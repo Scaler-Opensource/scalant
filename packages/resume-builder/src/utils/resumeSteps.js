@@ -285,15 +285,14 @@ const getReviewStatus = (formKey, reviewData, isReviewLoading) => {
     ];
     if (isReviewLoading) {
       return 'under_review';
-    } else if (overallScore) {
+    } else if (overallScore && Object.keys(FORM_AI_FEEDBACK_SECTIONS).includes(formKey)) {
       if (sectionScore > 2 || !sectionScore) {
         return 'looks_good';
       } else {
         return 'needs_work';
       }
-    } else {
-      return 'complete';
     }
+    return null;
 };
 
 export const getOverallSummary = (reviewData, isReviewLoading) => {

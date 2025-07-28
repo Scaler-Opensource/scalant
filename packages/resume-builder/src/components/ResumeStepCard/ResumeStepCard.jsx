@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Card, Typography, Flex, Avatar, Tag, Tooltip } from 'antd';
 import {
   PlusOutlined,
@@ -56,6 +57,10 @@ const ResumeStepCard = ({
   reviewStatus,
   required,
 }) => {
+  const reviewData = useSelector((state) => state.scalantResumeBuilder.resumeReview.reviewData);
+  const overallScore =
+    reviewData?.resume_evaluation_result?.overall_resume_score;
+
   return (
     <Card className={styles.card}>
       <div onClick={onClick}>
@@ -76,7 +81,7 @@ const ResumeStepCard = ({
                     <span className={styles.required}>*</span>
                   </Tooltip>
                 )}
-                {status && required && STATUS_TAGS[status]}
+                {status && required && !reviewStatus && !overallScore && STATUS_TAGS[status]}
                 {reviewStatus && STATUS_TAGS[reviewStatus]}
               </Flex>
               <Text type="secondary">{subtitle}</Text>
