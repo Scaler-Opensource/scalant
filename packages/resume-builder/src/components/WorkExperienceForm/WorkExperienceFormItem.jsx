@@ -122,9 +122,9 @@ const WorkExperienceFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text>Work Experience {index + 1}</Text>
-          {(formData?.workExperienceItems || []).length > 1 && (
+          {
             <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
-          )}
+          }
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>

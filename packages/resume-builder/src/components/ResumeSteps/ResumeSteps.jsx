@@ -151,7 +151,7 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
     isReviewLoading,
     onAiSuggestionClick,
   ]);
-
+  console.log(steps);
   return (
     <div className={styles.container}>
       <ResumeReviewOverallSummary
@@ -172,8 +172,7 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
               if (step.key === expandedStep) {
                 dotIcon = <LoadingOutlined className={styles.activeIcon} />;
               } else if (
-                step.status === 'complete' ||
-                step.status === 'looks_good'
+                step.status === 'complete'
               ) {
                 dotIcon = (
                   <CheckCircleOutlined className={styles.completeIcon} />
@@ -194,6 +193,7 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
                       subtitle={step.subtitle}
                       icon={step.icon}
                       status={step.status}
+                      reviewStatus={step.reviewStatus}
                       isActive={step.key === expandedStep}
                       expanded={step.key === expandedStep}
                       onClick={() => handleStepClick(step.key)}

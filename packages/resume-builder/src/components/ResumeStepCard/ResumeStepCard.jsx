@@ -53,6 +53,7 @@ const ResumeStepCard = ({
   expanded,
   onClick,
   status,
+  reviewStatus,
   required,
 }) => {
   return (
@@ -70,12 +71,13 @@ const ResumeStepCard = ({
                 <Title level={5} className={styles.title} style={{ margin: 0 }}>
                   {title}
                 </Title>
-                {required && status === 'incomplete' && (
+                {required && (
                   <Tooltip title="This step is required to complete your profile">
                     <span className={styles.required}>*</span>
                   </Tooltip>
                 )}
-                {status && STATUS_TAGS[status]}
+                {status && required && STATUS_TAGS[status]}
+                {reviewStatus && STATUS_TAGS[reviewStatus]}
               </Flex>
               <Text type="secondary">{subtitle}</Text>
             </div>
