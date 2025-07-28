@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Flex, FloatButton, Tooltip } from 'antd';
-import { EditOutlined, FilePdfOutlined, LikeOutlined } from '@ant-design/icons';
+import { FileOutlined, EditOutlined, LikeOutlined } from '@ant-design/icons';
 
 import FontSizeDropdown from './FontSizeDropdown';
 import ResumeDropdown from './ResumeDropdown';
@@ -108,7 +108,7 @@ const ResumePreview = ({
             </Tooltip>
             <Tooltip title={TOOLTIPS.SAMPLE_RESUME} placement="right">
               <FloatButton
-                icon={<FilePdfOutlined />}
+                icon={<FileOutlined />}
                 onClick={() => getSampleResumeLink()}
               />
             </Tooltip>

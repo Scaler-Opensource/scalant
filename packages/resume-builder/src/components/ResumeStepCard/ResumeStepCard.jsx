@@ -82,7 +82,7 @@ const ResumeStepCard = ({
                   </Tooltip>
                 )}
                 {status && required && !reviewStatus && !overallScore && STATUS_TAGS[status]}
-                {reviewStatus && STATUS_TAGS[reviewStatus]}
+                {reviewStatus && required && STATUS_TAGS[reviewStatus]}
               </Flex>
               <Text type="secondary">{subtitle}</Text>
             </div>
