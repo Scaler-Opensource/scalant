@@ -76,7 +76,10 @@ const WorkExperienceFormItem = ({ item, formId, required = false, index }) => {
     const currentItems = formData?.workExperienceItems || [];
     const updatedItems = currentItems.filter(
       (workExperienceItem) => workExperienceItem.index !== index
-    );
+    ).map((workExperienceItem, newIndex) => ({
+      ...workExperienceItem,
+      index: newIndex,
+    }));
 
     dispatch(
       updateFormData({

@@ -81,7 +81,10 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
     const currentItems = formData?.educationItems || [];
     const updatedItems = currentItems.filter(
       (educationItem) => educationItem.index !== index
-    );
+    ).map((educationItem, newIndex) => ({
+      ...educationItem,
+      index: newIndex,
+    }));
 
     dispatch(
       updateFormData({
