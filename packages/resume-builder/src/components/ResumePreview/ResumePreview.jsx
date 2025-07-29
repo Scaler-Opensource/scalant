@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Flex, FloatButton, Tooltip } from 'antd';
-import { FileOutlined, EditOutlined, LikeOutlined } from '@ant-design/icons';
+import { FileOutlined, AuditOutlined, LikeOutlined } from '@ant-design/icons';
 
 import FontSizeDropdown from './FontSizeDropdown';
 import ResumeDropdown from './ResumeDropdown';
@@ -104,7 +104,7 @@ const ResumePreview = ({
             <ChangeTemplate resumeTemplateConfig={resumeTemplateConfig} />
             <FontSizeDropdown onFontSizeChange={onFontSizeClick} />
             <Tooltip title={TOOLTIPS.EDIT} placement="right">
-              <FloatButton onClick={onEditClick} icon={<EditOutlined />} />
+              <FloatButton onClick={onEditClick} icon={<AuditOutlined />} />
             </Tooltip>
             <Tooltip title={TOOLTIPS.SAMPLE_RESUME} placement="right">
               <FloatButton
