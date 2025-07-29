@@ -95,9 +95,7 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text>Project {index + 1}</Text>
-          {(formData?.projectItems || []).length > 1 && (
-            <DeleteOutlined onClick={handleDelete} />
-          )}
+            <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>
