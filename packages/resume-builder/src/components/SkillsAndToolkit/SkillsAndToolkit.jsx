@@ -1,4 +1,5 @@
-import { Button, Flex, Space, message, Modal } from 'antd';
+import { Button, Flex, Space, message, Modal, Switch, Typography, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,6 +11,9 @@ import SectionFeedback from '../SectionFeedback/SectionFeedback';
 import styles from './SkillsAndToolkit.module.scss';
 import { FORM_KEYS } from '../../utils/constants';
 import SkillDemoVideoModal from './SkillDemoVideoModal';
+import { SKILL_VIEW_TOOLTIPS } from './constants';
+
+const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
 
@@ -35,6 +39,8 @@ const initialFormData = {
 
 const SkillsAndToolkit = ({ onComplete }) => {
   const dispatch = useDispatch();
+  const [categorizeSkills, setCategorizeSkills] = useState(false);
+  
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
@@ -74,14 +80,50 @@ const SkillsAndToolkit = ({ onComplete }) => {
     [resumeData?.skills, skillsData]
   );
 
+  const handleCategorizeToggle = (checked) => {
+    setCategorizeSkills(checked);
+  };
+
+  const getUpdatedTemplateStructure = () => {
+    const currentTemplate = resumeData?.scaler_resume_template_structure;
+    if (!currentTemplate) return null;
+
+    // Get the first template key (e.g., 'fresher', 'nonTechTemplate', etc.)
+    const templateKey = Object.keys(currentTemplate)[0];
+    const template = currentTemplate[templateKey];
+
+    // Create a deep copy and update the Skills section view
+    const updatedTemplate = {
+      ...template,
+      sections: template.sections.map(section => {
+        if (section.name === 'Skills') {
+          return {
+            ...section,
+            config: {
+              ...section.config,
+              view: categorizeSkills ? 'view2' : 'view1'
+            }
+          };
+        }
+        return section;
+      })
+    };
+
+    return {
+      [templateKey]: updatedTemplate
+    };
+  };
+
   const handleFinish = async () => {
     const selectedSkills = formData?.selectedSkills || [];
+    const updatedTemplateStructure = getUpdatedTemplateStructure();
 
     try {
       const payload = {
         form_stage: 'skills_details_form',
         skills: selectedSkills,
         mark_complete: markComplete,
+        ...(updatedTemplateStructure && { scaler_resume_template_structure: updatedTemplateStructure }),
       };
 
       await updateResumeDetails({
@@ -194,6 +236,24 @@ const SkillsAndToolkit = ({ onComplete }) => {
     <Space direction="vertical" size={24} className={styles.container}>
       <SectionFeedback feedbackData={skillsFeedback} />
       <SkillDemoVideoModal />
+      <Flex align="center" gap={16}>
+        <Flex align="center" gap={8}>
+          <Text>Linear skills</Text>
+          <Tooltip title={SKILL_VIEW_TOOLTIPS.LINEAR}>
+            <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
+          </Tooltip>
+        </Flex>
+        <Switch 
+          checked={categorizeSkills}
+          onChange={handleCategorizeToggle}
+        />
+        <Flex align="center" gap={8}>
+          <Text>Categorize skills</Text>
+          <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
+            <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
+          </Tooltip>
+        </Flex>
+      </Flex>
       {Object.values(SKILL_SECTIONS).map(renderSkillSection)}
       <Flex gap={16}>
         <Button
