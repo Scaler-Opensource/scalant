@@ -80,6 +80,22 @@ const SkillsAndToolkit = ({ onComplete }) => {
     [resumeData?.skills, skillsData]
   );
 
+  // Helper to get the view type for Skills section
+  const getSkillsSectionView = (resumeData) => {
+    const template = resumeData?.scaler_resume_template_structure;
+    if (!template) return 'view1';
+    const templateKey = Object.keys(template)[0];
+    const sections = template[templateKey]?.sections || [];
+    const skillsSection = sections.find(section => section.name === 'Skills');
+    return skillsSection?.config?.view || 'view1';
+  };
+
+  // Prefill categorizeSkills from resumeData
+  useEffect(() => {
+    const view = getSkillsSectionView(resumeData);
+    setCategorizeSkills(view === 'view2');
+  }, [resumeData]);
+
   const handleCategorizeToggle = (checked) => {
     setCategorizeSkills(checked);
   };
