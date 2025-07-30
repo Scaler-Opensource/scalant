@@ -17,6 +17,7 @@ const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
 
+
 const SKILL_SECTIONS = {
   PROGRAMMING_LANGUAGES: {
     title: 'Programming Languages',
@@ -30,6 +31,12 @@ const SKILL_SECTIONS = {
     title: 'Tools, databases, version control and everything else:',
     type: 'tools',
   },
+};
+
+const CATEGORY_TYPE_MAP = {
+  'language': 0, // Programming Languages
+  'framework': 1, // Libraries and Frameworks
+  'tools': 2, // Tools
 };
 
 const initialFormData = {
@@ -137,7 +144,23 @@ const SkillsAndToolkit = ({ onComplete }) => {
     try {
       const payload = {
         form_stage: 'skills_details_form',
-        skills: selectedSkills,
+        skills: selectedSkills.map(skill => {
+          // Try to infer the category from the skill's presence in resumeBuilderSkills
+          let category_type = null;
+          if (resumeBuilderSkills) {
+            if (resumeBuilderSkills.language?.includes(skill.skill_id)) {
+              category_type = CATEGORY_TYPE_MAP.language;
+            } else if (resumeBuilderSkills.framework?.includes(skill.skill_id)) {
+              category_type = CATEGORY_TYPE_MAP.framework;
+            } else if (resumeBuilderSkills.tools?.includes(skill.skill_id)) {
+              category_type = CATEGORY_TYPE_MAP.tools;
+            }
+          }
+          return {
+            ...skill,
+            category_type,
+          };
+        }),
         mark_complete: markComplete,
         ...(updatedTemplateStructure && { scaler_resume_template_structure: updatedTemplateStructure }),
       };
