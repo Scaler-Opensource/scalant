@@ -268,31 +268,31 @@ const getFormStatus = (
   formKey,
   reviewData,
   incompleteForms,
-  isReviewLoading
 ) => {
+  if (incompleteForms.includes(formKey)) {
+    return 'incomplete';
+  } else {
+    return 'complete';
+  }
+};
+
+const getReviewStatus = (formKey, reviewData, isReviewLoading) => {
   const overallScore =
     reviewData?.resume_evaluation_result?.overall_resume_score;
-
   const sectionScore =
     reviewData?.resume_evaluation_result?.section_scores?.[
       FORM_AI_FEEDBACK_SECTIONS[formKey]
     ];
-
-  if (isReviewLoading) {
-    return 'under_review';
-  } else if (incompleteForms.includes(formKey)) {
-    return 'incomplete';
-  } else {
-    if (overallScore) {
+    if (isReviewLoading) {
+      return 'under_review';
+    } else if (overallScore && Object.keys(FORM_AI_FEEDBACK_SECTIONS).includes(formKey)) {
       if (sectionScore > 2 || !sectionScore) {
         return 'looks_good';
       } else {
         return 'needs_work';
       }
-    } else {
-      return 'complete';
     }
-  }
+    return null;
 };
 
 export const getOverallSummary = (reviewData, isReviewLoading) => {
@@ -403,7 +403,7 @@ export const getFormSteps = (
   onComplete,
   program,
   reviewData,
-  s,
+  isReviewLoading,  
   onAiSuggestionClick
 ) => {
   if (!resumePersonaData) return [];
@@ -429,7 +429,8 @@ export const getFormSteps = (
       }
       return {
         ...step,
-        status: getFormStatus(key, reviewData, incompleteForms, s),
+        status: getFormStatus(key, reviewData, incompleteForms, isReviewLoading),
+        reviewStatus: getReviewStatus(key, reviewData, isReviewLoading),
         required: isRequired,
         component: React.createElement(step.component, {
           onComplete,

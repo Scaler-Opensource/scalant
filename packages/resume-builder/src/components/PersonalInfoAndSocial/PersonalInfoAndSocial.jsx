@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   GithubOutlined,
   LinkedinOutlined,
@@ -22,12 +22,6 @@ import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi'
 import { FORM_KEYS } from '../../utils/constants';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 import { ADDITIONAL_PROFILES } from '../../utils/constants';
-import {
-  getAdditionalProfileUrl,
-  getExistingProfileTypes,
-  getAvailableProfileTypes,
-  createProfilePayload,
-} from '../../utils/resumeUtils';
 
 import styles from './PersonalInfoAndSocial.module.scss';
 
@@ -45,7 +39,6 @@ const initialFormData = {
     linkedIn: '',
     github: '',
     personalWebsite: '',
-    additionalProfiles: [],
   },
 };
 
@@ -55,6 +48,8 @@ const urlPattern =
 
 const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   const dispatch = useDispatch();
+  const [additionalProfiles, setAdditionalProfiles] = useState([]);
+  
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
@@ -76,41 +71,40 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
 
   const [form] = Form.useForm();
 
+  // Initialize additional profiles from resume data
+  useEffect(() => {
+    if (resumeData?.personal_details) {
+      const profiles = [];
+      ADDITIONAL_PROFILES.forEach((profile) => {
+        const profileUrl = resumeData.personal_details[profile.value];
+        if (profileUrl) {
+          profiles.push({
+            type: profile.value,
+            url: profileUrl,
+          });
+        }
+      });
+      setAdditionalProfiles(profiles);
+    }
+  }, [resumeData?.personal_details]);
+
   const initialValues = useMemo(() => {
     if (!resumeData?.personal_details) {
       return initialFormData;
     }
 
-    // Get additional profiles from user data
-    const additionalProfiles = getAdditionalProfileUrl(
-      resumeData.personal_details
-    );
-
-    // Create a flat object with all form values including profileType0, profileUrl0, etc.
-    const formValues = {
-      fullName: resumeData.personal_details.name,
-      contactNumber: resumeData.personal_details.phone_number
-        ? resumeData.personal_details.phone_number.replace('+91-', '')
-        : '',
-      emailAddress: resumeData.personal_details.email,
-      gender: resumeData.personal_details.gender,
-      currentCity: resumeData.personal_details.city,
-      linkedIn: resumeData.personal_details.linkedin,
-      github: resumeData.personal_details.github,
-      personalWebsite: resumeData.personal_details.portfolio,
-    };
-
-    // Add the profileType and profileUrl keys directly to the formValues object
-    additionalProfiles.forEach((profile) => {
-      Object.keys(profile).forEach((key) => {
-        formValues[key] = profile[key];
-      });
-    });
-
     return {
       personalInfoAndSocial: {
-        ...formValues,
-        additionalProfiles,
+        fullName: resumeData.personal_details.name,
+        contactNumber: resumeData.personal_details.phone_number
+          ? resumeData.personal_details.phone_number.replace('+91-', '')
+          : '',
+        emailAddress: resumeData.personal_details.email,
+        gender: resumeData.personal_details.gender,
+        currentCity: resumeData.personal_details.city,
+        linkedIn: resumeData.personal_details.linkedin,
+        github: resumeData.personal_details.github,
+        personalWebsite: resumeData.personal_details.portfolio,
       },
     };
   }, [resumeData?.personal_details]);
@@ -128,12 +122,21 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
 
   const handleFinish = async () => {
     const values = formData?.personalInfoAndSocial;
-    updateFormData({
-      formId: FORM_ID,
-      data: {
-        personalInfoAndSocial: values,
-      },
-    });
+    
+    // Update form data with current additional profiles
+    const updatedFormData = {
+      ...values,
+      additionalProfiles,
+    };
+
+    dispatch(
+      updateFormData({
+        formId: FORM_ID,
+        data: {
+          personalInfoAndSocial: updatedFormData,
+        },
+      })
+    );
 
     try {
       // Create base payload with main personal details
@@ -152,8 +155,12 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
         mark_complete: markComplete,
       };
 
-      // Add additional profiles to payload
-      const payload = createProfilePayload(values, basePayload);
+      // Add all additional profiles to payload, always present
+      const payload = { ...basePayload };
+      ADDITIONAL_PROFILES.forEach((profile) => {
+        const found = additionalProfiles.find((p) => p.type === profile.value);
+        payload[profile.value] = found ? found.url : '';
+      });
 
       await updateResumeDetails({
         resumeId: resumeData?.resume_details?.id,
@@ -166,6 +173,7 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
       console.error('Error updating personal details:', error);
     }
   };
+
   const handleSaveAndCompile = () => {
     onComplete?.(true);
     handleFinish();
@@ -177,37 +185,6 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   };
 
   const handleValuesChange = (changedValues, allValues) => {
-    // Check if a profile type was changed
-    const changedProfileType = Object.keys(changedValues).find((key) =>
-      key.startsWith('profileType')
-    );
-
-    if (changedProfileType) {
-      const newProfileType = changedValues[changedProfileType];
-
-      // Check if this profile type already exists in another profile
-      const isDuplicate = Object.keys(allValues)
-        .filter(
-          (key) => key.startsWith('profileType') && key !== changedProfileType
-        )
-        .some((key) => allValues[key] === newProfileType);
-
-      if (isDuplicate) {
-        // Revert the change by setting back to previous value
-        const previousValue =
-          formData?.personalInfoAndSocial?.[changedProfileType];
-        form.setFieldValue(changedProfileType, previousValue);
-        message.warning(
-          `${ADDITIONAL_PROFILES.find((p) => p.value === newProfileType)?.label} profile is already added`
-        );
-        return;
-      }
-    }
-
-    // Get current additionalProfiles
-    const currentProfiles =
-      formData?.personalInfoAndSocial?.additionalProfiles || [];
-
     // Update the form state in the store
     dispatch(
       updateFormData({
@@ -215,7 +192,7 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
         data: {
           personalInfoAndSocial: {
             ...allValues,
-            additionalProfiles: currentProfiles,
+            additionalProfiles,
           },
         },
       })
@@ -223,11 +200,8 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   };
 
   const handleAddProfile = () => {
-    // Get current form values
-    const currentFormValues = form.getFieldsValue();
-
     // Get existing profile types
-    const existingTypes = getExistingProfileTypes(currentFormValues);
+    const existingTypes = additionalProfiles.map(profile => profile.type);
 
     // Check if all profile types are already used
     if (existingTypes.length >= ADDITIONAL_PROFILES.length) {
@@ -240,102 +214,60 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
       (profile) => !existingTypes.includes(profile.value)
     );
 
-    // Get current additionalProfiles array
-    const currentProfiles =
-      formData?.personalInfoAndSocial?.additionalProfiles || [];
-    const newProfileIndex = currentProfiles.length;
-
-    // Create a new profile with default values
-    const newProfile = {
-      [`profileType${newProfileIndex}`]: availableProfileType.value,
-      [`profileUrl${newProfileIndex}`]: '',
-    };
-
-    // Create updated form data with the new profile
-    const updatedProfiles = [...currentProfiles, newProfile];
-    const updatedFormData = {
-      ...formData?.personalInfoAndSocial,
-      ...currentFormValues,
-      additionalProfiles: updatedProfiles,
-      ...newProfile,
-    };
-
-    // Update the form state and UI
-    dispatch(
-      updateFormData({
-        formId: FORM_ID,
-        data: {
-          personalInfoAndSocial: updatedFormData,
-        },
-      })
-    );
-
-    form.setFieldsValue(updatedFormData);
+    // Add new profile
+    setAdditionalProfiles(prev => [
+      ...prev,
+      {
+        type: availableProfileType.value,
+        url: '',
+      }
+    ]);
   };
 
   const handleRemoveProfile = (indexToRemove) => {
-    // Get current form values
-    const currentFormValues = form.getFieldsValue();
-
-    // Get current additionalProfiles array
-    const currentProfiles =
-      formData?.personalInfoAndSocial?.additionalProfiles || [];
-
-    // Remove the profile at the specified index
-    const updatedProfiles = currentProfiles.filter(
-      (_, idx) => idx !== indexToRemove
+    setAdditionalProfiles(prev => 
+      prev.filter((_, idx) => idx !== indexToRemove)
     );
+  };
 
-    // Create new form data without the removed profile
-    const updatedFormData = {
-      ...formData?.personalInfoAndSocial,
-      ...currentFormValues,
-      additionalProfiles: updatedProfiles,
-    };
-
-    // Remove the profileType and profileUrl fields for the removed profile
-    delete updatedFormData[`profileType${indexToRemove}`];
-    delete updatedFormData[`profileUrl${indexToRemove}`];
-
-    // Update the form state
-    dispatch(
-      updateFormData({
-        formId: FORM_ID,
-        data: {
-          personalInfoAndSocial: updatedFormData,
-        },
-      })
+  const handleProfileChange = (index, field, value) => {
+    setAdditionalProfiles(prev => 
+      prev.map((profile, idx) => 
+        idx === index 
+          ? { ...profile, [field]: value }
+          : profile
+      )
     );
+  };
 
-    // Update form values
-    form.setFieldsValue(updatedFormData);
+  const getAvailableProfileTypes = (currentIndex) => {
+    const existingTypes = additionalProfiles
+      .map((profile, idx) => idx !== currentIndex ? profile.type : null)
+      .filter(Boolean);
+
+    return ADDITIONAL_PROFILES.filter(
+      (profile) => !existingTypes.includes(profile.value)
+    );
   };
 
   const renderAdditionalProfiles = () => {
-    const profiles = formData?.personalInfoAndSocial?.additionalProfiles || [];
-    const currentFormValues = form.getFieldsValue();
-
-    return profiles.map((_, idx) => {
-      const profileTypeKey = `profileType${idx}`;
-      const profileUrlKey = `profileUrl${idx}`;
-
-      // Get available profile types for this dropdown
-      const availableOptions = getAvailableProfileTypes(currentFormValues, idx);
+    return additionalProfiles.map((profile, idx) => {
+      const availableOptions = getAvailableProfileTypes(idx);
 
       return (
         <Flex gap={16} key={idx} align="center">
           <Form.Item
-            name={profileTypeKey}
             style={{ width: '45%' }}
             className={styles.formItem}
           >
             <Select
+              value={profile.type}
               options={availableOptions}
               placeholder="Select Profile Type"
+              onChange={(value) => handleProfileChange(idx, 'type', value)}
             />
           </Form.Item>
           <Form.Item
-            name={profileUrlKey}
             style={{ width: '45%' }}
             className={styles.formItem}
             rules={[
@@ -346,7 +278,11 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
               },
             ]}
           >
-            <Input placeholder="Enter Profile URL" />
+            <Input 
+              placeholder="Enter Profile URL" 
+              value={profile.url}
+              onChange={(e) => handleProfileChange(idx, 'url', e.target.value)}
+            />
           </Form.Item>
           <Button
             type="text"

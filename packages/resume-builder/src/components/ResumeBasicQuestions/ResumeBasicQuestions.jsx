@@ -40,7 +40,7 @@ const ResumeBasicQuestions = () => {
   const basicQuestionsData = resumeData?.personal_details;
   const jobRoles = getJobRoles(program);
 
-  const { initialValues, FORM_ID } = useBasicQuestionsForm(basicQuestionsData);
+  const { initialValues, FORM_ID } = useBasicQuestionsForm(basicQuestionsData, jobRoles);
   const formData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms[FORM_ID]
   );
