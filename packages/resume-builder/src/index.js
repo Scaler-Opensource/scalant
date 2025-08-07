@@ -1,6 +1,7 @@
 // Components
 export { default as Acknowledgement } from './components/Acknowledgement';
 export { default as ResumeBuilder } from './components/ResumeBuilder';
+export { default as PreferenceForm } from './components/PreferenceForm';
 
 // Layouts
 export { default as ResumeLayout } from './layout/ResumeLayout';
