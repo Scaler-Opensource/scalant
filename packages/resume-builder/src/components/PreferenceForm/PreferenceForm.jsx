@@ -81,6 +81,7 @@ const PreferenceForm = ({
       const resumeStepsIndex = steps.findIndex(
         (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
       );
+
       dispatch(setCurrentStep(resumeStepsIndex));
     }
   }, [resumeData, dispatch, courseProduct, steps]);
