@@ -93,6 +93,7 @@ const PreferenceForm = ({
 
     if (lastStepIndex < currentStep) {
       onBackButtonClick();
+      dispatch(resetSteps());
     }
   }, [steps, dispatch, currentStep, onBackButtonClick]);
 
