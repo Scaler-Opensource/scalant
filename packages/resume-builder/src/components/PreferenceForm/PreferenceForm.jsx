@@ -93,12 +93,14 @@ const PreferenceForm = ({
     if (lastStepIndex < currentStep) {
       onBackButtonClick();
     }
+  }, [steps, currentStep, onBackButtonClick, resumeData]);
 
+  useEffect(() => {
     return () => {
       dispatch(resetSteps());
       dispatch(resetAllForms());
     };
-  }, [steps, currentStep, onBackButtonClick, resumeData, dispatch]);
+  }, [dispatch]);
 
   if (!resumeData || isLoading) {
     return (
