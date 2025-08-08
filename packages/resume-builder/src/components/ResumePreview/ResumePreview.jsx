@@ -115,7 +115,7 @@ const ResumePreview = ({
             <Tooltip title={TOOLTIPS.FEEDBACK} placement="right">
               <FloatButton
                 icon={<LikeOutlined />}
-                href={`https://interviewbit.typeform.com/to/MTZOE7Pt?email=${userEmail}`}
+                href={`https://interviewbit.typeform.com/to/oH5N1sDP?email=${userEmail}`}
                 target="_blank"
               />
             </Tooltip>
