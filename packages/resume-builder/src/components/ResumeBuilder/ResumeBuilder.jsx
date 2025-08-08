@@ -93,6 +93,13 @@ const ResumeBuilderContent = ({
     }
   }, [currentStep, steps, resumeData]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetSteps());
+      dispatch(resetAllForms());
+    };
+  }, [dispatch]);
+
   const renderComponent = () => {
     const currentStepData = steps[currentStep];
     switch (currentStepData.component) {

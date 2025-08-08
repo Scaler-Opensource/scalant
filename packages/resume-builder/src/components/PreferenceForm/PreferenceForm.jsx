@@ -38,7 +38,7 @@ const PreferenceForm = ({
       case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
         return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
-        return <ResumeBasicQuestions />;
+        return <ResumeBasicQuestions isLastStep />;
       default:
         return null;
     }
@@ -81,7 +81,6 @@ const PreferenceForm = ({
       const resumeStepsIndex = steps.findIndex(
         (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
       );
-
       dispatch(setCurrentStep(resumeStepsIndex));
     }
   }, [resumeData, dispatch, courseProduct, steps]);
@@ -94,7 +93,14 @@ const PreferenceForm = ({
     if (lastStepIndex < currentStep) {
       onBackButtonClick();
     }
-  }, [steps, dispatch, currentStep, onBackButtonClick]);
+  }, [steps, currentStep, onBackButtonClick, resumeData]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetSteps());
+      dispatch(resetAllForms());
+    };
+  }, [dispatch]);
 
   if (!resumeData || isLoading) {
     return (
