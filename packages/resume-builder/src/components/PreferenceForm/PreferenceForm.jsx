@@ -86,16 +86,19 @@ const PreferenceForm = ({
   }, [resumeData, dispatch, courseProduct, steps]);
 
   useEffect(() => {
-    if (resumeData) {
-      const lastStepIndex = steps.findIndex(
-        (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
-      );
+    const lastStepIndex = steps.findIndex(
+      (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
+    );
 
-      if (lastStepIndex < currentStep) {
-        onBackButtonClick();
-      }
+    if (lastStepIndex < currentStep) {
+      onBackButtonClick();
     }
-  }, [steps, currentStep, onBackButtonClick, resumeData]);
+
+    return () => {
+      dispatch(resetSteps());
+      dispatch(resetAllForms());
+    };
+  }, [steps, currentStep, onBackButtonClick, resumeData, dispatch]);
 
   if (!resumeData || isLoading) {
     return (
