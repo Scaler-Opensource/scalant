@@ -38,7 +38,7 @@ const PreferenceForm = ({
       case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
         return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
-        return <ResumeBasicQuestions />;
+        return <ResumeBasicQuestions isLastStep />;
       default:
         return null;
     }
