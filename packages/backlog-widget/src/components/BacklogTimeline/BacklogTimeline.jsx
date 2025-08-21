@@ -13,11 +13,11 @@ import { useGetBacklogQuery } from '../../services/backlogService';
 const { Title, Text } = Typography;
 
 const BacklogTimeline = ({
-  visible = false,
   onCancel,
-  title = 'Your Learning Journey',
+  title = 'Backlog clearance Plan',
   width = 800,
   onEditSchedule,
+  open,
   ...modalProps
 }) => {
   const {
@@ -34,12 +34,18 @@ const BacklogTimeline = ({
   };
 
   useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    setAiLoader(true);
+    const randomWaitTime = Math.floor(Math.random() * 3000) + 4000;
     const timer = setTimeout(() => {
       setAiLoader(false);
-    }, 5000);
+    }, randomWaitTime);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [open]);
 
   const getStatusColor = (status) => {
     const statusLower = status?.toLowerCase();
@@ -210,11 +216,16 @@ const BacklogTimeline = ({
 
   const progressStats = getProgressStats();
 
+  const onEditClick = () => {
+    onEditSchedule?.();
+    onCancel?.();
+  };
+
   if (loading || aiLoader) {
     return (
       <Modal
         title={title}
-        open={visible}
+        open={open}
         onCancel={handleCancel}
         width={width}
         footer={null}
@@ -223,7 +234,7 @@ const BacklogTimeline = ({
       >
         <div className={styles.loadingContainer}>
           <Spin size="large" />
-          <Title level={4}>Loading your journey...</Title>
+          <Title level={4}>Curating your backlog clearance plan...</Title>
         </div>
       </Modal>
     );
@@ -233,7 +244,7 @@ const BacklogTimeline = ({
     return (
       <Modal
         title={title}
-        open={visible}
+        open={open}
         onCancel={handleCancel}
         width={width}
         footer={null}
@@ -257,12 +268,12 @@ const BacklogTimeline = ({
       title={
         <div className={styles.modalTitle}>
           <span>{title}</span>
-          <Button className={styles.modalTitleButton} onClick={onEditSchedule}>
+          <Button className={styles.modalTitleButton} onClick={onEditClick}>
             Edit Schedule
           </Button>
         </div>
       }
-      open={visible}
+      open={open}
       onCancel={handleCancel}
       width={width}
       footer={null}
