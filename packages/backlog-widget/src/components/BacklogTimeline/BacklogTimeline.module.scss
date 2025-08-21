@@ -1,0 +1,446 @@
+.modal {
+  :global(.ant-modal-content) {
+    padding: 0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  :global(.ant-modal-header) {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  :global(.ant-modal-title) {
+    color: white !important;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  :global(.ant-modal-close) {
+    color: white;
+  }
+}
+
+.modalTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+
+  .titleIcon {
+    font-size: 24px;
+    color: #ffd700;
+  }
+}
+
+.container {
+  min-height: 500px;
+  background: #fafafa;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  text-align: center;
+  gap: 16px;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  text-align: center;
+  gap: 16px;
+
+  .errorIcon {
+    font-size: 48px;
+    color: #ff4d4f;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  text-align: center;
+  gap: 16px;
+
+  .emptyIcon {
+    font-size: 64px;
+    color: #52c41a;
+  }
+}
+
+.timelineContainer {
+  padding: 0 16px;
+}
+
+.progressOverview {
+  margin-bottom: 24px;
+
+  .progressBar {
+    .progressInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.customTimeline {
+  margin-top: 16px;
+  position: relative;
+
+  .timelineItem {
+    display: flex;
+    margin-bottom: 24px;
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      bottom: -24px;
+      width: 2px;
+      background: #f0f0f0;
+    }
+
+    &.statusSuccess {
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        bottom: -24px;
+        width: 2px;
+        background: #52c41a;
+      }
+    }
+
+    &.statusProcessing {
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        bottom: -24px;
+        width: 2px;
+        background: #1890ff;
+      }
+    }
+
+    &.statusError {
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        bottom: -24px;
+        width: 2px;
+        background: #ff4d4f;
+      }
+    }
+
+    &.statusDefault {
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        bottom: -24px;
+        width: 2px;
+        background: #d9d9d9;
+      }
+    }
+  }
+
+  .timelineDot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+    color: #666;
+    font-size: 16px;
+    z-index: 1;
+    background-color: transparent;
+
+    &.statusSuccess {
+      border-color: #52c41a !important;
+      color: #52c41a !important;
+    }
+
+    &.statusProcessing {
+      border-color: #1890ff !important;
+      color: #1890ff !important;
+    }
+
+    &.statusError {
+      border-color: #ff4d4f !important;
+      color: #ff4d4f !important;
+    }
+
+    &.statusDefault {
+      border-color: #d9d9d9 !important;
+      color: #666 !important;
+    }
+  }
+
+  .timelineContent {
+    flex: 1;
+  }
+}
+
+.timelineCard {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .cardContent {
+    padding: 2px;
+  }
+
+  .itemHeader {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    margin-bottom: 0;
+    align-items: start;
+
+    .typeIcon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .typeBadge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .typeIconOverlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 16px;
+      z-index: 1;
+    }
+
+    .itemInfo {
+      min-width: 0;
+
+      .itemTitle {
+        margin: 0 0 12px 0 !important;
+        color: #262626;
+        font-weight: 600;
+        line-height: 1.4;
+        word-wrap: break-word;
+      }
+
+      .itemMeta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+
+        .metaLeft {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .itemTime {
+          color: #666;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-weight: 500;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .itemStatus {
+      flex-shrink: 0;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+
+      .viewButton {
+        border-radius: 6px;
+        font-weight: 500;
+        height: 32px;
+        padding: 0 16px;
+        transition: all 0.2s ease;
+        min-width: 100px;
+        flex-shrink: 0;
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+        }
+      }
+    }
+  }
+
+  .itemMotivation {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: #f6ffed;
+    border-radius: 6px;
+    border-left: 3px solid #52c41a;
+  }
+
+  .itemActions {
+    display: none;
+  }
+
+  .progressSection {
+    margin-top: 12px;
+  }
+}
+
+.compactCard {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  .compactContent {
+    padding: 8px;
+
+    .itemHeader {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0;
+
+      .typeIcon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .typeBadge {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .typeIconOverlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 12px;
+        z-index: 1;
+      }
+
+      .itemInfo {
+        flex: 1;
+
+        .itemTitle {
+          margin: 0 !important;
+          color: #262626;
+          font-weight: 600;
+        }
+      }
+
+      .itemStatus {
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+.customProgressBar {
+  width: 100%;
+  height: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0;
+
+  .progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #1890ff 0%, #52c41a 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+}
+
+.bottomMotivation {
+  margin-top: 32px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff2e8 0%, #f6ffed 100%);
+  border-radius: 16px;
+  border: 1px solid #ffd591;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  .motivationIcon {
+    font-size: 24px;
+    color: #fa8c16;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .progressStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .timelineCard {
+    .itemHeader {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+  }
+}

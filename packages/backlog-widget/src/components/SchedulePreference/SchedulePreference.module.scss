@@ -1,0 +1,324 @@
+.modal {
+  :global(.ant-modal-content) {
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  :global(.ant-modal-header) {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0;
+  }
+
+  :global(.ant-modal-title) {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  :global(.ant-modal-close) {
+    top: 20px;
+    right: 24px;
+  }
+
+  :global(.ant-modal-body) {
+    padding: 0;
+  }
+}
+
+.container {
+  display: flex;
+  min-height: 600px;
+  background-color: #f5f7fa;
+}
+
+.leftPanel {
+  flex: 0 0 400px;
+  background-color: #1A2C47;
+  color: white;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.introducingSection {
+  margin-bottom: 60px;
+}
+
+.sectionLabel {
+  color: #bdc3c7 !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.introducingTitle {
+  color: white !important;
+  font-size: 24px;
+  line-height: 1.4;
+  margin: 0 !important;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: #3498db;
+  text-underline-offset: 4px;
+}
+
+.backlogsSection {
+  flex: 1;
+}
+
+.backlogPoints {
+  margin-top: 20px;
+}
+
+.backlogPoint {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.plusIcon {
+  color: #3498db;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 12px;
+  margin-bottom: 2px;
+}
+
+.backlogText {
+  color: white !important;
+  font-size: 16px;
+  margin: 0 !important;
+}
+
+.rightPanel {
+  flex: 1;
+  background-color: white;
+  padding: 40px 50px;
+  overflow-y: auto;
+}
+
+.formTitle {
+  color: #2c3e50 !important;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 40px !important;
+}
+
+.form {
+  max-width: 600px;
+}
+
+.formItem {
+  margin-bottom: 32px !important;
+}
+
+.formItem :global(.ant-form-item-label) {
+  padding-bottom: 12px;
+}
+
+.formItem :global(.ant-form-item-label > label) {
+  color: #2c3e50 !important;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.daysContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.dayButton {
+  min-width: 60px;
+  height: 50px;
+  border-radius: 8px;
+  font-weight: 500;
+  position: relative;
+  border: 2px solid #e1e8ed;
+  background-color: white;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #3498db;
+    color: #3498db;
+  }
+
+  &:global(.ant-btn-primary) {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: white;
+  }
+}
+
+.hasClass {
+  position: relative;
+}
+
+.classIndicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: #f39c12;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.classNote {
+  display: flex;
+  align-items: center;
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.orangeDot {
+  width: 8px;
+  height: 8px;
+  background-color: #f39c12;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.moduleSelect {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.timePicker {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.durationContainer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.durationButton {
+  min-width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 2px solid #e1e8ed;
+  background-color: white;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #3498db;
+    color: #3498db;
+  }
+
+  &:global(.ant-btn-primary) {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: white;
+  }
+}
+
+.submitButtonContainer {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.submitButton {
+  height: 56px;
+  padding: 0 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: #3498db;
+  border-color: #3498db;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+  }
+
+  &:disabled {
+    background-color: #bdc3c7;
+    border-color: #bdc3c7;
+    color: #7f8c8d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .leftPanel {
+    flex: none;
+    padding: 30px 20px;
+  }
+
+  .rightPanel {
+    padding: 30px 20px;
+  }
+
+  .formTitle {
+    font-size: 24px;
+    margin-bottom: 30px !important;
+  }
+
+  .daysContainer {
+    gap: 8px;
+  }
+
+  .dayButton {
+    min-width: 50px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .durationButton {
+    min-width: 80px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftPanel {
+    padding: 20px 15px;
+  }
+
+  .rightPanel {
+    padding: 20px 15px;
+  }
+
+  .formTitle {
+    font-size: 20px;
+    margin-bottom: 25px !important;
+  }
+
+  .daysContainer {
+    justify-content: center;
+  }
+
+  .durationContainer {
+    justify-content: center;
+  }
+}
