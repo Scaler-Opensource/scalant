@@ -1,12 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import { backlogServiceApi } from '../services/backlogService';
 
-const store = configureStore({
-  reducer: {
-    [backlogServiceApi.reducerPath]: backlogServiceApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(backlogServiceApi.middleware),
+const rootReducer = combineReducers({
+  [backlogServiceApi.reducerPath]: backlogServiceApi.reducer,
 });
 
-export default store;
+export default rootReducer;
