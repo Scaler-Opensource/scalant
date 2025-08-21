@@ -5,12 +5,12 @@ import {
   ClockCircleOutlined,
   ExclamationCircleOutlined,
   PlayCircleOutlined,
-  FileTextOutlined,
-  VideoCameraOutlined,
-  CodeOutlined,
+  // FileTextOutlined,
+  // VideoCameraOutlined,
+  // CodeOutlined,
   TrophyOutlined,
   RocketOutlined,
-  BookOutlined,
+  // BookOutlined,
 } from '@ant-design/icons';
 import styles from './BacklogTimeline.module.scss';
 
@@ -90,14 +90,14 @@ const BacklogTimeline = ({
     }
   };
 
-  const getTypeIcon = (type) => {
-    const typeLower = type?.toLowerCase();
-    if (typeLower.includes('interview')) return <VideoCameraOutlined />;
-    if (typeLower.includes('lecture')) return <BookOutlined />;
-    if (typeLower.includes('problem')) return <CodeOutlined />;
-    if (typeLower.includes('test')) return <FileTextOutlined />;
-    return <FileTextOutlined />;
-  };
+  // const getTypeIcon = (type) => {
+  //   const typeLower = type?.toLowerCase();
+  //   if (typeLower.includes('interview')) return <VideoCameraOutlined />;
+  //   if (typeLower.includes('lecture')) return <BookOutlined />;
+  //   if (typeLower.includes('problem')) return <CodeOutlined />;
+  //   if (typeLower.includes('test')) return <FileTextOutlined />;
+  //   return <FileTextOutlined />;
+  // };
 
   const getTypeColor = (type) => {
     const typeLower = type?.toLowerCase();
@@ -145,7 +145,7 @@ const BacklogTimeline = ({
           className={isComplete ? styles.compactContent : styles.cardContent}
         >
           <div className={styles.itemHeader}>
-            <div className={styles.typeIcon}>
+            {/* <div className={styles.typeIcon}>
               <div
                 className={styles.typeBadge}
                 style={{ backgroundColor: getTypeColor(item.type) }}
@@ -153,7 +153,7 @@ const BacklogTimeline = ({
               <div className={styles.typeIconOverlay}>
                 {getTypeIcon(item.type)}
               </div>
-            </div>
+            </div> */}
             <div className={styles.itemInfo}>
               <Title level={5} className={styles.itemTitle}>
                 {item.title}

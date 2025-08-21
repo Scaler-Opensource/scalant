@@ -1,0 +1,10 @@
+.backlogManager {
+  width: 100%;
+  
+  // Ensure modals are properly positioned
+  :global {
+    .ant-modal {
+      z-index: 1000;
+    }
+  }
+}
