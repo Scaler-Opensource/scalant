@@ -11,6 +11,11 @@ import {
 } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import styles from './SchedulePreference.module.scss';
+import withBacklogStore from '../../hoc/withBacklogStore';
+import {
+  useCreateScheduleMutation,
+  useGetBacklogQuery,
+} from '../../services/backlogService';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -29,6 +34,9 @@ const SchedulePreference = ({
   moduleId, // For fetching scheduled days
   ...modalProps
 }) => {
+  const [createSchedule, { isLoading: isCreatingSchedule }] =
+    useCreateScheduleMutation();
+  const { refetch } = useGetBacklogQuery();
   const [form] = Form.useForm();
   const [selectedDays, setSelectedDays] = useState(['Mon']);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -141,34 +149,26 @@ const SchedulePreference = ({
 
     try {
       const planData = {
-        selectedDays,
-        selectedTime: selectedTime ? selectedTime.format('HH:mm') : null,
-        numberOfHours: selectedDuration,
+        selected_days: selectedDays,
+        selected_time: selectedTime ? selectedTime.format('HH:mm') : null,
+        number_of_hours: selectedDuration?.split?.(' ')?.[0],
       };
 
       // Call API to submit the plan
-      if (submitPlanAPI) {
-        const response = await submitPlanAPI(planData);
-        if (response && response.success) {
-          message.success('Study plan created successfully!');
-
-          if (onPlanCreate) {
-            onPlanCreate(planData, response);
-          }
-        } else {
-          throw new Error(response?.message || 'Failed to create plan');
-        }
-      } else {
-        // Fallback if no API provided
+      const response = await createSchedule({ payload: planData });
+      console.log('response', response);
+      if (response?.data?.success) {
         message.success('Study plan created successfully!');
-        if (onPlanCreate) {
-          onPlanCreate(planData);
-        }
+      } else {
+        throw new Error(response?.message || 'Failed to create plan');
       }
     } catch (error) {
       message.error(`Failed to create study plan: ${error.message}`);
     } finally {
+      await refetch();
       setSubmitting(false);
+      onCancel?.();
+      onPlanCreate?.();
     }
   };
 
@@ -189,12 +189,11 @@ const SchedulePreference = ({
   if (loading) {
     return (
       <Modal
-        title={title}
         open={visible}
         onCancel={handleCancel}
         width={width}
         footer={null}
-        destroyOnClose
+        onClose={handleCancel}
         className={styles.modal}
         {...modalProps}
       >
@@ -214,7 +213,6 @@ const SchedulePreference = ({
 
   return (
     <Modal
-      title={title}
       open={visible}
       onCancel={handleCancel}
       width={width}
@@ -366,4 +364,4 @@ const SchedulePreference = ({
   );
 };
 
-export default SchedulePreference;
+export default withBacklogStore(SchedulePreference);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Modal, Spin, Card, Tag, Button, Typography } from 'antd';
 import {
   CheckCircleOutlined,
@@ -10,9 +10,12 @@ import {
   // CodeOutlined,
   TrophyOutlined,
   RocketOutlined,
+  EditOutlined,
   // BookOutlined,
 } from '@ant-design/icons';
 import styles from './BacklogTimeline.module.scss';
+import { useGetBacklogQuery } from '../../services/backlogService';
+import withBacklogStore from '../../hoc/withBacklogStore';
 
 const { Title, Text } = Typography;
 
@@ -21,32 +24,18 @@ const BacklogTimeline = ({
   onCancel,
   title = 'Your Learning Journey',
   width = 800,
-  fetchBacklogItemsAPI,
-  moduleId,
+  onEditSchedule,
   ...modalProps
 }) => {
-  const [backlogItems, setBacklogItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchBacklogItems = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetchBacklogItemsAPI(moduleId);
-      setBacklogItems(response.data.backlogItems || []);
-    } catch {
-      setError('Failed to fetch backlog items');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (visible && moduleId && fetchBacklogItemsAPI) {
-      fetchBacklogItems();
-    }
-  }, [visible, moduleId, fetchBacklogItemsAPI]);
+  const {
+    data: backlog,
+    refetch,
+    isLoading: loading,
+    isError: error,
+  } = useGetBacklogQuery();
+  console.log('backlog', backlog);
+  const backlogItems = backlog?.backlog_data || [];
+  // const [backlogItems, setBacklogItems] = useState([]);
 
   const handleCancel = () => {
     onCancel?.();
@@ -55,22 +44,11 @@ const BacklogTimeline = ({
   const getStatusColor = (status) => {
     const statusLower = status?.toLowerCase();
     switch (statusLower) {
-      case 'complete':
       case 'completed':
-      case 'done':
       case 'finished':
         return 'success';
-      case 'inprogress':
-      case 'in progress':
-      case 'in-progress':
-      case 'active':
-      case 'working':
+      case 'in_progress':
         return 'processing';
-      case 'incomplete':
-      case 'not started':
-      case 'pending':
-      case 'todo':
-        return 'error';
       default:
         return 'default';
     }
@@ -79,11 +57,11 @@ const BacklogTimeline = ({
   const getStatusIcon = (status) => {
     const statusLower = status?.toLowerCase();
     switch (statusLower) {
-      case 'complete':
+      case 'completed':
         return <CheckCircleOutlined />;
-      case 'inprogress':
+      case 'in_progress':
         return <ClockCircleOutlined />;
-      case 'incomplete':
+      case 'pending':
         return <ExclamationCircleOutlined />;
       default:
         return <ExclamationCircleOutlined />;
@@ -121,20 +99,21 @@ const BacklogTimeline = ({
   const getProgressStats = () => {
     const total = backlogItems.length;
     const completed = backlogItems.filter(
-      (item) => item.status?.toLowerCase() === 'complete'
+      (item) => item.status?.toLowerCase() === 'completed'
     ).length;
     const inProgress = backlogItems.filter(
-      (item) => item.status?.toLowerCase() === 'inprogress'
+      (item) => item.status?.toLowerCase() === 'in_progress'
     ).length;
     const incomplete = backlogItems.filter(
-      (item) => item.status?.toLowerCase() === 'incomplete'
+      (item) => item.status?.toLowerCase() === 'pending'
     ).length;
 
     return { total, completed, inProgress, incomplete };
   };
 
   const renderTimelineItem = (item) => {
-    const isComplete = item.status?.toLowerCase() === 'complete';
+    const isComplete = item.status?.toLowerCase() === 'completed';
+    const isPending = item.status?.toLowerCase() === 'pending';
 
     return (
       <Card
@@ -162,10 +141,11 @@ const BacklogTimeline = ({
                 <div className={styles.itemMeta}>
                   <div className={styles.metaLeft}>
                     <Tag color={getTypeColor(item.type)} size="small">
-                      {item.type}
+                      {item.type?.split('_').join(' ').toUpperCase()}
                     </Tag>
                     <span className={styles.itemTime}>
-                      <ClockCircleOutlined /> {formatTime(item.approx_time)}
+                      <ClockCircleOutlined />
+                      {formatTime(item.duration)}
                     </span>
                   </div>
                 </div>
@@ -177,15 +157,15 @@ const BacklogTimeline = ({
                 icon={getStatusIcon(item.status)}
                 size="small"
               >
-                {item.status}
+                {item.status?.split('_').join(' ').toUpperCase()}
               </Tag>
-              {!isComplete && item.artifact_link && (
+              {!isComplete && !isPending && item.link && (
                 <Button
                   type="primary"
                   icon={<PlayCircleOutlined />}
                   onClick={() => {
                     // eslint-disable-next-line no-undef
-                    window.open(item.artifact_link, '_blank');
+                    window.open(item.link, '_blank');
                   }}
                   size="small"
                   className={styles.viewButton}
@@ -200,18 +180,18 @@ const BacklogTimeline = ({
     );
   };
 
-  // Sort items: completed first, then by status
+  // Sort items: completed first, then in progress, then pending
   const sortedBacklogItems = [...backlogItems].sort((a, b) => {
     const aStatus = a.status?.toLowerCase();
     const bStatus = b.status?.toLowerCase();
 
     // Completed items first
-    if (aStatus === 'complete' && bStatus !== 'complete') return -1;
-    if (bStatus === 'complete' && aStatus !== 'complete') return 1;
+    if (aStatus === 'completed' && bStatus !== 'completed') return -1;
+    if (bStatus === 'completed' && aStatus !== 'completed') return 1;
 
-    // Then incomplete items
-    if (aStatus === 'incomplete' && bStatus === 'inprogress') return -1;
-    if (bStatus === 'incomplete' && aStatus === 'inprogress') return 1;
+    // Then in progress items
+    if (aStatus === 'in_progress' && bStatus === 'pending') return -1;
+    if (bStatus === 'in_progress' && aStatus === 'pending') return 1;
 
     return 0;
   });
@@ -249,7 +229,7 @@ const BacklogTimeline = ({
     );
   }
 
-  if (error) {
+  if (error || !backlog?.success) {
     return (
       <Modal
         title={title}
@@ -264,7 +244,7 @@ const BacklogTimeline = ({
           <ExclamationCircleOutlined className={styles.errorIcon} />
           <Title level={4}>Something went wrong</Title>
           <Text type="secondary">{error}</Text>
-          <Button type="primary" onClick={fetchBacklogItems}>
+          <Button type="primary" onClick={refetch}>
             Try Again
           </Button>
         </div>
@@ -276,8 +256,10 @@ const BacklogTimeline = ({
     <Modal
       title={
         <div className={styles.modalTitle}>
-          <RocketOutlined className={styles.titleIcon} />
           <span>{title}</span>
+          <Button className={styles.modalTitleButton} onClick={onEditSchedule}>
+            Edit Schedule
+          </Button>
         </div>
       }
       open={visible}
@@ -350,4 +332,4 @@ const BacklogTimeline = ({
   );
 };
 
-export default BacklogTimeline;
+export default withBacklogStore(BacklogTimeline);

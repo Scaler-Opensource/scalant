@@ -8,18 +8,18 @@
   :global(.ant-modal-header) {
     padding: 20px 24px;
     border-bottom: 1px solid #f0f0f0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    color: black;
   }
 
   :global(.ant-modal-title) {
-    color: white !important;
+    color: black !important;
     font-size: 20px;
     font-weight: 600;
   }
 
   :global(.ant-modal-close) {
-    color: white;
+    margin-top: 8px;
+    color: black;
   }
 }
 
@@ -27,11 +27,29 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: white;
+  color: black;
+  justify-content: space-between;
+  width: calc(100% - 20px);
 
   .titleIcon {
     font-size: 24px;
     color: #ffd700;
+  }
+
+  .modalTitleButton {
+    border: none;
+    color: #1890ff;
+    background-color: transparent;
+    box-shadow: none;
+    text-decoration: underline;
+    gap: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .modalTitleEditIcon {
+    padding-right: 4px;
+    padding-bottom: 1px;
   }
 }
 
@@ -206,7 +224,6 @@
 }
 
 .timelineCard {
-  margin-bottom: 20px;
   border-radius: 12px;
   border: 1px solid #f0f0f0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);

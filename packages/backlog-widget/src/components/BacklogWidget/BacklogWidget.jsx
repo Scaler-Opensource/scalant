@@ -2,12 +2,15 @@ import React from 'react';
 import { Card, Typography, Button, Flex } from 'antd';
 import { CheckCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import styles from './BacklogWidget.module.scss';
+import { useGetBacklogQuery } from '../../services/backlogService';
+import withBacklogStore from '../../hoc/withBacklogStore';
 
 const { Text, Title } = Typography;
 
 const STATUSES = {
-  onTrack: 'on-track',
-  offTrack: 'off-track',
+  onTrack: 'on_track',
+  offTrack: 'off_track',
+  backLogInProgress: 'backlog_in_progress',
 };
 
 const STATUS_MAP = {
@@ -27,11 +30,24 @@ const STATUS_MAP = {
     icon: ExclamationCircleFilled,
     iconClass: styles.warningIcon,
   },
+  [STATUSES.backLogInProgress]: {
+    title: 'Off-Track',
+    encouragement:
+      'You need to clear your backlog to stay on track! Keep up the enthusiasm',
+    emoji: '🥺',
+    icon: ExclamationCircleFilled,
+    iconClass: styles.warningIcon,
+  },
 };
 
-const BacklogWidget = ({ status = STATUSES.onTrack, onClick = () => { } }) => {
-  const statusConfig = STATUS_MAP[status];
-  const StatusIcon = statusConfig.icon;
+const BacklogWidget = ({ createSchedule, showBacklogPlan }) => {
+  const { data: backlog } = useGetBacklogQuery();
+  const statusConfig = STATUS_MAP[backlog?.status];
+  const StatusIcon = statusConfig?.icon;
+
+  if (!backlog?.success || !StatusIcon) {
+    return null;
+  }
 
   return (
     <Card className={styles.backlogWidget}>
@@ -51,12 +67,27 @@ const BacklogWidget = ({ status = STATUSES.onTrack, onClick = () => { } }) => {
             </Text>
           </Flex>
         </Flex>
-        <Button type="primary" className={styles.openButton} onClick={onClick}>
-          Open Backlog Widget
-        </Button>
+        {backlog?.status === STATUSES.offTrack && (
+          <Button
+            type="primary"
+            className={styles.openButton}
+            onClick={createSchedule}
+          >
+            Create a Schedule!
+          </Button>
+        )}
+        {backlog?.status === STATUSES.backLogInProgress && (
+          <Button
+            type="primary"
+            className={styles.openButton}
+            onClick={showBacklogPlan}
+          >
+            Clear Backlog!
+          </Button>
+        )}
       </Flex>
     </Card>
   );
 };
 
-export default BacklogWidget;
+export default withBacklogStore(BacklogWidget);
