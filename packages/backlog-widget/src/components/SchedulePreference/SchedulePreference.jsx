@@ -19,6 +19,52 @@ import {
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+// LocalStorage key for schedule preferences
+const SCHEDULE_PREFERENCES_KEY = 'schedule_preferences';
+
+// Utility functions for localStorage
+const saveSchedulePreferences = (data) => {
+  try {
+    // eslint-disable-next-line no-undef
+    if (typeof window !== 'undefined' && window.localStorage) {
+      // Convert dayjs object to string for storage
+      const dataToStore = {
+        ...data,
+        selectedTime: data.selectedTime
+          ? data.selectedTime.format('HH:mm')
+          : null,
+      };
+      // eslint-disable-next-line no-undef
+      window.localStorage.setItem(
+        SCHEDULE_PREFERENCES_KEY,
+        JSON.stringify(dataToStore)
+      );
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to save schedule preferences to localStorage:', error);
+  }
+};
+
+const loadSchedulePreferences = () => {
+  try {
+    // eslint-disable-next-line no-undef
+    if (typeof window !== 'undefined' && window.localStorage) {
+      // eslint-disable-next-line no-undef
+      const saved = window.localStorage.getItem(SCHEDULE_PREFERENCES_KEY);
+      return saved ? JSON.parse(saved) : null;
+    }
+    return null;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'Failed to load schedule preferences from localStorage:',
+      error
+    );
+    return null;
+  }
+};
+
 const SchedulePreference = ({
   isSingleModule = true,
   onPlanCreate,
@@ -70,6 +116,30 @@ const SchedulePreference = ({
     'Mobile Development',
   ];
 
+  // Load saved preferences from localStorage on component mount
+  useEffect(() => {
+    const savedPreferences = loadSchedulePreferences();
+    if (savedPreferences) {
+      setSelectedDays(savedPreferences.selectedDays || ['Mon']);
+      setSelectedTime(null);
+      setSelectedDuration(savedPreferences.selectedDuration || '1 hour');
+      setSelectedModule(
+        savedPreferences.selectedModule || 'Data Structures & Algorithms'
+      );
+
+      // Update form fields if form is available
+      if (form) {
+        form.setFieldsValue({
+          selectedDays: savedPreferences.selectedDays || ['Mon'],
+          selectedTime: null,
+          selectedDuration: savedPreferences.selectedDuration || '1 hour',
+          selectedModule:
+            savedPreferences.selectedModule || 'Data Structures & Algorithms',
+        });
+      }
+    }
+  }, [form]);
+
   // Update days with scheduled classes when data is fetched
   useEffect(() => {
     if (scheduledDays.length > 0) {
@@ -82,13 +152,24 @@ const SchedulePreference = ({
     if (initialData) {
       form.setFieldsValue(initialData);
       setSelectedDays(initialData.selectedDays || ['Mon']);
-      setSelectedTime(initialData.selectedTime || null);
+      setSelectedTime(null);
       setSelectedDuration(initialData.selectedDuration || '1 hour');
       setSelectedModule(
         initialData.selectedModule || 'Data Structures & Algorithms'
       );
     }
   }, [initialData, form]);
+
+  // Save preferences to localStorage whenever they change
+  useEffect(() => {
+    const preferences = {
+      selectedDays,
+      selectedTime: selectedTime ? selectedTime.format('HH:mm') : null,
+      selectedDuration,
+      selectedModule,
+    };
+    saveSchedulePreferences(preferences);
+  }, [selectedDays, selectedTime, selectedDuration, selectedModule]);
 
   const handleDayToggle = (day) => {
     if (selectedDays.includes(day)) {
@@ -125,7 +206,7 @@ const SchedulePreference = ({
     try {
       const planData = {
         selected_days: selectedDays,
-        selected_time: selectedTime ? selectedTime.format('HH:mm') : null,
+        selected_time: selectedTime.format('HH:mm'),
         number_of_hours: selectedDuration?.split?.(' ')?.[0],
       };
 
@@ -270,7 +351,7 @@ const SchedulePreference = ({
               <TimePicker
                 value={selectedTime}
                 onChange={handleTimeChange}
-                format="hh:mm A"
+                format="HH:mm"
                 className={styles.timePicker}
                 suffixIcon={<ClockCircleOutlined />}
                 placeholder="Select time"
