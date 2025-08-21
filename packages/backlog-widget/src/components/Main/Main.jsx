@@ -9,12 +9,10 @@ const Main = () => {
   const [backlogPlanModal, setBacklogPlanModal] = useState(false);
 
   const createSchedule = () => {
-    console.log('createSchedule');
     setScheduleModal(true);
   };
 
   const showBacklogPlan = () => {
-    console.log('showBacklogPlan');
     setBacklogPlanModal(true);
   };
 

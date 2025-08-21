@@ -3,7 +3,6 @@ import { Card, Typography, Button, Flex } from 'antd';
 import { CheckCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import styles from './BacklogWidget.module.scss';
 import { useGetBacklogQuery } from '../../services/backlogService';
-import withBacklogStore from '../../hoc/withBacklogStore';
 
 const { Text, Title } = Typography;
 
@@ -90,4 +89,4 @@ const BacklogWidget = ({ createSchedule, showBacklogPlan }) => {
   );
 };
 
-export default withBacklogStore(BacklogWidget);
+export default BacklogWidget;

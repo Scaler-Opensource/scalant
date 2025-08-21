@@ -40,6 +40,12 @@ export const backlogServiceApi = createApi({
         body: payload,
       }),
     }),
+    getInitialData: builder.query({
+      query: () => ({
+        url: '/academy/mentee-dashboard/initial-load-data/',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -49,7 +55,10 @@ export const setBaseUrl = (url) => {
   }
 };
 
-export const { useGetBacklogQuery, useCreateScheduleMutation } =
-  backlogServiceApi;
+export const {
+  useGetBacklogQuery,
+  useCreateScheduleMutation,
+  useGetInitialDataQuery,
+} = backlogServiceApi;
 
 export default backlogServiceApi;

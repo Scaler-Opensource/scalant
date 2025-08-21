@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Typography,
   Form,
@@ -7,14 +7,13 @@ import {
   TimePicker,
   message,
   Modal,
-  Spin,
 } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import styles from './SchedulePreference.module.scss';
-import withBacklogStore from '../../hoc/withBacklogStore';
 import {
   useCreateScheduleMutation,
   useGetBacklogQuery,
+  useGetInitialDataQuery,
 } from '../../services/backlogService';
 
 const { Title, Text } = Typography;
@@ -26,16 +25,12 @@ const SchedulePreference = ({
   initialData = null,
   visible = false,
   onCancel,
-  title = 'Create Your Backlog Study Plan',
   width = 1200,
-  // API configuration props
-  fetchScheduledDaysAPI,
-  submitPlanAPI,
-  moduleId, // For fetching scheduled days
   ...modalProps
 }) => {
-  const [createSchedule, { isLoading: isCreatingSchedule }] =
-    useCreateScheduleMutation();
+  const [createSchedule] = useCreateScheduleMutation();
+  const { data: initialApiData } = useGetInitialDataQuery();
+  const batchSchedule = initialApiData?.user_data?.batch_schedule;
   const { refetch } = useGetBacklogQuery();
   const [form] = Form.useForm();
   const [selectedDays, setSelectedDays] = useState(['Mon']);
@@ -46,15 +41,18 @@ const SchedulePreference = ({
   );
 
   // API state
-  const [scheduledDays, setScheduledDays] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const scheduledDays = useMemo(
+    () => batchSchedule?.map?.((sch) => sch?.day?.substring?.(0, 3)) || [],
+    [batchSchedule]
+  );
+
   const [submitting, setSubmitting] = useState(false);
 
   const daysOfWeek = [
     { key: 'Mon', label: 'Mon', hasClass: false },
     { key: 'Tue', label: 'Tue', hasClass: false },
     { key: 'Wed', label: 'Wed', hasClass: false },
-    { key: 'Thur', label: 'Thur', hasClass: false },
+    { key: 'Thu', label: 'Thu', hasClass: false },
     { key: 'Fri', label: 'Fri', hasClass: false },
     { key: 'Sat', label: 'Sat', hasClass: false },
     { key: 'Sun', label: 'Sun', hasClass: false },
@@ -71,29 +69,6 @@ const SchedulePreference = ({
     'DevOps',
     'Mobile Development',
   ];
-
-  const fetchScheduledDays = async () => {
-    if (!fetchScheduledDaysAPI || !moduleId) return;
-
-    setLoading(true);
-    try {
-      const response = await fetchScheduledDaysAPI(moduleId);
-      if (response && response.data) {
-        setScheduledDays(response.data.scheduledDays || []);
-      }
-    } catch {
-      message.error('Failed to fetch scheduled days. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch scheduled days when component mounts or moduleId changes
-  useEffect(() => {
-    if (visible && fetchScheduledDaysAPI && moduleId) {
-      fetchScheduledDays();
-    }
-  }, [visible, moduleId, fetchScheduledDaysAPI]);
 
   // Update days with scheduled classes when data is fetched
   useEffect(() => {
@@ -156,7 +131,6 @@ const SchedulePreference = ({
 
       // Call API to submit the plan
       const response = await createSchedule({ payload: planData });
-      console.log('response', response);
       if (response?.data?.success) {
         message.success('Study plan created successfully!');
       } else {
@@ -182,34 +156,9 @@ const SchedulePreference = ({
   const getDaysWithScheduledInfo = () => {
     return daysOfWeek.map((day) => ({
       ...day,
-      hasClass: scheduledDays.includes(day.key),
+      hasClass: scheduledDays.includes(day.key.toLowerCase()),
     }));
   };
-
-  if (loading) {
-    return (
-      <Modal
-        open={visible}
-        onCancel={handleCancel}
-        width={width}
-        footer={null}
-        onClose={handleCancel}
-        className={styles.modal}
-        {...modalProps}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '400px',
-          }}
-        >
-          <Spin size="large" tip="Loading scheduled days..." />
-        </div>
-      </Modal>
-    );
-  }
 
   return (
     <Modal
@@ -364,4 +313,4 @@ const SchedulePreference = ({
   );
 };
 
-export default withBacklogStore(SchedulePreference);
+export default SchedulePreference;

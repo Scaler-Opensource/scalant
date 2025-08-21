@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Spin, Card, Tag, Button, Typography } from 'antd';
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   ExclamationCircleOutlined,
   PlayCircleOutlined,
-  // FileTextOutlined,
-  // VideoCameraOutlined,
-  // CodeOutlined,
   TrophyOutlined,
-  RocketOutlined,
-  EditOutlined,
-  // BookOutlined,
 } from '@ant-design/icons';
 import styles from './BacklogTimeline.module.scss';
 import { useGetBacklogQuery } from '../../services/backlogService';
-import withBacklogStore from '../../hoc/withBacklogStore';
 
 const { Title, Text } = Typography;
 
@@ -33,13 +26,20 @@ const BacklogTimeline = ({
     isLoading: loading,
     isError: error,
   } = useGetBacklogQuery();
-  console.log('backlog', backlog);
   const backlogItems = backlog?.backlog_data || [];
-  // const [backlogItems, setBacklogItems] = useState([]);
+  const [aiLoader, setAiLoader] = useState(true);
 
   const handleCancel = () => {
     onCancel?.();
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAiLoader(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const getStatusColor = (status) => {
     const statusLower = status?.toLowerCase();
@@ -210,7 +210,7 @@ const BacklogTimeline = ({
 
   const progressStats = getProgressStats();
 
-  if (loading) {
+  if (loading || aiLoader) {
     return (
       <Modal
         title={title}
@@ -332,4 +332,4 @@ const BacklogTimeline = ({
   );
 };
 
-export default withBacklogStore(BacklogTimeline);
+export default BacklogTimeline;
