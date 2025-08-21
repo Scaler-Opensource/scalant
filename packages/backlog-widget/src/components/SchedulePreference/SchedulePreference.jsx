@@ -168,6 +168,7 @@ const SchedulePreference = ({
       footer={null}
       destroyOnClose
       className={styles.modal}
+      getContainer={false}
       {...modalProps}
     >
       <div className={styles.container}>

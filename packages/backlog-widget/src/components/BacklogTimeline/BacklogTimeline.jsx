@@ -230,6 +230,7 @@ const BacklogTimeline = ({
         width={width}
         footer={null}
         className={styles.modal}
+        getContainer={false}
         {...modalProps}
       >
         <div className={styles.loadingContainer}>
@@ -249,6 +250,7 @@ const BacklogTimeline = ({
         width={width}
         footer={null}
         className={styles.modal}
+        getContainer={false}
         {...modalProps}
       >
         <div className={styles.errorContainer}>
@@ -278,6 +280,7 @@ const BacklogTimeline = ({
       width={width}
       footer={null}
       className={styles.modal}
+      getContainer={false}
       {...modalProps}
     >
       <div className={styles.container}>
