@@ -1,0 +1,24 @@
+{
+  "name": "@scalant/backlog-widget",
+  "version": "1.0.0",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/backlog-widget.umd.js",
+  "module": "dist/backlog-widget.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "import": "./dist/backlog-widget.es.js",
+    "require": "./dist/backlog-widget.umd.js"
+  },
+  "style": "./dist/backlog-widget.css",
+  "scripts": {
+    "lint": "eslint packages/**/src",
+    "lint:styles": "stylelint \"**/*.scss\"",
+    "build": "vite build",
+    "storybook": "start-storybook -p 6006"
+  }
+}
