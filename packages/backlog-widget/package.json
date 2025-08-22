@@ -1,20 +1,20 @@
 {
-  "name": "@scalant/components",
-  "version": "4.2.6",
+  "name": "@scalant/backlog-widget",
+  "version": "3.0.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/components.umd.js",
-  "module": "dist/components.es.js",
+  "main": "dist/backlog-widget.umd.js",
+  "module": "dist/backlog-widget.es.js",
   "files": [
     "dist"
   ],
   "exports": {
-    "import": "./dist/components.es.js",
-    "require": "./dist/components.umd.js"
+    "import": "./dist/backlog-widget.es.js",
+    "require": "./dist/backlog-widget.umd.js"
   },
-  "style": "./dist/components.css",
+  "style": "./dist/backlog-widget.css",
   "scripts": {
     "lint": "eslint packages/**/src",
     "lint:styles": "stylelint \"**/*.scss\"",
