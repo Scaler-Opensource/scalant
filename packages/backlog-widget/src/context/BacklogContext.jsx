@@ -13,7 +13,7 @@ const initialState = {
   backlogItems: null,
   loading: false,
   error: null,
-  baseUrl: typeof window !== 'undefined' ? window.location.origin : '',
+  baseUrl: typeof window !== 'undefined' ? 'http://localhost:3000' : '',
 };
 
 // Action types

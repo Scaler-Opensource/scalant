@@ -1,0 +1,72 @@
+.demoContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemCard {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.itemContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.itemInfo {
+  flex: 1;
+
+  h4 {
+    margin-bottom: 8px !important;
+    color: #262626;
+  }
+}
+
+.itemActions {
+  flex-shrink: 0;
+}
+
+.calendarButton {
+  border-radius: 6px;
+  font-weight: 500;
+  height: 36px;
+  padding: 0 16px;
+  transition: all 0.2s ease;
+  border-color: #52c41a;
+  color: #52c41a;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(82, 196, 26, 0.3);
+    border-color: #389e0d;
+    color: #389e0d;
+  }
+}
+
+.features {
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 8px 0;
+      font-size: 16px;
+      color: #595959;
+    }
+  }
+}

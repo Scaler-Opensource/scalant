@@ -331,6 +331,26 @@
           box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
         }
       }
+
+      .calendarButton {
+        border-radius: 6px;
+        font-weight: 500;
+        height: 32px;
+        padding: 0 16px;
+        transition: all 0.2s ease;
+        min-width: 100px;
+        flex-shrink: 0;
+        margin-left: 8px;
+        border-color: #52c41a;
+        color: #52c41a;
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(82, 196, 26, 0.3);
+          border-color: #389e0d;
+          color: #389e0d;
+        }
+      }
     }
   }
 

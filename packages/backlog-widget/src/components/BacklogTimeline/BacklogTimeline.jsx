@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Spin, Card, Tag, Button, Typography } from 'antd';
+import { Modal, Spin, Card, Tag, Button, Typography, message } from 'antd';
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
@@ -9,8 +9,21 @@ import {
 } from '@ant-design/icons';
 import styles from './BacklogTimeline.module.scss';
 import { useGetBacklogQuery } from '../../context';
+import CalendarService from '../../utils/calendarService';
+import CalendarSuccessModal from '../CalendarSuccessModal';
+import googleCalendarIcon from '../../assets/google-calendar-icon.svg';
 
 const { Title, Text } = Typography;
+
+// Google Calendar SVG Icon Component
+const GoogleCalendarIcon = ({ className, style }) => (
+  <img
+    src={googleCalendarIcon}
+    alt="Google Calendar"
+    className={className}
+    style={{ width: '14px', height: '14px', ...style }}
+  />
+);
 
 const BacklogTimeline = ({
   onCancel,
@@ -28,9 +41,31 @@ const BacklogTimeline = ({
   } = useGetBacklogQuery();
   const backlogItems = backlog?.backlog_data || [];
   const [aiLoader, setAiLoader] = useState(true);
+  const [successModal, setSuccessModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [calendarUrl, setCalendarUrl] = useState('');
+
+  const calendarService = new CalendarService('aswanth@scaler.com');
 
   const handleCancel = () => {
     onCancel?.();
+  };
+
+  const handleAddToCalendar = async (item) => {
+    try {
+      const result = await calendarService.addToGoogleCalendar(item);
+
+      if (result.success) {
+        setSelectedItem(item);
+        setCalendarUrl(result.url);
+        setSuccessModal(true);
+        message.success('Calendar event created successfully!');
+      } else {
+        message.error(result.message || 'Failed to add to calendar');
+      }
+    } catch (error) {
+      message.error('Failed to add event to calendar');
+    }
   };
 
   useEffect(() => {
@@ -179,6 +214,18 @@ const BacklogTimeline = ({
                   Start Learning
                 </Button>
               )}
+              {!isComplete && !isPending && (
+                <Button
+                  type="default"
+                  icon={<GoogleCalendarIcon />}
+                  onClick={() => handleAddToCalendar(item)}
+                  size="small"
+                  className={styles.calendarButton}
+                  title="Add to Google Calendar"
+                >
+                  Schedule
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -264,82 +311,92 @@ const BacklogTimeline = ({
   }
 
   return (
-    <Modal
-      title={
-        <div className={styles.modalTitle}>
-          <span>{title}</span>
-          <Button className={styles.modalTitleButton} onClick={onEditClick}>
-            Edit Schedule
-          </Button>
-        </div>
-      }
-      open={open}
-      onCancel={handleCancel}
-      width={width}
-      footer={null}
-      className={styles.modal}
-      {...modalProps}
-    >
-      <div className={styles.container}>
-        {backlogItems.length === 0 ? (
-          <div className={styles.emptyState}>
-            <TrophyOutlined className={styles.emptyIcon} />
-            <Title level={3}>🎉 All Caught Up!</Title>
-            <Text type="secondary">
-              Amazing! You've completed all your backlog items.
-            </Text>
+    <>
+      <Modal
+        title={
+          <div className={styles.modalTitle}>
+            <span>{title}</span>
+            <Button className={styles.modalTitleButton} onClick={onEditClick}>
+              Edit Schedule
+            </Button>
           </div>
-        ) : (
-          <div className={styles.timelineContainer}>
-            {/* Simple Progress Overview */}
-            <div className={styles.progressOverview}>
-              <div className={styles.progressBar}>
-                <div className={styles.progressInfo}>
-                  <Text strong>
-                    {progressStats.completed} of {progressStats.total} completed
-                  </Text>
-                  <Text type="secondary">
-                    {Math.round(
-                      (progressStats.completed / progressStats.total) * 100
-                    )}
-                    % done
-                  </Text>
-                </div>
-                <div className={styles.customProgressBar}>
-                  <div
-                    className={styles.progressFill}
-                    style={{
-                      width: `${Math.round(
+        }
+        open={open}
+        onCancel={handleCancel}
+        width={width}
+        footer={null}
+        className={styles.modal}
+        {...modalProps}
+      >
+        <div className={styles.container}>
+          {backlogItems.length === 0 ? (
+            <div className={styles.emptyState}>
+              <TrophyOutlined className={styles.emptyIcon} />
+              <Title level={3}>🎉 All Caught Up!</Title>
+              <Text type="secondary">
+                Amazing! You've completed all your backlog items.
+              </Text>
+            </div>
+          ) : (
+            <div className={styles.timelineContainer}>
+              {/* Simple Progress Overview */}
+              <div className={styles.progressOverview}>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressInfo}>
+                    <Text strong>
+                      {progressStats.completed} of {progressStats.total}{' '}
+                      completed
+                    </Text>
+                    <Text type="secondary">
+                      {Math.round(
                         (progressStats.completed / progressStats.total) * 100
-                      )}%`,
-                    }}
-                  />
+                      )}
+                      % done
+                    </Text>
+                  </div>
+                  <div className={styles.customProgressBar}>
+                    <div
+                      className={styles.progressFill}
+                      style={{
+                        width: `${Math.round(
+                          (progressStats.completed / progressStats.total) * 100
+                        )}%`,
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Simple Timeline */}
-            <div className={styles.customTimeline}>
-              {displayItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${styles.timelineItem} ${styles[`status${getStatusColor(item.status).charAt(0).toUpperCase() + getStatusColor(item.status).slice(1)}`]}`}
-                >
+              {/* Simple Timeline */}
+              <div className={styles.customTimeline}>
+                {displayItems.map((item, index) => (
                   <div
-                    className={`${styles.timelineDot} ${styles[`status${getStatusColor(item.status).charAt(0).toUpperCase() + getStatusColor(item.status).slice(1)}`]}`}
+                    key={index}
+                    className={`${styles.timelineItem} ${styles[`status${getStatusColor(item.status).charAt(0).toUpperCase() + getStatusColor(item.status).slice(1)}`]}`}
                   >
-                    {getStatusIcon(item.status)}
+                    <div
+                      className={`${styles.timelineDot} ${styles[`status${getStatusColor(item.status).charAt(0).toUpperCase() + getStatusColor(item.status).slice(1)}`]}`}
+                    >
+                      {getStatusIcon(item.status)}
+                    </div>
+                    <div className={styles.timelineContent}>
+                      {renderTimelineItem(item)}
+                    </div>
                   </div>
-                  <div className={styles.timelineContent}>
-                    {renderTimelineItem(item)}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </Modal>
+          )}
+        </div>
+      </Modal>
+
+      <CalendarSuccessModal
+        open={successModal}
+        onClose={() => setSuccessModal(false)}
+        itemTitle={selectedItem?.title}
+        calendarUrl={calendarUrl}
+      />
+    </>
   );
 };
 
