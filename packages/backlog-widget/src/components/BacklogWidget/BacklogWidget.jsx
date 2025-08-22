@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Typography, Button, Flex } from 'antd';
 import { CheckCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import styles from './BacklogWidget.module.scss';
-import { useGetBacklogQuery } from '../../services/backlogService';
+import { useGetBacklogQuery } from '../../context';
 
 const { Text, Title } = Typography;
 
@@ -40,9 +40,17 @@ const STATUS_MAP = {
 };
 
 const BacklogWidget = ({ createSchedule, showBacklogPlan }) => {
-  const { data: backlog } = useGetBacklogQuery();
+  const { data: backlog, isLoading, error } = useGetBacklogQuery();
   const statusConfig = STATUS_MAP[backlog?.status];
   const StatusIcon = statusConfig?.icon;
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   if (!backlog?.success || !StatusIcon) {
     return null;

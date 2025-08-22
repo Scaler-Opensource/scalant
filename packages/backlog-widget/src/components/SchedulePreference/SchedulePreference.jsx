@@ -14,7 +14,7 @@ import {
   useCreateScheduleMutation,
   useGetBacklogQuery,
   useGetInitialDataQuery,
-} from '../../services/backlogService';
+} from '../../context';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -30,9 +30,7 @@ const saveSchedulePreferences = (data) => {
       // Convert dayjs object to string for storage
       const dataToStore = {
         ...data,
-        selectedTime: data.selectedTime
-          ? data.selectedTime.format('HH:mm')
-          : null,
+        selectedTime: data?.selectedTime || null,
       };
       // eslint-disable-next-line no-undef
       window.localStorage.setItem(
@@ -212,7 +210,7 @@ const SchedulePreference = ({
 
       // Call API to submit the plan
       const response = await createSchedule({ payload: planData });
-      if (response?.data?.success) {
+      if (response?.success) {
         message.success('Study plan created successfully!');
       } else {
         throw new Error(response?.message || 'Failed to create plan');

@@ -8,7 +8,7 @@ import {
   TrophyOutlined,
 } from '@ant-design/icons';
 import styles from './BacklogTimeline.module.scss';
-import { useGetBacklogQuery } from '../../services/backlogService';
+import { useGetBacklogQuery } from '../../context';
 
 const { Title, Text } = Typography;
 
@@ -24,7 +24,7 @@ const BacklogTimeline = ({
     data: backlog,
     refetch,
     isLoading: loading,
-    isError: error,
+    error,
   } = useGetBacklogQuery();
   const backlogItems = backlog?.backlog_data || [];
   const [aiLoader, setAiLoader] = useState(true);

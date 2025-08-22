@@ -6,7 +6,7 @@ A React component for managing and displaying backlog information.
 
 ### Basic Usage with Provider
 
-The `BacklogWidget` component requires a Redux store context. Use the `BacklogWidgetProvider` to wrap your component:
+The `BacklogWidget` component requires a React Context provider. Use the `BacklogWidgetProvider` to wrap your component:
 
 ```jsx
 import { BacklogWidget, BacklogWidgetProvider } from '@scalant/backlog-widget';
@@ -23,34 +23,21 @@ function App() {
 }
 ```
 
-### Using with Existing Redux Store
+### Using with Custom Base URL
 
-If you already have a Redux store in your app, you can add the backlog service to it:
+You can customize the base URL for API calls:
 
 ```jsx
-import { configureStore } from '@reduxjs/toolkit';
-import { backlogServiceApi } from '@scalant/backlog-widget';
-
-const store = configureStore({
-  reducer: {
-    // ... your other reducers
-    [backlogServiceApi.reducerPath]: backlogServiceApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(backlogServiceApi.middleware),
-});
-
-// Then use your existing Provider
-import { Provider } from 'react-redux';
+import { BacklogWidget, BacklogWidgetProvider } from '@scalant/backlog-widget';
 
 function App() {
   return (
-    <Provider store={store}>
+    <BacklogWidgetProvider baseUrl="https://api.example.com">
       <BacklogWidget 
         createSchedule={() => console.log('Create schedule')}
         showBacklogPlan={() => console.log('Show backlog plan')}
       />
-    </Provider>
+    </BacklogWidgetProvider>
   );
 }
 ```
@@ -58,7 +45,7 @@ function App() {
 ## Components
 
 - `BacklogWidget` - Main component for displaying backlog status
-- `BacklogWidgetProvider` - Redux Provider wrapper
+- `BacklogWidgetProvider` - React Context Provider wrapper
 - `BacklogTimeline` - Timeline component for backlog items
 - `SchedulePreference` - Component for managing schedule preferences
 - `BacklogManager` - Manager component for backlog operations
@@ -70,9 +57,26 @@ function App() {
 - `createSchedule` (function) - Callback when create schedule button is clicked
 - `showBacklogPlan` (function) - Callback when show backlog plan button is clicked
 
-## Store
+## Context
 
-The package exports a configured Redux store that includes:
-- Backlog service API with RTK Query
-- Proper middleware configuration
-- Reducer setup
+The package exports a React Context that includes:
+- Backlog state management
+- API functions for backlog operations
+- Loading and error states
+- Custom hooks for easy integration
+
+### Available Hooks
+
+- `useBacklog()` - Access to all backlog context functions and state
+- `useGetBacklogQuery()` - Hook for fetching backlog data
+- `useCreateScheduleMutation()` - Hook for creating schedules
+- `useGetInitialDataQuery()` - Hook for fetching initial data
+
+### API Functions
+
+- `getBacklog()` - Fetch backlog information
+- `createSchedule(payload)` - Create a new schedule
+- `getInitialData()` - Fetch initial dashboard data
+- `getScheduledDays(moduleId)` - Get scheduled days for a module
+- `submitPlan(planData)` - Submit a backlog plan
+- `getBacklogItems(moduleId)` - Get backlog items for a module

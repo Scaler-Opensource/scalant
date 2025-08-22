@@ -1,31 +1,12 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { backlogServiceApi } from '../src/services/backlogService';
-import rootReducer from '../src/store';
+import { BacklogProvider } from '../src/context';
 
-const createStore = (preloadedState = {}) => {
-  return configureStore({
-    reducer: {
-      scalantResumeBuilder: rootReducer,
-      [backlogServiceApi.reducerPath]: backlogServiceApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(backlogServiceApi.middleware),
-    preloadedState,
-  });
+const withBacklogProvider = (Story) => {
+  return React.createElement(BacklogProvider, null, React.createElement(Story));
 };
 
-const store = createStore();
-
-const withReduxProvider = (Story) => (
-  <Provider store={store}>
-    <Story />
-  </Provider>
-);
-
 // ✅ ESM-compatible export
-export const decorators = [withReduxProvider];
+export const decorators = [withBacklogProvider];
 
 export const parameters = {
   controls: {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BacklogWidget from '../BacklogWidget';
 import SchedulePreference from '../SchedulePreference';
 import BacklogTimeline from '../BacklogTimeline';
+import { useBacklog } from '../../context';
 import styles from './BacklogManager.module.scss';
 
 const BacklogManager = ({
@@ -14,11 +15,6 @@ const BacklogManager = ({
   // BacklogTimeline props
   backlogTimelineProps = {},
 
-  // API functions
-  fetchScheduledDaysAPI,
-  submitPlanAPI,
-  fetchBacklogItemsAPI,
-
   // Module ID
   moduleId,
 
@@ -29,15 +25,22 @@ const BacklogManager = ({
   const [currentView, setCurrentView] = useState('widget'); // 'widget', 'schedule', 'timeline'
   const [scheduleData, setScheduleData] = useState(null);
 
+  const { getScheduledDays, submitPlan, getBacklogItems } = useBacklog();
+
   // Handle opening schedule preference from widget
   const handleOpenSchedule = () => {
     setCurrentView('schedule');
   };
 
   // Handle schedule preference submission
-  const handleScheduleSubmit = (planData) => {
-    setScheduleData(planData);
-    setCurrentView('timeline');
+  const handleScheduleSubmit = async (planData) => {
+    try {
+      await submitPlan(planData);
+      setScheduleData(planData);
+      setCurrentView('timeline');
+    } catch (error) {
+      console.error('Failed to submit plan:', error);
+    }
   };
 
   // Handle closing schedule preference
@@ -60,8 +63,8 @@ const BacklogManager = ({
             onCancel={handleScheduleCancel}
             onPlanCreate={handleScheduleSubmit}
             moduleId={moduleId}
-            fetchScheduledDaysAPI={fetchScheduledDaysAPI}
-            submitPlanAPI={submitPlanAPI}
+            fetchScheduledDaysAPI={getScheduledDays}
+            submitPlanAPI={submitPlan}
             {...schedulePreferenceProps}
           />
         );
@@ -72,7 +75,7 @@ const BacklogManager = ({
             visible={true}
             onCancel={handleTimelineCancel}
             moduleId={moduleId}
-            fetchBacklogItemsAPI={fetchBacklogItemsAPI}
+            fetchBacklogItemsAPI={getBacklogItems}
             {...backlogTimelineProps}
           />
         );
