@@ -244,7 +244,7 @@ export const TEMPLATE_VS_IMG = {
   enhanCv:
     'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/137/935/original/enhanCV.png?1751895655',
   professional:
-    'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/137/931/original/professional.png?1751895484',
-  nonTechTemplate:
     'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/137/932/original/nonTech.png?1751895516',
+  nonTechTemplate:
+    'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/137/931/original/professional.png?1751895484',
 };
