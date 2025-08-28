@@ -46,3 +46,8 @@ export const TOOLS = [
   { name: 'Excel', experience: null },
   { name: 'Power BI', experience: null },
 ];
+
+export const SKILL_VIEW_TOOLTIPS = {
+  LINEAR: 'Skills in one line separated by comma.',
+  CATEGORIZE: 'Skills can be categorised as languages, framework and DB.',
+};

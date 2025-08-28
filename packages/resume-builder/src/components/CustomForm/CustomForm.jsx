@@ -6,6 +6,7 @@ import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi'
 import { initializeForm } from '../../store/formStoreSlice';
 import CustomFormItem from './CustomFormItem';
 import { FORM_KEYS } from '../../utils/constants';
+import { isHtmlEmpty } from '../../utils/formattingUtils';
 
 const FORM_ID = 'achievementsForm';
 
@@ -77,7 +78,9 @@ const CustomForm = ({ onComplete }) => {
 
     const achievements = achievementsItems.map((item) => ({
       ...(item.id && { id: item.id }),
-      description: item.formData.description,
+      description: isHtmlEmpty(item.formData.description)
+        ? ''
+        : item.formData.description,
     }));
 
     try {

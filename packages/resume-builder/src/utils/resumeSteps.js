@@ -13,11 +13,13 @@ import EducationForm from '../components/EducationForm';
 import WorkExperienceForm from '../components/WorkExperienceForm';
 import CustomForm from '../components/CustomForm';
 import React from 'react';
+import { isHtmlEmpty } from './formattingUtils';
 import {
   PROJECT_FORM_REQUIRED_FIELDS,
   PERSONAL_DETAILS_FORM_REQUIRED_FIELDS,
   WORK_EXPERIENCE_FORM_REQUIRED_FIELDS,
   EDUCATION_FORM_REQUIRED_FIELDS,
+  ACHIEVEMENTS_FORM_REQUIRED_FIELDS,
 } from './constants';
 
 const ALL_FORMS_KEYS = {
@@ -73,6 +75,12 @@ const FORM_STEPS = [
     component: CustomForm,
   },
 ];
+
+const FORM_AI_FEEDBACK_SECTIONS = {
+  skills: 'skills',
+  projects: 'projects',
+  experience: 'work_experience',
+};
 
 const STEP_ORDERS = {
   ACADEMY_FRESHER: {
@@ -249,9 +257,82 @@ const getRequiredFields = (formKey) => {
       return WORK_EXPERIENCE_FORM_REQUIRED_FIELDS;
     case 'education':
       return EDUCATION_FORM_REQUIRED_FIELDS;
+    case 'achievements':
+      return ACHIEVEMENTS_FORM_REQUIRED_FIELDS;
     default:
       return [];
   }
+};
+
+const getFormStatus = (
+  formKey,
+  reviewData,
+  incompleteForms,
+) => {
+  if (incompleteForms.includes(formKey)) {
+    return 'incomplete';
+  } else {
+    return 'complete';
+  }
+};
+
+const getReviewStatus = (formKey, reviewData, isReviewLoading) => {
+  const overallScore =
+    reviewData?.resume_evaluation_result?.overall_resume_score;
+  const sectionScore =
+    reviewData?.resume_evaluation_result?.section_scores?.[
+      FORM_AI_FEEDBACK_SECTIONS[formKey]
+    ];
+    if (isReviewLoading) {
+      return 'under_review';
+    } else if (overallScore && Object.keys(FORM_AI_FEEDBACK_SECTIONS).includes(formKey)) {
+      if (sectionScore > 2 || !sectionScore) {
+        return 'looks_good';
+      } else {
+        return 'needs_work';
+      }
+    }
+    return null;
+};
+
+export const getOverallSummary = (reviewData, isReviewLoading) => {
+  const evaluationState = reviewData?.evaluation_state;
+
+  if (isReviewLoading) {
+    return [
+      'loading',
+      `Your resume is currently under review. Changes made during this process won’t appear in the review report.`,
+    ];
+  }
+
+  if (!evaluationState) {
+    return ['no_feedback', ''];
+  }
+
+  if (evaluationState === 'failed') {
+    return [
+      'error',
+      'We tried reviewing your resume a few times, but it didn’t go through. Please try again after a while or reach out to support if it continues',
+    ];
+  }
+
+  const scores = reviewData?.resume_evaluation_result?.section_scores || {};
+  const { skills = 0, projects = 0, work_experience = 0 } = scores;
+
+  if (skills === 3 && projects === 3 && work_experience === 3) {
+    return ['success', 'Your resume looks good!'];
+  }
+
+  const improvementAreas = [];
+  if (skills < 3) improvementAreas.push('Skills');
+  if (projects < 3) improvementAreas.push('Projects');
+  if (work_experience < 3) improvementAreas.push('Work Experience');
+
+  const message = `You're close! Try improving the ${improvementAreas.join(', ')} section${
+    improvementAreas.length > 1 ? 's' : ''
+  }, based on the provided feedback`;
+
+  return ['warning', message];
 };
 
 export const getAllIncompleteForms = (resumeData) => {
@@ -321,6 +402,8 @@ export const getFormSteps = (
   incompleteForms,
   onComplete,
   program,
+  reviewData,
+  isReviewLoading,  
   onAiSuggestionClick
 ) => {
   if (!resumePersonaData) return [];
@@ -346,7 +429,8 @@ export const getFormSteps = (
       }
       return {
         ...step,
-        status: incompleteForms.includes(key) ? 'incomplete' : 'complete',
+        status: getFormStatus(key, reviewData, incompleteForms, isReviewLoading),
+        reviewStatus: getReviewStatus(key, reviewData, isReviewLoading),
         required: isRequired,
         component: React.createElement(step.component, {
           onComplete,

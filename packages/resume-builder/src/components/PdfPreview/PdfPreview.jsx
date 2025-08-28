@@ -69,6 +69,7 @@ const PdfPreview = ({
   isLoading = false,
   isFetching = false,
   isError = false,
+  onDownloadClick,
 }) => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -112,6 +113,7 @@ const PdfPreview = ({
     try {
       downloadFile(pdfLink, `resume.pdf`);
       message.success('Resume will be downloaded in a moment');
+      onDownloadClick?.();
     } catch {
       message.error('Failed to download resume. Please try again.');
     }

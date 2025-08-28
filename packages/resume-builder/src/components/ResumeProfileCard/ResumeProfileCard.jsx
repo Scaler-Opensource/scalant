@@ -11,7 +11,7 @@ import styles from './ResumeProfileCard.module.scss';
 
 const { Title, Text } = Typography;
 
-const ResumeProfileCard = ({ resumePersonaData }) => {
+const ResumeProfileCard = ({ className, resumePersonaData }) => {
   const dispatch = useDispatch();
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -34,7 +34,7 @@ const ResumeProfileCard = ({ resumePersonaData }) => {
   const { currentJobRole, totalWorkExperienceInTech } = resumePersonaData;
 
   return (
-    <Card>
+    <Card className={className}>
       <Flex justify="space-between" align="center">
         <Flex align="center" gap={16}>
           <Avatar

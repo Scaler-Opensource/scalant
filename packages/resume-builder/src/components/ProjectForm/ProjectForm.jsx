@@ -8,6 +8,7 @@ import ProjectFormItem from './ProjectFormItem';
 
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
 import AiSuggestionBanner from '../AiSuggestionBanner/AiSuggestionBanner';
+import SectionFeedback from '../SectionFeedback/SectionFeedback';
 import { FORM_KEYS } from '../../utils/constants';
 
 const FORM_ID = 'projectForm';
@@ -39,6 +40,14 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
   const isFormInitialized = useSelector(
     (state) => state.scalantResumeBuilder.formStore.initializedForms[FORM_ID]
   );
+  const reviewData = useSelector(
+    (state) => state.scalantResumeBuilder.resumeReview.reviewData
+  );
+  const projectFeedback = useMemo(() => {
+    return (
+      reviewData?.resume_evaluation_result?.section_feedback?.projects || []
+    );
+  }, [reviewData]);
   const { incompleteForms, currentIncompleteForm } = useSelector(
     (state) => state.scalantResumeBuilder.resumeForms
   );
@@ -156,6 +165,7 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
   return (
     <Flex vertical gap={16}>
       <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      <SectionFeedback feedbackData={projectFeedback} />
       <Space direction="vertical" style={{ width: '100%' }}>
         <Flex vertical gap={16}>
           {(formData?.projectItems || []).map((item, index) => (

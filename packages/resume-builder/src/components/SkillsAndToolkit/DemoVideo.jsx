@@ -21,7 +21,6 @@ const DemoVideo = () => {
       width="100%"
       controls
       autoPlay
-      muted
       className={styles.demoVideo}
       poster="https://dummyimage.com/600x340/000/fff&text=WHY+DO+WE+HAVE+LIMITED+NUMBER+OF+SKILLS?"
     />

@@ -45,6 +45,7 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
 
   const handleExpand = () => {
     const currentItems = formData?.projectItems || [];
+    console.log('currentItems', currentItems, index);
     const updatedItems = currentItems.map((projectItem) =>
       projectItem.index === index
         ? { ...projectItem, expanded: !projectItem.expanded }
@@ -65,9 +66,12 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
 
   const handleDeleteModalOk = () => {
     const currentItems = formData?.projectItems || [];
-    const updatedItems = currentItems.filter(
-      (projectItem) => projectItem.index !== index
-    );
+    const updatedItems = currentItems
+      .filter((projectItem) => projectItem.index !== index)
+      .map((projectItem, newIndex) => ({
+        ...projectItem,
+        index: newIndex,
+      }));
 
     dispatch(updateFormData({ formId, data: { projectItems: updatedItems } }));
     setIsDeleteModalOpen(false);
@@ -95,9 +99,7 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text>Project {index + 1}</Text>
-          {(formData?.projectItems || []).length > 1 && (
-            <DeleteOutlined onClick={handleDelete} />
-          )}
+            <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>

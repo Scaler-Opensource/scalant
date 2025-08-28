@@ -16,6 +16,8 @@ import {
 } from '../../store/resumeFormsSlice';
 import { useBasicQuestionsForm } from '../../hooks/useBasicQuestionsForm';
 import ResumeProfileCard from '../ResumeProfileCard';
+import ResumeReviewOverallSummary from '../ResumeReviewOverallSummary';
+
 const ResumeTimeline = ({ onAiSuggestionClick }) => {
   const dispatch = useDispatch();
   const program = useSelector(
@@ -36,6 +38,12 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
   const [mounted, setMounted] = useState(false);
   const resumePersonaData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms.basicQuestions
+  );
+  const reviewData = useSelector(
+    (state) => state.scalantResumeBuilder.resumeReview.reviewData
+  );
+  const isReviewLoading = useSelector(
+    (state) => state.scalantResumeBuilder.resumeReview.isLoading
   );
 
   // Initialize form values when resumeData is loaded
@@ -128,6 +136,8 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
         incompleteForms,
         handleFormCompletion,
         program,
+        reviewData,
+        isReviewLoading,
         onAiSuggestionClick
       );
       setSteps(formSteps);
@@ -137,28 +147,33 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
     incompleteForms,
     handleFormCompletion,
     program,
+    reviewData,
+    isReviewLoading,
     onAiSuggestionClick,
   ]);
-
+  console.log(steps);
   return (
     <div className={styles.container}>
+      <ResumeReviewOverallSummary
+        reviewData={reviewData}
+        isReviewLoading={isReviewLoading}
+      />
+      <ResumeProfileCard
+        className={styles.profileCard}
+        resumePersonaData={resumePersonaData}
+      />
       {steps && steps.length > 0 ? (
         <Timeline
           mode="left"
+          pending={false}
           items={[
-            {
-              dot: <CheckCircleOutlined className={styles.completeIcon} />,
-              children: (
-                <div>
-                  <ResumeProfileCard resumePersonaData={resumePersonaData} />
-                </div>
-              ),
-            },
             ...steps.map((step) => {
               let dotIcon;
               if (step.key === expandedStep) {
                 dotIcon = <LoadingOutlined className={styles.activeIcon} />;
-              } else if (step.status === 'complete') {
+              } else if (
+                step.status === 'complete'
+              ) {
                 dotIcon = (
                   <CheckCircleOutlined className={styles.completeIcon} />
                 );
@@ -178,6 +193,7 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
                       subtitle={step.subtitle}
                       icon={step.icon}
                       status={step.status}
+                      reviewStatus={step.reviewStatus}
                       isActive={step.key === expandedStep}
                       expanded={step.key === expandedStep}
                       onClick={() => handleStepClick(step.key)}

@@ -1,0 +1,34 @@
+{
+  "resume_evaluation_result": {
+      "section_feedback": {
+          "accuracy_and_presentation": [
+              "Your resume is exceptionally well-formatted, clean, and easy to read. The use of bullet points and clear headings makes it easy for a hiring manager to scan and find key information.", 
+              "The content is grammatically correct with no spelling errors, which reflects great attention to detail.", 
+              "A very minor point: your current role at Outlier AI is listed as \"Dec 2024 - Present\". This appears to be a typo and should likely be \"Dec 2023 - Present\". Correcting this will ensure there is no confusion."
+            ], 
+          "work_experience": [
+            "You have done an excellent job of showcasing your career transition from a business and sales background to a technical role in prompt engineering. The experience section clearly tells this story.", 
+            "Your most recent role as a Prompt Engineer is highly relevant and filled with impressive, quantifiable impacts (e.g., \"achieving a 27% increase in response accuracy\"). This is exactly what recruiters look for.",
+            "To elevate this section to a perfect score, you could add more technical depth to your bullet points. For example, instead of saying \"Designed and optimized prompts for GPT-based Al models,\" you could say, \"Engineered and optimized prompts for large language models like GPT-4, utilizing techniques such as few-shot prompting and chain-of-thought to achieve a 27% increase in response accuracy.\""
+          ], 
+          "projects": [
+            "Your project section is strong, relevant, and demonstrates your capabilities in data analysis and machine learning. The choice of projects is excellent for a data science role.", 
+            "The projects are well-described with clear problem statements and quantifiable results, such as \"boosting prediction accuracy by 25%.\" This is very effective.", 
+            "To get a perfect score, you must include a link to your GitHub repository for each project. For a technical role, providing access to your code is non-negotiable as it allows us to see your coding style and technical skills firsthand. Simply add a \"GitHub\" or \"Code\" link for each project."
+          ], 
+          "skills": [
+            "You have listed a comprehensive set of skills. However, a key principle of a strong resume is that every skill listed should be backed by evidence in your experience or projects sections. The following skills are listed but do not have corresponding evidence: Power BI, AWS, MLOPS, Tensorflow, Keras, Pytorch.", 
+            "I would recommend you either add a bullet point in your projects or experience to demonstrate your proficiency with these tools or remove them. For instance, if you used AWS to deploy one of your projects, you should explicitly mention it.", 
+            "Based on your projects, you have clearly demonstrated the use of Python, SQL, Tableau, Pandas, and Matplotlib. These are well-supported and show your practical capabilities."
+          ]
+        }, 
+      "section_scores": {
+        "skills": 1,
+        "work_experience": 2,
+        "projects": 3,
+        "accuracy_and_presentation": 3
+      },
+    "overall_resume_score": 2
+  },
+  "evaluation_state": "success"
+}

@@ -71,6 +71,8 @@ export const EDUCATION_FORM_REQUIRED_FIELDS = [
   'graduation_date',
 ];
 
+export const ACHIEVEMENTS_FORM_REQUIRED_FIELDS = ['description'];
+
 export const STEPS_ORDER = [
   RESUME_BUILDER_STEPS.ACKNOWLEDGEMENT,
   RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS,
@@ -657,6 +659,10 @@ export const DEFAULT_TEMPLATE_CONFIG = {
 export const AI_REVIEW_MESSAGES = {
   SUCCESS: 'You will be redirected shortly...',
   ERROR: 'Failed to initiate review. Please try again.',
+};
+
+export const MODAL_NAMES = {
+  RESUME_REVIEW: 'resumeReview',
 };
 
 export const FORM_KEYS = {

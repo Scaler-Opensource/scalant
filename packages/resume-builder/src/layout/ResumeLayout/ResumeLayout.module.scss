@@ -58,4 +58,6 @@ $header-bg-color: #fff;
 
 .backButton {
   cursor: pointer;
+  z-index: 20;
+  position: relative;
 }

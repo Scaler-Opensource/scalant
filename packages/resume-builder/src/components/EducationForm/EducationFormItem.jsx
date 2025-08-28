@@ -81,7 +81,10 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
     const currentItems = formData?.educationItems || [];
     const updatedItems = currentItems.filter(
       (educationItem) => educationItem.index !== index
-    );
+    ).map((educationItem, newIndex) => ({
+      ...educationItem,
+      index: newIndex,
+    }));
 
     dispatch(
       updateFormData({
@@ -136,9 +139,7 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text strong>Education {index + 1}</Text>
-          {(formData?.educationItems || []).length > 1 && (
-            <DeleteOutlined onClick={handleDelete} />
-          )}
+          <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>

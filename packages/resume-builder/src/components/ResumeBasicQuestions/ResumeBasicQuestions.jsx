@@ -27,7 +27,7 @@ const getJobRoles = (program) => {
   return PROGRAM_JOB_ROLES[program] || [];
 };
 
-const ResumeBasicQuestions = () => {
+const ResumeBasicQuestions = ({ isLastStep = false }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -41,7 +41,10 @@ const ResumeBasicQuestions = () => {
   const basicQuestionsData = resumeData?.personal_details;
   const jobRoles = getJobRoles(program);
 
-  const { initialValues, FORM_ID } = useBasicQuestionsForm(basicQuestionsData);
+  const { initialValues, FORM_ID } = useBasicQuestionsForm(
+    basicQuestionsData,
+    jobRoles
+  );
   const formData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms[FORM_ID]
   );
@@ -233,7 +236,7 @@ const ResumeBasicQuestions = () => {
             className={styles.button}
             loading={isLoading}
           >
-            Save & Continue
+            {isLastStep ? 'Submit' : 'Save & Continue'}
           </Button>
           <Button
             block

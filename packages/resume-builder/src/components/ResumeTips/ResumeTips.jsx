@@ -32,7 +32,7 @@ const ResumeTips = () => {
   return (
     <div>
       <PageHeader
-        title="Based on your profile a beginner's resume fit well"
+        title="Here are a few Tips based on your profile "
         subtitle="Follow these tips to build a great resume. 
         See the sample on the side for reference."
       />

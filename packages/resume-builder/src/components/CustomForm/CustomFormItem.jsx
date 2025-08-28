@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'antd';
 import { updateFormData } from '../../store/formStoreSlice';
 import RichTextEditor from '../RichTextEditor';
+import { isHtmlEmpty } from '../../utils/formattingUtils';
 
 const CustomFormItem = ({ item, formId }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,12 @@ const CustomFormItem = ({ item, formId }) => {
   const [form] = Form.useForm();
 
   const handleValuesChange = (changedValues, allValues) => {
+    // Sanitize description field
+    const sanitizedValues = { ...allValues };
+    if (isHtmlEmpty(sanitizedValues.description)) {
+      sanitizedValues.description = '';
+    }
+
     // Get current items from formData or initialize with current item if empty
     const currentItems = formData?.achievementsItems || [item];
 
@@ -25,13 +32,13 @@ const CustomFormItem = ({ item, formId }) => {
       // If item not found, add it to the array
       updatedItems = [
         ...currentItems,
-        { ...item, formData: allValues, saved: true },
+        { ...item, formData: sanitizedValues, saved: true },
       ];
     } else {
       // Update existing item
       updatedItems = currentItems.map((achievementItem) =>
         achievementItem.id === item.id
-          ? { ...achievementItem, formData: allValues, saved: true }
+          ? { ...achievementItem, formData: sanitizedValues, saved: true }
           : achievementItem
       );
     }
@@ -44,13 +51,20 @@ const CustomFormItem = ({ item, formId }) => {
     );
   };
 
+  const sanitizedInitialValues = {
+    ...item.formData,
+    description: isHtmlEmpty(item.formData?.description)
+      ? ''
+      : item.formData?.description,
+  };
+
   return (
     <Form
       key={item.id}
       form={form}
       layout="vertical"
       onValuesChange={handleValuesChange}
-      initialValues={item.formData}
+      initialValues={sanitizedInitialValues}
     >
       <Form.Item name="description" label="">
         <RichTextEditor

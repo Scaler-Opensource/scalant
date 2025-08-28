@@ -1,0 +1,38 @@
+$gradient-color-2: rgba(135, 77, 0, 0.20);
+$gradient-color-1: rgba(254, 198, 1, 0.20);
+$success-text-color: $colors-brand-success-color-success;
+$warning-text-color: #D48806;
+$error-text-color: #ff4d4f;
+$loading-text-color: #006aff;
+
+.container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0 -8rem;
+  margin-top: -2rem;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.4rem 12rem;
+  text-align: center;
+}
+
+.successText {
+  color: $success-text-color;
+}
+
+.warningText {
+  color: $warning-text-color;
+}
+
+.errorText {
+  color: $error-text-color;
+}
+
+.loadingText {
+  color: $loading-text-color;
+}

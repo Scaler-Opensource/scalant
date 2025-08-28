@@ -87,6 +87,10 @@ const EducationForm = ({ onComplete, required = false }) => {
             formData: {
               name: resumeData?.resume_custom_section?.name,
               description: resumeData?.resume_custom_section?.description,
+              created_at: resumeData?.resume_custom_section?.created_at,
+              updated_at: resumeData?.resume_custom_section?.updated_at,
+              id: resumeData?.resume_custom_section?.id,
+              user_id: resumeData?.resume_custom_section?.user_id,
             },
           }
         : null;
@@ -170,7 +174,9 @@ const EducationForm = ({ onComplete, required = false }) => {
         isPopulated: true,
         mark_complete: markComplete,
         educations: educationPayload,
-        resume_custom_section: customEducation,
+        resume_custom_section: {
+          ...customEducation?.formData,
+        },
       };
 
       await updateResumeDetails({

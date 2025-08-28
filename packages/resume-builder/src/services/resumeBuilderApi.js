@@ -60,6 +60,12 @@ export const resumeBuilderApi = createApi({
         method: 'POST',
       }),
     }),
+    getResumeFeedback: builder.mutation({
+      query: ({ resumeId }) => ({
+        url: `/api/v3/user-resumes/${resumeId}/ai_resume_evaluator`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -74,6 +80,7 @@ export const {
   useGetResumeLinkQuery,
   useUpdateResumePreferencesMutation,
   useGetResumeReviewMutation,
+  useGetResumeFeedbackMutation,
 } = resumeBuilderApi;
 
 export default resumeBuilderApi;
