@@ -36,6 +36,29 @@ const getDsmlResumeHighlightImage = (jobRole) => {
   }
 };
 
+const getDevOpsResumeHighlightImage = (jobRole) => {
+  switch (jobRole) {
+    case JOB_ROLES.devops:
+      return RESUME_HIGHLIGHT_IMAGES.devopsEngineer;
+    case JOB_ROLES.techAdjacent:
+      return RESUME_HIGHLIGHT_IMAGES.devopsTechAdjacent;
+    case JOB_ROLES.nonTech:
+      return RESUME_HIGHLIGHT_IMAGES.devopsNonTech;
+    case JOB_ROLES.dataAnalystOrBusinessAnalyst:
+      return RESUME_HIGHLIGHT_IMAGES.devopsDataAnalyst;
+    case JOB_ROLES.fresher:
+      return RESUME_HIGHLIGHT_IMAGES.devopsFresher;
+    case JOB_ROLES.developer:
+      return RESUME_HIGHLIGHT_IMAGES.devopsDeveloper;
+    case JOB_ROLES.dataEngineer:
+      return RESUME_HIGHLIGHT_IMAGES.devopsDataEngineer;
+    case JOB_ROLES.embeddedSystemsEngineer:
+      return RESUME_HIGHLIGHT_IMAGES.embeddedSystemsEngineer;
+    default:
+      return RESUME_HIGHLIGHT_IMAGES.default;
+  }
+};
+
 export const getResumeHighlightImage = (jobRole, programType) => {
   if (!jobRole || !programType) {
     return RESUME_HIGHLIGHT_IMAGES.default;
@@ -45,6 +68,8 @@ export const getResumeHighlightImage = (jobRole, programType) => {
     return getAcademyResumeHighlightImage(jobRole);
   } else if (programType === PROGRAM_TYPES.DSML) {
     return getDsmlResumeHighlightImage(jobRole);
+  } else if (programType === PROGRAM_TYPES.DEVOPS) {
+    return getDevOpsResumeHighlightImage(jobRole);
   }
 
   return RESUME_HIGHLIGHT_IMAGES.default;

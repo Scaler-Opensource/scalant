@@ -1,10 +1,20 @@
-import { ADDITIONAL_PROFILES } from './constants';
+import { ADDITIONAL_PROFILES, PROGRAM_TYPES } from './constants';
+
+export const COURSE_PRODUCT = {
+  DATA_SCIENCE: 'data_science',
+  DEVOPS: 'devops',
+  ACADEMY: 'academy',
+};
 
 export const getResumeProgram = (courseProduct) => {
-  if (courseProduct === 'data_science') {
-    return 'dsml';
+  switch (courseProduct) {
+    case COURSE_PRODUCT.DATA_SCIENCE:
+      return PROGRAM_TYPES.DSML;
+    case COURSE_PRODUCT.DEVOPS:
+      return PROGRAM_TYPES.DEVOPS;
+    default:
+      return PROGRAM_TYPES.ACADEMY;
   }
-  return 'academy';
 };
 
 export const formatExperience = (years, months, shortFormat = false) => {

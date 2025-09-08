@@ -81,7 +81,7 @@ export const WithDummyData = () => {
         isOnboarding={true}
         resumeData={useResumeData1 ? resumeData1 : resumeData}
         resumeList={dummyResumeList}
-        courseProduct={'academy'}
+        courseProduct={'devops'}
         onResumeClick={(id) => {
           console.log('Resume with id', id, 'clicked');
         }}
