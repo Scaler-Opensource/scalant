@@ -68,10 +68,10 @@ export const WithReviewData = () => {
 
 export const WithDummyData = () => {
   const [useResumeData1, setUseResumeData1] = useState(false);
-  
+
   return (
     <div>
-      <button 
+      <button
         onClick={() => setUseResumeData1(!useResumeData1)}
         style={{ marginBottom: '20px', padding: '8px 16px' }}
       >
@@ -100,6 +100,15 @@ export const WithDummyData = () => {
         baseUrl="https://cf1d948b-f96c-4781-8235-53d3293f0a70.mock.pstmn.io"
         onReviewResumeClick={() => {
           console.log('Review Resume clicked');
+        }}
+        onResumeBuilderPageView={(stepKey) => {
+          console.log('Resume Builder Page View', stepKey);
+        }}
+        onFormCompletion={(formKey) => {
+          console.log('Form Completion', formKey);
+        }}
+        onAllFormsComplete={() => {
+          console.log('All Forms Complete');
         }}
       />
     </div>

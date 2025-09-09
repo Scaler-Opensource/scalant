@@ -18,7 +18,11 @@ import { useBasicQuestionsForm } from '../../hooks/useBasicQuestionsForm';
 import ResumeProfileCard from '../ResumeProfileCard';
 import ResumeReviewOverallSummary from '../ResumeReviewOverallSummary';
 
-const ResumeTimeline = ({ onAiSuggestionClick }) => {
+const ResumeTimeline = ({
+  onAiSuggestionClick,
+  onFormCompletion,
+  onAllFormsComplete,
+}) => {
   const dispatch = useDispatch();
   const program = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.program
@@ -102,6 +106,10 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
       } else if (!skipNextStep) {
         setExpandedStep(null);
       }
+      onFormCompletion?.(currentIncompleteForm);
+      if (updatedIncompleteForms.length === 0) {
+        onAllFormsComplete?.();
+      }
 
       if (
         updatedIncompleteForms.length === 0 &&
@@ -171,9 +179,7 @@ const ResumeTimeline = ({ onAiSuggestionClick }) => {
               let dotIcon;
               if (step.key === expandedStep) {
                 dotIcon = <LoadingOutlined className={styles.activeIcon} />;
-              } else if (
-                step.status === 'complete'
-              ) {
+              } else if (step.status === 'complete') {
                 dotIcon = (
                   <CheckCircleOutlined className={styles.completeIcon} />
                 );
