@@ -19,6 +19,7 @@ import {
 } from '../../utils/constants';
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
 import { useBasicQuestionsForm } from '../../hooks/useBasicQuestionsForm';
+import { PROGRAM_TYPES } from '../../utils/constants';
 
 const { Text } = Typography;
 
@@ -167,13 +168,13 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
 
             <Form.Item
               label={`Total Experience as ${
-                program === 'academy'
-                  ? 'Software Developer'
-                  : 'Data Analyst / Scientist'
+                program === PROGRAM_TYPES.DSML
+                  ? 'Data Analyst / Scientist'
+                  : 'Software Developer'
               }`}
               className={styles.formItem}
               required
-              tooltip="Total work experience in tech only includes relevant experience in SDE or Data Science/Analytics roles.5"
+              tooltip="Total work experience in tech only includes relevant experience in SDE or Data Science/Analytics roles"
             >
               <Flex gap={16} align="center">
                 <Flex gap={4} vertical>
