@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCurrentStep,
@@ -49,11 +49,16 @@ const ResumeBuilderContent = ({
   onDownloadClick,
   enableResumeReview = false,
   onReviewResumeClick,
+  onResumeBuilderPageView,
+  onFormCompletion,
+  onAllFormsComplete,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder
   );
+  const visitedStepsRef = useRef(new Set());
+  const initialStepSetRef = useRef(false);
 
   useEffect(() => {
     if (resumeData) {
@@ -93,6 +98,43 @@ const ResumeBuilderContent = ({
     }
   }, [currentStep, steps, resumeData]);
 
+  // Track step changes and call onResumeBuilderPageView with step name
+  useEffect(() => {
+    if (steps.length > 0 && currentStep >= 0) {
+      const currentStepData = steps[currentStep];
+      const stepKey = currentStepData?.key;
+
+      // Mark that we've processed the initial step setup
+      if (!initialStepSetRef.current) {
+        initialStepSetRef.current = true;
+
+        // Only trigger callback for initial step if onboarding should be shown
+        const resumeId = resumeData?.resume_details?.id;
+        const shouldShow = isOnboarding
+          ? shouldShowOnboarding(resumeId)
+          : false;
+
+        if (shouldShow && stepKey) {
+          visitedStepsRef.current.add(stepKey);
+          onResumeBuilderPageView?.(stepKey);
+        }
+        return; // Don't trigger callback for non-onboarding initial setup
+      }
+
+      // Only trigger callback for actual step changes after initial setup
+      if (stepKey && !visitedStepsRef.current.has(stepKey)) {
+        visitedStepsRef.current.add(stepKey);
+        onResumeBuilderPageView?.(stepKey);
+      }
+    }
+  }, [
+    currentStep,
+    steps,
+    onResumeBuilderPageView,
+    resumeData?.resume_details?.id,
+    isOnboarding,
+  ]);
+
   useEffect(() => {
     return () => {
       dispatch(resetSteps());
@@ -112,7 +154,13 @@ const ResumeBuilderContent = ({
       case RESUME_BUILDER_STEPS.RESUME_TIPS.component:
         return <ResumeTips />;
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
-        return <ResumeSteps onAiSuggestionClick={onAiSuggestionClick} />;
+        return (
+          <ResumeSteps
+            onAiSuggestionClick={onAiSuggestionClick}
+            onFormCompletion={onFormCompletion}
+            onAllFormsComplete={onAllFormsComplete}
+          />
+        );
       default:
         return null;
     }
@@ -191,8 +239,11 @@ const ResumeBuilder = ({
   onAiSuggestionClick,
   resumeTemplateConfig,
   onDownloadClick,
+  onResumeBuilderPageView,
   enableResumeReview = true,
   onReviewResumeClick,
+  onFormCompletion,
+  onAllFormsComplete,
 }) => {
   return (
     <ResumeBuilderContent
@@ -213,6 +264,9 @@ const ResumeBuilder = ({
       onDownloadClick={onDownloadClick}
       enableResumeReview={enableResumeReview}
       onReviewResumeClick={onReviewResumeClick}
+      onResumeBuilderPageView={onResumeBuilderPageView}
+      onFormCompletion={onFormCompletion}
+      onAllFormsComplete={onAllFormsComplete}
     />
   );
 };
