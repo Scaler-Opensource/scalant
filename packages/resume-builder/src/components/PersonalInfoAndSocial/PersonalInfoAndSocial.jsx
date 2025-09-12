@@ -49,7 +49,7 @@ const urlPattern =
 const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   const dispatch = useDispatch();
   const [additionalProfiles, setAdditionalProfiles] = useState([]);
-  
+
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
@@ -122,7 +122,7 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
 
   const handleFinish = async () => {
     const values = formData?.personalInfoAndSocial;
-    
+
     // Update form data with current additional profiles
     const updatedFormData = {
       ...values,
@@ -175,12 +175,12 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   };
 
   const handleSaveAndCompile = () => {
-    onComplete?.(true);
+    onComplete?.(FORM_KEYS.personal_details, true);
     handleFinish();
   };
 
   const handleSaveAndNext = () => {
-    onComplete?.();
+    onComplete?.(FORM_KEYS.personal_details);
     handleFinish();
   };
 
@@ -201,7 +201,7 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
 
   const handleAddProfile = () => {
     // Get existing profile types
-    const existingTypes = additionalProfiles.map(profile => profile.type);
+    const existingTypes = additionalProfiles.map((profile) => profile.type);
 
     // Check if all profile types are already used
     if (existingTypes.length >= ADDITIONAL_PROFILES.length) {
@@ -215,34 +215,32 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
     );
 
     // Add new profile
-    setAdditionalProfiles(prev => [
+    setAdditionalProfiles((prev) => [
       ...prev,
       {
         type: availableProfileType.value,
         url: '',
-      }
+      },
     ]);
   };
 
   const handleRemoveProfile = (indexToRemove) => {
-    setAdditionalProfiles(prev => 
+    setAdditionalProfiles((prev) =>
       prev.filter((_, idx) => idx !== indexToRemove)
     );
   };
 
   const handleProfileChange = (index, field, value) => {
-    setAdditionalProfiles(prev => 
-      prev.map((profile, idx) => 
-        idx === index 
-          ? { ...profile, [field]: value }
-          : profile
+    setAdditionalProfiles((prev) =>
+      prev.map((profile, idx) =>
+        idx === index ? { ...profile, [field]: value } : profile
       )
     );
   };
 
   const getAvailableProfileTypes = (currentIndex) => {
     const existingTypes = additionalProfiles
-      .map((profile, idx) => idx !== currentIndex ? profile.type : null)
+      .map((profile, idx) => (idx !== currentIndex ? profile.type : null))
       .filter(Boolean);
 
     return ADDITIONAL_PROFILES.filter(
@@ -256,10 +254,7 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
 
       return (
         <Flex gap={16} key={idx} align="center">
-          <Form.Item
-            style={{ width: '45%' }}
-            className={styles.formItem}
-          >
+          <Form.Item style={{ width: '45%' }} className={styles.formItem}>
             <Select
               value={profile.type}
               options={availableOptions}
@@ -278,8 +273,8 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
               },
             ]}
           >
-            <Input 
-              placeholder="Enter Profile URL" 
+            <Input
+              placeholder="Enter Profile URL"
               value={profile.url}
               onChange={(e) => handleProfileChange(idx, 'url', e.target.value)}
             />

@@ -89,7 +89,7 @@ const ResumeTimeline = ({
   };
 
   const handleFormCompletion = useCallback(
-    (skipNextStep = false) => {
+    (formType, skipNextStep = false) => {
       let updatedIncompleteForms = [...incompleteForms];
       if (expandedStep === currentIncompleteForm) {
         updatedIncompleteForms = updatedIncompleteForms.filter(
@@ -106,7 +106,7 @@ const ResumeTimeline = ({
       } else if (!skipNextStep) {
         setExpandedStep(null);
       }
-      onFormCompletion?.(currentIncompleteForm);
+      onFormCompletion?.(formType);
       if (updatedIncompleteForms.length === 0) {
         onAllFormsComplete?.();
       }
@@ -130,10 +130,12 @@ const ResumeTimeline = ({
     },
     [
       incompleteForms,
+      expandedStep,
       currentIncompleteForm,
+      onFormCompletion,
       resumeData?.application_stage,
       dispatch,
-      expandedStep,
+      onAllFormsComplete,
     ]
   );
 
