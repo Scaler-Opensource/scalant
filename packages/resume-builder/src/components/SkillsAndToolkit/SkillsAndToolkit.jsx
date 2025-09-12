@@ -1,4 +1,13 @@
-import { Button, Flex, Space, message, Modal, Switch, Typography, Tooltip } from 'antd';
+import {
+  Button,
+  Flex,
+  Space,
+  message,
+  Modal,
+  Switch,
+  Typography,
+  Tooltip,
+} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +26,6 @@ const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
 
-
 const SKILL_SECTIONS = {
   PROGRAMMING_LANGUAGES: {
     title: 'Programming Languages',
@@ -34,9 +42,9 @@ const SKILL_SECTIONS = {
 };
 
 const CATEGORY_TYPE_MAP = {
-  'language': 0, // Programming Languages
-  'framework': 1, // Libraries and Frameworks
-  'tools': 2, // Tools
+  language: 0, // Programming Languages
+  framework: 1, // Libraries and Frameworks
+  tools: 2, // Tools
 };
 
 const initialFormData = {
@@ -47,7 +55,7 @@ const initialFormData = {
 const SkillsAndToolkit = ({ onComplete }) => {
   const dispatch = useDispatch();
   const [categorizeSkills, setCategorizeSkills] = useState(false);
-  
+
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
@@ -79,10 +87,10 @@ const SkillsAndToolkit = ({ onComplete }) => {
     () =>
       resumeData?.skills
         ? {
-            selectedSkills: resumeData.skills.filter((skill) =>
-              skillsData.some((data) => data.subtopic_id === skill.skill_id)
-            ),
-          }
+          selectedSkills: resumeData.skills.filter((skill) =>
+            skillsData.some((data) => data.subtopic_id === skill.skill_id)
+          ),
+        }
         : initialFormData,
     [resumeData?.skills, skillsData]
   );
@@ -93,7 +101,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
     if (!template) return 'view1';
     const templateKey = Object.keys(template)[0];
     const sections = template[templateKey]?.sections || [];
-    const skillsSection = sections.find(section => section.name === 'Skills');
+    const skillsSection = sections.find((section) => section.name === 'Skills');
     return skillsSection?.config?.view || 'view1';
   };
 
@@ -118,22 +126,22 @@ const SkillsAndToolkit = ({ onComplete }) => {
     // Create a deep copy and update the Skills section view
     const updatedTemplate = {
       ...template,
-      sections: template.sections.map(section => {
+      sections: template.sections.map((section) => {
         if (section.name === 'Skills') {
           return {
             ...section,
             config: {
               ...section.config,
-              view: categorizeSkills ? 'view2' : 'view1'
-            }
+              view: categorizeSkills ? 'view2' : 'view1',
+            },
           };
         }
         return section;
-      })
+      }),
     };
 
     return {
-      [templateKey]: updatedTemplate
+      [templateKey]: updatedTemplate,
     };
   };
 
@@ -144,13 +152,15 @@ const SkillsAndToolkit = ({ onComplete }) => {
     try {
       const payload = {
         form_stage: 'skills_details_form',
-        skills: selectedSkills.map(skill => {
+        skills: selectedSkills.map((skill) => {
           // Try to infer the category from the skill's presence in resumeBuilderSkills
           let category_type = null;
           if (resumeBuilderSkills) {
             if (resumeBuilderSkills.language?.includes(skill.skill_id)) {
               category_type = CATEGORY_TYPE_MAP.language;
-            } else if (resumeBuilderSkills.framework?.includes(skill.skill_id)) {
+            } else if (
+              resumeBuilderSkills.framework?.includes(skill.skill_id)
+            ) {
               category_type = CATEGORY_TYPE_MAP.framework;
             } else if (resumeBuilderSkills.tools?.includes(skill.skill_id)) {
               category_type = CATEGORY_TYPE_MAP.tools;
@@ -162,7 +172,9 @@ const SkillsAndToolkit = ({ onComplete }) => {
           };
         }),
         mark_complete: markComplete,
-        ...(updatedTemplateStructure && { scaler_resume_template_structure: updatedTemplateStructure }),
+        ...(updatedTemplateStructure && {
+          scaler_resume_template_structure: updatedTemplateStructure,
+        }),
       };
 
       await updateResumeDetails({
@@ -187,7 +199,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
     }
   }, [dispatch, isFormInitialized, initialValues]);
 
-  const handleTagClick = () => {};
+  const handleTagClick = () => { };
 
   const handleExperienceUpdate = (skill, years, months) => {
     const selectedSkills = formData?.selectedSkills || [];
@@ -242,12 +254,12 @@ const SkillsAndToolkit = ({ onComplete }) => {
   };
 
   const handleSaveAndCompile = () => {
-    onComplete?.(true);
+    onComplete?.(FORM_KEYS.skills, true);
     handleFinish();
   };
 
   const handleSaveAndNext = () => {
-    onComplete?.();
+    onComplete?.(FORM_KEYS.skills);
     handleFinish();
   };
 
@@ -279,17 +291,18 @@ const SkillsAndToolkit = ({ onComplete }) => {
         <Flex align="center" gap={8}>
           <Text>Linear skills</Text>
           <Tooltip title={SKILL_VIEW_TOOLTIPS.LINEAR}>
-            <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
+            <InfoCircleOutlined
+              style={{ color: '#8c8c8c', cursor: 'pointer' }}
+            />
           </Tooltip>
         </Flex>
-        <Switch 
-          checked={categorizeSkills}
-          onChange={handleCategorizeToggle}
-        />
+        <Switch checked={categorizeSkills} onChange={handleCategorizeToggle} />
         <Flex align="center" gap={8}>
           <Text>Categorize skills</Text>
           <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
-            <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
+            <InfoCircleOutlined
+              style={{ color: '#8c8c8c', cursor: 'pointer' }}
+            />
           </Tooltip>
         </Flex>
       </Flex>
