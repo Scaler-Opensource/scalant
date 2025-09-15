@@ -61,18 +61,18 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
     () =>
       resumeData?.projects && resumeData?.projects.length > 0
         ? {
-            projectItems: resumeData.projects.map((item, index) => ({
-              id: item.id,
-              index: index,
-              completed: true,
-              expanded: false,
-              formData: {
-                title: item.title,
-                project_link: item.project_link,
-                description: item.description,
-              },
-            })),
-          }
+          projectItems: resumeData.projects.map((item, index) => ({
+            id: item.id,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              title: item.title,
+              project_link: item.project_link,
+              description: item.description,
+            },
+          })),
+        }
         : initialFormData,
     [resumeData?.projects]
   );
@@ -153,12 +153,12 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
   };
 
   const handleSaveAndCompile = () => {
-    onComplete?.(true);
+    onComplete?.(FORM_KEYS.projects, true);
     handleFinish();
   };
 
   const handleSaveAndNext = () => {
-    onComplete?.();
+    onComplete?.(FORM_KEYS.projects);
     handleFinish();
   };
 
