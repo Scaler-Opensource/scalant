@@ -18,6 +18,7 @@ import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
 
 const FORM_ID = 'preferenceSettings';
+const ANYWHERE_IN_INDIA = 'anywhere_in_india';
 
 const initialFormData = {
   preferredLocations: [],
@@ -27,6 +28,7 @@ const initialFormData = {
   negotiable: 'no',
   internship: true,
   acknowledge: true,
+  anywhereInIndia: false,
 };
 
 const PreferenceSettings = () => {
@@ -60,13 +62,18 @@ const PreferenceSettings = () => {
     () =>
       preferenceData
         ? {
-            preferredLocations: preferenceData?.preferred_location?.split('/'),
+            preferredLocations:
+              preferenceData?.preferred_location === ANYWHERE_IN_INDIA
+                ? []
+                : preferenceData?.preferred_location?.split('/'),
             preferredRoles: preferenceData?.preferred_role?.split('/'),
             ctc: preferenceData?.expected_ctc,
             notice: preferenceData?.notice_period,
             negotiable: preferenceData?.buyout_notice ? 'yes' : 'no',
             internship: true,
             acknowledge: true,
+            anywhereInIndia:
+              preferenceData?.preferred_location === ANYWHERE_IN_INDIA,
           }
         : initialFormData,
     [preferenceData]
@@ -106,7 +113,12 @@ const PreferenceSettings = () => {
     }
     // If preferred locations is an array, convert it to a string separated by /
     // If preferred roles is an array, convert it to a string separated by /
-    let preferredLocations = form.getFieldsValue().preferredLocations;
+    const { preferredLocations: preferredLocationsField, anywhereInIndia } =
+      form.getFieldsValue();
+    let preferredLocations = preferredLocationsField;
+    if (anywhereInIndia) {
+      preferredLocations = ANYWHERE_IN_INDIA;
+    }
     let preferredRoles = form.getFieldsValue().preferredRoles;
     if (Array.isArray(preferredLocations)) {
       preferredLocations = preferredLocations.join('/');
@@ -169,18 +181,44 @@ const PreferenceSettings = () => {
         initialValues={initialValues}
       >
         <Form.Item
-          label="Preferred job locations?"
-          name="preferredLocations"
-          rules={[
-            { required: true, message: 'Please select preferred location!' },
-          ]}
-          tooltip="Flexibility in your job locations will enable you to be eligible for more opportunities."
+          noStyle
+          shouldUpdate={(prev, cur) =>
+            prev.anywhereInIndia !== cur.anywhereInIndia
+          }
         >
-          <Select
-            mode="multiple"
-            allowClear
-            options={uniquePreferredJobLocationValues}
-          />
+          {({ getFieldValue }) => (
+            <>
+              <Form.Item
+                label="Preferred job locations?"
+                name="preferredLocations"
+                rules={[
+                  {
+                    required: !getFieldValue('anywhereInIndia'),
+                    message: 'Please select preferred location!',
+                  },
+                ]}
+                tooltip="Flexibility in your job locations will enable you to be eligible for more opportunities."
+              >
+                <Select
+                  mode="multiple"
+                  allowClear
+                  disabled={getFieldValue('anywhereInIndia')}
+                  options={uniquePreferredJobLocationValues}
+                />
+              </Form.Item>
+              <Form.Item name="anywhereInIndia" valuePropName="checked">
+                <Checkbox
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      form.setFieldsValue({ preferredLocations: [] });
+                    }
+                  }}
+                >
+                  I am open to jobs anywhere in India
+                </Checkbox>
+              </Form.Item>
+            </>
+          )}
         </Form.Item>
 
         <Form.Item
