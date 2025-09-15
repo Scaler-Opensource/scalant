@@ -61,20 +61,24 @@ const PreferenceSettings = () => {
   const initialValues = useMemo(
     () =>
       preferenceData
-        ? {
-            preferredLocations:
-              preferenceData?.preferred_location === ANYWHERE_IN_INDIA
-                ? []
-                : preferenceData?.preferred_location?.split('/'),
-            preferredRoles: preferenceData?.preferred_role?.split('/'),
-            ctc: preferenceData?.expected_ctc,
-            notice: preferenceData?.notice_period,
-            negotiable: preferenceData?.buyout_notice ? 'yes' : 'no',
-            internship: true,
-            acknowledge: true,
-            anywhereInIndia:
-              preferenceData?.preferred_location === ANYWHERE_IN_INDIA,
-          }
+        ? (() => {
+            const preferredLocationStr =
+              preferenceData?.preferred_location || '';
+            const locationParts = preferredLocationStr
+              ? preferredLocationStr.split('/')
+              : [];
+            const hasAnywhere = locationParts.includes(ANYWHERE_IN_INDIA);
+            return {
+              preferredLocations: hasAnywhere ? [] : locationParts,
+              preferredRoles: preferenceData?.preferred_role?.split('/'),
+              ctc: preferenceData?.expected_ctc,
+              notice: preferenceData?.notice_period,
+              negotiable: preferenceData?.buyout_notice ? 'yes' : 'no',
+              internship: true,
+              acknowledge: true,
+              anywhereInIndia: hasAnywhere,
+            };
+          })()
         : initialFormData,
     [preferenceData]
   );
