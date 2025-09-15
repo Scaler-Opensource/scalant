@@ -1,71 +1,64 @@
-import React, { useState } from 'react';
-import { Checkbox, Button, Typography } from 'antd';
+import React from 'react';
+import { Timeline, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { nextStep } from '../../store/resumeBuilderSlice';
 import PageHeader from '../PageHeader';
-import styles from './Acknowledgement.module.scss';
 
-const { Paragraph } = Typography;
+import styles from './Acknowledgement.module.scss';
 
 const Acknowledgement = () => {
   const dispatch = useDispatch();
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
   const handleContinue = () => {
-    if (checked1 && checked2 && checked3) {
-      dispatch(nextStep());
-    }
+    dispatch(nextStep());
   };
 
   return (
     <>
       <PageHeader
-        title="Scaler Resume Builder"
-        subtitle="Build a Resume with ATS Compliance"
+        title="Welcome to Careers Hub, Step Into Your Future Career"
+        subtitle="Start applying to jobs in three simple steps"
       />
-      <Paragraph className={styles.description}>
-        Please acknowledge the following pointers basis on which your profile
-        will be shortlisted for Job Opportunities.
-      </Paragraph>
-
-      <Checkbox
-        className={styles.checkbox}
-        checked={checked1}
-        onChange={(e) => setChecked1(e.target.checked)}
-      >
-        Your Job Preferences like CTC, Location, Notice Period are key points
-        based on which Scaler will showcase relevant job opportunities
-      </Checkbox>
-
-      <Checkbox
-        className={styles.checkbox}
-        checked={checked2}
-        onChange={(e) => setChecked2(e.target.checked)}
-      >
-        Your relevant tech work experience and technical skills entered in your
-        Scaler Resume Builder will be used for matching you with relevant job
-        opportunities
-      </Checkbox>
-
-      <Checkbox
-        className={styles.checkbox}
-        checked={checked3}
-        onChange={(e) => setChecked3(e.target.checked)}
-      >
-        Adding incorrect information on your resume can lower your chances of
-        getting shortlisted as recruiters will do a thorough validation check
-      </Checkbox>
+      <Timeline
+        className={styles.timeline}
+        items={[
+          {
+            dot: <div className={styles.timelineDot}> 1 </div>,
+            children: (
+              <div className={styles.timelineItem}>
+                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/268/original/Frame_1430102542_%281%29.png?1757925987"></img>
+                Build a resume that highlights you
+              </div>
+            ),
+          },
+          {
+            dot: <div className={styles.timelineDot}> 2 </div>,
+            children: (
+              <div className={styles.timelineItem}>
+                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/278/original/Frame_1430102542_%282%29.png?1757927475"></img>
+                Tell us what you are aiming for - Job location & CTC
+              </div>
+            ),
+          },
+          {
+            dot: <div className={styles.timelineDot}> 3 </div>,
+            children: (
+              <div className={styles.timelineItem}>
+                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/280/original/Frame_1430102545_%281%29.png?1757927530"></img>
+                Discover and apply to curated jobs
+              </div>
+            ),
+          },
+        ]}
+      />
 
       <div className={styles.buttonsContainer}>
         <Button
           type="primary"
           block
           className={styles.continueBtn}
-          disabled={!(checked1 && checked2 && checked3)}
           onClick={handleContinue}
         >
-          I Understand, Continue
+          Start building my resume
         </Button>
       </div>
     </>
