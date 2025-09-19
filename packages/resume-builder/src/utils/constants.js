@@ -183,10 +183,9 @@ export const RESUME_PDF_LINKS = {
       'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/128/677/original/Engineering_Manager_Good_Resume_1.pdf?1748329511',
   },
   [RESUME_PDF_LINK_KEYS.NON_TECH_BACKGROUND]: {
-    // update
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/697/original/Non_Tech_DSML.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/324/original/DSML_Fresher_%281%29_%281%29-1.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1uqBrioldipkhtfGc1mBWUlcLsSrcnAOU/view?usp=drive_link',
+      'https://drive.google.com/file/d/1v1QIHkDBOvL_GH1oRm3q-Ay_cyC3cu5z/view?usp=sharing',
   },
   [RESUME_PDF_LINK_KEYS.DATA_ANALYST]: {
     preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/266/original/Data_Analyst.png`,
