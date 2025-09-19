@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { nextStep, previousStep } from '../../store/resumeBuilderSlice';
 import {
@@ -30,6 +30,7 @@ const getJobRoles = (program) => {
 const ResumeBasicQuestions = ({ isLastStep = false }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const [currentJobRole, setCurrentJobRole] = useState(null);
 
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -40,6 +41,8 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
 
   const basicQuestionsData = resumeData?.personal_details;
   const jobRoles = getJobRoles(program);
+  const isNonTechOrFresher =
+    currentJobRole === 'Fresher' || currentJobRole === 'Non-Tech';
 
   const { initialValues, FORM_ID } = useBasicQuestionsForm(
     basicQuestionsData,
@@ -54,9 +57,31 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
   useEffect(() => {
     // Initialize form with Redux state
     form.setFieldsValue(formData);
+    // Initialize current job role from form data
+    if (formData?.currentJobRole) {
+      setCurrentJobRole(formData.currentJobRole);
+    }
   }, [form, formData]);
 
   const handleValuesChange = (changedValues, allValues) => {
+    // Track current job role for disabling tech experience fields
+    if (changedValues.currentJobRole !== undefined) {
+      setCurrentJobRole(changedValues.currentJobRole);
+
+      // Clear tech experience fields when switching to Fresher or Non-Tech
+      if (
+        changedValues.currentJobRole === 'Fresher' ||
+        changedValues.currentJobRole === 'Non-Tech'
+      ) {
+        form.setFieldsValue({
+          totalWorkExperienceInTech: {
+            yearsExperienceInTech: 0,
+            monthsExperienceInTech: 0,
+          },
+        });
+      }
+    }
+
     dispatch(
       updateFormData({
         formId: FORM_ID,
@@ -69,9 +94,16 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
     const totalExperience =
       values?.totalWorkExperience?.yearsExperience * 12 +
       values?.totalWorkExperience?.monthsExperience;
-    const techExperience =
-      values?.totalWorkExperienceInTech?.yearsExperienceInTech * 12 +
-      values?.totalWorkExperienceInTech?.monthsExperienceInTech;
+
+    const techExperience = isNonTechOrFresher
+      ? 0
+      : values?.totalWorkExperienceInTech?.yearsExperienceInTech * 12 +
+        values?.totalWorkExperienceInTech?.monthsExperienceInTech;
+
+    if (techExperience > totalExperience) {
+      message.error('Tech experience cannot exceed total work experience');
+      return;
+    }
 
     const payload = {
       form_stage: 'resume_preference_details_form',
@@ -173,7 +205,7 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
                   : 'Software Developer'
               }`}
               className={styles.formItem}
-              required
+              required={!isNonTechOrFresher}
               tooltip="Total work experience in tech only includes relevant experience in SDE or Data Science/Analytics roles"
             >
               <Flex gap={16} align="center">
@@ -185,14 +217,17 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
                     ]}
                     rules={[
                       {
-                        required: true,
+                        required: !isNonTechOrFresher,
                         message: 'Please enter years of tech work experience',
                       },
                     ]}
                     noStyle
                     className={styles.formItem}
                   >
-                    <InputNumber placeholder="00" />
+                    <InputNumber
+                      placeholder="00"
+                      disabled={isNonTechOrFresher}
+                    />
                   </Form.Item>
                   <Text>Years</Text>
                 </Flex>
@@ -204,14 +239,17 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
                     ]}
                     rules={[
                       {
-                        required: true,
+                        required: !isNonTechOrFresher,
                         message: 'Please enter months of tech work experience',
                       },
                     ]}
                     noStyle
                     className={styles.formItem}
                   >
-                    <InputNumber placeholder="00" />
+                    <InputNumber
+                      placeholder="00"
+                      disabled={isNonTechOrFresher}
+                    />
                   </Form.Item>
                   <Text>Months</Text>
                 </Flex>
