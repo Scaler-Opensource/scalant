@@ -148,34 +148,34 @@ export const RESUME_PDF_LINK_KEYS = {
 
 export const RESUME_PDF_LINKS = {
   [RESUME_PDF_LINK_KEYS.DSML_FRESHER]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/689/original/DSML_Fresher.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/281/original/DSML_Fresher.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1uqBrioldipkhtfGc1mBWUlcLsSrcnAOU/view?usp=drive_link',
+      'https://drive.google.com/file/d/1IwLrSapgaYH2cY9-ojkgcUOWVZZpx2EO/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.FRESHER]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/691/original/Fresher_Good_Resume_Page_1.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/286/original/Fresher_Good_Resume.png`,
     pdfLink:
-      'https://drive.google.com/file/d/13uvgO7vh8cCWwiQpLtup01rIwzeuCWWh/view?usp=drive_link',
+      'https://drive.google.com/file/d/1tlmkji8KF5pA_kh8Z1UDEGtQPkxDEfFL/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.JUNIOR_BACKEND]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/692/original/Junior_Backend_Developer_Resume.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/290/original/Junior_Backed.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1HIoD2gsjTiEN4dCvqCOItfTKy8HsL1iO/view?usp=drive_link',
+      'https://drive.google.com/file/d/15Ws2o5bWkgFvaMMbtEcu73CREV0uxcL_/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.JUNIOR_FRONTEND]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/700/original/Junior_Frontend_Developer_Resume.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/294/original/Junior_frontend_developer_good_resume.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1mXud8d-CS1MR6eB9Ab06PNCI_N8Nc6do/view?usp=drive_link',
+      'https://drive.google.com/file/d/1Y_WHhG69ZamTsAbl10hTFtRrPcqXnl96/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.SENIOR_BACKEND]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/693/original/Senior_Backend_Developer_Resume.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/298/original/Senior_Backend.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1xsbTDyD0aSZ8C5xabobrnSLSE5bsM9_6/view?usp=drive_link',
+      'https://drive.google.com/file/d/1EKNasTcnN76Hqf3jcyUOkXXBHMW0LXWf/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.NON_TECH]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/695/original/Non-Tech_Good_Resume.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/299/original/Non_Tech_Good_Resume.png`,
     pdfLink:
-      'https://drive.google.com/file/d/1BYMDlHwmHsC1T62_xV0auF0VkgtjRFQE/view?usp=drive_link',
+      'https://drive.google.com/file/d/1GPnKQeftkyFf5Wfxr5XwQlGNHbQjyrDT/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.ENGG_MANAGER]: {
     preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/128/798/original/Engineering_Manager_Good_Resume_1_page-0001.jpg?1748353948`,
@@ -183,19 +183,20 @@ export const RESUME_PDF_LINKS = {
       'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/128/677/original/Engineering_Manager_Good_Resume_1.pdf?1748329511',
   },
   [RESUME_PDF_LINK_KEYS.NON_TECH_BACKGROUND]: {
+    // update
     preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/697/original/Non_Tech_DSML.jpg`,
     pdfLink:
       'https://drive.google.com/file/d/1uqBrioldipkhtfGc1mBWUlcLsSrcnAOU/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.DATA_ANALYST]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/698/original/Data_Analyst_Page_1.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/266/original/Data_Analyst.png`,
     pdfLink:
-      'https://drive.google.com/file/d/12W2C4WPkr1ysfuJPQfZGYZF9i90v7VdV/view?usp=drive_link',
+      'https://drive.google.com/file/d/1lIzsnBcVFrszl--NiFJzNS_QyndifDFh/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.DATA_SCIENTIST]: {
-    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/136/699/original/Data_Scientist_Page_1.jpg`,
+    preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/153/280/original/Data_Scientist.png`,
     pdfLink:
-      'https://drive.google.com/file/d/109gY_ZyyTSnwMXATNsdrMSDGkCoKy0RN/view?usp=drive_link',
+      'https://drive.google.com/file/d/1qUONNSeheYDHBt6mxImdvFJLhwHKbM0a/view?usp=drive_link',
   },
   [RESUME_PDF_LINK_KEYS.DEVOPS_FRESHER]: {
     preview: `https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/149/044/original/DevOps_Freshers.jpg?1757067205`,
@@ -227,20 +228,6 @@ export const RESUME_PDF_LINKS = {
     pdfLink:
       'https://drive.google.com/file/d/19bp0OwGciozWes66HKJ7swIAZ4_SUdLu/view?usp=drive_link',
   },
-};
-
-/**
- * Get resume preview and PDF link based on job role
- * @param {string} jobRole - The selected job role
- * @returns {Object} Object containing preview and pdfLink
- */
-export const getResumeTemplateByJobRole = (jobRole) => {
-  const pdfKey = JOB_ROLE_TO_RESUME_PDF_KEY[jobRole];
-  if (!pdfKey) {
-    // Return default fresher template if no mapping found
-    return RESUME_PDF_LINKS[RESUME_PDF_LINK_KEYS.FRESHER];
-  }
-  return RESUME_PDF_LINKS[pdfKey];
 };
 
 // Job role constants
