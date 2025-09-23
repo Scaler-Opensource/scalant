@@ -10,7 +10,7 @@ import { setReviewData, setIsLoading } from '../../store/resumeReviewSlice';
 import { resetAllForms } from '../../store/formStoreSlice';
 import { getResumeProgram } from '../../utils/resumeUtils';
 import { LoadingOutlined } from '@ant-design/icons';
-
+import ResumeParsing from '../ResumeParsing';
 import {
   RESUME_BUILDER_STEPS,
   PREFERENCE_SETTINGS_IMAGE,
@@ -27,7 +27,6 @@ import ResumeBasicQuestions from '../ResumeBasicQuestions';
 import ResumeTips from '../ResumeTips';
 import ResumeSteps from '../ResumeSteps';
 import ResumePreview from '../ResumePreview';
-import IntroVideo from '../IntroVideo';
 import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
@@ -52,6 +51,8 @@ const ResumeBuilderContent = ({
   onResumeBuilderPageView,
   onFormCompletion,
   onAllFormsComplete,
+  onUploadFile,
+  onFileUploaded,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
@@ -147,12 +148,19 @@ const ResumeBuilderContent = ({
     switch (currentStepData.component) {
       case RESUME_BUILDER_STEPS.ACKNOWLEDGEMENT.component:
         return <Acknowledgement />;
-      case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
-        return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
         return <ResumeBasicQuestions />;
+      case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
+        return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_TIPS.component:
         return <ResumeTips />;
+      case RESUME_BUILDER_STEPS.RESUME_PARSING.component:
+        return (
+          <ResumeParsing
+            onUploadFile={onUploadFile}
+            onFileUploaded={onFileUploaded}
+          />
+        );
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
         return (
           <ResumeSteps
@@ -177,6 +185,8 @@ const ResumeBuilderContent = ({
             alt="preference-settings"
           />
         );
+      case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
+        return <ResumeHighlightPreview />;
       case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
         return (
           <img
@@ -185,11 +195,10 @@ const ResumeBuilderContent = ({
             alt="preference-settings"
           />
         );
-      case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
-        return <ResumeHighlightPreview />;
       case RESUME_BUILDER_STEPS.RESUME_TIPS.component:
         return <SampleResumePreview />;
-
+      case RESUME_BUILDER_STEPS.RESUME_PARSING.component:
+        return <SampleResumePreview />;
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
         return (
           <ResumePreview
@@ -250,6 +259,8 @@ const ResumeBuilder = ({
   onReviewResumeClick,
   onFormCompletion,
   onAllFormsComplete,
+  onUploadFile,
+  onFileUploaded,
 }) => {
   return (
     <ResumeBuilderContent
@@ -273,6 +284,8 @@ const ResumeBuilder = ({
       onResumeBuilderPageView={onResumeBuilderPageView}
       onFormCompletion={onFormCompletion}
       onAllFormsComplete={onAllFormsComplete}
+      onUploadFile={onUploadFile}
+      onFileUploaded={onFileUploaded}
     />
   );
 };

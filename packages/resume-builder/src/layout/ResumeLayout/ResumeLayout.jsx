@@ -81,14 +81,14 @@ const ResumeLayout = ({
                 }}
               >
                 {currentStep >= 2 && <Text>Resume Builder</Text>}
-                {currentStep === 4 && (
+                {currentStep === 5 && (
                   <Text>
                     {6 - incompleteForms.length} of 6 sections completed
                   </Text>
                 )}
               </Flex>
 
-              {currentStep === 4 && enableResumeReview && (
+              {currentStep === 5 && enableResumeReview && (
                 <Tooltip title={reviewTooltipTitle}>
                   <Button
                     type="primary"

@@ -18,6 +18,11 @@ export const RESUME_BUILDER_STEPS = {
     title: 'Preference Settings',
     component: 'PreferenceSettings',
   },
+  RESUME_PARSING: {
+    key: 'resumeParsing',
+    title: 'Resume Parsing',
+    component: 'ResumeParsing',
+  },
   RESUME_BASIC_QUESTIONS: {
     key: 'resumeBasicQuestions',
     title: 'Resume Basic Questions',
@@ -75,9 +80,10 @@ export const ACHIEVEMENTS_FORM_REQUIRED_FIELDS = ['description'];
 
 export const STEPS_ORDER = [
   RESUME_BUILDER_STEPS.ACKNOWLEDGEMENT,
-  RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS,
   RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS,
+  RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS,
   RESUME_BUILDER_STEPS.RESUME_TIPS,
+  RESUME_BUILDER_STEPS.RESUME_PARSING,
   RESUME_BUILDER_STEPS.RESUME_STEPS,
 ];
 
