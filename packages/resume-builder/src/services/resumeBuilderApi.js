@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// eslint-disable-next-line no-undef
-let baseUrl = window.location.origin;
+let baseUrl = 'http://localhost:8000/';
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
@@ -27,6 +26,13 @@ export const resumeBuilderApi = createApi({
   baseQuery: dynamicBaseQuery,
   tagTypes: ['ResumeLink'],
   endpoints: (builder) => ({
+    parseResume: builder.mutation({
+      query: ({ resumeId, resourceLink }) => ({
+        url: `/api/v3/user_ressdsumes/${resumeId}/parse_resume`,
+        method: 'POST',
+        body: { resource_link: resourceLink },
+      }),
+    }),
     updateResumeDetails: builder.mutation({
       query: ({ resumeId, payload }) => ({
         url: `/api/v3/user-resumes/${resumeId}/`,
@@ -76,6 +82,7 @@ export const setBaseUrl = (url) => {
 };
 
 export const {
+  useParseResumeMutation,
   useUpdateResumeDetailsMutation,
   useGetResumeLinkQuery,
   useUpdateResumePreferencesMutation,

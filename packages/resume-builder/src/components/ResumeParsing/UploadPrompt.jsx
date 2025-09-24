@@ -15,7 +15,6 @@ const UploadPrompt = ({ onSkip, onSelectFile }) => {
         showUploadList={false}
         beforeUpload={() => false}
         onChange={({ file }) => {
-          // Pass a synthetic event-like object to reuse onSelectFile handler signature
           if (file) {
             const synthetic = {
               target: { files: [file.originFileObj || file] },

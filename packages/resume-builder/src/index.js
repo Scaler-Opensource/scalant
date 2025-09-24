@@ -18,3 +18,10 @@ export {
   setIsError,
   setReviewData,
 } from './store/resumeReviewSlice';
+export {
+  setParsingLoading,
+  setParsingPercent,
+  setParsingSuccess,
+  setParsingError,
+  resetParsing,
+} from './store/resumeParsingSlice';

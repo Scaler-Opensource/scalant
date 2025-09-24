@@ -5,7 +5,7 @@ const initialState = {
   isOnboarding: true,
   currentStep: 0,
   steps: STEPS_ORDER,
-  resumeData: null,
+  resumeData: {},
   program: null,
 };
 
@@ -30,7 +30,10 @@ const resumeBuilderSlice = createSlice({
       }
     },
     setResumeData: (state, action) => {
-      state.resumeData = action.payload;
+      state.resumeData = {
+        ...state.resumeData,
+        ...action.payload,
+      };
     },
     setProgram: (state, action) => {
       state.program = action.payload;

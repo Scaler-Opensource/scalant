@@ -5,11 +5,7 @@ import styles from './ResumeParsing.module.scss';
 
 const { Paragraph } = Typography;
 
-const Loading = ({
-  fileName = 'Resume.pdf',
-  percent = 40,
-  onChooseDifferentFile,
-}) => {
+const Loading = ({ fileName = 'Resume.pdf', percent = 40 }) => {
   return (
     <div className={styles.container}>
       <div className={`${styles.card} ${styles.centered}`}>
@@ -23,13 +19,8 @@ const Loading = ({
       <Button block disabled className={styles.primaryButton} type="primary">
         Save Resume & Continue
       </Button>
-      <Button
-        block
-        onClick={onChooseDifferentFile}
-        className={styles.secondaryButton}
-        type="text"
-      >
-        Choose a different file
+      <Button block disabled className={styles.secondaryButton} type="text">
+        Try with a different file
       </Button>
     </div>
   );
