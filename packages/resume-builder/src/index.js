@@ -23,5 +23,6 @@ export {
   setParsingPercent,
   setParsingSuccess,
   setParsingError,
+  setParsedData,
   resetParsing,
 } from './store/resumeParsingSlice';
