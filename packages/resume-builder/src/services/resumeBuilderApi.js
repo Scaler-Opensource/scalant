@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-let baseUrl = 'http://localhost:8000/';
+let baseUrl = window.location.origin;
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
