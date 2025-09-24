@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import merge from 'deepmerge';
 import { STEPS_ORDER } from '../utils/constants';
+
+const replaceArrays = (_destinationArray, sourceArray) => sourceArray;
 
 const initialState = {
   isOnboarding: true,
@@ -30,10 +33,9 @@ const resumeBuilderSlice = createSlice({
       }
     },
     setResumeData: (state, action) => {
-      state.resumeData = {
-        ...state.resumeData,
-        ...action.payload,
-      };
+      state.resumeData = merge(state.resumeData, action.payload, {
+        arrayMerge: replaceArrays,
+      });
     },
     setProgram: (state, action) => {
       state.program = action.payload;
