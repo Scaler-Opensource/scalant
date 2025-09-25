@@ -13,6 +13,7 @@ import {
   resetParsing,
 } from '../../store/resumeParsingSlice';
 import { useParseResumeMutation } from '../../services/resumeBuilderApi';
+import { setCompleted, setIncompleteForms } from '../../store/resumeFormsSlice';
 
 const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
   const dispatch = useDispatch();
@@ -150,6 +151,8 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
             batch(() => {
               dispatch(setResumeData(parsedData));
               dispatch(nextStep());
+              dispatch(setCompleted(false));
+              dispatch(setIncompleteForms([]));
             });
           }}
           onTryDifferent={() => dispatch(resetParsing())}
