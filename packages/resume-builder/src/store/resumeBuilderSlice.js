@@ -22,6 +22,15 @@ const resumeBuilderSlice = createSlice({
     setCurrentStep: (state, action) => {
       state.currentStep = action.payload;
     },
+    setSteps: (state, action) => {
+      const nextSteps = Array.isArray(action.payload)
+        ? action.payload
+        : STEPS_ORDER;
+      state.steps = nextSteps;
+      if (state.currentStep > nextSteps.length - 1) {
+        state.currentStep = Math.max(0, nextSteps.length - 1);
+      }
+    },
     nextStep: (state) => {
       if (state.currentStep < state.steps.length - 1) {
         state.currentStep += 1;
@@ -50,6 +59,7 @@ const resumeBuilderSlice = createSlice({
 export const {
   setOnboarding,
   setCurrentStep,
+  setSteps,
   nextStep,
   previousStep,
   setResumeData,

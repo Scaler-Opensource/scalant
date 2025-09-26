@@ -40,6 +40,14 @@ export const RESUME_BUILDER_STEPS = {
   },
 };
 
+// Parsing status enum used across resume parsing flow
+export const PARSING_STATUS = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
 export const ADDITIONAL_PROFILES = [
   { label: 'LeetCode', value: 'leetcode' },
   { label: 'Codeforces', value: 'codeforces' },

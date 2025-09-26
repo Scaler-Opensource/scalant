@@ -12,13 +12,25 @@ import {
   setParsingError,
   resetParsing,
   setParsingPercent,
+  setParsingSuccess,
+  setParsedData,
 } from '../../store/resumeParsingSlice';
 import { useParseResumeMutation } from '../../services/resumeBuilderApi';
+import resumeParseData from '../../dummyData/resumeParseData.json';
+import { PARSING_STATUS } from '../../utils/constants';
+
+// Constants controlling parsing progress and timeout behavior
+const TOTAL_TIMEOUT_MS = 60000; // 60 seconds
+const PROGRESS_TICK_MS = 500; // UI update tick
+const MAX_PRE_SUCCESS_PERCENT = 99; // don't reach 100 until success
+const MIN_PROGRESS_PERCENT = 1; // ensure non-zero when ticking
 
 const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState('resume.pdf');
   const timeoutRef = useRef(null);
+  const progressIntervalRef = useRef(null);
+  const progressStartTsRef = useRef(null);
   const doneRef = useRef(false);
 
   const resumeData = useSelector(
@@ -34,53 +46,89 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
     (s) => s.scalantResumeBuilder?.resumeParsing?.parsedData
   );
 
-  console.log('resumeData', resumeData);
-
   const [parseResume] = useParseResumeMutation();
+
+  // ----- Helpers: timeout and progress management -----
+  const clearTimeoutTimer = useCallback(() => {
+    if (timeoutRef.current) {
+      globalThis.clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+
+  const stopProgress = useCallback(() => {
+    if (progressIntervalRef.current) {
+      globalThis.clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+  }, []);
+
+  const calculatePercent = useCallback((startTs) => {
+    const elapsedMs = Date.now() - (startTs || Date.now());
+    const ratio = Math.min(
+      elapsedMs / TOTAL_TIMEOUT_MS,
+      MAX_PRE_SUCCESS_PERCENT / 100
+    );
+    const percent = Math.max(MIN_PROGRESS_PERCENT, Math.floor(ratio * 100));
+    return percent;
+  }, []);
+
+  const startProgress = useCallback(() => {
+    stopProgress();
+    progressStartTsRef.current = Date.now();
+    progressIntervalRef.current = globalThis.setInterval(() => {
+      if (doneRef.current) return;
+      const percent = calculatePercent(progressStartTsRef.current);
+      dispatch(setParsingPercent(percent));
+    }, PROGRESS_TICK_MS);
+  }, [calculatePercent, dispatch, stopProgress]);
+
+  const startTimeout = useCallback(() => {
+    clearTimeoutTimer();
+    doneRef.current = false;
+    timeoutRef.current = globalThis.setTimeout(() => {
+      if (!doneRef.current) {
+        dispatch(setParsingError('Parsing timed out. Please try again.'));
+      }
+    }, TOTAL_TIMEOUT_MS);
+  }, [clearTimeoutTimer, dispatch]);
 
   const onChooseDifferentFile = () => {
     dispatch(resetParsing());
   };
 
   const onSelectFile = async (e) => {
-    dispatch(setParsingPercent(0));
     const file = e?.target?.files?.[0];
-    console.log(file);
+
     if (!file) return;
     setFileName(file.name);
-    dispatch(setParsingLoading(10));
 
     try {
       if (onUploadFile) {
         const url = await onUploadFile(file);
-        console.log('url', url);
+
         onFileUploaded?.(url);
 
         // Kick off parse via API
         const resumeId = resumeData?.resume_details?.id;
-        console.log('resumeId', resumeId);
+
         if (!resumeId) throw new Error('Missing resume id');
 
-        dispatch(setParsingLoading(40));
+        globalThis.setTimeout(() => {
+          dispatch(setParsingSuccess());
+          dispatch(setParsedData(resumeParseData));
+        }, 3000);
 
-        // Start 60s timeout waiting for websocket to flip to success
-        if (timeoutRef.current) globalThis.clearTimeout(timeoutRef.current);
-        doneRef.current = false;
-        timeoutRef.current = globalThis.setTimeout(() => {
-          // If still not success, show error
-          if (!doneRef.current) {
-            dispatch(setParsingError('Parsing timed out. Please try again.'));
-          }
-        }, 60000);
-
+        // Mark as loading and start progress/timeout machinery
+        dispatch(setParsingLoading());
+        dispatch(setParsingPercent(0));
+        startTimeout();
+        startProgress();
         await parseResume({ resumeId, resourceLink: url }).unwrap();
-
-        dispatch(setParsingLoading(60));
       } else {
         throw new Error('Upload file function not provided');
       }
-    } catch (error) {
-      console.log('Failed to start parsing.', error);
+    } catch {
       dispatch(setParsingError('Failed to start parsing.'));
     }
   };
@@ -91,28 +139,35 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
 
   // React to parsing status updates that may come from websocket
   useEffect(() => {
-    if (parsingStatus === 'success') {
+    if (parsingStatus === PARSING_STATUS.SUCCESS) {
       doneRef.current = true;
-      if (timeoutRef.current) {
-        globalThis.clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
+      clearTimeoutTimer();
+      stopProgress();
+      // Snap to 100 on success
+      if (typeof parsingPercent !== 'number' || parsingPercent < 100) {
+        dispatch(setParsingPercent(100));
       }
-    } else if (parsingStatus === 'error') {
+    } else if (parsingStatus === PARSING_STATUS.ERROR) {
       doneRef.current = false;
-      if (timeoutRef.current) {
-        globalThis.clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-    } else if (parsingStatus === 'loading') {
+      clearTimeoutTimer();
+      stopProgress();
+    } else if (parsingStatus === PARSING_STATUS.LOADING) {
       doneRef.current = false;
     }
-  }, [parsingStatus, parsingPercent]);
+  }, [
+    clearTimeoutTimer,
+    dispatch,
+    parsingStatus,
+    parsingPercent,
+    stopProgress,
+  ]);
 
   useEffect(
     () => () => {
-      if (timeoutRef.current) globalThis.clearTimeout(timeoutRef.current);
+      clearTimeoutTimer();
+      stopProgress();
     },
-    []
+    [clearTimeoutTimer, stopProgress]
   );
 
   return (
@@ -130,24 +185,24 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
         }
       />
 
-      {(!parsingStatus || parsingStatus === 'idle') && (
+      {(!parsingStatus || parsingStatus === PARSING_STATUS.IDLE) && (
         <UploadPrompt onSkip={onSkip} onSelectFile={onSelectFile} />
       )}
-      {parsingStatus === 'loading' && (
+      {parsingStatus === PARSING_STATUS.LOADING && (
         <Loading
           fileName={fileName}
-          percent={parsingPercent || 40}
+          percent={parsingPercent}
           onChooseDifferentFile={onChooseDifferentFile}
         />
       )}
-      {parsingStatus === 'error' && (
+      {parsingStatus === PARSING_STATUS.ERROR && (
         <ErrorState
           fileName={fileName}
           onRetry={() => dispatch(resetParsing())}
           onSkip={onSkip}
         />
       )}
-      {parsingStatus === 'success' && (
+      {parsingStatus === PARSING_STATUS.SUCCESS && (
         <SuccessState
           fileName={fileName}
           onSave={() => {
@@ -156,7 +211,6 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
               dispatch(nextStep());
             });
           }}
-          onTryDifferent={() => dispatch(resetParsing())}
         />
       )}
     </div>

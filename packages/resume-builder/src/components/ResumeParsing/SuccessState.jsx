@@ -9,7 +9,6 @@ const SuccessState = ({
   fileName = 'Resume.pdf',
   sections = ['Skills', 'Projects', 'Education', 'Work Experience'],
   onSave,
-  onTryDifferent,
 }) => {
   return (
     <div className={styles.container}>
@@ -30,15 +29,7 @@ const SuccessState = ({
         className={styles.primaryButton}
         onClick={onSave}
       >
-        Save Resume & Continue
-      </Button>
-      <Button
-        block
-        className={styles.secondaryButton}
-        type="text"
-        onClick={onTryDifferent}
-      >
-        Try with a different file
+        Continue
       </Button>
     </div>
   );

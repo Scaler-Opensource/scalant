@@ -24,16 +24,16 @@ export const WithReviewData = () => {
   const TIMEOUT_FOR_REVIEW_DATA = 3000;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(setReviewData(reviewData));
-      if (reviewData.evaluation_state === 'ongoing') {
-        dispatch(setIsLoading(true));
-      } else {
-        dispatch(setIsLoading(false));
-      }
-    }, TIMEOUT_FOR_REVIEW_DATA);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     dispatch(setReviewData(reviewData));
+  //     if (reviewData.evaluation_state === 'ongoing') {
+  //       dispatch(setIsLoading(true));
+  //     } else {
+  //       dispatch(setIsLoading(false));
+  //     }
+  //   }, TIMEOUT_FOR_REVIEW_DATA);
+  // }, []);
 
   return (
     <div>
@@ -82,6 +82,7 @@ export const WithDummyData = () => {
         resumeData={useResumeData1 ? resumeData1 : resumeData}
         resumeList={dummyResumeList}
         courseProduct={'devops'}
+        enableResumeParsing={true}
         onResumeClick={(id) => {
           console.log('Resume with id', id, 'clicked');
         }}

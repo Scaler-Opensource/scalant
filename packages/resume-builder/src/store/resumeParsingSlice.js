@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PARSING_STATUS } from '../utils/constants';
 
 const initialState = {
-  status: 'idle', // idle | loading | success | error
+  status: PARSING_STATUS.IDLE, // idle | loading | success | error
   percent: 0,
   errorMessage: null,
   parsedData: {},
@@ -12,7 +13,7 @@ const resumeParsingSlice = createSlice({
   initialState,
   reducers: {
     setParsingLoading: (state, action) => {
-      state.status = 'loading';
+      state.status = PARSING_STATUS.LOADING;
       state.percent = typeof action.payload === 'number' ? action.payload : 0;
       state.errorMessage = null;
     },
@@ -22,7 +23,7 @@ const resumeParsingSlice = createSlice({
       }
     },
     setParsingSuccess: (state) => {
-      state.status = 'success';
+      state.status = PARSING_STATUS.SUCCESS;
       state.percent = 100;
       state.errorMessage = null;
     },
@@ -30,7 +31,7 @@ const resumeParsingSlice = createSlice({
       state.parsedData = action.payload;
     },
     setParsingError: (state, action) => {
-      state.status = 'error';
+      state.status = PARSING_STATUS.ERROR;
       state.errorMessage = action.payload || 'Something went wrong';
     },
     resetParsing: () => initialState,

@@ -5,7 +5,6 @@ import {
   PlusOutlined,
   MinusOutlined,
   CheckCircleOutlined,
-  ExclamationCircleOutlined,
   SyncOutlined,
   CloseCircleOutlined,
 } from '@ant-design/icons';
@@ -57,7 +56,9 @@ const ResumeStepCard = ({
   reviewStatus,
   required,
 }) => {
-  const reviewData = useSelector((state) => state.scalantResumeBuilder.resumeReview.reviewData);
+  const reviewData = useSelector(
+    (state) => state.scalantResumeBuilder.resumeReview.reviewData
+  );
   const overallScore =
     reviewData?.resume_evaluation_result?.overall_resume_score;
 
@@ -81,7 +82,11 @@ const ResumeStepCard = ({
                     <span className={styles.required}>*</span>
                   </Tooltip>
                 )}
-                {status && required && !reviewStatus && !overallScore && STATUS_TAGS[status]}
+                {status &&
+                  required &&
+                  !reviewStatus &&
+                  !overallScore &&
+                  STATUS_TAGS[status]}
                 {reviewStatus && required && STATUS_TAGS[reviewStatus]}
               </Flex>
               <Text type="secondary">{subtitle}</Text>

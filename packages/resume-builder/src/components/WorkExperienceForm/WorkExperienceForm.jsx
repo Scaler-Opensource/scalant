@@ -36,6 +36,7 @@ const WorkExperienceForm = ({
   onComplete,
   required = false,
   onAiSuggestionClick,
+  enableResumeParsing,
 }) => {
   const dispatch = useDispatch();
   const resumeData = useSelector(
@@ -205,7 +206,9 @@ const WorkExperienceForm = ({
 
   return (
     <Flex vertical gap={16}>
-      <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      {!enableResumeParsing && (
+        <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      )}
       <SectionFeedback feedbackData={workExperienceFeedback} />
       <Space direction="vertical" style={{ width: '100%' }}>
         <Flex vertical gap={16}>
