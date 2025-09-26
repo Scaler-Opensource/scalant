@@ -82,6 +82,9 @@ const ResumeBuilderContent = ({
   onUploadFile,
   onFileUploaded,
   enableResumeParsing = false,
+  onRetry,
+  onContinue,
+  onSkip,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
@@ -197,6 +200,9 @@ const ResumeBuilderContent = ({
           <ResumeParsing
             onUploadFile={onUploadFile}
             onFileUploaded={onFileUploaded}
+            onRetry={onRetry}
+            onContinue={onContinue}
+            onSkip={onSkip}
           />
         );
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
@@ -316,6 +322,9 @@ const ResumeBuilder = ({
   onUploadFile,
   onFileUploaded,
   enableResumeParsing = false,
+  onRetry,
+  onContinue,
+  onSkip,
 }) => {
   return (
     <ResumeBuilderContent
@@ -342,6 +351,9 @@ const ResumeBuilder = ({
       onUploadFile={onUploadFile}
       onFileUploaded={onFileUploaded}
       enableResumeParsing={enableResumeParsing}
+      onRetry={onRetry}
+      onContinue={onContinue}
+      onSkip={onSkip}
     />
   );
 };

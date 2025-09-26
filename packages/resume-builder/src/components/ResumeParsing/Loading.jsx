@@ -17,10 +17,7 @@ const Loading = ({ fileName = 'Resume.pdf', percent = 40 }) => {
       </div>
 
       <Button block disabled className={styles.primaryButton} type="primary">
-        Save Resume & Continue
-      </Button>
-      <Button block disabled className={styles.secondaryButton} type="text">
-        Try with a different file
+        Continue
       </Button>
     </div>
   );
