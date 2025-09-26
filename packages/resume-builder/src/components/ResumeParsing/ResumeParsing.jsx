@@ -11,6 +11,7 @@ import {
   setParsingLoading,
   setParsingError,
   resetParsing,
+  setParsingPercent,
 } from '../../store/resumeParsingSlice';
 import { useParseResumeMutation } from '../../services/resumeBuilderApi';
 
@@ -42,11 +43,12 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
   };
 
   const onSelectFile = async (e) => {
+    dispatch(setParsingPercent(0));
     const file = e?.target?.files?.[0];
     console.log(file);
     if (!file) return;
     setFileName(file.name);
-    dispatch(setParsingLoading(40));
+    dispatch(setParsingLoading(10));
 
     try {
       if (onUploadFile) {
@@ -72,6 +74,8 @@ const ResumeParsing = ({ onUploadFile, onFileUploaded }) => {
         }, 60000);
 
         await parseResume({ resumeId, resourceLink: url }).unwrap();
+
+        dispatch(setParsingLoading(60));
       } else {
         throw new Error('Upload file function not provided');
       }
