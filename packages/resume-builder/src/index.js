@@ -26,3 +26,5 @@ export {
   setParsedData,
   resetParsing,
 } from './store/resumeParsingSlice';
+
+export { setResumeData } from './store/resumeBuilderSlice';
