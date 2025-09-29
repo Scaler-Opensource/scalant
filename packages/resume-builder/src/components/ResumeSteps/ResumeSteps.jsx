@@ -17,7 +17,7 @@ import {
 import { useBasicQuestionsForm } from '../../hooks/useBasicQuestionsForm';
 import ResumeProfileCard from '../ResumeProfileCard';
 import ResumeReviewOverallSummary from '../ResumeReviewOverallSummary';
-import { FORM_KEYS } from '../../utils/constants';
+import { FORM_KEYS, PARSING_STATUS } from '../../utils/constants';
 
 const ResumeTimeline = ({
   onAiSuggestionClick,
@@ -49,8 +49,8 @@ const ResumeTimeline = ({
   const reviewData = useSelector(
     (state) => state.scalantResumeBuilder.resumeReview.reviewData
   );
-  const parsedData = useSelector(
-    (state) => state.scalantResumeBuilder.resumeParsing.parsedData
+  const parseStatus = useSelector(
+    (state) => state.scalantResumeBuilder.resumeParsing.status
   );
   const isReviewLoading = useSelector(
     (state) => state.scalantResumeBuilder.resumeReview.isLoading
@@ -61,16 +61,14 @@ const ResumeTimeline = ({
 
   // Force re-render when resumeData changes
   useEffect(() => {
-    if (Object.keys(parsedData).length > 0) {
-      // if the resume data is parsed, parsedData will be set. We can use this to mark the all steps as incomplete.
+    if (parseStatus === PARSING_STATUS.SUCCESS) {
+      // parsing succeeded; mark all steps as incomplete and prepare the flow
       dispatch(setIncompleteForms(Object.values(FORM_KEYS)));
       dispatch(setCurrentIncompleteForm(FORM_KEYS.personal_details));
-      // Keep all steps closed initially when parsedData is present
       setExpandedStep(null);
-      // Reset dismissal for new parsing sessions
       setTourDismissed(false);
     } else if (resumeData) {
-      setSteps([]); // Clear steps to force re-render
+      setSteps([]);
       const newIncompleteForms = getAllIncompleteForms(resumeData);
       batch(() => {
         dispatch(setIncompleteForms(newIncompleteForms));
@@ -82,7 +80,7 @@ const ResumeTimeline = ({
         }
       });
     }
-  }, [resumeData, dispatch, parsedData]);
+  }, [resumeData, dispatch, parseStatus]);
 
   useEffect(() => {
     setMounted(true);
@@ -95,9 +93,9 @@ const ResumeTimeline = ({
     }
   }, [expandedStep, mounted]);
 
-  // Compute whether to show Tour: parsedData present, first step exists, and not dismissed
+  // Compute whether to show Tour: parsing success present, first step exists, and not dismissed
   const shouldShowTour = (() => {
-    const hasParsed = parsedData && Object.keys(parsedData || {}).length > 0;
+    const hasParsed = parseStatus === PARSING_STATUS.SUCCESS;
     const firstStepKey = steps?.[0]?.key;
     const firstStepEl = firstStepKey ? stepRefs.current[firstStepKey] : null;
     return Boolean(
