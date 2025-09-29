@@ -1,6 +1,6 @@
 {
   "name": "@scalant/resume-builder",
-  "version": "9.4.2",
+  "version": "9.4.3",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
