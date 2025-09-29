@@ -106,7 +106,6 @@ const ResumeBuilderContent = ({
       dispatch(setResumeData(resumeData));
       dispatch(setProgram(getResumeProgram(courseProduct)));
       dispatch(resetSteps());
-      dispatch(resetParsing());
       dispatch(resetAllForms());
       dispatch(setReviewData(resumeEvaluationDetails));
 
@@ -129,6 +128,10 @@ const ResumeBuilderContent = ({
         );
         dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
+
+      return () => {
+        dispatch(resetParsing());
+      };
     }
   }, [resumeData, dispatch, isOnboarding, courseProduct, enableResumeParsing]);
 
