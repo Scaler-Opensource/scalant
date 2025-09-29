@@ -6,7 +6,7 @@ import UploadPrompt from './UploadPrompt';
 import Loading from './Loading';
 import ErrorState from './ErrorState';
 import SuccessState from './SuccessState';
-import { nextStep, setResumeData } from '../../store/resumeBuilderSlice';
+import { nextStep } from '../../store/resumeBuilderSlice';
 import {
   setParsingLoading,
   setParsingError,
@@ -147,11 +147,11 @@ const ResumeParsing = ({
 
   const handleSave = useCallback(() => {
     batch(() => {
-      dispatch(setResumeData(parsedData));
+      // dispatch(setResumeData(parsedData));
       dispatch(nextStep());
     });
     onContinue?.();
-  }, [dispatch, onContinue, parsedData]);
+  }, [dispatch, onContinue]);
 
   // React to parsing status updates that may come from websocket
   useEffect(() => {
