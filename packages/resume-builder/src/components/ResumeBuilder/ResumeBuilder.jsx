@@ -93,9 +93,23 @@ const ResumeBuilderContent = ({
   );
   const visitedStepsRef = useRef(new Set());
   const initialStepSetRef = useRef(false);
+  const previousResumeIdRef = useRef();
   const parsingStatus = useSelector(
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
+
+  // Reset parsing only when resumeId value changes between renders
+  useEffect(() => {
+    const resumeId = resumeData?.resume_details?.id;
+    if (resumeId === undefined) return;
+    if (
+      previousResumeIdRef.current !== undefined &&
+      previousResumeIdRef.current !== resumeId
+    ) {
+      dispatch(resetParsing());
+    }
+    previousResumeIdRef.current = resumeId;
+  }, [resumeData?.resume_details?.id, dispatch]);
 
   useEffect(() => {
     if (resumeData) {
@@ -128,10 +142,6 @@ const ResumeBuilderContent = ({
         );
         dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
-
-      return () => {
-        dispatch(resetParsing());
-      };
     }
   }, [resumeData, dispatch, isOnboarding, courseProduct, enableResumeParsing]);
 
