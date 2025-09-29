@@ -7,6 +7,7 @@ import {
   resetSteps,
   setSteps,
 } from '../../store/resumeBuilderSlice';
+import { resetParsing } from '../../store/resumeParsingSlice';
 import { setReviewData, setIsLoading } from '../../store/resumeReviewSlice';
 import { resetAllForms } from '../../store/formStoreSlice';
 import { getResumeProgram } from '../../utils/resumeUtils';
@@ -105,6 +106,7 @@ const ResumeBuilderContent = ({
       dispatch(setResumeData(resumeData));
       dispatch(setProgram(getResumeProgram(courseProduct)));
       dispatch(resetSteps());
+      dispatch(resetParsing());
       dispatch(resetAllForms());
       dispatch(setReviewData(resumeEvaluationDetails));
 
