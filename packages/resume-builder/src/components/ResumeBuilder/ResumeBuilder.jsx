@@ -256,6 +256,7 @@ const ResumeBuilderContent = ({
               onDeleteClick={onDeleteClick}
               onDownloadClick={onDownloadClick}
               resumeTemplateConfig={resumeTemplateConfig}
+              showOnlyPdf={true}
             />
           );
         } else {
