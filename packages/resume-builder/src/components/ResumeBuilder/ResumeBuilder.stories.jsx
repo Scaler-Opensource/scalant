@@ -68,6 +68,14 @@ export const WithReviewData = () => {
 
 export const WithDummyData = () => {
   const [useResumeData1, setUseResumeData1] = useState(false);
+  const [currentResumeData, setCurrentResumeData] = useState(
+    useResumeData1 ? resumeData1 : resumeData
+  );
+
+  useEffect(() => {
+    // When toggling between datasets, reset to the selected dataset
+    setCurrentResumeData(useResumeData1 ? resumeData1 : resumeData);
+  }, [useResumeData1]);
 
   return (
     <div>
@@ -79,10 +87,14 @@ export const WithDummyData = () => {
       </button>
       <ResumeBuilder
         isOnboarding={true}
-        resumeData={useResumeData1 ? resumeData1 : resumeData}
+        resumeData={currentResumeData}
         resumeList={dummyResumeList}
         courseProduct={'devops'}
         enableResumeParsing={true}
+        onContinue={() => {
+          // Simulate the same data but a new object reference on continue
+          setCurrentResumeData((prev) => ({ ...prev }));
+        }}
         onResumeClick={(id) => {
           console.log('Resume with id', id, 'clicked');
         }}

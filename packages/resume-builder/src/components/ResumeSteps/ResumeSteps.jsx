@@ -40,9 +40,10 @@ const ResumeTimeline = ({
   const currentIncompleteForm = useSelector(
     (state) => state.scalantResumeBuilder.resumeForms.currentIncompleteForm
   );
-  const stepRefs = useRef([]);
+  const stepRefs = useRef({});
   const [mounted, setMounted] = useState(false);
   const [tourDismissed, setTourDismissed] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
   const resumePersonaData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms.basicQuestions
   );
@@ -93,15 +94,21 @@ const ResumeTimeline = ({
     }
   }, [expandedStep, mounted]);
 
-  // Compute whether to show Tour: parsing success present, first step exists, and not dismissed
-  const shouldShowTour = (() => {
+  // Control opening of Tour after refs are populated and DOM is ready
+  useEffect(() => {
     const hasParsed = parseStatus === PARSING_STATUS.SUCCESS;
-    const firstStepKey = steps?.[0]?.key;
-    const firstStepEl = firstStepKey ? stepRefs.current[firstStepKey] : null;
-    return Boolean(
-      hasParsed && firstStepEl && !tourDismissed && expandedStep === null
-    );
-  })();
+    if (tourDismissed || expandedStep !== null || !hasParsed) {
+      if (tourOpen) setTourOpen(false);
+      return;
+    }
+    const firstKey = steps?.[0]?.key;
+    // wait a tick so ref callbacks run and DOM nodes are attached
+    const id = globalThis.requestAnimationFrame(() => {
+      const el = firstKey ? stepRefs.current[firstKey] : null;
+      setTourOpen(Boolean(el));
+    });
+    return () => globalThis.cancelAnimationFrame(id);
+  }, [steps, expandedStep, tourDismissed, parseStatus, tourOpen]);
 
   const handleStepClick = useCallback(
     (key) => {
@@ -195,7 +202,8 @@ const ResumeTimeline = ({
   return (
     <div className={styles.container}>
       <Tour
-        open={shouldShowTour}
+        key={steps?.[0]?.key || 'tour'}
+        open={tourOpen}
         onClose={() => setTourDismissed(true)}
         steps={[
           {

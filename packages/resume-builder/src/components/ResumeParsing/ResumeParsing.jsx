@@ -48,9 +48,6 @@ const ResumeParsing = ({
   const parsingPercent = useSelector(
     (s) => s.scalantResumeBuilder?.resumeParsing?.percent
   );
-  const parsedData = useSelector(
-    (s) => s.scalantResumeBuilder?.resumeParsing?.parsedData
-  );
 
   const [parseResume] = useParseResumeMutation();
 
@@ -123,7 +120,6 @@ const ResumeParsing = ({
 
         // globalThis.setTimeout(() => {
         //   dispatch(setParsingSuccess());
-        //   dispatch(setParsedData(resumeParseData));
         // }, 3000);
 
         // Mark as loading and start progress/timeout machinery
