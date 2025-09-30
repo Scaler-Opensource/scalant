@@ -22,7 +22,7 @@ const Acknowledgement = () => {
         className={styles.timeline}
         items={[
           {
-            dot: <div className={styles.timelineDot}> 2 </div>,
+            dot: <div className={styles.timelineDot}> 1 </div>,
             children: (
               <div className={styles.timelineItem}>
                 <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/278/original/Frame_1430102542_%282%29.png?1757927475"></img>
@@ -31,7 +31,7 @@ const Acknowledgement = () => {
             ),
           },
           {
-            dot: <div className={styles.timelineDot}> 1 </div>,
+            dot: <div className={styles.timelineDot}> 2 </div>,
             children: (
               <div className={styles.timelineItem}>
                 <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/156/248/original/Frame_1430102542_%285%29.png?1759217079"></img>
