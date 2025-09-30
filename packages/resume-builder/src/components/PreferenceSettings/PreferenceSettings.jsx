@@ -31,7 +31,7 @@ const initialFormData = {
   anywhereInIndia: false,
 };
 
-const PreferenceSettings = () => {
+const PreferenceSettings = ({ isLastStep = false }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -290,7 +290,7 @@ const PreferenceSettings = () => {
             block
             loading={isLoading}
           >
-            Save and Continue
+            {isLastStep ? 'Submit' : 'Save and Continue'}
           </Button>
         </div>
       </Form>

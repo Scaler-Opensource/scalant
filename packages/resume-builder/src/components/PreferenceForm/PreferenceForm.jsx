@@ -36,9 +36,9 @@ const PreferenceForm = ({
     const currentStepData = steps[currentStep];
     switch (currentStepData.component) {
       case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
-        return <PreferenceSettings />;
+        return <PreferenceSettings isLastStep />;
       case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
-        return <ResumeBasicQuestions isLastStep />;
+        return <ResumeBasicQuestions />;
       default:
         return null;
     }
@@ -79,7 +79,7 @@ const PreferenceForm = ({
       }
 
       const resumeStepsIndex = steps.findIndex(
-        (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
+        (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
       );
       dispatch(setCurrentStep(resumeStepsIndex));
     }
@@ -87,7 +87,7 @@ const PreferenceForm = ({
 
   useEffect(() => {
     const lastStepIndex = steps.findIndex(
-      (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
+      (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
     );
 
     if (lastStepIndex < currentStep) {
