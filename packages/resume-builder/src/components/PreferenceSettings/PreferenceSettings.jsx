@@ -23,7 +23,8 @@ const ANYWHERE_IN_INDIA = 'anywhere_in_india';
 const initialFormData = {
   preferredLocations: [],
   preferredRoles: [],
-  ctc: '',
+  currentCtc: '',
+  expectedCtc: '',
   notice: '',
   negotiable: 'no',
   internship: true,
@@ -71,7 +72,8 @@ const PreferenceSettings = ({ isLastStep = false }) => {
             return {
               preferredLocations: hasAnywhere ? [] : locationParts,
               preferredRoles: preferenceData?.preferred_role?.split('/'),
-              ctc: preferenceData?.expected_ctc,
+              currentCtc: preferenceData?.current_ctc,
+              expectedCtc: preferenceData?.expected_ctc,
               notice: preferenceData?.notice_period,
               negotiable: preferenceData?.buyout_notice ? 'yes' : 'no',
               internship: true,
@@ -135,7 +137,8 @@ const PreferenceSettings = ({ isLastStep = false }) => {
       form_stage: 'preferences_details_v1_form',
       preferred_location: preferredLocations,
       preferred_role: preferredRoles,
-      expected_ctc: form.getFieldsValue().ctc,
+      expected_ctc: form.getFieldsValue().expectedCtc,
+      current_ctc: form.getFieldsValue().currentCtc,
       ctc_currency: 'INR',
       notice_period: form.getFieldsValue().notice,
       buyout_notice: form.getFieldsValue().negotiable === 'yes',
@@ -233,15 +236,29 @@ const PreferenceSettings = ({ isLastStep = false }) => {
           <Select mode="multiple" allowClear options={PREFERRED_JOB_ROLES} />
         </Form.Item>
 
-        <Form.Item
-          label="Current CTC (LPA)"
-          name="ctc"
-          rules={[
-            { required: true, message: 'Please enter your current CTC!' },
-          ]}
-        >
-          <Input placeholder="e.g., 3" />
-        </Form.Item>
+        <Flex gap={16}>
+          <Form.Item
+            label="Current CTC (LPA)"
+            name="currentCtc"
+            rules={[
+              { required: true, message: 'Please enter your current CTC!' },
+            ]}
+            style={{ flex: 1 }}
+          >
+            <Input placeholder="e.g., 3" />
+          </Form.Item>
+
+          <Form.Item
+            label="Expected CTC (LPA)"
+            name="expectedCtc"
+            rules={[
+              { required: true, message: 'Please enter your expected CTC!' },
+            ]}
+            style={{ flex: 1 }}
+          >
+            <Input placeholder="e.g., 3" />
+          </Form.Item>
+        </Flex>
 
         <Flex gap={16}>
           <Form.Item
