@@ -144,10 +144,8 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
     <Flex vertical gap={32} align="flex-start">
       <Flex vertical>
         <PageHeader
-          title="Create the resume that will get you ahead"
-          subtitle={`Answer these three simple questions, 
-            to get started on building your 
-            industry standard resume`}
+          title="Your success story begins with a resume"
+          subtitle={`Your profile helps us personalize your resume`}
         />
         <Form
           form={form}
@@ -157,6 +155,15 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
           initialValues={initialValues}
         >
           <Flex gap={16} vertical>
+            <Form.Item
+              label="Current Job Profile"
+              name="currentJobRole"
+              rules={[{ required: true }]}
+              className={styles.formItem}
+            >
+              <Select options={jobRoles} />
+            </Form.Item>
+
             <Form.Item
               label="Total Work Experience"
               className={styles.formItem}
@@ -254,15 +261,6 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
                   <Text>Months</Text>
                 </Flex>
               </Flex>
-            </Form.Item>
-
-            <Form.Item
-              label="Current Job Role"
-              name="currentJobRole"
-              rules={[{ required: true }]}
-              className={styles.formItem}
-            >
-              <Select options={jobRoles} />
             </Form.Item>
           </Flex>
 

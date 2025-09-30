@@ -21,7 +21,7 @@ const FORM_ID = 'preferenceSettings';
 const ANYWHERE_IN_INDIA = 'anywhere_in_india';
 
 const initialFormData = {
-  preferredLocations: [],
+  preferredLocations: ['Remote'],
   preferredRoles: [],
   currentCtc: '',
   expectedCtc: '',
@@ -42,6 +42,10 @@ const PreferenceSettings = ({ isLastStep = false }) => {
   const formData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms[FORM_ID]
   );
+  const basicQuestionsFormData = useSelector(
+    (state) => state.scalantResumeBuilder.formStore.forms['basicQuestions']
+  );
+  const isFresher = basicQuestionsFormData?.currentJobRole === 'Fresher';
   const isFormInitialized = useSelector(
     (state) => state.scalantResumeBuilder.formStore.initializedForms[FORM_ID]
   );
@@ -70,7 +74,11 @@ const PreferenceSettings = ({ isLastStep = false }) => {
               : [];
             const hasAnywhere = locationParts.includes(ANYWHERE_IN_INDIA);
             return {
-              preferredLocations: hasAnywhere ? [] : locationParts,
+              preferredLocations: hasAnywhere
+                ? []
+                : locationParts.length === 0
+                  ? ['Remote']
+                  : locationParts,
               preferredRoles: preferenceData?.preferred_role?.split('/'),
               currentCtc: preferenceData?.current_ctc,
               expectedCtc: preferenceData?.expected_ctc,
@@ -101,6 +109,20 @@ const PreferenceSettings = ({ isLastStep = false }) => {
     form.setFieldsValue(formData);
   }, [form, formData]);
 
+  // If the user selected Fresher in basic questions, force notice to '0' and internship to true
+  useEffect(() => {
+    if (isFresher) {
+      const enforcedValues = { notice: '0', internship: true };
+      form.setFieldsValue(enforcedValues);
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: enforcedValues,
+        })
+      );
+    }
+  }, [isFresher, dispatch, form]);
+
   useEffect(() => {
     setUniquePreferredJobLocationValues(
       preferredJobLocationValues.filter(
@@ -127,7 +149,10 @@ const PreferenceSettings = ({ isLastStep = false }) => {
     }
     let preferredRoles = form.getFieldsValue().preferredRoles;
     if (Array.isArray(preferredLocations)) {
-      preferredLocations = preferredLocations.join('/');
+      preferredLocations =
+        preferredLocations.length === 0
+          ? 'Remote'
+          : preferredLocations.join('/');
     }
     if (Array.isArray(preferredRoles)) {
       preferredRoles = preferredRoles.join('/');
@@ -265,8 +290,9 @@ const PreferenceSettings = ({ isLastStep = false }) => {
             label="Notice Period (in Days)"
             name="notice"
             rules={[{ required: true, message: 'Please enter notice period!' }]}
+            tooltip={isFresher ? 'Set to 0 for Freshers' : undefined}
           >
-            <Input placeholder="e.g., 3" />
+            <Input placeholder="e.g., 3" disabled={isFresher} />
           </Form.Item>
           {/* // If notice period is 0 then disable negotiable field */}
           <Form.Item
@@ -289,7 +315,9 @@ const PreferenceSettings = ({ isLastStep = false }) => {
           valuePropName="checked"
           rules={[{ required: true, message: 'Please select an option!' }]}
         >
-          <Checkbox>I am also open to Internships</Checkbox>
+          <Checkbox disabled={isFresher}>
+            I am also open to Internships
+          </Checkbox>
         </Form.Item>
 
         <Form.Item name="acknowledge" valuePropName="checked">
