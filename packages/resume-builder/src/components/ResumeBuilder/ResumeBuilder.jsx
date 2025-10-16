@@ -47,6 +47,7 @@ const ResumeBuilderContent = ({
   courseProduct,
   isLoading = false,
   onDownloadClick,
+  onUploadClick,
   enableResumeReview = false,
   onReviewResumeClick,
   onResumeBuilderPageView,
@@ -200,6 +201,7 @@ const ResumeBuilderContent = ({
             onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
             onDownloadClick={onDownloadClick}
+            onUploadClick={onUploadClick}
             resumeTemplateConfig={resumeTemplateConfig}
           />
         );
@@ -245,6 +247,7 @@ const ResumeBuilder = ({
   onAiSuggestionClick,
   resumeTemplateConfig,
   onDownloadClick,
+  onUploadClick,
   onResumeBuilderPageView,
   enableResumeReview = true,
   onReviewResumeClick,
@@ -268,6 +271,7 @@ const ResumeBuilder = ({
       courseProduct={courseProduct}
       resumeTemplateConfig={resumeTemplateConfig}
       onDownloadClick={onDownloadClick}
+      onUploadClick={onUploadClick}
       enableResumeReview={enableResumeReview}
       onReviewResumeClick={onReviewResumeClick}
       onResumeBuilderPageView={onResumeBuilderPageView}
