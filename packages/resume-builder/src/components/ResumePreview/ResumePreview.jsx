@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Flex, FloatButton, Tooltip } from 'antd';
-import { FileOutlined, AuditOutlined, LikeOutlined } from '@ant-design/icons';
+import { FileOutlined, AuditOutlined, LikeOutlined, UploadOutlined } from '@ant-design/icons';
 
 import FontSizeDropdown from './FontSizeDropdown';
 import ResumeDropdown from './ResumeDropdown';
@@ -31,6 +31,7 @@ const ResumePreview = ({
   onResumeClick,
   resumeTemplateConfig,
   onDownloadClick,
+  onUploadClick,
 }) => {
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -112,6 +113,15 @@ const ResumePreview = ({
                 onClick={() => getSampleResumeLink()}
               />
             </Tooltip>
+          <Tooltip title="Upload" placement="right">
+            <FloatButton
+              icon={<UploadOutlined />}
+              onClick={() => onUploadClick?.()}
+              aria-label="Upload resume"
+              disabled={isLoading || isFetching}
+              style={{ width: 40, height: 40 }}
+            />
+          </Tooltip>
             <Tooltip title={TOOLTIPS.FEEDBACK} placement="right">
               <FloatButton
                 icon={<LikeOutlined />}
