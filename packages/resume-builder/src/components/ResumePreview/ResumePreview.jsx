@@ -100,9 +100,7 @@ const ResumePreview = ({
         isError={isError}
         onDownloadClick={onDownloadClick}
       />
-      {/* Commented out for testing - toolbar always visible */}
-      {/* {!isLoading && !isFetching && !isError && !showOnlyPdf && ( */}
-      {true && (
+      {!isLoading && !isFetching && !isError && !showOnlyPdf && (
         <Flex vertical>
           <FloatButton.Group shape="square" className={styles.floatButtonGroup}>
             <ChangeTemplate resumeTemplateConfig={resumeTemplateConfig} />
