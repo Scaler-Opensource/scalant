@@ -101,13 +101,23 @@ const ResumeBuilderContent = ({
 
   // Handle upload button click - navigate to parsing step
   const handleUploadClick = useCallback(() => {
+    // Call external onUploadClick if provided
+    if (onUploadClick) {
+      onUploadClick();
+      return;
+    }
+
+    // Otherwise, navigate to parsing step if it exists
     const parsingStepIndex = steps.findIndex(
       (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
     );
+    
     if (parsingStepIndex >= 0) {
       dispatch(setCurrentStep(parsingStepIndex));
+    } else {
+      console.warn('Resume parsing step not found in current steps configuration');
     }
-  }, [dispatch, steps]);
+  }, [dispatch, steps, onUploadClick]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {
@@ -296,7 +306,7 @@ const ResumeBuilderContent = ({
             onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
             onDownloadClick={onDownloadClick}
-            onUploadClick={onUploadClick || handleUploadClick}
+            onUploadClick={handleUploadClick}
             resumeTemplateConfig={resumeTemplateConfig}
           />
         );
