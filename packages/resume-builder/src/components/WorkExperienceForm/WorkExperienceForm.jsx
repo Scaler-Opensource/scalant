@@ -36,6 +36,7 @@ const WorkExperienceForm = ({
   onComplete,
   required = false,
   onAiSuggestionClick,
+  enableResumeParsing,
 }) => {
   const dispatch = useDispatch();
   const resumeData = useSelector(
@@ -69,22 +70,22 @@ const WorkExperienceForm = ({
     () =>
       resumeData?.experience && resumeData?.experience.length > 0
         ? {
-          workExperienceItems: resumeData.experience.map((item, index) => ({
-            id: item.id,
-            index: index,
-            completed: true,
-            expanded: false,
-            formData: {
-              company: item.company,
-              position: item.position,
-              from: item.from ? dayjs(item.from) : null,
-              to: item.to ? dayjs(item.to) : null,
-              location: item.location,
-              short_description: item.short_description,
-              is_current: item.is_current,
-            },
-          })),
-        }
+            workExperienceItems: resumeData.experience.map((item, index) => ({
+              id: item.id,
+              index: index,
+              completed: true,
+              expanded: false,
+              formData: {
+                company: item.company,
+                position: item.position,
+                from: item.from ? dayjs(item.from) : null,
+                to: item.to ? dayjs(item.to) : null,
+                location: item.location,
+                short_description: item.short_description,
+                is_current: item.is_current,
+              },
+            })),
+          }
         : initialFormData,
     [resumeData?.experience]
   );
@@ -205,7 +206,9 @@ const WorkExperienceForm = ({
 
   return (
     <Flex vertical gap={16}>
-      <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      {!enableResumeParsing && (
+        <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      )}
       <SectionFeedback feedbackData={workExperienceFeedback} />
       <Space direction="vertical" style={{ width: '100%' }}>
         <Flex vertical gap={16}>

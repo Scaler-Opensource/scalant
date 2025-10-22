@@ -27,6 +27,13 @@ export const resumeBuilderApi = createApi({
   baseQuery: dynamicBaseQuery,
   tagTypes: ['ResumeLink'],
   endpoints: (builder) => ({
+    parseResume: builder.mutation({
+      query: ({ resumeId, resourceLink }) => ({
+        url: `/api/v3/user-resumes/${resumeId}/parse_resume`,
+        method: 'POST',
+        body: { resource_link: resourceLink },
+      }),
+    }),
     updateResumeDetails: builder.mutation({
       query: ({ resumeId, payload }) => ({
         url: `/api/v3/user-resumes/${resumeId}/`,
@@ -76,6 +83,7 @@ export const setBaseUrl = (url) => {
 };
 
 export const {
+  useParseResumeMutation,
   useUpdateResumeDetailsMutation,
   useGetResumeLinkQuery,
   useUpdateResumePreferencesMutation,

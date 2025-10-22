@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
-import { Timeline, Spin, message } from 'antd';
+import { Timeline, Spin, message, Tour } from 'antd';
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
@@ -17,11 +17,13 @@ import {
 import { useBasicQuestionsForm } from '../../hooks/useBasicQuestionsForm';
 import ResumeProfileCard from '../ResumeProfileCard';
 import ResumeReviewOverallSummary from '../ResumeReviewOverallSummary';
+import { FORM_KEYS, PARSING_STATUS } from '../../utils/constants';
 
 const ResumeTimeline = ({
   onAiSuggestionClick,
   onFormCompletion,
   onAllFormsComplete,
+  enableResumeParsing,
 }) => {
   const dispatch = useDispatch();
   const program = useSelector(
@@ -38,13 +40,18 @@ const ResumeTimeline = ({
   const currentIncompleteForm = useSelector(
     (state) => state.scalantResumeBuilder.resumeForms.currentIncompleteForm
   );
-  const stepRefs = useRef([]);
+  const stepRefs = useRef({});
   const [mounted, setMounted] = useState(false);
+  const [tourDismissed, setTourDismissed] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
   const resumePersonaData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms.basicQuestions
   );
   const reviewData = useSelector(
     (state) => state.scalantResumeBuilder.resumeReview.reviewData
+  );
+  const parseStatus = useSelector(
+    (state) => state.scalantResumeBuilder.resumeParsing.status
   );
   const isReviewLoading = useSelector(
     (state) => state.scalantResumeBuilder.resumeReview.isLoading
@@ -55,8 +62,14 @@ const ResumeTimeline = ({
 
   // Force re-render when resumeData changes
   useEffect(() => {
-    if (resumeData) {
-      setSteps([]); // Clear steps to force re-render
+    if (parseStatus === PARSING_STATUS.SUCCESS) {
+      // parsing succeeded; mark all steps as incomplete and prepare the flow
+      dispatch(setIncompleteForms(Object.values(FORM_KEYS)));
+      dispatch(setCurrentIncompleteForm(FORM_KEYS.personal_details));
+      setExpandedStep(null);
+      setTourDismissed(false);
+    } else if (resumeData) {
+      setSteps([]);
       const newIncompleteForms = getAllIncompleteForms(resumeData);
       batch(() => {
         dispatch(setIncompleteForms(newIncompleteForms));
@@ -68,7 +81,7 @@ const ResumeTimeline = ({
         }
       });
     }
-  }, [resumeData, dispatch]);
+  }, [resumeData, dispatch, parseStatus]);
 
   useEffect(() => {
     setMounted(true);
@@ -81,12 +94,34 @@ const ResumeTimeline = ({
     }
   }, [expandedStep, mounted]);
 
-  const handleStepClick = (key) => {
-    setExpandedStep((prev) => (prev === key ? null : key));
-    if (incompleteForms.includes(key)) {
-      dispatch(setCurrentIncompleteForm(key));
+  // Control opening of Tour after refs are populated and DOM is ready
+  useEffect(() => {
+    const hasParsed = parseStatus === PARSING_STATUS.SUCCESS;
+    if (tourDismissed || expandedStep !== null || !hasParsed) {
+      if (tourOpen) setTourOpen(false);
+      return;
     }
-  };
+    const firstKey = steps?.[0]?.key;
+    // wait a tick so ref callbacks run and DOM nodes are attached
+    const id = globalThis.requestAnimationFrame(() => {
+      const el = firstKey ? stepRefs.current[firstKey] : null;
+      setTourOpen(Boolean(el));
+    });
+    return () => globalThis.cancelAnimationFrame(id);
+  }, [steps, expandedStep, tourDismissed, parseStatus, tourOpen]);
+
+  const handleStepClick = useCallback(
+    (key) => {
+      // Dismiss the tour when user interacts with a step
+      if (!tourDismissed) setTourDismissed(true);
+
+      setExpandedStep((prev) => (prev === key ? null : key));
+      if (incompleteForms.includes(key)) {
+        dispatch(setCurrentIncompleteForm(key));
+      }
+    },
+    [dispatch, incompleteForms, tourDismissed]
+  );
 
   const handleFormCompletion = useCallback(
     (formType, skipNextStep = false) => {
@@ -148,7 +183,8 @@ const ResumeTimeline = ({
         program,
         reviewData,
         isReviewLoading,
-        onAiSuggestionClick
+        onAiSuggestionClick,
+        enableResumeParsing
       );
       setSteps(formSteps);
     }
@@ -160,10 +196,27 @@ const ResumeTimeline = ({
     reviewData,
     isReviewLoading,
     onAiSuggestionClick,
+    enableResumeParsing,
   ]);
-  console.log(steps);
+
   return (
     <div className={styles.container}>
+      <Tour
+        key={steps?.[0]?.key || 'tour'}
+        open={tourOpen}
+        onClose={() => setTourDismissed(true)}
+        steps={[
+          {
+            title: 'Data from your resume has been successfully added',
+            description:
+              'Open the section and click on save once you validate the data',
+            target: () => {
+              const firstKey = steps?.[0]?.key;
+              return firstKey ? stepRefs.current[firstKey] : null;
+            },
+          },
+        ]}
+      />
       <ResumeReviewOverallSummary
         reviewData={reviewData}
         isReviewLoading={isReviewLoading}

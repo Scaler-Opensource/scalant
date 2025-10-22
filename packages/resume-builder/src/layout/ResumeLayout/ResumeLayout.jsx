@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Layout, Typography, Flex, Button, Tooltip } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { setModal } from '../../store/modalsSlice';
-import { MODAL_NAMES } from '../../utils/constants';
+import {
+  MODAL_NAMES,
+  RESUME_BUILDER_STEPS,
+  FORM_KEYS,
+} from '../../utils/constants';
 import ResumeReviewModal from '../../components/ResumeReviewModal/ResumeReviewModal';
 
 const { Header, Content } = Layout;
@@ -23,7 +27,7 @@ const ResumeLayout = ({
   onReviewResumeClick,
 }) => {
   const dispatch = useDispatch();
-  const { currentStep } = useSelector(
+  const { currentStep, steps } = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder
   );
   const { isLoading: isReviewLoading } = useSelector(
@@ -38,6 +42,11 @@ const ResumeLayout = ({
     dispatch(setModal({ modalName: MODAL_NAMES.RESUME_REVIEW, isOpen: true }));
     onReviewResumeClick?.();
   }, [dispatch, onReviewResumeClick]);
+
+  const currentStepData = steps?.[currentStep] || {};
+  const isResumeSteps =
+    currentStepData?.key === RESUME_BUILDER_STEPS.RESUME_STEPS.key;
+  const totalSections = Object.keys(FORM_KEYS).length;
 
   const reviewTooltipTitle = useMemo(() => {
     if (incompleteForms.length > 0) {
@@ -80,15 +89,15 @@ const ResumeLayout = ({
                   transform: 'translate(-50%, -50%)',
                 }}
               >
-                {currentStep >= 2 && <Text>Resume Builder</Text>}
-                {currentStep === 4 && (
+                {isResumeSteps && <Text>Resume Builder</Text>}
+                {isResumeSteps && (
                   <Text>
-                    {6 - incompleteForms.length} of 6 sections completed
+                    {`${totalSections - incompleteForms.length} of ${totalSections} sections completed`}
                   </Text>
                 )}
               </Flex>
 
-              {currentStep === 4 && enableResumeReview && (
+              {isResumeSteps && enableResumeReview && (
                 <Tooltip title={reviewTooltipTitle}>
                   <Button
                     type="primary"

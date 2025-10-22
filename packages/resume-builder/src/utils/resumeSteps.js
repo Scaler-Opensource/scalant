@@ -264,11 +264,7 @@ const getRequiredFields = (formKey) => {
   }
 };
 
-const getFormStatus = (
-  formKey,
-  reviewData,
-  incompleteForms,
-) => {
+const getFormStatus = (formKey, reviewData, incompleteForms) => {
   if (incompleteForms.includes(formKey)) {
     return 'incomplete';
   } else {
@@ -283,16 +279,19 @@ const getReviewStatus = (formKey, reviewData, isReviewLoading) => {
     reviewData?.resume_evaluation_result?.section_scores?.[
       FORM_AI_FEEDBACK_SECTIONS[formKey]
     ];
-    if (isReviewLoading) {
-      return 'under_review';
-    } else if (overallScore && Object.keys(FORM_AI_FEEDBACK_SECTIONS).includes(formKey)) {
-      if (sectionScore > 2 || !sectionScore) {
-        return 'looks_good';
-      } else {
-        return 'needs_work';
-      }
+  if (isReviewLoading) {
+    return 'under_review';
+  } else if (
+    overallScore &&
+    Object.keys(FORM_AI_FEEDBACK_SECTIONS).includes(formKey)
+  ) {
+    if (sectionScore > 2 || !sectionScore) {
+      return 'looks_good';
+    } else {
+      return 'needs_work';
     }
-    return null;
+  }
+  return null;
 };
 
 export const getOverallSummary = (reviewData, isReviewLoading) => {
@@ -403,8 +402,9 @@ export const getFormSteps = (
   onComplete,
   program,
   reviewData,
-  isReviewLoading,  
-  onAiSuggestionClick
+  isReviewLoading,
+  onAiSuggestionClick,
+  enableResumeParsing
 ) => {
   if (!resumePersonaData) return [];
 
@@ -429,13 +429,19 @@ export const getFormSteps = (
       }
       return {
         ...step,
-        status: getFormStatus(key, reviewData, incompleteForms, isReviewLoading),
+        status: getFormStatus(
+          key,
+          reviewData,
+          incompleteForms,
+          isReviewLoading
+        ),
         reviewStatus: getReviewStatus(key, reviewData, isReviewLoading),
         required: isRequired,
         component: React.createElement(step.component, {
           onComplete,
           required: isRequired,
           onAiSuggestionClick,
+          enableResumeParsing,
         }),
       };
     })

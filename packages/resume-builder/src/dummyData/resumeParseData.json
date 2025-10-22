@@ -1,0 +1,97 @@
+{
+  "personal_details": {
+    "experience_months": 1,
+    "experience_years": 4
+  },
+  "skills": [
+    {
+      "id": null,
+      "topic": "Frontend Engineer",
+      "topic_id": 680,
+      "subtopic_id": 3096,
+      "subtopic": "Python",
+      "eligible_topic_id": null,
+      "eligible_class": "Topic",
+      "name": "Python",
+      "skill_id": 3096,
+      "skill_type": "SubTopic"
+    }
+  ],
+  "resume_details": {
+    "meta": {
+      "social_profiles": {}
+    }
+  },
+  "projects": [],
+  "achievements": [
+    {
+      "description": "Conducted comprehensive experiments, yielding critical insights that led to a 20% improvement in FID-score for IDiff-Face model."
+    },
+    {
+      "description": "Engineered a custom Chat-Bot powered by Langchain technology, streamlining user interactions and achieving a 200% increase in registration efficiency."
+    },
+    {
+      "description": "Spearheaded the development of an adaptive testing system using machine learning models, enhancing user engagement by 2x and reducing drop-off rates by 30%."
+    },
+    {
+      "description": "Developed a personalized recommendation system for adaptive learning platforms, boosting student engagement and learning outcomes by 20% through tailored content delivery."
+    },
+    {
+      "description": "Designed a predictive model with Random Forests to identify at-risk students, decreasing dropout rates by 25% through timely interventions and personalized support."
+    }
+  ],
+  "experience": [
+    {
+      "company": "Capgemini",
+      "location": "Bengaluru",
+      "from": "2024-01-01",
+      "position": "Deep Learning Engineer",
+      "short_description": "\\u2022 Working on the RAG framework using manufacturing industries documents in the Capgemini MES Copilot project, utilizing advanced tools such as Langchain, LangGraph, Neo4j knowledge graph database, and LLM models from OpenAI, Ollama, and Hugging Face.\n\\u2022 Fine-tuned the Llama3 model on a custom dataset to enhance performance and accuracy.\n\\u2022 Designed and implemented Retrieval-Augmented Generation (RAG) utilizing AWS Bedrock to enhance user interaction in MES copilot project.",
+      "is_current": true
+    },
+    {
+      "short_description": "\\u2022 Spearheaded the replication of advanced research papers using Python and Pytorch, including the DDPM (Denoising Diffusion Probabilistic Models), IDiff-Face (Synthetic-based Face Recognition), LDM(Latent Diffusion Models) and MIM-Refiners(Masked Image Modelling Refiners) papers, demonstrating a strong grasp of Generative Al in the Deep Learning field.\n\\u2022 Conducted comprehensive experiments, yielding critical insights that led to a 20% improvement in FID-score for IDiff-Face model.\n\\u2022 Documented methodologies, results, and challenges encountered during implementation, contributing to the development of internal best practices and knowledge repositories.\n\\u2022 Collaborated with senior researchers to align research with company objectives, ensuring practical integration.",
+      "is_current": false,
+      "company": "Capgemini (consultant at SONY India)",
+      "from": "2024-01-01",
+      "position": "Deep Learning Engineer",
+      "to": "2024-06-01",
+      "location": "Bengaluru"
+    },
+    {
+      "from": "2023-07-01",
+      "short_description": "\\u2022 Designed and implemented an advanced keystroke authentication model utilizing a deep learning Siamese network, while also developing a seamless API for efficient data collection with Flask.\n\\u2022 Engineered a custom Chat-Bot powered by Langchain technology, streamlining user interactions and achieving a 200% increase in registration efficiency.\n\\u2022 Deployed a state-of-the-art DeepSORT algorithm with YOLO for object detection and tracking, leveraging PyTorch to enhance accuracy and efficiency on a custom dataset.\n\\u2022 Created an innovative system using Langchain to automatically generate items/questions from provided documents/topics, streamlining content creation processes and enhancing productivity.",
+      "to": "2024-01-01",
+      "is_current": false,
+      "position": "AIML Engineer",
+      "company": "Examroom.AI",
+      "location": "Bengaluru"
+    },
+    {
+      "from": "2020-01-01",
+      "company": "toppr",
+      "short_description": "\\u2022 Spearheaded the development of an adaptive testing system using machine learning models, enhancing user engagement by 2x and reducing drop-off rates by 30%.\n\\u2022 Analyzed data from 150,000 monthly active users to derive insights for marketing strategies, leading to targeted content recommendations that improved user success rates.\n\\u2022 Developed a personalized recommendation system for adaptive learning platforms, boosting student engagement and learning outcomes by 20% through tailored content delivery.\n\\u2022 Designed a predictive model with Random Forests to identify at-risk students, decreasing dropout rates by 25% through timely interventions and personalized support.",
+      "is_current": false,
+      "position": "Mathematics Product Developer",
+      "to": "2022-07-01",
+      "location": "Pune"
+    },
+    {
+      "location": "Pune",
+      "company": "toppr",
+      "is_current": false,
+      "from": "2019-08-01",
+      "position": "Mathematics Product Developer (Intern)",
+      "short_description": "\\u2022 Acquired comprehensive training in classical machine learning methodologies, mastering techniques such as Linear Regression, Random Forest, XGBoost, Naive Bayes, clustering algorithms, and Collaborative Filtering.\n\\u2022 Engineered an adaptive learning system for mathematics practice tests during my internship, leveraging collaborative filtering to personalize learning experiences for over 20000 students.",
+      "to": "2019-12-01"
+    }
+  ],
+  "education": [
+    {
+      "university": "Pune University",
+      "degree": "BE/B.Tech/Bs",
+      "field": "other",
+      "graduation_date": "2018-01-01"
+    }
+  ]
+}

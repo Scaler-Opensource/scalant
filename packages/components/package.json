@@ -1,6 +1,6 @@
 {
   "name": "@scalant/components",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -20,5 +20,6 @@
     "lint:styles": "stylelint \"**/*.scss\"",
     "build": "vite build",
     "storybook": "start-storybook -p 6006"
-  }
+  },
+  "gitHead": "fb371eb8a611ff21b5085a95c3f8d1f60b20bbd6"
 }

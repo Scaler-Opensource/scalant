@@ -28,7 +28,12 @@ const initialFormData = {
   ],
 };
 
-const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
+const ProjectForm = ({
+  onComplete,
+  required = false,
+  onAiSuggestionClick,
+  enableResumeParsing,
+}) => {
   const dispatch = useDispatch();
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -61,18 +66,18 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
     () =>
       resumeData?.projects && resumeData?.projects.length > 0
         ? {
-          projectItems: resumeData.projects.map((item, index) => ({
-            id: item.id,
-            index: index,
-            completed: true,
-            expanded: false,
-            formData: {
-              title: item.title,
-              project_link: item.project_link,
-              description: item.description,
-            },
-          })),
-        }
+            projectItems: resumeData.projects.map((item, index) => ({
+              id: item.id,
+              index: index,
+              completed: true,
+              expanded: false,
+              formData: {
+                title: item.title,
+                project_link: item.project_link,
+                description: item.description,
+              },
+            })),
+          }
         : initialFormData,
     [resumeData?.projects]
   );
@@ -164,7 +169,9 @@ const ProjectForm = ({ onComplete, required = false, onAiSuggestionClick }) => {
 
   return (
     <Flex vertical gap={16}>
-      <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      {!enableResumeParsing && (
+        <AiSuggestionBanner onClick={onAiSuggestionClick} />
+      )}
       <SectionFeedback feedbackData={projectFeedback} />
       <Space direction="vertical" style={{ width: '100%' }}>
         <Flex vertical gap={16}>

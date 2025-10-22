@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import merge from 'deepmerge';
 import { STEPS_ORDER } from '../utils/constants';
+
+const replaceArrays = (_destinationArray, sourceArray) => sourceArray;
 
 const initialState = {
   isOnboarding: true,
   currentStep: 0,
   steps: STEPS_ORDER,
-  resumeData: null,
+  resumeData: {},
   program: null,
 };
 
@@ -19,6 +22,15 @@ const resumeBuilderSlice = createSlice({
     setCurrentStep: (state, action) => {
       state.currentStep = action.payload;
     },
+    setSteps: (state, action) => {
+      const nextSteps = Array.isArray(action.payload)
+        ? action.payload
+        : STEPS_ORDER;
+      state.steps = nextSteps;
+      if (state.currentStep > nextSteps.length - 1) {
+        state.currentStep = Math.max(0, nextSteps.length - 1);
+      }
+    },
     nextStep: (state) => {
       if (state.currentStep < state.steps.length - 1) {
         state.currentStep += 1;
@@ -30,7 +42,9 @@ const resumeBuilderSlice = createSlice({
       }
     },
     setResumeData: (state, action) => {
-      state.resumeData = action.payload;
+      state.resumeData = merge(state.resumeData, action.payload, {
+        arrayMerge: replaceArrays,
+      });
     },
     setProgram: (state, action) => {
       state.program = action.payload;
@@ -45,6 +59,7 @@ const resumeBuilderSlice = createSlice({
 export const {
   setOnboarding,
   setCurrentStep,
+  setSteps,
   nextStep,
   previousStep,
   setResumeData,

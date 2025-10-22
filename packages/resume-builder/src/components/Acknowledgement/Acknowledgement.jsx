@@ -25,8 +25,8 @@ const Acknowledgement = () => {
             dot: <div className={styles.timelineDot}> 1 </div>,
             children: (
               <div className={styles.timelineItem}>
-                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/268/original/Frame_1430102542_%281%29.png?1757925987"></img>
-                Build a resume that highlights you
+                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/278/original/Frame_1430102542_%282%29.png?1757927475"></img>
+                Tell us what you are aiming for - Job location & CTC
               </div>
             ),
           },
@@ -34,8 +34,8 @@ const Acknowledgement = () => {
             dot: <div className={styles.timelineDot}> 2 </div>,
             children: (
               <div className={styles.timelineItem}>
-                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/151/278/original/Frame_1430102542_%282%29.png?1757927475"></img>
-                Tell us what you are aiming for - Job location & CTC
+                <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/156/248/original/Frame_1430102542_%285%29.png?1759217079"></img>
+                Build or Upload a resume that highlights you
               </div>
             ),
           },

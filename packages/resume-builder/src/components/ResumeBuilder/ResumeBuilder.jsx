@@ -5,15 +5,20 @@ import {
   setResumeData,
   setProgram,
   resetSteps,
+  setSteps,
 } from '../../store/resumeBuilderSlice';
+import { resetParsing } from '../../store/resumeParsingSlice';
 import { setReviewData, setIsLoading } from '../../store/resumeReviewSlice';
 import { resetAllForms } from '../../store/formStoreSlice';
 import { getResumeProgram } from '../../utils/resumeUtils';
 import { LoadingOutlined } from '@ant-design/icons';
-
+import ResumeParsing from '../ResumeParsing';
 import {
   RESUME_BUILDER_STEPS,
   PREFERENCE_SETTINGS_IMAGE,
+  PARSING_STATUS,
+  STEPS_ORDER,
+  FORM_KEYS,
 } from '../../utils/constants';
 import {
   shouldShowOnboarding,
@@ -27,10 +32,33 @@ import ResumeBasicQuestions from '../ResumeBasicQuestions';
 import ResumeTips from '../ResumeTips';
 import ResumeSteps from '../ResumeSteps';
 import ResumePreview from '../ResumePreview';
-import IntroVideo from '../IntroVideo';
 import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
+
+const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
+
+const areCoreSectionsEmpty = (resumeData) => {
+  const education = resumeData?.[FORM_KEYS.education];
+  const experience = resumeData?.[FORM_KEYS.experience];
+  const projects = resumeData?.[FORM_KEYS.projects];
+  return (
+    isEmptyArray(education) &&
+    isEmptyArray(experience) &&
+    isEmptyArray(projects)
+  );
+};
+
+const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
+  const baseSteps = STEPS_ORDER;
+  const shouldShowParsing =
+    Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
+
+  if (shouldShowParsing) return baseSteps;
+  return baseSteps.filter(
+    (s) => s.key !== RESUME_BUILDER_STEPS.RESUME_PARSING.key
+  );
+};
 
 const ResumeBuilderContent = ({
   isOnboarding = true,
@@ -52,6 +80,12 @@ const ResumeBuilderContent = ({
   onResumeBuilderPageView,
   onFormCompletion,
   onAllFormsComplete,
+  onUploadFile,
+  onFileUploaded,
+  enableResumeParsing = false,
+  onRetry,
+  onContinue,
+  onSkip,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
@@ -59,6 +93,23 @@ const ResumeBuilderContent = ({
   );
   const visitedStepsRef = useRef(new Set());
   const initialStepSetRef = useRef(false);
+  const previousResumeIdRef = useRef();
+  const parsingStatus = useSelector(
+    (s) => s.scalantResumeBuilder?.resumeParsing?.status
+  );
+
+  // Reset parsing only when resumeId value changes between renders
+  useEffect(() => {
+    const resumeId = resumeData?.resume_details?.id;
+    if (resumeId === undefined) return;
+    if (
+      previousResumeIdRef.current !== undefined &&
+      previousResumeIdRef.current !== resumeId
+    ) {
+      dispatch(resetParsing());
+    }
+    previousResumeIdRef.current = resumeId;
+  }, [resumeData?.resume_details?.id, dispatch]);
 
   useEffect(() => {
     if (resumeData) {
@@ -79,14 +130,20 @@ const ResumeBuilderContent = ({
       }
 
       const shouldShow = isOnboarding ? shouldShowOnboarding(resumeId) : false;
+      const filteredSteps = computeStepsWithSkip(
+        enableResumeParsing,
+        resumeData
+      );
+      dispatch(setSteps(filteredSteps));
+
       if (!shouldShow) {
-        const resumeStepsIndex = steps.findIndex(
+        const resumeStepsIndex = filteredSteps.findIndex(
           (step) => step.key === RESUME_BUILDER_STEPS.RESUME_STEPS.key
         );
-        dispatch(setCurrentStep(resumeStepsIndex));
+        dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
     }
-  }, [resumeData, dispatch, steps, isOnboarding, courseProduct]);
+  }, [resumeData, dispatch, isOnboarding, courseProduct, enableResumeParsing]);
 
   useEffect(() => {
     const currentStepData = steps[currentStep];
@@ -147,17 +204,28 @@ const ResumeBuilderContent = ({
     switch (currentStepData.component) {
       case RESUME_BUILDER_STEPS.ACKNOWLEDGEMENT.component:
         return <Acknowledgement />;
-      case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
-        return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
         return <ResumeBasicQuestions />;
+      case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
+        return <PreferenceSettings />;
       case RESUME_BUILDER_STEPS.RESUME_TIPS.component:
         return <ResumeTips />;
+      case RESUME_BUILDER_STEPS.RESUME_PARSING.component:
+        return (
+          <ResumeParsing
+            onUploadFile={onUploadFile}
+            onFileUploaded={onFileUploaded}
+            onRetry={onRetry}
+            onContinue={onContinue}
+            onSkip={onSkip}
+          />
+        );
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
         return (
           <ResumeSteps
             onAiSuggestionClick={onAiSuggestionClick}
             onFormCompletion={onFormCompletion}
+            enableResumeParsing={enableResumeParsing}
             onAllFormsComplete={onAllFormsComplete}
           />
         );
@@ -177,6 +245,8 @@ const ResumeBuilderContent = ({
             alt="preference-settings"
           />
         );
+      case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
+        return <ResumeHighlightPreview />;
       case RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.component:
         return (
           <img
@@ -185,11 +255,26 @@ const ResumeBuilderContent = ({
             alt="preference-settings"
           />
         );
-      case RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.component:
-        return <ResumeHighlightPreview />;
       case RESUME_BUILDER_STEPS.RESUME_TIPS.component:
         return <SampleResumePreview />;
-
+      case RESUME_BUILDER_STEPS.RESUME_PARSING.component:
+        if (parsingStatus === PARSING_STATUS.SUCCESS) {
+          return (
+            <ResumePreview
+              resumeList={resumeList}
+              onResumeClick={onResumeClick}
+              onAddResumeClick={onAddResumeClick}
+              onManageResumesClick={onManageResumesClick}
+              onEditClick={onEditClick}
+              onDeleteClick={onDeleteClick}
+              onDownloadClick={onDownloadClick}
+              resumeTemplateConfig={resumeTemplateConfig}
+              showOnlyPdf={true}
+            />
+          );
+        } else {
+          return <ResumeHighlightPreview />;
+        }
       case RESUME_BUILDER_STEPS.RESUME_STEPS.component:
         return (
           <ResumePreview
@@ -250,6 +335,12 @@ const ResumeBuilder = ({
   onReviewResumeClick,
   onFormCompletion,
   onAllFormsComplete,
+  onUploadFile,
+  onFileUploaded,
+  enableResumeParsing = false,
+  onRetry,
+  onContinue,
+  onSkip,
 }) => {
   return (
     <ResumeBuilderContent
@@ -273,6 +364,12 @@ const ResumeBuilder = ({
       onResumeBuilderPageView={onResumeBuilderPageView}
       onFormCompletion={onFormCompletion}
       onAllFormsComplete={onAllFormsComplete}
+      onUploadFile={onUploadFile}
+      onFileUploaded={onFileUploaded}
+      enableResumeParsing={enableResumeParsing}
+      onRetry={onRetry}
+      onContinue={onContinue}
+      onSkip={onSkip}
     />
   );
 };

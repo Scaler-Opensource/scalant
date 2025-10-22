@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { STEPS_ORDER } from '../utils/constants';
 
 const initialState = {
   currentIncompleteForm: '',
   nextIncompleteForm: '',
-  allForms: STEPS_ORDER,
   incompleteForms: [],
   completed: false,
 };

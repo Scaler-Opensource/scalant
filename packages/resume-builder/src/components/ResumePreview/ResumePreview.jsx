@@ -31,6 +31,7 @@ const ResumePreview = ({
   onResumeClick,
   resumeTemplateConfig,
   onDownloadClick,
+  showOnlyPdf = false,
 }) => {
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -98,7 +99,7 @@ const ResumePreview = ({
         isError={isError}
         onDownloadClick={onDownloadClick}
       />
-      {!isLoading && !isFetching && !isError && (
+      {!isLoading && !isFetching && !isError && !showOnlyPdf && (
         <Flex vertical>
           <FloatButton.Group shape="square" className={styles.floatButtonGroup}>
             <ChangeTemplate resumeTemplateConfig={resumeTemplateConfig} />
