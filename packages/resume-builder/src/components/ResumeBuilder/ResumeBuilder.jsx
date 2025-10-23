@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, batch } from 'react-redux';
 import {
   setCurrentStep,
   setResumeData,
@@ -103,7 +103,7 @@ const ResumeBuilderContent = ({
   const handleUploadClick = useCallback(() => {
     // Call external onUploadClick if provided
     if (onUploadClick) {
-      onUploadClick?.();
+      onUploadClick();
       return;
     }
 
@@ -115,16 +115,20 @@ const ResumeBuilderContent = ({
     if (parsingStepIndex >= 0) {
       // Parsing step exists in current flow
       dispatch(setCurrentStep(parsingStepIndex));
-    } else {
-      // Parsing step not in current flow
-      const newSteps = [...steps, {
-        key: RESUME_BUILDER_STEPS.RESUME_PARSING.key,
-        component: RESUME_BUILDER_STEPS.RESUME_PARSING.component,
-        title: 'Upload Resume'
-      }];
-      dispatch(setSteps(newSteps));
-      dispatch(setCurrentStep(newSteps.length - 1));
-    }
+      } else {
+        // Parsing step not in current flow 
+        const newSteps = [...steps, {
+          key: RESUME_BUILDER_STEPS.RESUME_PARSING.key,
+          component: RESUME_BUILDER_STEPS.RESUME_PARSING.component,
+          title: 'Upload Resume'
+        }];
+        
+        // Batch both dispatches to avoid multiple re-renders
+        batch(() => {
+          dispatch(setSteps(newSteps));
+          dispatch(setCurrentStep(newSteps.length - 1));
+        });
+      }
   }, [dispatch, steps, onUploadClick]);
 
   // Reset parsing only when resumeId value changes between renders
