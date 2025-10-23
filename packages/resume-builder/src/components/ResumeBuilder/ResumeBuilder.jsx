@@ -103,19 +103,27 @@ const ResumeBuilderContent = ({
   const handleUploadClick = useCallback(() => {
     // Call external onUploadClick if provided
     if (onUploadClick) {
-      onUploadClick();
+      onUploadClick?.();
       return;
     }
 
-    // Otherwise, navigate to parsing step if it exists
+    // Navigate to parsing step
     const parsingStepIndex = steps.findIndex(
       (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
     );
     
     if (parsingStepIndex >= 0) {
+      // Parsing step exists in current flow
       dispatch(setCurrentStep(parsingStepIndex));
     } else {
-      console.warn('Resume parsing step not found in current steps configuration');
+      // Parsing step not in current flow
+      const newSteps = [...steps, {
+        key: RESUME_BUILDER_STEPS.RESUME_PARSING.key,
+        component: RESUME_BUILDER_STEPS.RESUME_PARSING.component,
+        title: 'Upload Resume'
+      }];
+      dispatch(setSteps(newSteps));
+      dispatch(setCurrentStep(newSteps.length - 1));
     }
   }, [dispatch, steps, onUploadClick]);
 
