@@ -103,7 +103,7 @@ const ResumeBuilderContent = ({
   const handleUploadClick = useCallback(() => {
     // Call external onUploadClick if provided
     if (onUploadClick) {
-      onUploadClick();
+      onUploadClick?.();
       return;
     }
 
