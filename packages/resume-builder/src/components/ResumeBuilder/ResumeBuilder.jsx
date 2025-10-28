@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCurrentStep,
@@ -86,6 +86,7 @@ const ResumeBuilderContent = ({
   onRetry,
   onContinue,
   onSkip,
+  onUploadClick,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
@@ -97,6 +98,11 @@ const ResumeBuilderContent = ({
   const parsingStatus = useSelector(
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
+
+  // Handle upload button click - delegate to host app
+  const handleUploadClick = useCallback(() => {
+    onUploadClick?.();
+  }, [onUploadClick]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {
@@ -285,6 +291,7 @@ const ResumeBuilderContent = ({
             onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
             onDownloadClick={onDownloadClick}
+            onUploadClick={handleUploadClick}
             resumeTemplateConfig={resumeTemplateConfig}
           />
         );
@@ -341,6 +348,7 @@ const ResumeBuilder = ({
   onRetry,
   onContinue,
   onSkip,
+  onUploadClick,
 }) => {
   return (
     <ResumeBuilderContent
@@ -370,6 +378,7 @@ const ResumeBuilder = ({
       onRetry={onRetry}
       onContinue={onContinue}
       onSkip={onSkip}
+      onUploadClick={onUploadClick}
     />
   );
 };
