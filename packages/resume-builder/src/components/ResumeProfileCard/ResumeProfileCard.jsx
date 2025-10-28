@@ -17,6 +17,7 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
   const fullName = resumeData?.personal_details?.name;
+  const jobTitleFromApi = resumeData?.personal_details?.job_title;
 
   const handleEditProfile = () => {
     dispatch(
@@ -28,10 +29,27 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
     );
   };
 
-  if (!resumePersonaData) {
+  if (!resumePersonaData && !resumeData?.personal_details) {
     return null;
   }
-  const { currentJobRole, totalWorkExperienceInTech } = resumePersonaData;
+
+  // Determine job title with API fallback
+  const jobTitle =
+    resumePersonaData?.currentJobRole || jobTitleFromApi || '';
+
+  // Determine experience in tech with API fallback (expects years/months)
+  const experienceInTechMonths = resumeData?.personal_details?.experience;
+  const experienceFromPersona = resumePersonaData?.totalWorkExperienceInTech;
+  const yearsExperienceInTech =
+    experienceFromPersona?.yearsExperienceInTech ??
+    (typeof experienceInTechMonths === 'number'
+      ? Math.floor(experienceInTechMonths / 12)
+      : 0);
+  const monthsExperienceInTech =
+    experienceFromPersona?.monthsExperienceInTech ??
+    (typeof experienceInTechMonths === 'number'
+      ? experienceInTechMonths % 12
+      : 0);
 
   return (
     <Card className={className}>
@@ -47,10 +65,10 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
               {fullName}
             </Title>
             <Text type="secondary">
-              {currentJobRole} |{' '}
+              {jobTitle} |{' '}
               {formatExperience(
-                totalWorkExperienceInTech.yearsExperienceInTech,
-                totalWorkExperienceInTech.monthsExperienceInTech
+                yearsExperienceInTech,
+                monthsExperienceInTech
               )}{' '}
               of Work experience
             </Text>
