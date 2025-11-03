@@ -57,11 +57,21 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
   useEffect(() => {
     // Initialize form with Redux state
     form.setFieldsValue(formData);
-    // Initialize current job role from form data
-    if (formData?.currentJobRole) {
-      setCurrentJobRole(formData.currentJobRole);
+
+    // Determine initial job role from form store or API data
+    const apiJobTitle = basicQuestionsData?.job_title;
+    const jobTitleExists = jobRoles.some((role) => role.value === apiJobTitle);
+    const initialJobRole =
+      formData?.currentJobRole || (jobTitleExists ? apiJobTitle : undefined);
+
+    if (initialJobRole && form.getFieldValue('currentJobRole') !== initialJobRole) {
+      form.setFieldsValue({ currentJobRole: initialJobRole });
     }
-  }, [form, formData]);
+
+    if (initialJobRole) {
+      setCurrentJobRole(initialJobRole);
+    }
+  }, [form, formData, basicQuestionsData, jobRoles]);
 
   const handleValuesChange = (changedValues, allValues) => {
     // Track current job role for disabling tech experience fields
