@@ -233,7 +233,18 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   const handleProfileChange = (index, field, value) => {
     setAdditionalProfiles((prev) =>
       prev.map((profile, idx) =>
-        idx === index ? { ...profile, [field]: value } : profile
+        idx === index
+          ? {
+              ...profile,
+              ...(field === 'type' && value === 'scaler'
+                ? {
+                    type: value,
+                    // Auto-populate Scaler profile URL from backend data when available
+                    url: resumeData?.personal_details?.scaler || profile.url,
+                  }
+                : { [field]: value }),
+            }
+          : profile
       )
     );
   };
@@ -276,6 +287,10 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
             <Input
               placeholder="Enter Profile URL"
               value={profile.url}
+              disabled={
+                profile.type === 'scaler' &&
+                Boolean(resumeData?.personal_details?.scaler)
+              }
               onChange={(e) => handleProfileChange(idx, 'url', e.target.value)}
             />
           </Form.Item>

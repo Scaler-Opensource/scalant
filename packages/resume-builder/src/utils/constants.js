@@ -55,6 +55,7 @@ export const ADDITIONAL_PROFILES = [
   { label: 'HackerRank', value: 'hackerrank' },
   { label: 'HackerEarth', value: 'hackerearth' },
   { label: 'Geeksforgeeks', value: 'geeksforgeeks' },
+  { label: 'Scaler Profile', value: 'scaler' },
 ];
 
 export const PROJECT_FORM_REQUIRED_FIELDS = [
