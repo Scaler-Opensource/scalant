@@ -232,7 +232,6 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
           <Form.Item
             name="marks"
             label="Marks (Final/Current)"
-            rules={[{ required }]}
             className={styles.midWidth}
           >
             <InputNumber placeholder="Enter Marks" addonAfter={selectAfter} />
