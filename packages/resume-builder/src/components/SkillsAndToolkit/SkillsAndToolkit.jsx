@@ -1,10 +1,10 @@
 import {
   Button,
+  Checkbox,
   Flex,
   Space,
   message,
   Modal,
-  Switch,
   Typography,
   Tooltip,
 } from 'antd';
@@ -111,8 +111,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
     setCategorizeSkills(view === 'view2');
   }, [resumeData]);
 
-  const handleCategorizeToggle = (checked) => {
-    setCategorizeSkills(checked);
+  const handleCategorizeToggle = (e) => {
+    setCategorizeSkills(e.target.checked);
   };
 
   const getUpdatedTemplateStructure = () => {
@@ -288,23 +288,16 @@ const SkillsAndToolkit = ({ onComplete }) => {
       <SectionFeedback feedbackData={skillsFeedback} />
       <SkillDemoVideoModal />
       <Flex align="center" gap={16}>
-        <Flex align="center" gap={8}>
-          <Text>Linear skills</Text>
-          <Tooltip title={SKILL_VIEW_TOOLTIPS.LINEAR}>
-            <InfoCircleOutlined
-              style={{ color: '#8c8c8c', cursor: 'pointer' }}
-            />
-          </Tooltip>
-        </Flex>
-        <Switch checked={categorizeSkills} onChange={handleCategorizeToggle} />
-        <Flex align="center" gap={8}>
-          <Text>Categorize skills</Text>
-          <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
-            <InfoCircleOutlined
-              style={{ color: '#8c8c8c', cursor: 'pointer' }}
-            />
-          </Tooltip>
-        </Flex>
+        <Checkbox checked={categorizeSkills} onChange={handleCategorizeToggle}>
+          <Text>
+            Group skills as <strong>Languages, Libraries, Tools.</strong>
+          </Text>
+        </Checkbox>
+        <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
+          <InfoCircleOutlined
+            style={{ color: '#8c8c8c', cursor: 'pointer' }}
+          />
+        </Tooltip>
       </Flex>
       {Object.values(SKILL_SECTIONS).map(renderSkillSection)}
       <Flex gap={16}>
