@@ -177,7 +177,8 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
                 },
                 { label: 'MS', value: 'MS' },
                 { label: 'MBA', value: 'MBA' },
-                { label: 'MCA/BCA', value: 'MCA/BCA' },
+                { label: 'MCA', value: 'MCA' },
+                { label: 'BCA', value: 'BCA' },
                 { label: 'BE + MBA', value: 'BE + MBA' },
                 { label: 'Other', value: 'Other' },
               ]}
