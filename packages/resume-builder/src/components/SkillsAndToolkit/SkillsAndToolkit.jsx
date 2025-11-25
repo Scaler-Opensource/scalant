@@ -85,6 +85,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
   const {
     resume_builder_skills: resumeBuilderSkills,
     skill_data: skillsData = [],
+    course_based_skills: metaCourseBasedSkills = [],
   } = useSelector((state) => state.scalantResumeBuilder.metaData.meta);
 
   const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
@@ -179,7 +180,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
   };
 
   const selectedSkills = formData?.selectedSkills || [];
-  const courseBasedSkills = resumeData?.course_based_skills || [];
+  const courseBasedSkills =
+    resumeData?.course_based_skills || metaCourseBasedSkills || [];
   const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
 
   const handleRemoveSkill = (skillId) => {
