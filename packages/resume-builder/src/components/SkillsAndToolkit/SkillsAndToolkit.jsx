@@ -179,8 +179,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
   };
 
   const selectedSkills = formData?.selectedSkills || [];
-  const courseBasedSkills =
-    resumeData?.personal_details?.course_based_skills || [];
+  const courseBasedSkills = resumeData?.course_based_skills || [];
   const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
 
   const handleRemoveSkill = (skillId) => {
