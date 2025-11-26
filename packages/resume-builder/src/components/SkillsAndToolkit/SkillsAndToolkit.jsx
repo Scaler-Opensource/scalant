@@ -203,9 +203,12 @@ const SkillsAndToolkit = ({ onComplete }) => {
     const skillFromData = skillsData.find(
       (s) => s.subtopic_id === skill.skill_id
     );
-    const skillToEdit = skillFromData || {
-      subtopic_id: skill.skill_id,
-      subtopic: skill.name,
+    const skillToEdit = {
+      ...(skillFromData || {
+        subtopic_id: skill.skill_id,
+        subtopic: skill.name,
+      }),
+      proficiency_period: skill.proficiency_period,
     };
     setPendingSkill(skillToEdit);
     setIsExperienceModalOpen(true);
