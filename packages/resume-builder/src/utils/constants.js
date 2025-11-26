@@ -58,6 +58,10 @@ export const ADDITIONAL_PROFILES = [
   { label: 'Scaler Profile', value: 'scaler' },
 ];
 
+export const PROFILE_TYPES = {
+  SCALER: 'scaler',
+};
+
 export const PROJECT_FORM_REQUIRED_FIELDS = [
   'title',
   'description',

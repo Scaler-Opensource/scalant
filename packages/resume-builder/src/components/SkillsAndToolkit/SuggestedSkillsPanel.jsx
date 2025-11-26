@@ -18,7 +18,9 @@ const SuggestedSkillsPanel = ({
     if (isSelected) {
       return; // Don't allow re-selection
     }
-    onSkillSelect?.(skill);
+    if (onSkillSelect) {
+      onSkillSelect(skill);
+    }
   };
 
   return (
@@ -36,10 +38,6 @@ const SuggestedSkillsPanel = ({
                 isSelected ? styles.selected : ''
               }`}
               onClick={() => handleSkillClick(skill)}
-              style={{
-                cursor: isSelected ? 'not-allowed' : 'pointer',
-                opacity: isSelected ? 0.6 : 1,
-              }}
             >
               {skill.subtopic}
             </Tag>

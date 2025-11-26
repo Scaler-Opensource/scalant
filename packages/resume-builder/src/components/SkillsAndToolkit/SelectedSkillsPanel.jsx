@@ -12,7 +12,9 @@ const SelectedSkillsPanel = ({ selectedSkills, onRemove, onEdit }) => {
   }
 
   const handleTagClick = (skill) => {
-    onEdit?.(skill);
+    if (onEdit) {
+      onEdit(skill);
+    }
   };
 
   const handleRemove = (e, skillId) => {

@@ -8,12 +8,28 @@ const ExperienceModal = ({ open, skill, onCancel, onSubmit }) => {
 
   useEffect(() => {
     if (open) {
+      const proficiency = skill?.proficiency_period;
+      if (
+        proficiency &&
+        typeof proficiency.years === 'number' &&
+        typeof proficiency.months === 'number'
+      ) {
+        form.setFieldsValue({
+          years: proficiency.years,
+          months: proficiency.months,
+        });
+      } else {
+        form.resetFields();
+      }
+    } else {
       form.resetFields();
     }
-  }, [open, form, skill?.subtopic_id]);
+  }, [open, form, skill?.subtopic_id, skill?.proficiency_period]);
 
   const handleFinish = (values) => {
-    onSubmit?.(values);
+    if (onSubmit) {
+      onSubmit(values);
+    }
   };
 
   return (
