@@ -1,7 +1,5 @@
-import React from 'react';
+// Named export
+export { HelloWorld } from './components';
 
-export const CareerHub = () => {
-  return <div>Hello World - Career Hub</div>;
-};
-
-export default CareerHub;
+// Default export
+export { default } from './components/HelloWorld';
