@@ -1,0 +1,25 @@
+{
+  "name": "job-application-form",
+  "version": "1.0.0",
+  "description": "Career Hub Job Application form Frontend components",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/job-application-form.umd.js",
+  "module": "dist/job-application-form.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "import": "./dist/job-application-form.es.js",
+    "require": "./dist/job-application-form.umd.js"
+  },
+  "style": "./dist/job-application-form.css",
+  "scripts": {
+    "lint": "eslint packages/**/src",
+    "lint:styles": "stylelint \"**/*.scss\"",
+    "build": "vite build",
+    "storybook": "start-storybook -p 6006"
+  }
+}
