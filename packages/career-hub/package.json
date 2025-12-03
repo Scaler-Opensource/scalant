@@ -19,11 +19,20 @@
   },
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "lint": "eslint src",
+    "lint:styles": "stylelint \"**/*.scss\"",
+    "storybook": "start-storybook -p 6007"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "@reduxjs/toolkit": "^1.9.3",
+    "react-redux": "^8.0.5",
+    "antd": "^5.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
