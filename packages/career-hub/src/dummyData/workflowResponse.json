@@ -1,0 +1,210 @@
+{
+  "workflowGroups": [
+    {
+      "label": "Finish these to Unlock Jobs",
+      "id": 1,
+      "status": "pending",
+      "steps": [
+        {
+          "label": "Linux Shell Scripting Expert Mock Interview",
+          "definitions": [
+            {
+              "key": "workflow_def_mbe_expert_mock_interview",
+              "title": "Interview Name",
+              "tag": "Mock Interview",
+              "id": 1,
+              "status": "pending",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Complete the test to get closer to unlocking job opportunities"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Practice risk free, get instant feedback, you have multiple attempts"
+                  }
+                ],
+                "learner_cleared_interview": 43
+              }
+            }
+          ],
+          "id": 1,
+          "order": 1,
+          "status": "pending"
+        },
+        {
+          "label": "Language (HLD 1) expert mock",
+          "definitions": [
+            {
+              "key": "workflow_def_mbe_expert_mock_interview",
+              "title": "Language Expert Mock",
+              "tag": "Mock Interview",
+              "id": 2,
+              "status": "pending",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Complete the test to get closer to unlocking job opportunities"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Practice risk free, get instant feedback, you have multiple attempts"
+                  }
+                ],
+                "learner_cleared_interview": 43
+              }
+            }
+          ],
+          "id": 2,
+          "order": 2,
+          "status": "pending"
+        },
+        {
+          "label": "Data Structures & Algorithms Skill Test",
+          "definitions": [
+            {
+              "key": "workflow_def_skill_test",
+              "title": "DSA Skill Assessment",
+              "tag": "Skill Test",
+              "id": 3,
+              "status": "pending",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "code",
+                    "text": "Test your coding skills with real-world problems"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Get detailed feedback on your problem-solving approach"
+                  }
+                ],
+                "learner_cleared_skill": 67
+              }
+            }
+          ],
+          "id": 3,
+          "order": 3,
+          "status": "pending"
+        },
+        {
+          "label": "Build your Resume",
+          "definitions": [],
+          "id": 3,
+          "order": 3,
+          "status": "complete"
+        },
+        {
+          "label": "Watch video to learn about certifications",
+          "definitions": [],
+          "id": 4,
+          "order": 4,
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "label": "Complete your resume",
+      "id": 2,
+      "status": "pending",
+      "steps": [
+        {
+          "label": "Resume Builder",
+          "definitions": [
+            {
+              "key": "workflow_def_resume_builder",
+              "title": "Create Your Resume",
+              "tag": "Resume",
+              "id": 5,
+              "status": "pending",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Build an ATS-friendly resume with our guided builder"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Get suggestions and improvements from industry experts"
+                  }
+                ]
+              }
+            }
+          ],
+          "id": 5,
+          "order": 1,
+          "status": "pending"
+        },
+        {
+          "label": "Resume Review",
+          "definitions": [],
+          "id": 6,
+          "order": 2,
+          "status": "pending"
+        },
+        {
+          "label": "Watch video to Know why a resume impacts Career's hub",
+          "definitions": [],
+          "id": 7,
+          "order": 3,
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "label": "Job Readiness Check",
+      "id": 3,
+      "status": "pending",
+      "steps": [
+        {
+          "label": "Take home assignment",
+          "definitions": [],
+          "id": 8,
+          "order": 1,
+          "status": "pending"
+        },
+        {
+          "label": "Resume interview",
+          "definitions": [],
+          "id": 9,
+          "order": 2,
+          "status": "pending"
+        },
+        {
+          "label": "Role-specific mock interviews",
+          "definitions": [],
+          "id": 10,
+          "order": 3,
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "source_persona": "Non-tech",
+    "target_persona": "Fullstack",
+    "completedAllSteps": false,
+    "eligibilityChecksFailedAgain": false,
+    "resume_completed": true,
+    "is_job_ineligible": false,
+    "v1OnboardingEnabled": true,
+    "v0OnboardingCompleted": false,
+    "showResumeOnboarding": true,
+    "applicationStage": 1,
+    "defaultResumeDetails": {
+      "id": 123,
+      "name": "Resume 01",
+      "meta": {
+        "interactions": {
+          "resumeApproved": false
+        }
+      }
+    },
+    "interactions": {
+      "relevancyAlertModalDisplayed": false
+    }
+  }
+}
+

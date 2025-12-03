@@ -1,0 +1,42 @@
+// Content Wrapper Styles
+// LLD: Styles for consistent content wrapper
+
+.contentWrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.headerSection {
+  margin-bottom: 32px;
+  text-align: left;
+  
+  .title {
+    margin-bottom: 8px !important;
+    text-align: left;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    display: block;
+    margin-top: 8px;
+    text-align: left;
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .contentWrapper {
+    padding: 16px;
+  }
+  
+  .headerSection {
+    margin-bottom: 24px;
+  }
+}
+

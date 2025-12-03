@@ -1,0 +1,187 @@
+{
+  "workflowGroups": [
+    {
+      "id": 1,
+      "label": "MBE blocker",
+      "status": "pending",
+      "steps": [
+        {
+          "id": 1,
+          "order": 1,
+          "status": "pending",
+          "label": "Linux Shell Scripting Expert Mock Interview",
+          "definitions": [
+            {
+              "id": 1,
+              "key": "workflow_def_mock_interview",
+              "status": "pending",
+              "title": "Interview Name",
+              "tag": "Mock Interview",
+              "response": {
+                "evaluationInitiated": false
+              },
+              "meta": {
+                "menteeModuleId": 123,
+                "skillId": 456,
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Complete the test to get closer to unlocking job opportunities"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Practice risk free, get instant feedback, you have multiple attempts"
+                  }
+                ],
+                "learner_cleared_interview": 43
+              }
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "status": "pending",
+          "label": "Language (HLD 1) expert mock",
+          "definitions": [
+            {
+              "id": 2,
+              "key": "workflow_def_mock_interview",
+              "status": "pending",
+              "title": "Language Expert Mock",
+              "tag": "Mock Interview",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Complete the test to get closer to unlocking job opportunities"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Practice risk free, get instant feedback, you have multiple attempts"
+                  }
+                ],
+                "learner_cleared_interview": 43
+              }
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "order": 3,
+          "status": "done",
+          "label": "Build your Resume",
+          "definitions": []
+        },
+        {
+          "id": 4,
+          "order": 4,
+          "status": "done",
+          "label": "Watch video to learn about certifications",
+          "definitions": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Projects",
+      "status": "pending",
+      "steps": [
+        {
+          "id": 5,
+          "order": 1,
+          "status": "pending",
+          "label": "Complete project assignment",
+          "definitions": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Resume requirements",
+      "status": "pending",
+      "steps": [
+        {
+          "id": 6,
+          "order": 1,
+          "status": "pending",
+          "label": "Resume Builder",
+          "definitions": [
+            {
+              "id": 6,
+              "key": "workflow_def_resume_builder",
+              "status": "pending",
+              "title": "Create Your Resume",
+              "tag": "Resume",
+              "meta": {
+                "points": [
+                  {
+                    "icon": "user",
+                    "text": "Build an ATS-friendly resume with our guided builder"
+                  },
+                  {
+                    "icon": "star",
+                    "text": "Get suggestions and improvements from industry experts"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "order": 2,
+          "status": "pending",
+          "label": "Resume Review",
+          "definitions": []
+        },
+        {
+          "id": 8,
+          "order": 3,
+          "status": "done",
+          "label": "Watch video to Know why a resume impacts Career's hub",
+          "definitions": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "label": "Resume approval",
+      "status": "pending",
+      "steps": [
+        {
+          "id": 9,
+          "order": 1,
+          "status": "pending",
+          "label": "Submit resume for approval",
+          "definitions": []
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "source_persona": "Non-tech",
+    "target_persona": "Fullstack",
+    "completedAllSteps": false,
+    "eligibilityChecksFailedAgain": false,
+    "resume_completed": false,
+    "is_job_ineligible": true,
+    "v1OnboardingEnabled": true,
+    "v0OnboardingCompleted": false,
+    "showResumeOnboarding": true,
+    "applicationStage": 1,
+    "defaultResumeDetails": {
+      "id": 123,
+      "name": "Resume 01",
+      "meta": {
+        "interactions": {
+          "resumeApproved": false
+        }
+      }
+    },
+    "interactions": {
+      "relevancyAlertModalDisplayed": false
+    }
+  }
+}
+

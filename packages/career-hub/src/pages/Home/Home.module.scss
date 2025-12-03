@@ -1,0 +1,25 @@
+// Home Page Styles
+// LLD: Styles for the Home/Checklist page
+
+.homePage {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.dropdownSection {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.progressSection {
+  margin-top: 32px;
+}
+
