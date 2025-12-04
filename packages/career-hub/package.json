@@ -25,7 +25,8 @@
     "storybook": "start-storybook -p 6007"
   },
   "dependencies": {
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "classnames": "^2.5.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",
