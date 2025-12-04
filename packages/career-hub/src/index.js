@@ -10,6 +10,9 @@ export {
   SaveButton
 } from './components';
 
+// Layouts
+export { JobsLayout } from './layouts';
+
 // Hooks
 export { useCreateApplication, useApplicationForm } from './hooks';
 export { useJobCardState } from './hooks/useJobCardState';
