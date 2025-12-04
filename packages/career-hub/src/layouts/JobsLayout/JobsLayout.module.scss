@@ -1,13 +1,24 @@
 // JobsLayout styles
-.jobsLayout {
+.content {
   width: 100%;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: $colors-neutral-color-white;
+  margin-right: 2rem;
 }
 
-.jobsLayoutContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
+.header {
+  background-color: $colors-neutral-color-bg-base;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+.sider {
+  background-color: $colors-neutral-color-bg-base;
+}
+
+.layout {
+  background-color: $colors-neutral-color-muted-white;
+  margin: 0 8rem;
+  margin-top: 3.2rem; 
+}

@@ -12,10 +12,10 @@ export default {
 export function Default() {
   return (
     <JobsLayout>
-      <div style={{ padding: '20px', background: 'white', borderRadius: '8px' }}>
+      
         <h2>Jobs Content</h2>
         <p>This is the default JobsLayout with sample content.</p>
-      </div>
+    
     </JobsLayout>
   );
 }

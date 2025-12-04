@@ -35,10 +35,7 @@ const JobCardHeader = ({ jobData, companiesList, currentTab }) => {
 
       {/* Right: Tag only */}
       <Col>
-        <JobCardActions
-          jobData={jobData}
-          currentTab={currentTab}
-        />
+        <JobCardActions jobData={jobData} currentTab={currentTab} />
       </Col>
     </Row>
   );
@@ -47,12 +44,12 @@ const JobCardHeader = ({ jobData, companiesList, currentTab }) => {
 JobCardHeader.propTypes = {
   jobData: PropTypes.object.isRequired,
   companiesList: PropTypes.object,
-  currentTab: PropTypes.string
+  currentTab: PropTypes.string,
 };
 
 JobCardHeader.defaultProps = {
   companiesList: {},
-  currentTab: 'all'
+  currentTab: 'all',
 };
 
 export default JobCardHeader;
