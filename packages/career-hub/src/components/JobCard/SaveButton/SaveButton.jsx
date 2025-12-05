@@ -20,7 +20,7 @@ const SaveButton = ({
   const isSaved = applicationStatus === 'Saved';
 
   const handleClick = async (e) => {
-    e.stopPropagation(); // Prevent card click event
+    e.stopPropagation();
     
     setLoading(true);
     try {
@@ -36,7 +36,7 @@ const SaveButton = ({
     return (
       <Button
         type="text"
-        icon={<SaveTwoTone twoToneColor="rgba(0, 0, 0, 0.45)" />}
+        icon={<SaveTwoTone className={styles.savedIcon} />}
         onClick={handleClick}
         disabled={disabled || loading}
         loading={loading}

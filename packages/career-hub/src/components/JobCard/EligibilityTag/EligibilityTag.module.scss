@@ -1,60 +1,54 @@
-// Base tag styles - override Ant Design defaults
-.tag {
+// Custom eligibility tag class - all base styles applied via this class
+.eligibilityTag {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 0.75rem !important;
+  font-size: 0.75rem;
   font-style: normal;
-  font-weight: 400 !important;
-  line-height: 1.25rem !important;
-  border-radius: 0.25rem !important;
+  font-weight: 400;
+  line-height: 1.25rem;
+  border-radius: 0.25rem;
   display: flex;
-  padding: 0.0625rem 0.5rem !important;
+  padding: 0.0625rem 0.5rem;
   align-items: center;
-  gap: 0.25rem !important;
-  
-  // Override Ant Design default styles
-  :global {
-    .ant-tag {
-      margin: 0;
-    }
-  }
+  gap: 0.25rem;
+  margin: 0;
 }
 
-// Quick Apply tag
+// Quick Apply tag variant
 .quickApply {
   color: $colors-base-green-8;
   border: 1px solid $colors-base-green-6;
   background: $colors-base-green-2;
 }
 
-// Eligible tag
+// Eligible tag variant
 .eligible {
   color: $colors-base-green-8;
   border: 1px solid $colors-base-green-6;
   background: $colors-base-green-2;
 }
 
-// Steps Pending tag
+// Steps Pending tag variant
 .stepsPending {
   color: $colors-base-geekblue-6;
   border: 1px solid $colors-base-geekblue-6;
   background: $colors-base-geekblue-1;
 }
 
-// Ineligible tag
+// Ineligible tag variant
 .ineligible {
   color: $colors-base-red-6;
   border: 1px solid $colors-base-red-4;
   background: $colors-base-red-2;
 }
 
-// Notice Period Mismatch tag (separate for modularity)
+// Notice Period Mismatch tag variant (separate for modularity)
 .noticePeriodMismatch {
   color: $colors-base-red-6;
   border: 1px solid $colors-base-red-4;
   background: $colors-base-red-2;
 }
 
-// Expired tag
+// Expired tag variant
 .expired {
   color: $colors-base-purple-7;
   border-color: $colors-base-purple-7;

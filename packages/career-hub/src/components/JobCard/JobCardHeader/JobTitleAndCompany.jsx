@@ -6,7 +6,6 @@ import styles from './JobCardHeader.module.scss';
 const { Title, Text } = Typography;
 
 /**
- * Job Title and Company Name component (consolidated)
  * Displays job title in blue and company name below it
  */
 const JobTitleAndCompany = ({ title, companyName }) => {

@@ -1,10 +1,8 @@
 .jobCard {
-  // Responsive cards - flexible width, adapts to container
-  // No fixed width - card adapts to parent container for responsive design
   width: 100%;
   max-width: 100%;
   height: auto;
-  margin-bottom: 1rem; // Matches Figma spacing (var(--Space-Margin-margin, 1rem))
+  margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -21,7 +19,7 @@
     box-shadow: none;
     
     & :global(.ant-card-body) {
-      padding: 1rem !important;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -44,10 +42,9 @@
     background: $colors-neutral-bg-color-bg-layout;
   }
 
-  // Card body wrapper - matches Figma padding
   & :global(.ant-card-body) {
-    padding: 1rem !important; // Matches Figma (var(--Space-Padding-padding, 1rem))
-    height: auto !important;
+    padding: 1rem;
+    height: auto;
   }
 }
 

@@ -35,4 +35,3 @@ JobCardBody.defaultProps = {
 };
 
 export default JobCardBody;
-

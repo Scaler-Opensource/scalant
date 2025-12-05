@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { determineJobTag } from '../../../utils/jobCard/eligibility';
+import { ELIGIBILITY_ICONS, ELIGIBILITY_TAG_TYPES } from '../../../utils/jobCard/constants';
 import styles from './EligibilityTag.module.scss';
 
 const ICON_MAP = {
@@ -34,19 +35,19 @@ const EligibilityTag = ({ jobData, currentTab }) => {
   
   // Get specific class name for each tag type
   const getTagClassName = () => {
-    const baseClass = styles.tag;
+    const baseClass = styles.eligibilityTag;
     switch (tagData.tag) {
-      case 'quick_apply':
+      case ELIGIBILITY_TAG_TYPES.QUICK_APPLY:
         return `${baseClass} ${styles.quickApply}`;
-      case 'eligible':
+      case ELIGIBILITY_TAG_TYPES.ELIGIBLE:
         return `${baseClass} ${styles.eligible}`;
-      case 'steps_to_apply':
+      case ELIGIBILITY_TAG_TYPES.STEPS_TO_APPLY:
         return `${baseClass} ${styles.stepsPending}`;
-      case 'ineligible':
+      case ELIGIBILITY_TAG_TYPES.INELIGIBLE:
         return `${baseClass} ${styles.ineligible}`;
-      case 'notice_period_mismatch':
+      case ELIGIBILITY_TAG_TYPES.NOTICE_PERIOD_MISMATCH:
         return `${baseClass} ${styles.noticePeriodMismatch}`;
-      case 'expired':
+      case ELIGIBILITY_TAG_TYPES.EXPIRED:
         return `${baseClass} ${styles.expired}`;
       default:
         return baseClass;
@@ -58,9 +59,13 @@ const EligibilityTag = ({ jobData, currentTab }) => {
     if (!IconComponent) return null;
     
     // For two-tone icons, apply color props
-    if (tagData.icon === 'CheckCircleTwoTone' || 
-        tagData.icon === 'UnlockTwoTone' || 
-        tagData.icon === 'RocketTwoTone') {
+    const TWO_TONE_ICONS = [
+      ELIGIBILITY_ICONS.CHECK_CIRCLE_TWO_TONE,
+      ELIGIBILITY_ICONS.UNLOCK_TWO_TONE,
+      ELIGIBILITY_ICONS.ROCKET_TWO_TONE
+    ];
+    
+    if (TWO_TONE_ICONS.includes(tagData.icon)) {
       return <IconComponent twoToneColor={tagData.color} />;
     }
     
@@ -68,7 +73,7 @@ const EligibilityTag = ({ jobData, currentTab }) => {
   };
 
   // Don't use Ant Design color prop for custom styled tags (only for expired)
-  const shouldUseAntdColor = tagData.tag === 'expired';
+  const shouldUseAntdColor = tagData.tag === ELIGIBILITY_TAG_TYPES.EXPIRED;
 
   return (
     <Tag
@@ -103,4 +108,3 @@ EligibilityTag.defaultProps = {
 };
 
 export default EligibilityTag;
-

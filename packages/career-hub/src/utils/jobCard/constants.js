@@ -85,3 +85,27 @@ export const TABS = {
   ARCHIVED: 'archived'
 };
 
+/**
+ * Icon name constants for eligibility tags
+ */
+export const ELIGIBILITY_ICONS = {
+  CHECK_CIRCLE_OUTLINED: 'CheckCircleOutlined',
+  CHECK_CIRCLE_TWO_TONE: 'CheckCircleTwoTone',
+  CLOSE_CIRCLE_OUTLINED: 'CloseCircleOutlined',
+  CLOCK_CIRCLE_OUTLINED: 'ClockCircleOutlined',
+  ROCKET_TWO_TONE: 'RocketTwoTone',
+  UNLOCK_TWO_TONE: 'UnlockTwoTone'
+};
+
+/**
+ * Eligibility tag type constants
+ */
+export const ELIGIBILITY_TAG_TYPES = {
+  QUICK_APPLY: 'quick_apply',
+  ELIGIBLE: 'eligible',
+  STEPS_TO_APPLY: 'steps_to_apply',
+  INELIGIBLE: 'ineligible',
+  NOTICE_PERIOD_MISMATCH: 'notice_period_mismatch',
+  EXPIRED: 'expired'
+};
+

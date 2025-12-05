@@ -5,10 +5,14 @@
   height: auto;
   
   &:hover {
-    background: rgba(0, 106, 255, 0.05);
+    background: rgba($colors-brand-primary-color-primary, 0.05);
   }
 }
 
 .savedButton {
-  color: #8c8c8c;
+  color: $colors-neutral-text-color-text-tertiary;
+}
+
+.savedIcon {
+  color: $colors-neutral-text-color-text-tertiary;
 }
