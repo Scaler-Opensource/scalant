@@ -1,7 +1,7 @@
 .body {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 0.0625rem solid #f0f0f0;
+  border-top: 0.0625rem solid $colors-neutral-border-color-border-secondary;
 }
 
 .detailsRowContainer {
@@ -21,7 +21,7 @@
 }
 
 .detailText {
-  color: #595959;
+  color: $colors-neutral-text-color-text-secondary;
   font-size: 1.2rem;
   line-height: 1.5;
 }

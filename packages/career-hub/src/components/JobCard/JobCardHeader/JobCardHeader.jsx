@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import CompanyLogo from './CompanyLogo';
 import JobTitleAndCompany from './JobTitleAndCompany';
@@ -12,35 +11,35 @@ import styles from './JobCardHeader.module.scss';
  */
 const JobCardHeader = ({ jobData, companiesList, currentTab }) => {
   return (
-    <Row gutter={[12, 8]} className={styles.header}>
+    <div className={styles.header}>
       {/* Left: Logo + Title & Company */}
-      <Col flex="auto">
-        <Row gutter={12} align="top" wrap={false}>
-          <Col>
+      <div className={styles.leftSection}>
+        <div className={styles.logoAndTitle}>
+          <div className={styles.logoWrapper}>
             <CompanyLogo
               logo={jobData.logo}
               company={jobData.company}
               companiesList={companiesList}
               companyName={jobData.name}
             />
-          </Col>
-          <Col flex="auto">
+          </div>
+          <div className={styles.titleWrapper}>
             <JobTitleAndCompany
               title={jobData.title}
               companyName={jobData.name}
             />
-          </Col>
-        </Row>
-      </Col>
+          </div>
+        </div>
+      </div>
 
       {/* Right: Tag only */}
-      <Col>
+      <div className={styles.actionsWrapper}>
         <JobCardActions
           jobData={jobData}
           currentTab={currentTab}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

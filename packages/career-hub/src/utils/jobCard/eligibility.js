@@ -1,11 +1,9 @@
 /**
  * Job Card Eligibility Tag Utilities
- * Reference: frontend/src/modules/job_tracker/utils/eligibility_tags.js
  */
 
 /**
  * Determines the eligibility tag to display for a job
- * Reference: frontend/src/modules/job_tracker/utils/eligibility_tags.js (lines 64-165)
  * 
  * @param {Object} jobData - Job data object
  * @param {Object} eligibilityCriteria - Eligibility criteria with reasons
@@ -27,7 +25,7 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
       text: 'Job Expired',
       icon: 'ClockCircleOutlined',
       color: '#5a2780',
-      antdColor: 'default' // Will be styled with custom color
+      antdColor: 'default'
     };
   }
 
@@ -46,9 +44,9 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
   if (experienceReason && !experienceReason.isEligible) {
     return {
       tag: 'ineligible',
-      text: 'Ineligible',
+      text: 'Not Eligible',
       icon: 'CloseCircleOutlined',
-      color: '#a42137',
+      color: '#E22D4C',
       antdColor: 'error'
     };
   }
@@ -62,7 +60,7 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
         tag: 'notice_period_mismatch',
         text: 'Notice Period Mismatch',
         icon: 'CloseCircleOutlined',
-        color: '#a42137',
+        color: '#E22D4C',
         antdColor: 'error'
       };
     }
@@ -78,8 +76,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
       return {
         tag: 'steps_to_apply',
         text: `${pendingSteps} ${pendingSteps === 1 ? 'step' : 'steps'} pending`,
-        icon: 'RocketOutlined',
-        color: '#20a164',
+        icon: 'RocketTwoTone',
+        color: '#2F54EB',
         antdColor: 'success',
         count: pendingSteps
       };
@@ -91,8 +89,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
     return {
       tag: 'quick_apply',
       text: 'Quick Apply',
-      icon: 'CheckCircleOutlined',
-      color: '#20a164',
+      icon: 'CheckCircleTwoTone',
+      color: '#1A8452',
       antdColor: 'success'
     };
   }
@@ -102,8 +100,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
     return {
       tag: 'eligible',
       text: 'Eligible',
-      icon: 'CheckCircleOutlined',
-      color: '#20a164',
+      icon: 'UnlockTwoTone',
+      color: '#1A8452',
       antdColor: 'success'
     };
   }
@@ -111,16 +109,15 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
   // Fallback: Ineligible
   return {
     tag: 'ineligible',
-    text: 'Ineligible',
+    text: 'Not Eligible',
     icon: 'CloseCircleOutlined',
-    color: '#a42137',
+    color: '#E22D4C',
     antdColor: 'error'
   };
 };
 
 /**
  * Count pending steps (mocks + contests + tech stacks)
- * Reference: frontend/src/modules/job_tracker/utils/eligibility_tags.js (lines 20-39)
  * 
  * @param {Object} skillsReason - Skills reason data
  * @param {Object} techStacksReason - Tech stacks reason data
@@ -155,7 +152,6 @@ export const countPendingSteps = (skillsReason, techStacksReason) => {
 
 /**
  * Check if all other requirements are met (excluding specific reason)
- * Reference: frontend/src/modules/job_tracker/utils/eligibility_tags.js (lines 47-56)
  * 
  * @param {Object} reasonsMap - Map of reasons
  * @param {string} excludeReason - Reason to exclude from check

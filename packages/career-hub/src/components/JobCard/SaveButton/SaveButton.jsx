@@ -36,12 +36,11 @@ const SaveButton = ({
     return (
       <Button
         type="text"
-        icon={<SaveTwoTone twoToneColor="#8c8c8c" />}
+        icon={<SaveTwoTone twoToneColor="rgba(0, 0, 0, 0.45)" />}
         onClick={handleClick}
         disabled={disabled || loading}
         loading={loading}
         className={styles.savedButton}
-        style={{ color: '#8c8c8c' }}
         size="small"
       >
         Saved on {formatDate(applicationLastUpdatedAt)}

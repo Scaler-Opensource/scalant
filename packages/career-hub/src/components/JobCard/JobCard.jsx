@@ -15,6 +15,7 @@ import styles from './JobCard.module.scss';
  * - Click handling
  * - Save functionality
  * - Multiple eligibility states
+ * - Expanded state
  */
 const JobCard = ({
   jobData,
@@ -24,13 +25,17 @@ const JobCard = ({
   onSave,
   companiesList,
   userCountry,
-  className
+  className,
+  expanded
 }) => {
   const { cardConfig, shouldShowBody, isExpired } = useJobCardState({
     currentTab,
     isActive,
     jobData
   });
+
+  // Expanded state: becomes true when card is active (or explicitly set)
+  const isExpanded = expanded !== undefined ? expanded : isActive;
 
   const handleClick = () => {
     if (onClick && !isExpired) {
@@ -104,7 +109,8 @@ JobCard.propTypes = {
   onSave: PropTypes.func.isRequired,
   companiesList: PropTypes.object,
   userCountry: PropTypes.oneOf(['IN', 'US']),
-  className: PropTypes.string
+  className: PropTypes.string,
+  expanded: PropTypes.bool
 };
 
 JobCard.defaultProps = {
@@ -113,7 +119,8 @@ JobCard.defaultProps = {
   onClick: null,
   companiesList: {},
   userCountry: 'IN',
-  className: ''
+  className: '',
+  expanded: undefined // When undefined, it will be derived from isActive
 };
 
 export default JobCard;

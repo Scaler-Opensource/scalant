@@ -26,10 +26,10 @@ DetailItem.propTypes = {
 
 /**
  * Job Details Row component (consolidated)
- * Shows: Location | Experience | CTC | Notice Period | Save Button (inline)
+ * Shows: Location | CTC | Experience | Notice Period | Save Button (inline)
  * 
  * Conditional rendering:
- * - When isActive: Hide Experience and Notice Period
+ * - When isActive: Hide last 2 items (Experience and Notice Period)
  * - When !isActive: Show all details
  */
 const JobDetailsRow = ({ jobData, isActive, cardConfig, userCountry, onSave }) => {
@@ -45,16 +45,8 @@ const JobDetailsRow = ({ jobData, isActive, cardConfig, userCountry, onSave }) =
     preferredNoticePeriod
   } = jobData;
 
-  // Location: Always show
-  const location = formatLocation(preferredCities);
-
-  // Experience: Hide when active
-  const experience = !isActive && cardConfig.isExperienceCtcAvailable
-    ? formatExperience(minExperience, maxExperience)
-    : null;
-
-  // CTC: Always show when config allows
-  const ctc = cardConfig.isExperienceCtcAvailable
+  const locationText = formatLocation(preferredCities);
+  const ctcText = cardConfig.isExperienceCtcAvailable
     ? formatCtc({
         minCtc,
         maxCtc,
@@ -64,18 +56,25 @@ const JobDetailsRow = ({ jobData, isActive, cardConfig, userCountry, onSave }) =
         userCountry
       })
     : null;
-
-  // Notice Period: Hide when active
-  const noticePeriod = !isActive && cardConfig.isNoticePeriodAvailable
+  const experienceText = cardConfig.isExperienceCtcAvailable
+    ? formatExperience(minExperience, maxExperience)
+    : null;
+  const noticePeriodText = cardConfig.isNoticePeriodAvailable
     ? formatNoticePeriod(preferredNoticePeriod)
     : null;
 
-  const details = [
-    location && { text: location },
-    experience && { text: experience },
-    ctc && { text: ctc },
-    noticePeriod && { text: noticePeriod }
+  // Build array of all available details in the correct order
+  const allDetails = [
+    locationText && { text: locationText },
+    ctcText && { text: ctcText },
+    experienceText && { text: experienceText },
+    noticePeriodText && { text: noticePeriodText }
   ].filter(Boolean);
+
+  // When active, hide last 2 items (Experience and Notice Period)
+  const details = isActive && allDetails.length > 2
+    ? allDetails.slice(0, -2)
+    : allDetails;
 
   return (
     <div className={styles.detailsRowContainer}>
