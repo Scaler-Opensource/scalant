@@ -1,4 +1,4 @@
-// Custom eligibility tag class - all base styles applied via this class
+// Custom eligibility tag class
 .eligibilityTag {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.75rem;
@@ -7,48 +7,48 @@
   line-height: 1.25rem;
   border-radius: 0.25rem;
   display: flex;
-  padding: 0.0625rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   align-items: center;
   gap: 0.25rem;
   margin: 0;
 }
 
-// Quick Apply tag variant
+// Quick Apply tag
 .quickApply {
   color: $colors-base-green-8;
   border: 1px solid $colors-base-green-6;
   background: $colors-base-green-2;
 }
 
-// Eligible tag variant
+// Eligible tag
 .eligible {
   color: $colors-base-green-8;
   border: 1px solid $colors-base-green-6;
   background: $colors-base-green-2;
 }
 
-// Steps Pending tag variant
+// Steps Pending tag
 .stepsPending {
   color: $colors-base-geekblue-6;
   border: 1px solid $colors-base-geekblue-6;
   background: $colors-base-geekblue-1;
 }
 
-// Ineligible tag variant
+// Ineligible tag
 .ineligible {
   color: $colors-base-red-6;
   border: 1px solid $colors-base-red-4;
   background: $colors-base-red-2;
 }
 
-// Notice Period Mismatch tag variant (separate for modularity)
+// Notice Period Mismatch tag variant
 .noticePeriodMismatch {
   color: $colors-base-red-6;
   border: 1px solid $colors-base-red-4;
   background: $colors-base-red-2;
 }
 
-// Expired tag variant
+// Expired tag
 .expired {
   color: $colors-base-purple-7;
   border-color: $colors-base-purple-7;
