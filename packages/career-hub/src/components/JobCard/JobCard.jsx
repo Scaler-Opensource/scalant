@@ -9,7 +9,7 @@ import styles from './JobCard.module.scss';
 
 /**
  * Job Card component (Main Container)
- * 
+ *
  * Features:
  * - Conditional rendering based on isActive
  * - Click handling
@@ -24,12 +24,12 @@ const JobCard = ({
   onSave,
   companiesList,
   userCountry,
-  className
+  className,
 }) => {
   const { cardConfig, shouldShowBody, isExpired } = useJobCardState({
     currentTab,
     isActive,
-    jobData
+    jobData,
   });
 
   const handleClick = () => {
@@ -46,7 +46,7 @@ const JobCard = ({
         {
           [styles.active]: isActive,
           [styles.expired]: isExpired,
-          [styles.archived]: jobData.applicationStatus === 'Archived'
+          [styles.archived]: jobData.applicationStatus === 'Archived',
         },
         className
       )}
@@ -95,8 +95,8 @@ JobCard.propTypes = {
     stipend: PropTypes.string,
     eligibilityCriteria: PropTypes.shape({
       isEligible: PropTypes.bool,
-      reasons: PropTypes.arrayOf(PropTypes.object)
-    })
+      reasons: PropTypes.arrayOf(PropTypes.object),
+    }),
   }).isRequired,
   isActive: PropTypes.bool,
   currentTab: PropTypes.string,
@@ -104,7 +104,7 @@ JobCard.propTypes = {
   onSave: PropTypes.func.isRequired,
   companiesList: PropTypes.object,
   userCountry: PropTypes.oneOf(['IN', 'US']),
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 JobCard.defaultProps = {
@@ -113,8 +113,7 @@ JobCard.defaultProps = {
   onClick: null,
   companiesList: {},
   userCountry: 'IN',
-  className: ''
+  className: '',
 };
 
 export default JobCard;
-

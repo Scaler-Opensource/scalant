@@ -1,0 +1,32 @@
+.tagsSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.1rem solid $colors-neutral-border-color-border-secondary;
+  background: $colors-neutral-bg-color-bg-layout;
+  padding: 0.1rem 0.8rem;
+  margin-right: 0;
+  cursor: pointer;
+
+  &:hover {
+    border: 0.1rem solid $colors-brand-primary-color-primary-border;
+  }
+}
+
+.activeTag {
+  background: $colors-base-blue-1;
+  border: 0.1rem solid $colors-brand-primary-color-primary-border;
+  font-weight: 600;
+  color: $colors-base-blue-6;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
