@@ -1,9 +1,20 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { Typography } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
 import JobCard from '../JobCard';
 import jobCardStates from '../../dummyData/jobCardStates.json';
+import styles from './JobsList.module.scss';
+
+const { Title } = Typography;
+
+const TAB_HEADINGS = {
+  relevant: 'Unlocked Jobs',
+  all: 'All Jobs',
+  saved: 'Saved Jobs',
+  applications: 'Applied Jobs',
+};
 
 function JobsList({ className, currentTab }) {
   const dispatch = useDispatch();
@@ -35,8 +46,13 @@ function JobsList({ className, currentTab }) {
     return Promise.resolve();
   };
 
+  const heading = TAB_HEADINGS[currentTab] || TAB_HEADINGS.all;
+
   return (
     <div className={className}>
+      <Title level={2} className={styles.heading}>
+        {heading}
+      </Title>
       {jobCards.map((jobData) => (
         <JobCard
           key={jobData.id}

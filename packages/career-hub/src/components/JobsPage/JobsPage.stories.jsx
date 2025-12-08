@@ -7,11 +7,6 @@ export default {
 };
 
 export function Default() {
-  return (
-    <JobsPage>
-      <h2>Jobs Content</h2>
-      <p>This is the default JobsPage with sample content.</p>
-    </JobsPage>
-  );
+  return <JobsPage />;
 }
 

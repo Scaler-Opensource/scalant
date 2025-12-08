@@ -32,3 +32,10 @@ export const JOB_FILTER_TAGS = {
     icon: CheckCircleOutlined,
   },
 };
+
+export const TAG_TO_TAB_MAPPING = {
+  relevant: 'relevant',
+  all: 'all',
+  saved: 'saved',
+  applied: 'applications',
+};
