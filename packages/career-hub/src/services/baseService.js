@@ -25,7 +25,7 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
 export const careerHubApi = createApi({
   reducerPath: 'careerHubApi',
   baseQuery: dynamicBaseQuery,
-  tagTypes: ['CareerHub'],
+  tagTypes: ['CareerHub', 'JobPreview'],
   endpoints: () => ({}),
 });
 
