@@ -1,0 +1,20 @@
+.expandedJobView {
+  width: 100%;
+  margin-bottom: 2rem;
+
+  // Ant Design Card overrides
+  & :global(.ant-card) {
+    border-radius: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.6rem;
+  }
+}
+
+.loadingCard {
+  & :global(.ant-spin) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20rem;
+  }
+}
