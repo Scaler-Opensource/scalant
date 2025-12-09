@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// eslint-disable-next-line no-undef
-let baseUrl = window.location.origin;
+let baseUrl = 'http://localhost:8000';
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
@@ -25,7 +24,7 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
 export const careerHubApi = createApi({
   reducerPath: 'careerHubApi',
   baseQuery: dynamicBaseQuery,
-  tagTypes: ['CareerHub'],
+  tagTypes: ['CareerHub', 'Jobs', 'PipelineJobs', 'RelevantJobs'],
   endpoints: () => ({}),
 });
 
@@ -36,4 +35,3 @@ export const setBaseUrl = (url) => {
 };
 
 export default careerHubApi;
-

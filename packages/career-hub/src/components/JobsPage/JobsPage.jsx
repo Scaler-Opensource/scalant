@@ -8,7 +8,7 @@ import RelevantJobsPage from '../RelevantJobsPage';
 import AllJobsPage from '../AllJobsPage';
 import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
-import { SIDER_WIDTH } from '../../utils/constants';
+import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
 function JobsPage() {
@@ -16,7 +16,7 @@ function JobsPage() {
     (state) => state.scalantCareerHub.layout.selectedJobId
   );
   const currentTab = useSelector(
-    (state) => state.scalantCareerHub?.filter?.tab || 'all'
+    (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
   );
 
   const header = <JobsHeader />;
@@ -31,13 +31,13 @@ function JobsPage() {
 
   const renderPageContent = () => {
     switch (currentTab) {
-      case 'relevant':
+      case TAG_TO_TAB_MAPPING.relevant:
         return <RelevantJobsPage />;
-      case 'saved':
+      case TAG_TO_TAB_MAPPING.saved:
         return <SavedJobsPage />;
-      case 'applications':
+      case TAG_TO_TAB_MAPPING.applied:
         return <AppliedJobsPage />;
-      case 'all':
+      case TAG_TO_TAB_MAPPING.all:
       default:
         return <AllJobsPage />;
     }
