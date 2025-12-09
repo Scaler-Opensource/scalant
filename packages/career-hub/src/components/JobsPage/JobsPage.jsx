@@ -1,0 +1,58 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import JobsLayout from '../../layouts/JobsLayout';
+import JobsHeader from '../JobsHeader';
+import ProfileDetails from '../ProfileDetails';
+import JobDetails from '../JobDetails';
+import RelevantJobsPage from '../RelevantJobsPage';
+import AllJobsPage from '../AllJobsPage';
+import SavedJobsPage from '../SavedJobsPage';
+import AppliedJobsPage from '../AppliedJobsPage';
+import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import styles from './JobsPage.module.scss';
+
+function JobsPage() {
+  const selectedJobId = useSelector(
+    (state) => state.scalantCareerHub.layout.selectedJobId
+  );
+  const currentTab = useSelector(
+    (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
+  );
+
+  const header = <JobsHeader />;
+  const sider = selectedJobId ? (
+    <JobDetails jobId={selectedJobId} />
+  ) : (
+    <ProfileDetails />
+  );
+  const siderWidth = selectedJobId
+    ? SIDER_WIDTH.JOB_DETAILS
+    : SIDER_WIDTH.PROFILE_DETAILS;
+
+  const renderPageContent = () => {
+    switch (currentTab) {
+      case TAG_TO_TAB_MAPPING.relevant:
+        return <RelevantJobsPage />;
+      case TAG_TO_TAB_MAPPING.saved:
+        return <SavedJobsPage />;
+      case TAG_TO_TAB_MAPPING.applied:
+        return <AppliedJobsPage />;
+      case TAG_TO_TAB_MAPPING.all:
+      default:
+        return <AllJobsPage />;
+    }
+  };
+
+  return (
+    <JobsLayout
+      header={header}
+      sider={sider}
+      siderWidth={siderWidth}
+      className={styles.jobsPage}
+    >
+      {renderPageContent()}
+    </JobsLayout>
+  );
+}
+
+export default JobsPage;

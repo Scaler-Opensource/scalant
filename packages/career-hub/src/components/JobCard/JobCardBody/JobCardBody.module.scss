@@ -1,0 +1,33 @@
+.body {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 0.0625rem solid #f0f0f0;
+}
+
+.detailsRowContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.detailsRow {
+  flex: 1;
+  font-size: 1rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.detailText {
+  color: #595959;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.saveButtonWrapper {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
