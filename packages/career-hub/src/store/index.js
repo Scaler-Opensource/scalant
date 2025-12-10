@@ -4,6 +4,7 @@ import layoutReducer from './layoutSlice';
 import filterReducer from './filterSlice';
 import jobPreviewReducer from './jobPreviewSlice';
 import dashboardReducer from './dashboardSlice';
+import filterFormReducer from './filterFormSlice';
 
 const rootReducer = combineReducers({
   [careerHubApi.reducerPath]: careerHubApi.reducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   filter: filterReducer,
   jobPreview: jobPreviewReducer,
   dashboard: dashboardReducer,
+  filterForm: filterFormReducer,
 });
 
 export default rootReducer;

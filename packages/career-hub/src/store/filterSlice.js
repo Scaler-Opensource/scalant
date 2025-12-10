@@ -48,6 +48,13 @@ const filterSlice = createSlice({
         tab: state.tab, // Keep current tab when resetting
       };
     },
+    updateFiltersFromForm: (state, action) => {
+      state.filters = {
+        ...state.filters,
+        ...action.payload,
+      };
+      state.page_number = 1;
+    },
   },
 });
 
@@ -59,6 +66,7 @@ export const {
   setSortings,
   setSkipExpiredJobs,
   resetFilters,
+  updateFiltersFromForm,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

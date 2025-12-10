@@ -8,6 +8,7 @@ import RelevantJobsPage from '../RelevantJobsPage';
 import AllJobsPage from '../AllJobsPage';
 import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
+import FilterDrawer from '../FilterDrawer';
 import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
@@ -44,14 +45,17 @@ function JobsPage() {
   };
 
   return (
-    <JobsLayout
-      header={header}
-      sider={sider}
-      siderWidth={siderWidth}
-      className={styles.jobsPage}
-    >
-      {renderPageContent()}
-    </JobsLayout>
+    <>
+      <JobsLayout
+        header={header}
+        sider={sider}
+        siderWidth={siderWidth}
+        className={styles.jobsPage}
+      >
+        {renderPageContent()}
+      </JobsLayout>
+      <FilterDrawer />
+    </>
   );
 }
 

@@ -9,6 +9,7 @@ const initialState = {
     saved: 0,
     archived: 0,
   },
+  filterModalOpen: false,
 };
 
 const dashboardSlice = createSlice({
@@ -18,9 +19,15 @@ const dashboardSlice = createSlice({
     setProcessCounts: (state, action) => {
       state.processCounts = action.payload;
     },
+    openFilterModal: (state) => {
+      state.filterModalOpen = true;
+    },
+    closeFilterModal: (state) => {
+      state.filterModalOpen = false;
+    },
   },
 });
 
-export const { setProcessCounts } = dashboardSlice.actions;
+export const { setProcessCounts, openFilterModal, closeFilterModal } =
+  dashboardSlice.actions;
 export default dashboardSlice.reducer;
-
