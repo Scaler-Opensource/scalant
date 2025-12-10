@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Spin, Alert } from 'antd';
+import { Typography, Spin, Alert, Space, Tag } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobCard from '../JobCard';
 import styles from './JobsList.module.scss';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const TAB_HEADINGS = {
   [TAG_TO_TAB_MAPPING.relevant]: 'Unlocked Jobs',
@@ -95,21 +95,29 @@ function JobsList({
 
   return (
     <div className={className}>
-      <Title level={2} className={styles.heading}>
-        {heading}
-      </Title>
-      {jobs.map((jobData) => (
-        <JobCard
-          key={jobData.id}
-          jobData={jobData}
-          isActive={selectedJobId === jobData.id}
-          currentTab={currentTab}
-          onClick={handleCardClick}
-          onSave={handleSave}
-          companiesList={companiesMap}
-          userCountry="IN"
-        />
-      ))}
+      <Space direction="vertical" className={styles.header}>
+        <Title level={4} className={styles.heading}>
+          {heading} <Tag color="green">28 Found</Tag>
+        </Title>
+        <Text>
+          Based on your profile, preferences, and activity like applies,
+          searches, and saves
+        </Text>
+      </Space>
+      <div className={styles.jobsListContainer}>
+        {jobs.map((jobData) => (
+          <JobCard
+            key={jobData.id}
+            jobData={jobData}
+            isActive={selectedJobId === jobData.id}
+            currentTab={currentTab}
+            onClick={handleCardClick}
+            onSave={handleSave}
+            companiesList={companiesMap}
+            userCountry="IN"
+          />
+        ))}
+      </div>
     </div>
   );
 }

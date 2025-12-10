@@ -6,7 +6,7 @@ import ExpandedJobView from '../ExpandedJobView/ExpandedJobView';
 
 /**
  * JobDetails - Component that displays expanded job view
- * 
+ *
  * ExpandedJobView uses RTK Query directly for data fetching.
  * This component just sets the active job ID in Redux for UI state tracking.
  */
@@ -26,11 +26,7 @@ function JobDetails({ jobId, className }) {
 
   return (
     <div className={className}>
-      <ExpandedJobView
-        jobId={jobId}
-        isActive={!!jobId}
-        currentTab="all"
-      />
+      <ExpandedJobView jobId={jobId} isActive={!!jobId} currentTab="all" />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { toCamelCaseObject } from '../utils/caseUtil';
 
 /**
  * Job Preview API Service
- * 
+ *
  * RTK Query endpoint with cache tags for automatic cache invalidation.
  * Components use useGetJobPreviewQuery hook directly.
  */

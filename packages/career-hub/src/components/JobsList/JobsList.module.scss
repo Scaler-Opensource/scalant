@@ -1,5 +1,8 @@
 .heading {
-  margin-bottom: 2.4rem;
+  margin-bottom: 0.8rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .spinner {
@@ -12,3 +15,7 @@
   margin: 1rem 0;
 }
 
+.header {
+  padding: 2rem;
+  gap: 0rem;
+}

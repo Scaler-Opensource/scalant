@@ -22,7 +22,6 @@ const jobsService = careerHubApi.injectEndpoints({
         };
       },
       providesTags: ['Jobs'],
-      keepUnusedDataFor: 60, // Cache for 60 seconds
     }),
     fetchPipelineJobs: builder.query({
       query: (params = {}) => ({
@@ -40,7 +39,6 @@ const jobsService = careerHubApi.injectEndpoints({
         };
       },
       providesTags: ['PipelineJobs'],
-      keepUnusedDataFor: 60, // Cache for 60 seconds
     }),
     fetchRelevantJobs: builder.query({
       query: (params = {}) => ({
@@ -58,7 +56,6 @@ const jobsService = careerHubApi.injectEndpoints({
         };
       },
       providesTags: ['RelevantJobs'],
-      keepUnusedDataFor: 60, // Cache for 60 seconds
     }),
   }),
 });

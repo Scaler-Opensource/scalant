@@ -26,26 +26,24 @@ const JobCard = ({
   userCountry,
   className,
 }) => {
-  const { cardConfig, shouldShowBody, isExpired } = useJobCardState({
+  const { cardConfig, shouldShowBody } = useJobCardState({
     currentTab,
     isActive,
     jobData,
   });
 
   const handleClick = () => {
-    if (onClick && !isExpired) {
+    if (onClick) {
       onClick(jobData.id);
     }
   };
 
   return (
     <Card
-      hoverable={!isActive && !isExpired}
       className={classnames(
         styles.jobCard,
         {
           [styles.active]: isActive,
-          [styles.expired]: isExpired,
           [styles.archived]: jobData.applicationStatus === 'Archived',
         },
         className

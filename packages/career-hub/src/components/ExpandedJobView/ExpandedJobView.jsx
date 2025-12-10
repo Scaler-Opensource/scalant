@@ -1,10 +1,14 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Spin, Alert } from 'antd';
 import PropTypes from 'prop-types';
 import { useGetJobPreviewQuery } from '../../services/jobPreviewApi';
 import { setActiveJob, setShouldScroll } from '../../store/jobPreviewSlice';
-import { selectActiveJobId, selectShouldScroll } from '../../store/jobPreviewSelectors';
+import {
+  selectActiveJobId,
+  selectShouldScroll,
+} from '../../store/jobPreviewSelectors';
 import ExpandedJobViewHeader from '../ExpandedJobViewHeader';
 import JobHighlights from '../JobHighlights';
 import ExpandedJobViewBody from '../ExpandedJobViewBody';
@@ -12,13 +16,13 @@ import styles from './ExpandedJobView.module.scss';
 
 /**
  * ExpandedJobView - Main container component for expanded job view
- * 
+ *
  * Features:
  * - Uses RTK Query directly for data fetching (useGetJobPreviewQuery)
  * - Manages tab state via Redux
  * - Handles scroll-to-table functionality
  * - Orchestrates layout: Header → Highlights → Body
- * 
+ *
  * Data Flow:
  * - Component calls useGetJobPreviewQuery(jobId)
  * - RTK Query handles caching, loading, error states
@@ -28,12 +32,12 @@ const ExpandedJobView = ({ jobId, isActive, onClose, currentTab }) => {
   const dispatch = useDispatch();
   const activeJobId = useSelector(selectActiveJobId);
   const shouldScroll = useSelector(selectShouldScroll);
-  
+
   // RTK Query hook - handles data fetching, caching, loading, error
   const { data, isLoading, error } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || !isActive,
   });
-  
+
   const scrollTargetRef = useRef(null);
 
   // Set active job when jobId changes
@@ -47,10 +51,14 @@ const ExpandedJobView = ({ jobId, isActive, onClose, currentTab }) => {
   useEffect(() => {
     if (shouldScroll) {
       setTimeout(() => {
-        const requirementsTab = document.querySelector('[data-tab-key="requirements"]');
-        const requirementsTable = document.querySelector('.expertSkillsTable, .techStackTable');
+        const requirementsTab = document.querySelector(
+          '[data-tab-key="requirements"]'
+        );
+        const requirementsTable = document.querySelector(
+          '.expertSkillsTable, .techStackTable'
+        );
         const scrollTarget = requirementsTable || requirementsTab;
-        
+
         if (scrollTarget) {
           scrollTarget.scrollIntoView({
             behavior: 'smooth',
@@ -85,7 +93,9 @@ const ExpandedJobView = ({ jobId, isActive, onClose, currentTab }) => {
         <Alert
           type="error"
           message="Failed to load job details"
-          description={error?.data?.message || error?.message || 'Please try again later'}
+          description={
+            error?.data?.message || error?.message || 'Please try again later'
+          }
           showIcon
         />
       </Card>
@@ -115,14 +125,14 @@ const ExpandedJobView = ({ jobId, isActive, onClose, currentTab }) => {
           console.log('Save action:', action, 'for job:', jobId);
         }}
       />
-      
+
       {hasHighlights && (
         <JobHighlights
           highlights={data.highlights}
           eligibilityCriteria={data.eligibilityCriteria}
         />
       )}
-      
+
       <ExpandedJobViewBody
         jobData={data.jobData}
         companyData={data.companyData}
