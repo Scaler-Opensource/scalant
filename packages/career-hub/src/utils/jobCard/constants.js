@@ -13,43 +13,43 @@ export const JOB_CARD_CONFIG = {
     isNoticePeriodAvailable: true,
     isAppliedDateAvailable: false,
     isArchivedStatusAvailable: false,
-    isApplicationStatusAvailable: false
+    isApplicationStatusAvailable: false,
   },
   all: {
     isExperienceCtcAvailable: true,
     isNoticePeriodAvailable: true,
     isAppliedDateAvailable: false,
     isArchivedStatusAvailable: false,
-    isApplicationStatusAvailable: false
+    isApplicationStatusAvailable: false,
   },
   eligible: {
     isExperienceCtcAvailable: true,
     isNoticePeriodAvailable: true,
     isAppliedDateAvailable: false,
     isArchivedStatusAvailable: false,
-    isApplicationStatusAvailable: false
+    isApplicationStatusAvailable: false,
   },
   saved: {
     isExperienceCtcAvailable: true,
     isNoticePeriodAvailable: true,
     isAppliedDateAvailable: false,
     isArchivedStatusAvailable: false,
-    isApplicationStatusAvailable: false
+    isApplicationStatusAvailable: false,
   },
   applications: {
     isExperienceCtcAvailable: false,
     isNoticePeriodAvailable: false,
     isAppliedDateAvailable: true,
     isArchivedStatusAvailable: false,
-    isApplicationStatusAvailable: true
+    isApplicationStatusAvailable: true,
   },
   archived: {
     isExperienceCtcAvailable: true,
     isNoticePeriodAvailable: true,
     isAppliedDateAvailable: false,
     isArchivedStatusAvailable: true,
-    isApplicationStatusAvailable: false
-  }
+    isApplicationStatusAvailable: false,
+  },
 };
 
 /**
@@ -61,7 +61,7 @@ export const APPLICATION_STATUS = {
   SAVED: 'Saved',
   APPLIED: 'Applied',
   IN_PIPELINE: 'In Pipeline',
-  ARCHIVED: 'Archived'
+  ARCHIVED: 'Archived',
 };
 
 /**
@@ -70,7 +70,7 @@ export const APPLICATION_STATUS = {
 export const JOB_PROFILE_STATUS = {
   ACTIVE: 'active',
   PAUSED: 'paused',
-  INACTIVE: 'inactive'
+  INACTIVE: 'inactive',
 };
 
 /**
@@ -82,6 +82,5 @@ export const TABS = {
   ELIGIBLE: 'eligible',
   SAVED: 'saved',
   APPLICATIONS: 'applications',
-  ARCHIVED: 'archived'
+  ARCHIVED: 'archived',
 };
-

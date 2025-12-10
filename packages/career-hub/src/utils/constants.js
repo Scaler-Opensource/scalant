@@ -46,3 +46,26 @@ export const COUNT_TO_TAB_MAPPING = {
   saved: 'saved',
   applied: 'applications',
 };
+
+export const SORTING_OPTIONS = {
+  eligibility: {
+    label: 'Eligibility',
+    value: 'eligibility',
+    mapping: { property: 'eligibility', direction: 'DESC' },
+  },
+  popularity: {
+    label: 'Popularity',
+    value: 'popularity',
+    mapping: { property: 'popularity', direction: 'DESC' },
+  },
+  leastApplied: {
+    label: 'Least Applied',
+    value: 'leastApplied',
+    mapping: { property: 'popularity', direction: 'ASC' },
+  },
+  mostRecent: {
+    label: 'Most Recent',
+    value: 'mostRecent',
+    mapping: { property: 'date_posted_on', direction: 'DESC' },
+  },
+};
