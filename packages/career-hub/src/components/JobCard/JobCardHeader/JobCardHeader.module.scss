@@ -1,23 +1,32 @@
 .header {
   width: 100%;
+  flex-wrap: nowrap;
 }
 
 .jobTitle {
   color: #006AFF !important;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 1.5;
   margin-bottom: 0 !important;
 }
 
+.titleContainer {
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+.titleContainerExpanded {
+  max-width: 50rem;
+}
+
+.titleContainerCollapsed {
+  max-width: 25rem;
+}
+
 .companyName {
   font-size: 1.1rem;
   color: rgba(0, 0, 0, 0.45);
-}
-
-.titleContainer {
-  width: 100%;
 }
 
 .actions {

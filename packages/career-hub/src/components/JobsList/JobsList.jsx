@@ -121,7 +121,7 @@ function JobsList({
           searches, and saves
         </Text>
       </Space>
-      <div className={styles.jobsListContainer}>
+      <div>
         {jobs.map((jobData) => (
           <JobCard
             key={jobData.id}
@@ -132,6 +132,7 @@ function JobsList({
             onSave={handleSave}
             companiesList={companiesMap}
             userCountry="IN"
+            selectedJobId={selectedJobId}
           />
         ))}
         {/* Sentinel element for infinite scroll */}

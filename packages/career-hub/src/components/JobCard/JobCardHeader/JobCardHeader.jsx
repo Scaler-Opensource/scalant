@@ -6,14 +6,9 @@ import JobTitleAndCompany from './JobTitleAndCompany';
 import JobCardActions from './JobCardActions';
 import styles from './JobCardHeader.module.scss';
 
-/**
- * Job Card Header component
- * Layout: Logo + Title/Company (left) | Tag + Save Button (right)
- */
-const JobCardHeader = ({ jobData, companiesList, currentTab }) => {
+const JobCardHeader = ({ jobData, companiesList, currentTab, isExpanded }) => {
   return (
     <Row gutter={[12, 8]} className={styles.header}>
-      {/* Left: Logo + Title & Company */}
       <Col flex="auto">
         <Row gutter={12} align="top" wrap={false}>
           <Col>
@@ -28,11 +23,11 @@ const JobCardHeader = ({ jobData, companiesList, currentTab }) => {
             <JobTitleAndCompany
               title={jobData.title}
               companyName={jobData.name}
+              isExpanded={isExpanded}
             />
           </Col>
         </Row>
       </Col>
-
       {/* Right: Tag only */}
       <Col>
         <JobCardActions jobData={jobData} currentTab={currentTab} />
@@ -45,11 +40,13 @@ JobCardHeader.propTypes = {
   jobData: PropTypes.object.isRequired,
   companiesList: PropTypes.object,
   currentTab: PropTypes.string,
+  isExpanded: PropTypes.bool,
 };
 
 JobCardHeader.defaultProps = {
   companiesList: {},
   currentTab: 'all',
+  isExpanded: false,
 };
 
 export default JobCardHeader;

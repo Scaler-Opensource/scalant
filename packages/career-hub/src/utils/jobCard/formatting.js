@@ -1,6 +1,6 @@
 /**
  * Job Card Formatting Utilities
- * References: 
+ * References:
  * - frontend/src/modules/job_tracker/utils/job.js
  * - frontend/src/modules/job_tracker/components/jobList/components/CtcInfo.js
  */
@@ -8,7 +8,7 @@
 /**
  * Format experience text
  * Reference: frontend/src/modules/job_tracker/utils/job.js (lines 28-42)
- * 
+ *
  * @param {number} minExperience - Minimum experience in months
  * @param {number} maxExperience - Maximum experience in months
  * @returns {string} Formatted experience text
@@ -39,7 +39,7 @@ export const formatExperience = (minExperience, maxExperience) => {
 /**
  * Format CTC text
  * Reference: frontend/src/modules/job_tracker/components/jobList/components/CtcInfo.js
- * 
+ *
  * @param {Object} params - CTC parameters
  * @returns {string} Formatted CTC text
  */
@@ -49,7 +49,7 @@ export const formatCtc = ({
   openForDiscussionCtc,
   isInternship,
   stipend,
-  userCountry = 'IN'
+  userCountry = 'IN',
 }) => {
   // Internship case
   if (isInternship) {
@@ -62,6 +62,16 @@ export const formatCtc = ({
   // CTC case
   const currencySymbol = userCountry === 'US' ? '$' : '₹';
   const unit = userCountry === 'US' ? 'K' : 'L';
+
+  // Check if min or max CTC is not available
+  if (
+    minCtc === null ||
+    maxCtc === null ||
+    minCtc === undefined ||
+    maxCtc === undefined
+  ) {
+    return `${currencySymbol} (Flexible)`;
+  }
 
   if (openForDiscussionCtc) {
     return `${currencySymbol}${minCtc}${unit}+ (Negotiable)`;
@@ -77,7 +87,7 @@ export const formatCtc = ({
 /**
  * Format notice period text
  * Reference: frontend/src/modules/job_tracker/utils/job.js (lines 52-56)
- * 
+ *
  * @param {number} days - Notice period in days
  * @returns {string} Formatted notice period text
  */
@@ -92,17 +102,17 @@ export const formatNoticePeriod = (days) => {
 /**
  * Format date to DD/MM/YYYY
  * Reference: Used by SaveButton for "Saved on" text
- * 
+ *
  * @param {string} dateString - ISO date string
  * @returns {string} Formatted date string
  */
 export const formatDate = (dateString) => {
   if (!dateString) return '';
-  
+
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
-  
+
   return `${day}/${month}/${year}`;
 };

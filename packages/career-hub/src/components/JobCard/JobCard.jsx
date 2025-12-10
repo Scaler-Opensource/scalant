@@ -25,6 +25,7 @@ const JobCard = ({
   companiesList,
   userCountry,
   className,
+  selectedJobId,
 }) => {
   const { cardConfig, shouldShowBody } = useJobCardState({
     currentTab,
@@ -55,14 +56,15 @@ const JobCard = ({
           jobData={jobData}
           companiesList={companiesList}
           currentTab={currentTab}
+          isExpanded={!selectedJobId}
         />
         {shouldShowBody && (
           <JobCardBody
             jobData={jobData}
-            isActive={isActive}
             cardConfig={cardConfig}
             userCountry={userCountry}
             onSave={onSave}
+            selectedJobId={selectedJobId}
           />
         )}
       </div>
@@ -103,6 +105,7 @@ JobCard.propTypes = {
   companiesList: PropTypes.object,
   userCountry: PropTypes.oneOf(['IN', 'US']),
   className: PropTypes.string,
+  selectedJobId: PropTypes.number,
 };
 
 JobCard.defaultProps = {
