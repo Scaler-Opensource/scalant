@@ -25,3 +25,38 @@ export const getCurrentSortingValue = (sortings = []) => {
 
   return 'eligibility'; // Default fallback
 };
+
+/**
+ * Accumulates jobs across multiple pages, avoiding duplicates
+ * Merges new jobs with existing accumulated jobs based on job IDs
+ *
+ * @param {Array} accumulatedJobs - Previously accumulated jobs
+ * @param {Array} newJobs - New jobs to add to the accumulated list
+ * @returns {Array} Combined array of jobs without duplicates
+ */
+export const accumulateJobs = (accumulatedJobs = [], newJobs = []) => {
+  if (!newJobs || newJobs.length === 0) {
+    return accumulatedJobs;
+  }
+
+  // Avoid duplicates by checking job IDs
+  const existingIds = new Set(accumulatedJobs.map((job) => job.id));
+  const uniqueNewJobs = newJobs.filter((job) => !existingIds.has(job.id));
+
+  return [...accumulatedJobs, ...uniqueNewJobs];
+};
+
+/**
+ * Accumulates companies map across multiple pages
+ * Merges new companies map with existing accumulated map
+ *
+ * @param {Object} accumulatedMap - Previously accumulated companies map
+ * @param {Object} newMap - New companies map to merge
+ * @returns {Object} Combined companies map
+ */
+export const accumulateCompaniesMap = (accumulatedMap = {}, newMap = {}) => {
+  return {
+    ...accumulatedMap,
+    ...newMap,
+  };
+};

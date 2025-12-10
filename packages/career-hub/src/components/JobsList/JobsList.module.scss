@@ -19,3 +19,19 @@
   padding: 2rem;
   gap: 0rem;
 }
+
+.sentinel {
+  min-height: 20px;
+  height: 20px;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.loadingMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: #666;
+}

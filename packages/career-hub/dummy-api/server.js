@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { manipulateJobData } = require('./utils/dataManipulator');
 const app = express();
 
 // Basic CORS middleware
@@ -35,19 +36,25 @@ const readJsonFile = (filename) => {
 // POST /job-tracker/fetch-all-jobs/
 app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
   const data = readJsonFile('fetch-all-jobs.json');
-  res.status(200).json(data);
+  const pageNumber = req.body?.page_number || 1;
+  const manipulatedData = manipulateJobData(data, pageNumber);
+  res.status(200).json(manipulatedData);
 });
 
 // POST /job-tracker/fetch-pipeline-jobs/
 app.post('/job-tracker/fetch-pipeline-jobs/', (req, res) => {
   const data = readJsonFile('fetch-pipeline-jobs.json');
-  res.status(200).json(data);
+  const pageNumber = req.body?.page_number || 1;
+  const manipulatedData = manipulateJobData(data, pageNumber);
+  res.status(200).json(manipulatedData);
 });
 
 // POST /job-tracker/relevancy/
 app.post('/job-tracker/relevancy/', (req, res) => {
   const data = readJsonFile('relevancy.json');
-  res.status(200).json(data);
+  const pageNumber = req.body?.page_number || 1;
+  const manipulatedData = manipulateJobData(data, pageNumber);
+  res.status(200).json(manipulatedData);
 });
 
 // GET /job-tracker/fetch-process-counts/

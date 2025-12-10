@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Spin, Alert, Space, Tag } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
+import { useInfiniteScroll } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobCard from '../JobCard';
 import styles from './JobsList.module.scss';
@@ -23,6 +24,8 @@ function JobsList({
   companiesMap = {},
   isLoading = false,
   error = null,
+  isFetchingMore = false,
+  hasMore = true,
 }) {
   const dispatch = useDispatch();
   const selectedJobId = useSelector(
@@ -31,6 +34,13 @@ function JobsList({
   const processCounts = useSelector(
     (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
   );
+  const calculatedHasMore = hasMore !== undefined ? hasMore : true;
+
+  const { sentinelRef } = useInfiniteScroll({
+    hasMore: calculatedHasMore,
+    isLoading,
+    isFetchingMore,
+  });
 
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
@@ -124,6 +134,17 @@ function JobsList({
             userCountry="IN"
           />
         ))}
+        {/* Sentinel element for infinite scroll */}
+        {calculatedHasMore && (
+          <div ref={sentinelRef} className={styles.sentinel}>
+            {isFetchingMore && (
+              <div className={styles.loadingMore}>
+                <Spin size="small" />
+                <span>Loading more jobs...</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -136,6 +157,8 @@ JobsList.propTypes = {
   companiesMap: PropTypes.object,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
+  isFetchingMore: PropTypes.bool,
+  hasMore: PropTypes.bool,
 };
 
 JobsList.defaultProps = {
@@ -145,6 +168,8 @@ JobsList.defaultProps = {
   companiesMap: {},
   isLoading: false,
   error: null,
+  isFetchingMore: false,
+  hasMore: true,
 };
 
 export default JobsList;
