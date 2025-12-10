@@ -9,6 +9,9 @@ export { default as JobCard } from './JobCard';
 export { default as EligibilityTag } from './JobCard/EligibilityTag';
 export { default as SaveButton } from './JobCard/SaveButton';
 
+// Expanded Job View Components
+export { default as ExpandedJobView } from './ExpandedJobView';
+
 // Page Components
 export { default as JobsPage } from './JobsPage';
 export { default as JobsHeader } from './JobsHeader';
