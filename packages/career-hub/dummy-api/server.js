@@ -32,21 +32,27 @@ const readJsonFile = (filename) => {
   return JSON.parse(fileContent);
 };
 
-// GET /job-tracker/fetch-all-jobs/
-app.get('/job-tracker/fetch-all-jobs/', (req, res) => {
+// POST /job-tracker/fetch-all-jobs/
+app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
   const data = readJsonFile('fetch-all-jobs.json');
   res.status(200).json(data);
 });
 
-// GET /job-tracker/fetch-pipeline-jobs/
-app.get('/job-tracker/fetch-pipeline-jobs/', (req, res) => {
+// POST /job-tracker/fetch-pipeline-jobs/
+app.post('/job-tracker/fetch-pipeline-jobs/', (req, res) => {
   const data = readJsonFile('fetch-pipeline-jobs.json');
   res.status(200).json(data);
 });
 
-// GET /job-tracker/relevancy/
-app.get('/job-tracker/relevancy/', (req, res) => {
+// POST /job-tracker/relevancy/
+app.post('/job-tracker/relevancy/', (req, res) => {
   const data = readJsonFile('relevancy.json');
+  res.status(200).json(data);
+});
+
+// GET /job-tracker/fetch-process-counts/
+app.get('/job-tracker/fetch-process-counts/', (req, res) => {
+  const data = readJsonFile('fetch-process-counts.json');
   res.status(200).json(data);
 });
 

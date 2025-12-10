@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tag } from 'antd';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTab } from '../../store/filterSlice';
-import { JOB_FILTER_TAGS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import { setProcessCounts } from '../../store/dashboardSlice';
+import { useFetchProcessCountsQuery } from '../../services/dashboardService';
+import {
+  JOB_FILTER_TAGS,
+  TAG_TO_TAB_MAPPING,
+  COUNT_TO_TAB_MAPPING,
+} from '../../utils/constants';
 
 import styles from './TagsSection.module.scss';
-
-const DUMMY_COUNTS = {
-  relevant: 10,
-  all: 100,
-  saved: 10,
-  applied: 10,
-};
 
 function TagsSection() {
   const dispatch = useDispatch();
   const currentTab = useSelector(
     (state) => state.scalantCareerHub?.filter?.tab || 'all'
   );
+  const processCounts = useSelector(
+    (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
+  );
+
+  const { data: countsData } = useFetchProcessCountsQuery();
+
+  useEffect(() => {
+    if (countsData) {
+      dispatch(setProcessCounts(countsData));
+    }
+  }, [countsData, dispatch]);
 
   const handleTagClick = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
@@ -30,6 +40,11 @@ function TagsSection() {
   const isTagActive = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
     return currentTab === tabValue;
+  };
+
+  const getCountForTag = (tag) => {
+    const countKey = COUNT_TO_TAB_MAPPING[tag];
+    return processCounts[countKey] || 0;
   };
 
   return (
@@ -46,7 +61,7 @@ function TagsSection() {
             className: styles.icon,
           })}
           {JOB_FILTER_TAGS[tag].label}{' '}
-          <span className={styles.count}>({DUMMY_COUNTS[tag]})</span>
+          <span className={styles.count}>({getCountForTag(tag)})</span>
         </Tag>
       ))}
     </div>

@@ -39,3 +39,10 @@ export const TAG_TO_TAB_MAPPING = {
   saved: 'saved',
   applied: 'applications',
 };
+
+export const COUNT_TO_TAB_MAPPING = {
+  relevant: 'relevant',
+  all: 'all',
+  saved: 'saved',
+  applied: 'applications',
+};

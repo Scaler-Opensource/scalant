@@ -9,8 +9,8 @@ const jobsService = careerHubApi.injectEndpoints({
     fetchAllJobs: builder.query({
       query: (params = {}) => ({
         url: '/job-tracker/fetch-all-jobs/',
-        method: 'GET',
-        params,
+        method: 'POST',
+        body: params,
       }),
       transformResponse: (response) => {
         const jobs = transformJobsData(response);
@@ -26,8 +26,8 @@ const jobsService = careerHubApi.injectEndpoints({
     fetchPipelineJobs: builder.query({
       query: (params = {}) => ({
         url: '/job-tracker/fetch-pipeline-jobs/',
-        method: 'GET',
-        params,
+        method: 'POST',
+        body: params,
       }),
       transformResponse: (response) => {
         const jobs = transformJobsData(response);
@@ -43,8 +43,8 @@ const jobsService = careerHubApi.injectEndpoints({
     fetchRelevantJobs: builder.query({
       query: (params = {}) => ({
         url: '/job-tracker/relevancy/',
-        method: 'GET',
-        params,
+        method: 'POST',
+        body: params,
       }),
       transformResponse: (response) => {
         const jobs = transformJobsData(response);

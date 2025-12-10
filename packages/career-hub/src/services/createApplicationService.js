@@ -31,4 +31,3 @@ export const { useCreateApplicationMutation, useGetApplicationQuery } =
   createApplicationService;
 
 export default createApplicationService;
-

@@ -1,12 +1,15 @@
 import React from 'react';
 import { useFetchPipelineJobsQuery } from '../../services/jobsService';
+import { useJobFilters } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobsList from '../JobsList';
 import styles from './AppliedJobsPage.module.scss';
 
 function AppliedJobsPage() {
+  const queryParams = useJobFilters();
   const { data, isLoading, error } = useFetchPipelineJobsQuery({
     type: TAG_TO_TAB_MAPPING.applied,
+    ...queryParams,
   });
   const jobs = data?.jobs || data?.results || [];
   const companiesMap = data?.companiesMap || {};

@@ -28,6 +28,9 @@ function JobsList({
   const selectedJobId = useSelector(
     (state) => state.scalantCareerHub.layout.selectedJobId
   );
+  const processCounts = useSelector(
+    (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
+  );
 
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
@@ -43,6 +46,10 @@ function JobsList({
 
   const heading =
     TAB_HEADINGS[currentTab] || TAB_HEADINGS[TAG_TO_TAB_MAPPING.all];
+
+  const getCountForTab = () => {
+    return processCounts[currentTab] || 0;
+  };
 
   if (isLoading) {
     return (
@@ -97,7 +104,7 @@ function JobsList({
     <div className={className}>
       <Space direction="vertical" className={styles.header}>
         <Title level={4} className={styles.heading}>
-          {heading} <Tag color="green">28 Found</Tag>
+          {heading} <Tag color="green">{getCountForTab()} Found</Tag>
         </Title>
         <Text>
           Based on your profile, preferences, and activity like applies,
