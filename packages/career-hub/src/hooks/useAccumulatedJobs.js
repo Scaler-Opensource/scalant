@@ -56,7 +56,6 @@ const useAccumulatedJobs = (
     return accumulatedJobs.length < totalCount;
   }, [totalCount, accumulatedJobs.length, currentJobs.length]);
 
-  // isFetchingMore is true when fetching and not on first page
   const isFetchingMore = isFetching && pageNumber > 1;
 
   return {
