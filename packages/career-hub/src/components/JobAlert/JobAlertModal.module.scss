@@ -1,0 +1,95 @@
+.modalTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalTitleContent {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.modalCloseIcon {
+  cursor: pointer;
+}
+
+.modalDescription {
+  margin-top: 0.8rem;
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+.createAlertContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  margin-bottom: 0.4rem;
+  font-size: $default-font-size;
+  color: $colors-neutral-text-color-text;
+}
+
+.requiredAsterisk {
+  color: $colors-brand-error-color-error;
+}
+
+.formInput {
+  width: 100%;
+}
+
+.experienceInputs {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.existingAlertContent {
+  padding: 2rem 0;
+  text-align: center;
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.modal {
+  :global(.ant-modal) {
+    max-height: 60rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.ant-modal-content) {
+    display: flex;
+    flex-direction: column;
+    max-height: 60rem;
+    overflow: hidden;
+  }
+
+  :global(.ant-modal-body) {
+    overflow-y: auto;
+    flex: 1;
+  }
+}
+
+.radioGroup {
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}

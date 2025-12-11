@@ -9,6 +9,7 @@ import AllJobsPage from '../AllJobsPage';
 import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
 import FilterDrawer from '../FilterDrawer';
+import JobAlertModal from '../JobAlert/JobAlertModal';
 import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
@@ -55,6 +56,7 @@ function JobsPage() {
         {renderPageContent()}
       </JobsLayout>
       <FilterDrawer />
+      <JobAlertModal />
     </>
   );
 }

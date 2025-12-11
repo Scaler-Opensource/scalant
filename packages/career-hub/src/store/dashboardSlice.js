@@ -10,6 +10,7 @@ const initialState = {
     archived: 0,
   },
   filterModalOpen: false,
+  jobAlertModalOpen: false,
 };
 
 const dashboardSlice = createSlice({
@@ -25,9 +26,20 @@ const dashboardSlice = createSlice({
     closeFilterModal: (state) => {
       state.filterModalOpen = false;
     },
+    openJobAlertModal: (state) => {
+      state.jobAlertModalOpen = true;
+    },
+    closeJobAlertModal: (state) => {
+      state.jobAlertModalOpen = false;
+    },
   },
 });
 
-export const { setProcessCounts, openFilterModal, closeFilterModal } =
-  dashboardSlice.actions;
+export const {
+  setProcessCounts,
+  openFilterModal,
+  closeFilterModal,
+  openJobAlertModal,
+  closeJobAlertModal,
+} = dashboardSlice.actions;
 export default dashboardSlice.reducer;
