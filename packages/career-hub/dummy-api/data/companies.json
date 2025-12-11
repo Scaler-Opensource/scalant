@@ -1,0 +1,165 @@
+{
+  "data": [
+    {
+      "id": "1867",
+      "type": "company",
+      "attributes": {
+        "name": "Walmart Amazon",
+        "id": 1867
+      }
+    },
+    {
+      "id": "7283",
+      "type": "company",
+      "attributes": {
+        "name": "Adgama Digital",
+        "id": 7283
+      }
+    },
+    {
+      "id": "325",
+      "type": "company",
+      "attributes": {
+        "name": "Akamai",
+        "id": 325
+      }
+    },
+    {
+      "id": "1741",
+      "type": "company",
+      "attributes": {
+        "name": "Akamai Technologies",
+        "id": 1741
+      }
+    },
+    {
+      "id": "1451",
+      "type": "company",
+      "attributes": {
+        "name": "Amadeus",
+        "id": 1451
+      }
+    },
+    {
+      "id": "1450",
+      "type": "company",
+      "attributes": {
+        "name": "Amadeus It Group",
+        "id": 1450
+      }
+    },
+    {
+      "id": "893",
+      "type": "company",
+      "attributes": {
+        "name": "Amadeus Labs",
+        "id": 893
+      }
+    },
+    {
+      "id": "1227",
+      "type": "company",
+      "attributes": {
+        "name": "AmadeusLabs",
+        "id": 1227
+      }
+    },
+    {
+      "id": "1486",
+      "type": "company",
+      "attributes": {
+        "name": "Amagi",
+        "id": 1486
+      }
+    },
+    {
+      "id": "2373",
+      "type": "company",
+      "attributes": {
+        "name": "Amagi Labs",
+        "id": 2373
+      }
+    },
+    {
+      "id": "2945",
+      "type": "company",
+      "attributes": {
+        "name": "Amagi Media Labs",
+        "id": 2945
+      }
+    },
+    {
+      "id": "3384",
+      "type": "company",
+      "attributes": {
+        "name": "Amamzon",
+        "id": 3384
+      }
+    },
+    {
+      "id": "1302",
+      "type": "company",
+      "attributes": {
+        "name": "Amaon",
+        "id": 1302
+      }
+    },
+    {
+      "id": "5330",
+      "type": "company",
+      "attributes": {
+        "name": "Amazatic",
+        "id": 5330
+      }
+    },
+    {
+      "id": "4093",
+      "type": "company",
+      "attributes": {
+        "name": "Amazion",
+        "id": 4093
+      }
+    },
+    {
+      "id": "607",
+      "type": "company",
+      "attributes": {
+        "name": "Amazon",
+        "id": 607
+      }
+    },
+    {
+      "id": "1824",
+      "type": "company",
+      "attributes": {
+        "name": "Amazon",
+        "id": 1824
+      }
+    },
+    {
+      "id": "1363",
+      "type": "company",
+      "attributes": {
+        "name": "Amazon Seattle",
+        "id": 1363
+      }
+    },
+    {
+      "id": "5531",
+      "type": "company",
+      "attributes": {
+        "name": "Amazon (Devices)",
+        "id": 5531
+      }
+    },
+    {
+      "id": "2425",
+      "type": "company",
+      "attributes": {
+        "name": "AMAZON (ref)",
+        "id": 2425
+      }
+    }
+  ]
+}
+

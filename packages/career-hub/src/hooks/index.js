@@ -4,3 +4,5 @@ export { default as useJobCardState } from './useJobCardState';
 export { default as useJobFilters } from './useJobFilters';
 export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useAccumulatedJobs } from './useAccumulatedJobs';
+export { useAsyncFilterOptions } from './useAsyncFilterOptions';
+export { useFilterMetaOptions } from './useFilterMetaOptions';

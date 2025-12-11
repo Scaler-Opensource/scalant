@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeFilterModal } from '../../store/dashboardSlice';
 import { updateFiltersFromForm } from '../../store/filterSlice';
 import { resetForm } from '../../store/filterFormSlice';
+import { clearAllOptions } from '../../store/filterOptionsSlice';
 import FilterForm from './FilterForm';
 
 import styles from './FilterDrawer.module.scss';
@@ -40,6 +41,55 @@ function FilterDrawer() {
   };
 
   const handleApply = () => {
+    // Transform mbe_skill_ids from object to array format
+    let transformedMbeSkillIds = undefined;
+    if (
+      formData.mbe_skill_ids &&
+      typeof formData.mbe_skill_ids === 'object' &&
+      !Array.isArray(formData.mbe_skill_ids) &&
+      Object.keys(formData.mbe_skill_ids).length > 0
+    ) {
+      transformedMbeSkillIds = Object.values(formData.mbe_skill_ids)
+        .filter((item) => {
+          // Filter out items that don't have both subject and rating
+          if (!item || item.rating === undefined || item.rating === null) {
+            return false;
+          }
+          // Check if subject exists and has a valid key
+          if (item.subject) {
+            if (typeof item.subject === 'object') {
+              return (
+                item.subject.key !== undefined && item.subject.key !== null
+              );
+            }
+            // If subject is a primitive value, it's valid
+            return item.subject !== undefined && item.subject !== null;
+          }
+          return false;
+        })
+        .map((item) => {
+          // Extract mbe_skill_id from subject
+          let mbeSkillId;
+          if (
+            typeof item.subject === 'object' &&
+            item.subject?.key !== undefined
+          ) {
+            mbeSkillId = item.subject.key;
+          } else {
+            mbeSkillId = item.subject;
+          }
+          return {
+            mbe_skill_id: mbeSkillId,
+            rating: item.rating,
+          };
+        });
+
+      // Set to undefined if array is empty
+      if (transformedMbeSkillIds.length === 0) {
+        transformedMbeSkillIds = undefined;
+      }
+    }
+
     // Transform form data to filter format
     const filterData = {
       role_type: formData.role_type || undefined,
@@ -59,9 +109,7 @@ function FilterDrawer() {
       min_duration: formData.min_duration || undefined,
       notice_period: formData.notice_period || undefined,
       date_posted_on: formData.date_posted_on || undefined,
-      mbe_skill_ids: formData.mbe_skill_ids?.length
-        ? formData.mbe_skill_ids
-        : undefined,
+      mbe_skill_ids: transformedMbeSkillIds,
       experience_skill_ids: formData.experience_skill_ids?.length
         ? formData.experience_skill_ids
         : undefined,
@@ -85,6 +133,7 @@ function FilterDrawer() {
 
   const handleReset = () => {
     dispatch(resetForm());
+    dispatch(clearAllOptions());
     dispatch(updateFiltersFromForm({}));
   };
 

@@ -72,6 +72,62 @@ app.get('/job-tracker/job_profile/:id', (req, res) => {
   res.status(200).json(data);
 });
 
+// GET /job-tracker/filters/
+app.get('/job-tracker/filters/', (req, res) => {
+  const { query_type, q } = req.query;
+
+  if (query_type === 'companies') {
+    // Return companies data
+    const companiesData = readJsonFile('companies.json');
+    // Filter by search query if provided
+    if (q) {
+      const filtered = companiesData.data.filter((company) =>
+        company.attributes.name.toLowerCase().includes(q.toLowerCase())
+      );
+      res.status(200).json({ data: filtered });
+    } else {
+      res.status(200).json(companiesData);
+    }
+  } else if (query_type === 'title') {
+    // Return titles data
+    const titlesData = readJsonFile('titles.json');
+    // Handle both array and object with data property
+    const titlesArray = Array.isArray(titlesData)
+      ? titlesData
+      : titlesData.data || [];
+
+    // Filter by search query if provided
+    if (q) {
+      const filtered = titlesArray.filter((title) =>
+        (title.attributes?.title || title.attributes?.name || '')
+          .toLowerCase()
+          .includes(q.toLowerCase())
+      );
+      res.status(200).json({ data: filtered });
+    } else {
+      res.status(200).json({ data: titlesArray });
+    }
+  } else {
+    res.status(400).json({ error: 'Invalid query_type' });
+  }
+});
+
+// GET /user/skills/all
+app.get('/user/skills/all', (req, res) => {
+  const { prefix_q } = req.query;
+  const skillsData = readJsonFile('experience_skills.json');
+
+  // Filter by search query if provided
+  if (prefix_q) {
+    const filtered = skillsData.all_skills.filter((skill) =>
+      skill.key.toLowerCase().includes(prefix_q.toLowerCase())
+    );
+    res.status(200).json({ all_skills: filtered });
+  } else {
+    res.status(200).json(skillsData);
+  }
+});
+
 // Start server
 const PORT = 8000;
 app.listen(PORT, () => {

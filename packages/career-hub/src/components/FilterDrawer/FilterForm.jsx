@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Select, Row, Col } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFormField } from '../../store/filterFormSlice';
+import { useAsyncFilterOptions } from '../../hooks/useAsyncFilterOptions';
+import { useFilterMetaOptions } from '../../hooks/useFilterMetaOptions';
+import ExpertMbeRating from './ExpertMbeRating';
 
 import styles from './FilterDrawer.module.scss';
 
@@ -11,105 +13,49 @@ const { Option } = Select;
 function FilterForm() {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.scalantCareerHub.filterForm);
+  const filterOptionsState = useSelector(
+    (state) => state.scalantCareerHub.filterOptions || {}
+  );
   const [form] = Form.useForm();
+
+  // Reset form fields when formData changes (e.g., after reset)
+  useEffect(() => {
+    form.setFieldsValue(formData);
+  }, [form, formData]);
+
+  // Custom hooks for filter options
+  const {
+    handleCompanySearch,
+    handleTitleSearch,
+    handleExperienceSkillSearch,
+    loadingCompanies,
+    loadingTitles,
+    loadingExperienceSkills,
+  } = useAsyncFilterOptions();
+
+  const {
+    jobTypes,
+    functions,
+    seniorityLevels,
+    companyCategories,
+    locations,
+    mbeSkills,
+    ctcRanges,
+    stipendRanges,
+    durationRanges,
+    noticePeriods,
+    datePostedOptions,
+    skillRatings,
+  } = useFilterMetaOptions();
 
   const handleFieldChange = (field, value) => {
     dispatch(updateFormField({ field, value }));
   };
 
-  // Dummy options for select fields
-  const jobTypes = [
-    { value: 'full_time', label: 'Full Time' },
-    { value: 'part_time', label: 'Part Time' },
-    { value: 'internship', label: 'Internship' },
-    { value: 'contract', label: 'Contract' },
-  ];
-
-  const functions = [
-    { value: 56529, label: 'Engineering' },
-    { value: 56530, label: 'Product' },
-    { value: 56531, label: 'Design' },
-    { value: 56532, label: 'Marketing' },
-  ];
-
-  const seniorityLevels = [
-    { value: 202948, label: 'Entry Level' },
-    { value: 202949, label: 'Mid Level' },
-    { value: 202950, label: 'Senior Level' },
-    { value: 202951, label: 'Lead' },
-  ];
-
-  const companyCategories = [
-    { value: 5, label: 'Technology' },
-    { value: 6, label: 'Finance' },
-    { value: 7, label: 'Healthcare' },
-    { value: 8, label: 'Education' },
-  ];
-
-  const locations = [
-    { value: 'Bangalore', label: 'Bangalore' },
-    { value: 'Mumbai', label: 'Mumbai' },
-    { value: 'Delhi', label: 'Delhi' },
-    { value: 'Hyderabad', label: 'Hyderabad' },
-  ];
-
-  const ctcRanges = [
-    { value: 5, label: '5-10 Lakhs' },
-    { value: 10, label: '10-15 Lakhs' },
-    { value: 15, label: '15-20 Lakhs' },
-    { value: 20, label: '20+ Lakhs' },
-  ];
-
-  const stipendRanges = [
-    { value: 10000, label: '10,000 - 20,000' },
-    { value: 20000, label: '20,000 - 30,000' },
-    { value: 30000, label: '30,000 - 40,000' },
-    { value: 40000, label: '40,000+' },
-  ];
-
-  const durationRanges = [
-    { value: 3, label: '3 months' },
-    { value: 6, label: '6 months' },
-    { value: 9, label: '9 months' },
-    { value: 12, label: '12 months' },
-  ];
-
-  const noticePeriods = [
-    { value: 'immediate', label: 'Immediate' },
-    { value: '15 days', label: '15 days' },
-    { value: '30 days', label: '30 days' },
-    { value: '60 days', label: '60 days' },
-    { value: '90 days', label: '90 days' },
-    { value: 'not filled', label: 'Not Filled' },
-  ];
-
-  const datePostedOptions = [
-    { value: 1, label: 'Last 24 hours' },
-    { value: 7, label: 'Last 7 days' },
-    { value: 30, label: 'Last 30 days' },
-    { value: 90, label: 'Last 90 days' },
-  ];
-
-  const mbeSkills = [
-    { value: 37223, label: 'React' },
-    { value: 37224, label: 'JavaScript' },
-    { value: 37225, label: 'Node.js' },
-    { value: 37226, label: 'Python' },
-  ];
-
-  const skillRatings = [
-    { value: 0, label: 'Beginner' },
-    { value: 1, label: 'Intermediate' },
-    { value: 2, label: 'Advanced' },
-    { value: 3, label: 'Expert' },
-  ];
-
-  const experienceSkills = [
-    { value: 1150, label: 'Frontend Development', type: 'SubTopic' },
-    { value: 1151, label: 'Backend Development', type: 'SubTopic' },
-    { value: 1152, label: 'Full Stack Development', type: 'SubTopic' },
-    { value: 1153, label: 'DevOps', type: 'SubTopic' },
-  ];
+  // Get job type value for conditional rendering
+  const jobTypeValue = formData.role_type;
+  const isFullTime = jobTypeValue === 'full_time';
+  const isInternship = jobTypeValue === 'internship';
 
   return (
     <Form
@@ -125,39 +71,59 @@ function FilterForm() {
           onChange={(value) => handleFieldChange('role_type', value)}
         >
           {jobTypes.map((type) => (
-            <Option key={type.value} value={type.value}>
-              {type.label}
+            <Option key={type.key} value={type.key}>
+              {type.value}
             </Option>
           ))}
         </Select>
       </Form.Item>
 
       <Form.Item label="Company Name" name="company_ids">
-        <Input
+        <Select
+          mode="multiple"
+          showSearch
           placeholder="Search company"
-          suffix={<SearchOutlined />}
-          value={formData.company_ids?.join(',') || ''}
-          onChange={(e) => {
-            const value = e.target.value
-              ? e.target.value.split(',').map((id) => id.trim())
-              : [];
-            handleFieldChange('company_ids', value);
-          }}
-        />
+          filterOption={false}
+          onSearch={handleCompanySearch}
+          loading={loadingCompanies}
+          value={formData.company_ids}
+          onChange={(value) => handleFieldChange('company_ids', value)}
+          notFoundContent={
+            loadingCompanies
+              ? 'Loading...'
+              : 'Type at least 3 characters to search'
+          }
+        >
+          {filterOptionsState.companyOptions?.map((company) => (
+            <Option key={company.key} value={company.key}>
+              {company.value}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
 
       <Form.Item label="Title" name="job_title">
-        <Input
+        <Select
+          mode="multiple"
+          showSearch
           placeholder="Search job title"
-          suffix={<SearchOutlined />}
-          value={formData.job_title?.join(',') || ''}
-          onChange={(e) => {
-            const value = e.target.value
-              ? e.target.value.split(',').map((title) => title.trim())
-              : [];
-            handleFieldChange('job_title', value);
-          }}
-        />
+          filterOption={false}
+          onSearch={handleTitleSearch}
+          loading={loadingTitles}
+          value={formData.job_title}
+          onChange={(value) => handleFieldChange('job_title', value)}
+          notFoundContent={
+            loadingTitles
+              ? 'Loading...'
+              : 'Type at least 3 characters to search'
+          }
+        >
+          {filterOptionsState.titleOptions?.map((title) => (
+            <Option key={title.key} value={title.value}>
+              {title.value}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
 
       <Form.Item label="Function" name="job_category">
@@ -168,8 +134,8 @@ function FilterForm() {
           onChange={(value) => handleFieldChange('job_category', value)}
         >
           {functions.map((func) => (
-            <Option key={func.value} value={func.value}>
-              {func.label}
+            <Option key={func.key} value={func.value}>
+              {func.value}
             </Option>
           ))}
         </Select>
@@ -185,8 +151,8 @@ function FilterForm() {
               onChange={(value) => handleFieldChange('seniority_level', value)}
             >
               {seniorityLevels.map((level) => (
-                <Option key={level.value} value={level.value}>
-                  {level.label}
+                <Option key={level.key} value={level.value}>
+                  {level.value}
                 </Option>
               ))}
             </Select>
@@ -203,8 +169,8 @@ function FilterForm() {
               }
             >
               {companyCategories.map((category) => (
-                <Option key={category.value} value={category.value}>
-                  {category.label}
+                <Option key={category.key} value={category.value}>
+                  {category.value}
                 </Option>
               ))}
             </Select>
@@ -220,62 +186,66 @@ function FilterForm() {
           onChange={(value) => handleFieldChange('location', value)}
         >
           {locations.map((loc) => (
-            <Option key={loc.value} value={loc.value}>
-              {loc.label}
+            <Option key={loc.key} value={loc.value}>
+              {loc.value}
             </Option>
           ))}
         </Select>
       </Form.Item>
 
-      <Form.Item label="Minimum CTC (in Lakhs)?" name="min_ctc">
-        <Select
-          placeholder="Select range"
-          value={formData.min_ctc}
-          onChange={(value) => handleFieldChange('min_ctc', value)}
-        >
-          {ctcRanges.map((range) => (
-            <Option key={range.value} value={range.value}>
-              {range.label}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
-
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item label="Stipend (INR per month)" name="min_stipend">
-            <Select
-              placeholder="Select range"
-              value={formData.min_stipend}
-              onChange={(value) => handleFieldChange('min_stipend', value)}
-            >
-              {stipendRanges.map((range) => (
-                <Option key={range.value} value={range.value}>
-                  {range.label}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item
-            label="Internship duration (in months)"
-            name="min_duration"
+      {!isInternship && (
+        <Form.Item label="Minimum CTC (in Lakhs)?" name="min_ctc">
+          <Select
+            placeholder="Select range"
+            value={formData.min_ctc}
+            onChange={(value) => handleFieldChange('min_ctc', value)}
           >
-            <Select
-              placeholder="Select range"
-              value={formData.min_duration}
-              onChange={(value) => handleFieldChange('min_duration', value)}
+            {ctcRanges.map((range) => (
+              <Option key={range.value} value={range.value}>
+                {range.label}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+      )}
+
+      {!isFullTime && (
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item label="Stipend (INR per month)" name="min_stipend">
+              <Select
+                placeholder="Select range"
+                value={formData.min_stipend}
+                onChange={(value) => handleFieldChange('min_stipend', value)}
+              >
+                {stipendRanges.map((range) => (
+                  <Option key={range.value} value={range.value}>
+                    {range.label}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Internship duration (in months)"
+              name="min_duration"
             >
-              {durationRanges.map((range) => (
-                <Option key={range.value} value={range.value}>
-                  {range.label}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
+              <Select
+                placeholder="Select range"
+                value={formData.min_duration}
+                onChange={(value) => handleFieldChange('min_duration', value)}
+              >
+                {durationRanges.map((range) => (
+                  <Option key={range.value} value={range.value}>
+                    {range.label}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+      )}
 
       <Row gutter={16}>
         <Col span={12}>
@@ -311,83 +281,57 @@ function FilterForm() {
       </Row>
 
       <Form.Item label="Expert Mock Interview Skills Required">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item name="mbe_skill_id" noStyle>
-              <Select
-                placeholder="Select option"
-                value={
-                  formData.mbe_skill_ids?.[0]?.mbe_skill_id ||
-                  formData.mbe_skill_id
-                }
-                onChange={(value) => {
-                  const existing = formData.mbe_skill_ids?.[0] || {};
-                  handleFieldChange('mbe_skill_ids', [
-                    { ...existing, mbe_skill_id: value },
-                  ]);
-                }}
-              >
-                {mbeSkills.map((skill) => (
-                  <Option key={skill.value} value={skill.value}>
-                    {skill.label}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item name="mbe_skill_rating" noStyle>
-              <Select
-                placeholder="Select rating"
-                value={
-                  formData.mbe_skill_ids?.[0]?.rating !== undefined
-                    ? formData.mbe_skill_ids[0].rating
-                    : formData.mbe_skill_rating
-                }
-                onChange={(value) => {
-                  const existing = formData.mbe_skill_ids?.[0] || {};
-                  handleFieldChange('mbe_skill_ids', [
-                    { ...existing, rating: value },
-                  ]);
-                }}
-              >
-                {skillRatings.map((rating) => (
-                  <Option key={rating.value} value={rating.value}>
-                    {rating.label}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
-        </Row>
+        <ExpertMbeRating
+          fieldName="mbe_skill_ids"
+          subjectOptions={mbeSkills}
+          ratingOptions={skillRatings}
+        />
       </Form.Item>
 
       <Form.Item label="Experienced based skills" name="experience_skill_ids">
         <Select
           mode="multiple"
-          placeholder="Select skills"
+          showSearch
+          placeholder="Search skills"
+          filterOption={false}
+          onSearch={handleExperienceSkillSearch}
+          loading={loadingExperienceSkills}
           value={formData.experience_skill_ids?.map(
-            (skill) => skill.experience_skill_id
+            (skill) => skill.experience_skill_id || skill
           )}
           onChange={(value) => {
             const skills = value.map((id) => {
               const existing = formData.experience_skill_ids?.find(
-                (s) => s.experience_skill_id === id
+                (s) => (s.experience_skill_id || s) === id
               );
+              const optionSkill =
+                filterOptionsState.experienceSkillOptions?.find(
+                  (s) => s.key === id
+                );
               return (
                 existing ||
-                experienceSkills.find((s) => s.value === id) || {
-                  experience_skill_id: id,
-                  skill_type: 'SubTopic',
-                }
+                (optionSkill
+                  ? {
+                      experience_skill_id: optionSkill.key,
+                      skill_type: optionSkill.type || 'SubTopic',
+                    }
+                  : {
+                      experience_skill_id: id,
+                      skill_type: 'SubTopic',
+                    })
               );
             });
             handleFieldChange('experience_skill_ids', skills);
           }}
+          notFoundContent={
+            loadingExperienceSkills
+              ? 'Loading...'
+              : 'Type at least 2 characters to search'
+          }
         >
-          {experienceSkills.map((skill) => (
-            <Option key={skill.value} value={skill.value}>
-              {skill.label}
+          {filterOptionsState.experienceSkillOptions?.map((skill) => (
+            <Option key={skill.key} value={skill.key}>
+              {skill.value}
             </Option>
           ))}
         </Select>
