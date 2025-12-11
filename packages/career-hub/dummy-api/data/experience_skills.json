@@ -1,195 +1,116 @@
 {
   "all_skills": [
-    {
-      "skill_id": 1128,
-      "key": "Javascript",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1133,
-      "key": "Angular",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1136,
-      "key": "CSS",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1145,
-      "key": "Flutter",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1148,
-      "key": "HTML",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1150,
-      "key": "JavaScript",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1156,
-      "key": "React",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1157,
-      "key": "React Native",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1158,
-      "key": "Redux",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1167,
-      "key": "TypeScript",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1175,
-      "key": "Android Development",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1176,
-      "key": "iOS Development",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1195,
-      "key": ".NET",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1196,
-      "key": "Django",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1197,
-      "key": "Express.js",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1198,
-      "key": "Flask",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1200,
-      "key": "Node.js",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1203,
-      "key": "Ruby on Rails",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1206,
-      "key": "Spring Boot",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1209,
-      "key": "C",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1210,
-      "key": "Go",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1211,
-      "key": "Java",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1213,
-      "key": "Python",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1215,
-      "key": "Ruby",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1217,
-      "key": "Scala",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1218,
-      "key": "Swift",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1228,
-      "key": "MongoDB",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1229,
-      "key": "MySQL",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1231,
-      "key": "PostgreSQL",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1234,
-      "key": "SQL Server",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1270,
-      "key": "C#",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 1276,
-      "key": "C++",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 2430,
-      "key": "AWS",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 2431,
-      "key": "Azure",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 2432,
-      "key": "Microservices",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 2435,
-      "key": "SQL",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 46262,
-      "key": "Tableau",
-      "skill_type": "SubTopic"
-    },
-    {
-      "skill_id": 58475,
-      "key": "Power BI",
-      "skill_type": "SubTopic"
-    }
+      {
+          "key": "BabylonJS",
+          "name": "BabylonJS",
+          "skill_type": "SubTopic",
+          "skill_id": 1135
+      },
+      {
+          "key": "Babel",
+          "name": "Babel",
+          "skill_type": "SubTopic",
+          "skill_id": 1134
+      },
+      {
+          "key": "GitLab CI",
+          "name": "GitLab CI",
+          "skill_type": "SubTopic",
+          "skill_id": 324258
+      },
+      {
+          "key": "Google Colab",
+          "name": "Google Colab",
+          "skill_type": "SubTopic",
+          "skill_id": 308288
+      },
+      {
+          "key": "SeaBorn",
+          "name": "SeaBorn",
+          "skill_type": "SubTopic",
+          "skill_id": 308286
+      },
+      {
+          "key": "Stats and Probability",
+          "name": "Stats and Probability",
+          "skill_type": "SubTopic",
+          "skill_id": 46266
+      },
+      {
+          "key": "Tableau",
+          "name": "Tableau",
+          "skill_type": "SubTopic",
+          "skill_id": 46262
+      },
+      {
+          "key": "Frontend Development",
+          "name": "Frontend Development",
+          "skill_type": "Topic",
+          "skill_id": 400
+      },
+      {
+          "key": "Backend Development",
+          "name": "Backend Development",
+          "skill_type": "Topic",
+          "skill_id": 403
+      },
+      {
+          "key": "Machine Learning",
+          "name": "Machine Learning",
+          "skill_type": "Topic",
+          "skill_id": 405
+      }
+  ],
+  "items": [
+      {
+          "id": 1135,
+          "text": "BabylonJS",
+          "type": "SubTopic"
+      },
+      {
+          "id": 1134,
+          "text": "Babel",
+          "type": "SubTopic"
+      },
+      {
+          "id": 324258,
+          "text": "GitLab CI",
+          "type": "SubTopic"
+      },
+      {
+          "id": 308288,
+          "text": "Google Colab",
+          "type": "SubTopic"
+      },
+      {
+          "id": 308286,
+          "text": "SeaBorn",
+          "type": "SubTopic"
+      },
+      {
+          "id": 46266,
+          "text": "Stats and Probability",
+          "type": "SubTopic"
+      },
+      {
+          "id": 46262,
+          "text": "Tableau",
+          "type": "SubTopic"
+      },
+      {
+          "id": 400,
+          "text": "Frontend Development",
+          "type": "Topic"
+      },
+      {
+          "id": 403,
+          "text": "Backend Development",
+          "type": "Topic"
+      },
+      {
+          "id": 405,
+          "text": "Machine Learning",
+          "type": "Topic"
+      }
   ]
 }
-

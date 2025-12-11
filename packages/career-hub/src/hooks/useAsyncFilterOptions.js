@@ -83,11 +83,26 @@ export const useAsyncFilterOptions = () => {
     300
   );
 
+  // Handler to format experience skill IDs into the required object format
+  const handleExperienceSkillChange = useCallback(
+    (selectedIds, skillOptions) => {
+      return selectedIds.map((id) => {
+        const skill = skillOptions?.find((opt) => opt.key === id);
+        return {
+          experience_skill_id: id,
+          skill_type: skill?.type || 'SubTopic',
+        };
+      });
+    },
+    []
+  );
+
   return {
     // Search handlers
     handleCompanySearch,
     handleTitleSearch,
     handleExperienceSkillSearch,
+    handleExperienceSkillChange,
     // Loading states
     loadingCompanies: loadingCompanies || fetchingCompanies,
     loadingTitles: loadingTitles || fetchingTitles,

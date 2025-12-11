@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
  * Custom hook to get filter state and build query parameters for job queries
  *
  * @returns {Object} Query parameters object ready to be passed to job query hooks
+ * Structure: { per_page, tab, filters: {...}, sortings, page_number, skip_expired_jobs }
  */
 export const useJobFilters = () => {
   const filterState = useSelector(
@@ -12,14 +13,15 @@ export const useJobFilters = () => {
   );
 
   const queryParams = useMemo(() => {
-    const { filters, per_page, page_number, sortings, skip_expired_jobs } =
+    const { filters, per_page, tab, page_number, sortings, skip_expired_jobs } =
       filterState;
 
     return {
-      ...(filters || {}),
       per_page,
-      page_number,
+      tab,
+      filters: filters || { keyword: '' },
       sortings,
+      page_number,
       skip_expired_jobs,
     };
   }, [filterState]);

@@ -31,8 +31,9 @@ const filterOptionsSlice = createSlice({
     clearTitleOptions: (state) => {
       state.titleOptions = [];
     },
-    clearExperienceSkillOptions: (state) => {
-      state.experienceSkillOptions = [];
+    clearExperienceSkillOptions: () => {
+      // Don't clear - keep selected options visible
+      // state.experienceSkillOptions = [];
     },
     clearAllOptions: (state) => {
       state.companyOptions = [];
@@ -63,7 +64,22 @@ const filterOptionsSlice = createSlice({
     builder.addMatcher(
       filterService.endpoints.getExperienceSkills.matchFulfilled,
       (state, action) => {
-        state.experienceSkillOptions = action.payload;
+        // Merge new options with existing ones to keep selected options visible
+        const newOptions = action.payload || [];
+        const existingOptions = state.experienceSkillOptions || [];
+
+        // Create a map of existing options by key
+        const existingMap = new Map(
+          existingOptions.map((opt) => [opt.key, opt])
+        );
+
+        // Add/update with new options
+        newOptions.forEach((opt) => {
+          existingMap.set(opt.key, opt);
+        });
+
+        // Convert back to array
+        state.experienceSkillOptions = Array.from(existingMap.values());
       }
     );
   },

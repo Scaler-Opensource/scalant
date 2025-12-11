@@ -28,6 +28,7 @@ function FilterForm() {
     handleCompanySearch,
     handleTitleSearch,
     handleExperienceSkillSearch,
+    handleExperienceSkillChange,
     loadingCompanies,
     loadingTitles,
     loadingExperienceSkills,
@@ -134,7 +135,7 @@ function FilterForm() {
           onChange={(value) => handleFieldChange('job_category', value)}
         >
           {functions.map((func) => (
-            <Option key={func.key} value={func.value}>
+            <Option key={func.key} value={func.key}>
               {func.value}
             </Option>
           ))}
@@ -151,7 +152,7 @@ function FilterForm() {
               onChange={(value) => handleFieldChange('seniority_level', value)}
             >
               {seniorityLevels.map((level) => (
-                <Option key={level.key} value={level.value}>
+                <Option key={level.key} value={level.key}>
                   {level.value}
                 </Option>
               ))}
@@ -169,7 +170,7 @@ function FilterForm() {
               }
             >
               {companyCategories.map((category) => (
-                <Option key={category.key} value={category.value}>
+                <Option key={category.key} value={category.key}>
                   {category.value}
                 </Option>
               ))}
@@ -287,7 +288,6 @@ function FilterForm() {
           ratingOptions={skillRatings}
         />
       </Form.Item>
-
       <Form.Item label="Experienced based skills" name="experience_skill_ids">
         <Select
           mode="multiple"
@@ -296,32 +296,17 @@ function FilterForm() {
           filterOption={false}
           onSearch={handleExperienceSkillSearch}
           loading={loadingExperienceSkills}
-          value={formData.experience_skill_ids?.map(
-            (skill) => skill.experience_skill_id || skill
-          )}
-          onChange={(value) => {
-            const skills = value.map((id) => {
-              const existing = formData.experience_skill_ids?.find(
-                (s) => (s.experience_skill_id || s) === id
-              );
-              const optionSkill =
-                filterOptionsState.experienceSkillOptions?.find(
-                  (s) => s.key === id
-                );
-              return (
-                existing ||
-                (optionSkill
-                  ? {
-                      experience_skill_id: optionSkill.key,
-                      skill_type: optionSkill.type || 'SubTopic',
-                    }
-                  : {
-                      experience_skill_id: id,
-                      skill_type: 'SubTopic',
-                    })
-              );
-            });
-            handleFieldChange('experience_skill_ids', skills);
+          value={
+            formData.experience_skill_ids?.map((item) =>
+              typeof item === 'object' ? item.experience_skill_id : item
+            ) || []
+          }
+          onChange={(selectedIds) => {
+            const formattedValue = handleExperienceSkillChange(
+              selectedIds,
+              filterOptionsState.experienceSkillOptions
+            );
+            handleFieldChange('experience_skill_ids', formattedValue);
           }}
           notFoundContent={
             loadingExperienceSkills

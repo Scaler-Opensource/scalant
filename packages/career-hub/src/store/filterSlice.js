@@ -49,8 +49,10 @@ const filterSlice = createSlice({
       };
     },
     updateFiltersFromForm: (state, action) => {
+      // Preserve keyword if it exists, but replace all other filters
+      const keyword = state.filters?.keyword || '';
       state.filters = {
-        ...state.filters,
+        keyword,
         ...action.payload,
       };
       state.page_number = 1;

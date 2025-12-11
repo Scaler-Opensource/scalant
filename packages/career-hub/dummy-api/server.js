@@ -114,16 +114,26 @@ app.get('/job-tracker/filters/', (req, res) => {
 
 // GET /user/skills/all
 app.get('/user/skills/all', (req, res) => {
-  const { prefix_q } = req.query;
+  const { prefix_q, format } = req.query;
   const skillsData = readJsonFile('experience_skills.json');
 
   // Filter by search query if provided
   if (prefix_q) {
-    const filtered = skillsData.all_skills.filter((skill) =>
-      skill.key.toLowerCase().includes(prefix_q.toLowerCase())
-    );
-    res.status(200).json({ all_skills: filtered });
+    if (format === 'items') {
+      // Filter items array if format is 'items'
+      const filtered = (skillsData.items || []).filter((item) =>
+        item.text.toLowerCase().includes(prefix_q.toLowerCase())
+      );
+      res.status(200).json({ items: filtered });
+    } else {
+      // Default: filter all_skills array
+      const filtered = (skillsData.all_skills || []).filter((skill) =>
+        skill.key.toLowerCase().includes(prefix_q.toLowerCase())
+      );
+      res.status(200).json({ all_skills: filtered });
+    }
   } else {
+    // Return full data structure with both all_skills and items
     res.status(200).json(skillsData);
   }
 });
