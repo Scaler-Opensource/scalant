@@ -31,6 +31,7 @@ export const careerHubApi = createApi({
     'RelevantJobs',
     'ProcessCounts',
     'FilterOptions',
+    'JobPreview',
   ],
   endpoints: () => ({}),
 });

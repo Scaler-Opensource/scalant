@@ -1,0 +1,35 @@
+.actionBanner {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  border: 1px solid;
+  gap: 0.8rem;
+  width: 100%;
+  margin-bottom: 0.8rem;
+}
+
+.actionBannerIcon {
+  padding-top: 0.4rem;
+  align-self: flex-start;
+}
+
+.actionBannerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.actionBannerTitle {
+  font-size: $default-font-size;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.actionBannerDescription {
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.actionBannerButton {
+  margin-left: auto;
+}

@@ -3,6 +3,8 @@
  * Reference: frontend/src/modules/job_tracker/utils/list.js (lines 25-74)
  */
 
+import { convertArraySingletonsToObject } from '../form';
+
 /**
  * Job card configuration per tab
  * Determines which details to show/hide in job cards
@@ -84,3 +86,11 @@ export const TABS = {
   APPLICATIONS: 'applications',
   ARCHIVED: 'archived',
 };
+
+export const WITHDRAW_REASONS = convertArraySingletonsToObject([
+  'Got another offer',
+  "Company didn't match expectations",
+  'Need more prep time',
+  'Applied by mistake',
+  'Other',
+]);

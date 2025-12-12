@@ -7,6 +7,8 @@ import {
 
 export const APPLICATION_STATUS = {
   APPLICATION_FORM: 'application_form',
+  SAVED: 'Saved',
+  WITHDRAWN: 'Application Withdrawn',
 };
 
 export const SIDER_WIDTH = {

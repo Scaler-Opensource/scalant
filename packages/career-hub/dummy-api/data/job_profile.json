@@ -1,335 +1,455 @@
 {
-  "data": {
-      "id": "174065",
-      "type": "job_profile",
-      "attributes": {
-          "title": "LLM Python (ML) - Freelance/Contract",
-          "slug": "llm-python-engineer",
-          "job_desc": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/job_profiles/job_descs/000/174/065/original/Turing_-_LLM_-_Python_for_Machine_Learning_JD.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251210%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251210T081644Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=bbb666aac9ec4d53e26c793f787ff83d14b690acf2630511411641f008b6a452",
-          "job_desc_text": "\u003cp\u003e\u003cstrong\u003e\u003cu\u003e\u003cem\u003eThis is a freelance opportunity allowing you to take it up alongside your full-time job to earn extra income\u003c/em\u003e\u003c/u\u003e\u003c/strong\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003e\u003cu\u003eNote:\u003c/u\u003e\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eRole : LLM - Python for Machine Learning\u003c/li\u003e\u003cli\u003eEngagement Type : Freelancing/Short term contract\u003c/li\u003e\u003cli\u003eEngagement Duration : 2 months\u003c/li\u003e\u003cli\u003ePay rate : $10 - $20 USD per hour (depends on your expertise \u0026amp; experience)\u003c/li\u003e\u003cli\u003eShift Availability \u0026amp; Timing : Availability of 40 hours per week (4 hours of overlap with PST Timezone) - Night Shift\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003cstrong\u003e\u003cu\u003eAbout Turing:\u003c/u\u003e\u003c/strong\u003e\u003c/p\u003e\u003cp\u003eBased in Palo Alto, California, Turing aims to unleash the world’s untapped human potential. We use AI to source, evaluate, hire, onboard, and manage engineers 100% remotely via a bigger platform that we call the “Talent Cloud”. Today, Turing is one of the fastest-growing unicorns, with a valuation of $1.1B, after raising over $140M over four rounds of funding. 100+ companies including the likes of Pepsi, Dell, Disney +, and Coinbase have hired Turing developers.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eRole Overview: Senior Python Developer (Top Coder Track) - LLM \u0026amp; Machine Learning\u003c/strong\u003e\u003c/p\u003e\u003cp\u003eWe’re looking for a world-class Python Developer — someone who lives and breathes code, optimizes for performance, and has proven mastery on competitive programming or data challenge platforms like LeetCode, Codeforces, HackerRank, or Kaggle. This is a pure coding role — where you’ll tackle challenging engineering problems, design scalable systems, and collaborate with leading AI research teams.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eWhat You’ll Do:\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eBuild, test, and optimize high-performance Python systems used in large-scale AI and data pipelines.\u003c/li\u003e\u003cli\u003eDesign and maintain modular, clean, and production-ready Python codebases.\u003c/li\u003e\u003cli\u003eCollaborate with cross-functional teams (data, infra, and research engineers) to deliver reliable backend components.\u003c/li\u003e\u003cli\u003eWrite efficient, maintainable, and testable code with strong focus on algorithms and data structures.\u003c/li\u003e\u003cli\u003eStay current with modern Python tools, frameworks, and best practices.\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003cstrong\u003eRequired Qualifications:\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eBachelor’s or Master’s in Computer Science, Software Engineering, or a related field.\u003c/li\u003e\u003cli\u003e4+ years of professional experience writing Python in production environments.\u003c/li\u003e\u003cli\u003eExpert-level proficiency in Python and core libraries (Pandas, NumPy, AsyncIO, FastAPI, or similar).\u003c/li\u003e\u003cli\u003eProven track record on coding platforms — e.g., top percentile or strong rating on LeetCode, Codeforces, HackerRank, or Kaggle competitions.\u003c/li\u003e\u003cli\u003eDeep understanding of data structures, algorithms, and problem-solving at scale.\u003c/li\u003e\u003cli\u003eExperience with system design, clean architecture, and performance optimization.\u003c/li\u003e\u003cli\u003eWorking level Proficiency in ML/DS\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003ePreferred Qualifications:\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eStrong experience with distributed systems, APIs, or data processing pipelines.\u003c/li\u003e\u003cli\u003eFamiliarity with cloud environments (AWS, GCP, or Azure) and CI/CD workflows.\u003c/li\u003e\u003cli\u003eExperience in open-source contributions or building developer tools.\u003c/li\u003e\u003cli\u003eComfort working in fast-paced, research-driven environments.\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eBonus:\u003c/strong\u003e\u003c/p\u003e\u003cp\u003eRecognized performance in Kaggle, Codeforces, or ICPC/TopCoder contests.\u003c/p\u003e\u003cp\u003eDeep curiosity for performance tuning, scalability, and elegant code design.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003ePerks of Freelancing with Turing\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eWork fully remotely, from anywhere.\u003c/li\u003e\u003cli\u003eCollaborate with world-class AI labs and frontier research companies.\u003c/li\u003e\u003cli\u003eTackle real engineering challenges with high autonomy and ownership.\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eOffer Details:\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eCommitment: 40 hours/week with 4-hour PST overlap with PST zone.\u003c/li\u003e\u003cli\u003eType: Contractor (no medical/paid leave).\u003c/li\u003e\u003cli\u003eDuration: 2 months  (start date: immediately).\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eEvaluation Process (≈75 mins):\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eTechnical Interview (60 mins): Deep discussion of Python problem-solving, architecture, and system design.\u003c/li\u003e\u003cli\u003eOnboarding \u0026amp; Culture Fit (15 mins)\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e",
-          "min_experience": "48.0",
-          "max_experience": "120.0",
-          "max_ctc": null,
-          "min_ctc": null,
-          "valid_till": "2025-12-31",
-          "created_at": "2025-12-09T08:49:42.000Z",
-          "job_type": "lateral",
-          "preferred_cities": "Remote",
-          "preferred_notice_period": 90,
-          "merit_based_skills": [
-              {
-                  "id": 37191,
-                  "title": "Python Libraries",
-                  "proficiency": 0
-              },
-              {
-                  "id": 37192,
-                  "title": "SQL",
-                  "proficiency": 0
-              },
-              {
-                  "id": 37194,
-                  "title": "EDA Fundamentals",
-                  "proficiency": 0
-              }
-          ],
-          "application_status": null,
-          "contest_skills": [
-              {
-                  "id": 37191,
-                  "skill_id": 37191,
-                  "proficiency": 0,
-                  "skill_title": "Python Libraries",
-                  "tag_name": "mbe_and_contest"
-              },
-              {
-                  "id": 37192,
-                  "skill_id": 37192,
-                  "proficiency": 0,
-                  "skill_title": "SQL",
-                  "tag_name": "mbe_and_contest"
-              },
-              {
-                  "id": 37194,
-                  "skill_id": 37194,
-                  "proficiency": 0,
-                  "skill_title": "EDA Fundamentals",
-                  "tag_name": "mbe_and_contest"
-              }
-          ],
-          "application_infos": [
-              {
-                  "name": "application_form",
-                  "completed": false,
-                  "required": true
-              },
-              {
-                  "name": "resume_choice_select",
-                  "completed": false,
-                  "required": true
-              },
-              {
-                  "name": "internal_test_issued",
-                  "completed": false,
-                  "required": false
-              }
-          ],
-          "expiry": "2025-12-31T02:30:00.000Z",
-          "application_id": null,
-          "user_company_status": null,
-          "application_last_upated_at": null,
-          "job_source": null,
-          "job_profile_id": 174065,
-          "job_profile_status": "active",
-          "date_posted_on": "2025-12-09T10:46:21.000Z",
-          "open_for_discussion_ctc": true,
-          "applied_on": null,
-          "seniority_level": null,
-          "role_type": "internship",
-          "duration": 2,
-          "stipend": null,
-          "eligibility_criteria": {
-              "is_eligible": true,
-              "reasons": [
-                  {
-                      "label": "placed_mentee",
-                      "text": "You can apply for this job as you are not placed yet",
-                      "show_text": false,
-                      "is_eligible": true,
-                      "data": null
-                  },
-                  {
-                      "label": "diversity",
-                      "text": "You can apply for this job as the diversity criteria is not applicable",
-                      "show_text": false,
-                      "is_eligible": true,
-                      "data": null
-                  },
-                  {
-                      "label": "experience",
-                      "text": "You have the required experience for this job profile",
-                      "show_text": true,
-                      "is_eligible": true,
-                      "data": null
-                  },
-                  {
-                      "label": "notice_period",
-                      "text": "You can apply for this job as the notice period criteria is not applicable",
-                      "show_text": false,
-                      "is_eligible": true,
-                      "data": null
-                  },
-                  {
-                      "label": "skills",
-                      "text": "You are eligible to apply for this job profile as you have cleared all the required skills",
-                      "show_text": false,
-                      "is_eligible": true,
-                      "data": {
-                          "EDA Fundamentals": {
-                              "id": null,
-                              "contests": {
-                                  "cleared": true,
-                                  "details": "Skill obtained through DSML DAV Fundamentals on 2025-11-11",
-                                  "join_link": "",
-                                  "show_text": true
-                              },
-                              "skills": {
-                                  "cleared": true,
-                                  "details": "You have cleared this skill.",
-                                  "show_text": false
-                              },
-                              "skill_name": "EDA Fundamentals",
-                              "skill_id": 37194
-                          },
-                          "Python Libraries": {
-                              "id": null,
-                              "contests": {
-                                  "cleared": true,
-                                  "details": "Skill obtained through DSML DAV Fundamentals on 2025-11-11",
-                                  "join_link": "",
-                                  "show_text": true
-                              },
-                              "skills": {
-                                  "cleared": true,
-                                  "details": "You have cleared this skill.",
-                                  "show_text": false
-                              },
-                              "skill_name": "Python Libraries",
-                              "skill_id": 37191
-                          },
-                          "SQL": {
-                              "id": null,
-                              "contests": {
-                                  "cleared": true,
-                                  "details": "Skill obtained through DSML DAV Fundamentals on 2025-11-11",
-                                  "join_link": "",
-                                  "show_text": true
-                              },
-                              "skills": {
-                                  "cleared": true,
-                                  "details": "You have cleared this skill.",
-                                  "show_text": false
-                              },
-                              "skill_name": "SQL",
-                              "skill_id": 37192
-                          }
-                      }
-                  },
-                  {
-                      "label": "tech_stacks",
-                      "text": "You are eligible to apply for this job profile as you have all the required experience skills",
-                      "show_text": false,
-                      "is_eligible": true,
-                      "data": {
-                          "Python": {
-                              "id": 174065,
-                              "skill_id": 1213,
-                              "skill_type": "SubTopic",
-                              "proficiency_period": 48,
-                              "owner_id": 174065,
-                              "proficiency": 3,
-                              "skill_name": "Python",
-                              "eligible_topic": null,
-                              "eligible_skill_id": 7596,
-                              "data": {
-                                  "cleared": true,
-                                  "details": "You have cleared this experience skill.",
-                                  "show_text": false
-                              }
-                          }
-                      }
-                  },
-                  {
-                      "label": "career_guide",
-                      "text": null,
-                      "show_text": null,
-                      "is_eligible": true,
-                      "data": {
-                          "career_guide_completed": true
-                      }
-                  }
-              ]
-          },
-          "exceptional_job": false,
-          "is_relevant": false,
-          "recruiters": [
-              {
-                  "name": "Anuj",
-                  "avatar": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/users/avatars/001/068/420/original/unnamed.png?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251210%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251210T081644Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=ea551d70d7ed5a8c96bd6621b91059da0428b35fbd1eb049f7d3061437609c6b",
-                  "slack_dm_link": null,
-                  "email": "anuj.gairola@scaler.com",
-                  "position": "team lead"
-              },
-              {
-                  "name": "Roslina",
-                  "avatar": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/users/avatars/001/635/249/original/unnamed.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251210%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251210T081644Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=aed00d50dbf3108d99133cfea0a15846a94b6e4d25217b6290ebbaf5534b3bde",
-                  "slack_dm_link": null,
-                  "email": "roslina.nayak@scaler.com",
-                  "position": "recruiter"
-              }
-          ],
-          "hiring_steps": [
-              {
-                  "id": 1094710,
-                  "company_id": 3883,
-                  "job_profile_id": 174065,
-                  "step_name": "Technical Round 1",
-                  "interview_type": "Online Interview",
-                  "interview_mode_id": 15,
-                  "is_first_step": null,
-                  "created_at": "2025-12-09T08:49:44.000Z",
-                  "updated_at": "2025-12-09T09:27:56.000Z",
-                  "step_meta_data": null,
-                  "parent_company_step_id": null,
-                  "next_step_id": 1094745
-              },
-              {
-                  "id": 1094745,
-                  "company_id": 3883,
-                  "job_profile_id": 174065,
-                  "step_name": "Delivery Round",
-                  "interview_type": "Online Interview",
-                  "interview_mode_id": 15,
-                  "is_first_step": null,
-                  "created_at": "2025-12-09T09:27:56.000Z",
-                  "updated_at": "2025-12-09T09:27:56.000Z",
-                  "step_meta_data": null,
-                  "parent_company_step_id": null,
-                  "next_step_id": 1094711
-              },
-              {
-                  "id": 1094711,
-                  "company_id": 3883,
-                  "job_profile_id": 174065,
-                  "step_name": "Culture Fit/HR Discussion",
-                  "interview_type": "Online Interview",
-                  "interview_mode_id": 16,
-                  "is_first_step": null,
-                  "created_at": "2025-12-09T08:49:44.000Z",
-                  "updated_at": "2025-12-09T09:27:56.000Z",
-                  "step_meta_data": null,
-                  "parent_company_step_id": null,
-                  "next_step_id": 1094705
-              }
-          ],
-          "experience_based_skills": [
-              {
-                  "id": 321075,
-                  "proficiency_period": 48,
-                  "owner_id": 174065,
-                  "proficiency": 1,
-                  "eligible_topic": null,
-                  "eligible_skill_id": null,
-                  "type": "SubTopic",
-                  "title": "Machine Learning"
-              }
-          ],
-          "flexible_experience_lower": false,
-          "flexible_experience_upper": false,
-          "application_count": 11,
-          "application_timeline": null,
-          "previous_roles": null,
-          "visa_sponsorship": null,
-          "benefits": null,
-          "collect_rejection_reason_feedback": null,
-          "collect_recommendations_feedback": "true",
-          "form_builder_enabled": true,
-          "collect_recruiter_csat": null,
-          "existing_recruiter_csat": null,
-          "highlights": {}
-      },
-      "relationships": {
-          "company": {
-              "data": {
-                  "id": "3883",
-                  "type": "company"
-              }
-          },
-          "hiring_regions": {
-              "data": []
-          }
-      }
-  },
-  "included": [
-      {
-          "id": "3883",
-          "type": "company",
-          "attributes": {
-              "name": "Turing",
-              "id": 3883,
-              "slug": "turing",
-              "employee_count": "0-10",
-              "company_website": "https://www.turing.com/?s=na_organic_linkedin-profile_customer\u0026n=organic\u0026utm_source=na_organic_linkedin-profile_customer\u0026utm_medium=organic",
-              "vision": "",
-              "benefits": null,
-              "perks": "",
-              "tagline": "Spin up your engineering dream team with Turing",
-              "logo": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/companies/images/000/003/883/original/turingcom_logo_%281%29.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251210%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251210T081644Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=fbbb615351e4d2b2063b9ba46927718146d6263ee416a7ee316a537396d69dbe",
-              "location": "California",
-              "tier": null,
-              "category": "service",
-              "company_vision": "\u003cp\u003eWe now live in a remote-first world and every company is in a race to find the best remote engineers. There are so many amazing engineers all over the world. Turing’s mission is to help unleash the world’s untapped human potential. More than 300 companies, including those backed by Google Ventures, Bloomberg, Andreessen, Founders Fund, and Kleiner are already using Turing to spin up their engineering dream teams. Turing’s hiring platform combines the planetary reach and AI to deliver your ideal engineers in order to help you spin up your engineering dream team. Our deep matching intelligence finds the best Turing developers across 100+ skills like React, Node, Python, Golang, Angular, Swift, Java, and many more. As part of our rigorous vetting process, we also review software engineers’ technical abilities, English skills, and remote working capabilities. Turing ensures time zone overlap, transparency, and reliable communication in order to make remote development easy for you after the match. The Turing team has deep expertise in AI and building engineering dream teams in the U.S. at top companies. Turing company is backed by well-known investors like Facebook’s initial CTO (Adam D’Angelo), executives from Google, Facebook, Amazon, Twitter, Founders Fund (investors in Facebook, Tesla, Asana, etc). Turing.com is led by serial A.I. entrepreneurs Jonathan Siddharth and Vijay Krishnan, their last A.I. firm leveraged remote talent and had a successful acquisition.\u003c/p\u003e"
-          }
-      }
-  ]
+    "data": {
+        "id": "166142",
+        "type": "job_profile",
+        "attributes": {
+            "title": "Data Scientist",
+            "slug": "senior-r-d-engineer-afbda84f-0bb9-4ccc-9264-5b399367b4b8",
+            "job_desc": "/job_descs/original/missing.png",
+            "job_desc_text": "\u003cp\u003e\u003cstrong\u003eKEY SKILLS AND EXPERIENCE\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eMasters Degree in Statistics, Machine Learning, Data Science, Computer Science, or Computer Engineering (PhD preferred).\u003c/li\u003e\u003cli\u003e3-4 years of significant professional experience in Data Science.\u003c/li\u003e\u003cli\u003eExpertise in Machine Learning\u003c/li\u003e\u003cli\u003eProficient in both supervised and unsupervised learning.\u003c/li\u003e\u003cli\u003eTechniques: Linear and logistic regressions, random forests, gradient boosting, neural networks (RNN, LSTM, CNN), text mining, topic extraction, NLP, K-Means, decision trees.\u003c/li\u003e\u003cli\u003eApplications: Computer vision, Generative AI, Language Models (e.g., GPT), Retrieval-Augmented Generation (RAG), Agentic AI\u003c/li\u003e\u003cli\u003eHands on experience with Natural Language Processing, Language Models (SLM, LLM, CLM), Generative AI and Agentic AI\u003c/li\u003e\u003cli\u003eDeep knowledge of Python (including libraries such as scikit-learn, Pandas, NumPy).\u003c/li\u003e\u003cli\u003eExperience with Jupyter, Spark/Scala or R, PostgreSQL, and ELK stack.\u003c/li\u003e\u003cli\u003eProficiency in Java, Kubernetes, Docker, and microservices-oriented architecture.\u003c/li\u003e\u003cli\u003eFamiliarity with MLOps practices and collaborative tools (e.g., GitLab).\u003c/li\u003e\u003cli\u003eEnglish fluency (both written and verbal) is mandatory.\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003cstrong\u003eHOW YOU WILL CONTRIBUTE AND WHAT YOU WILL LEARN\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eTechnical Leadership: Drive and manage projects, activities, and technical responsibilities within your area of expertise, ensuring high-quality deliverables and documentation.\u003c/li\u003e\u003cli\u003eInnovation \u0026amp; Development: Develop tools, methods, and processes; write requirements and specifications to guide R\u0026amp;D efforts.\u003c/li\u003e\u003cli\u003eCollaboration \u0026amp; Support: Partner with internal and external teams, providing training, consulting, and technical support to Product Management, Customer Interface, and business lines.\u003c/li\u003e\u003cli\u003eProblem-Solving \u0026amp; Efficiency: Lead serious issue resolution, seek cost-efficient solutions, and foster change in the environment.\u003c/li\u003e\u003cli\u003ePredictive Analysis: Apply deep expertise in predictive analytics to deliver insights and solutions.\u003c/li\u003e\u003cli\u003ePlanning \u0026amp; Organization: Contribute to resource planning, work estimation, and process optimization.\u003c/li\u003e\u003c/ul\u003e",
+            "min_experience": "36.0",
+            "max_experience": "60.0",
+            "max_ctc": null,
+            "min_ctc": null,
+            "valid_till": "2025-07-09",
+            "created_at": "2025-07-08T08:29:30.000Z",
+            "job_type": "lateral",
+            "preferred_cities": "Bangalore",
+            "preferred_notice_period": 30,
+            "merit_based_skills": [
+                {
+                    "id": 37191,
+                    "title": "Python Libraries",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37192,
+                    "title": "SQL",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37194,
+                    "title": "EDA Fundamentals",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37195,
+                    "title": "Supervised Learning",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37196,
+                    "title": "Unsupervised Learning",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37198,
+                    "title": "Natural Language Processing",
+                    "proficiency": 0
+                }
+            ],
+            "application_status": null,
+            "contest_skills": [
+                {
+                    "id": 37191,
+                    "skill_id": 37191,
+                    "proficiency": 0,
+                    "skill_title": "Python Libraries",
+                    "tag_name": "mbe_and_contest"
+                },
+                {
+                    "id": 37192,
+                    "skill_id": 37192,
+                    "proficiency": 0,
+                    "skill_title": "SQL",
+                    "tag_name": "mbe_and_contest"
+                },
+                {
+                    "id": 37194,
+                    "skill_id": 37194,
+                    "proficiency": 0,
+                    "skill_title": "EDA Fundamentals",
+                    "tag_name": "mbe_and_contest"
+                },
+                {
+                    "id": 37195,
+                    "skill_id": 37195,
+                    "proficiency": 0,
+                    "skill_title": "Supervised Learning",
+                    "tag_name": "mbe_and_contest"
+                },
+                {
+                    "id": 37196,
+                    "skill_id": 37196,
+                    "proficiency": 0,
+                    "skill_title": "Unsupervised Learning",
+                    "tag_name": "mbe_and_contest"
+                },
+                {
+                    "id": 37198,
+                    "skill_id": 37198,
+                    "proficiency": 0,
+                    "skill_title": "Natural Language Processing",
+                    "tag_name": "mbe_and_contest"
+                }
+            ],
+            "application_infos": [
+                {
+                    "name": "application_form",
+                    "completed": false,
+                    "required": true
+                },
+                {
+                    "name": "resume_choice_select",
+                    "completed": false,
+                    "required": true
+                },
+                {
+                    "name": "internal_test_issued",
+                    "completed": false,
+                    "required": false
+                }
+            ],
+            "expiry": null,
+            "application_id": null,
+            "user_company_status": null,
+            "application_last_upated_at": null,
+            "job_source": null,
+            "job_profile_id": 166142,
+            "job_profile_status": "active",
+            "date_posted_on": "2025-07-08T08:41:41.000Z",
+            "open_for_discussion_ctc": true,
+            "applied_on": null,
+            "seniority_level": "Mid - Senior",
+            "role_type": "full_time",
+            "duration": null,
+            "stipend": null,
+            "eligibility_criteria": {
+                "is_eligible": false,
+                "reasons": [
+                    {
+                        "label": "placed_mentee",
+                        "text": "You can apply for this job as you are not placed yet",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "diversity",
+                        "text": "You can apply for this job as the diversity criteria is not applicable",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "experience",
+                        "text": "You cannot apply since you do not have the required minimum experience",
+                        "show_text": true,
+                        "is_eligible": false,
+                        "data": null
+                    },
+                    {
+                        "label": "notice_period",
+                        "text": "You can apply for this job as the notice period criteria is met",
+                        "show_text": true,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "skills",
+                        "text": "You are not eligible to apply for this job profile as you have not cleared all the required skills",
+                        "show_text": false,
+                        "is_eligible": false,
+                        "data": {
+                            "EDA Fundamentals": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/dav_fundamentals_dsml",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 9018954,
+                                    "show_text": false
+                                },
+                                "skill_name": "EDA Fundamentals",
+                                "skill_id": 37194
+                            },
+                            "Natural Language Processing": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/nlp_test",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 7956868,
+                                    "show_text": false
+                                },
+                                "skill_name": "Natural Language Processing",
+                                "skill_id": 37198
+                            },
+                            "Python Libraries": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/dav-libraries",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 9018952,
+                                    "show_text": false
+                                },
+                                "skill_name": "Python Libraries",
+                                "skill_id": 37191
+                            },
+                            "SQL": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/sql_test_dsml",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 9623215,
+                                    "show_text": false
+                                },
+                                "skill_name": "SQL",
+                                "skill_id": 37192
+                            },
+                            "Supervised Learning": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/ml2_test",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 8923464,
+                                    "show_text": false
+                                },
+                                "skill_name": "Supervised Learning",
+                                "skill_id": 37195
+                            },
+                            "Unsupervised Learning": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this contest.",
+                                    "join_link": "https://www.scaler.com/test/a/ml3_test",
+                                    "show_text": false
+                                },
+                                "skills": {
+                                    "cleared": false,
+                                    "details": "You have not cleared this skill.",
+                                    "mentee_module_id": 8923465,
+                                    "show_text": false
+                                },
+                                "skill_name": "Unsupervised Learning",
+                                "skill_id": 37196
+                            }
+                        }
+                    },
+                    {
+                        "label": "tech_stacks",
+                        "text": "You are not eligible to apply for this job profile as you do not have all the required experience skills",
+                        "show_text": false,
+                        "is_eligible": false,
+                        "data": {
+                            "Python": {
+                                "id": 166142,
+                                "skill_id": 1213,
+                                "skill_type": "SubTopic",
+                                "proficiency_period": 36,
+                                "owner_id": 166142,
+                                "proficiency": 3,
+                                "skill_name": "Python",
+                                "eligible_topic": null,
+                                "eligible_skill_id": 7596,
+                                "data": {
+                                    "cleared": false,
+                                    "details": "You don't have this experience skill.",
+                                    "show_text": true
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "label": "career_guide",
+                        "text": null,
+                        "show_text": null,
+                        "is_eligible": true,
+                        "data": {
+                            "career_guide_completed": true
+                        }
+                    }
+                ]
+            },
+            "exceptional_job": false,
+            "is_relevant": false,
+            "recruiters": [
+                {
+                    "name": "Krishnaa Bistha",
+                    "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
+                    "slack_dm_link": null,
+                    "email": "krishnaa.bistha@scaler.com",
+                    "position": "team lead"
+                },
+                {
+                    "name": "Jennifer r",
+                    "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
+                    "slack_dm_link": null,
+                    "email": "jennifer.r@scaler.com",
+                    "position": "recruiter"
+                }
+            ],
+            "hiring_steps": [
+                {
+                    "id": 1064268,
+                    "company_id": 3347,
+                    "job_profile_id": 166142,
+                    "step_name": "Technical Discussion",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 15,
+                    "is_first_step": null,
+                    "created_at": "2025-07-08T08:29:31.000Z",
+                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": null,
+                    "next_step_id": 1064269
+                },
+                {
+                    "id": 1064269,
+                    "company_id": 3347,
+                    "job_profile_id": 166142,
+                    "step_name": "Technical Discussion",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 15,
+                    "is_first_step": null,
+                    "created_at": "2025-07-08T08:29:31.000Z",
+                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": null,
+                    "next_step_id": 1064270
+                },
+                {
+                    "id": 1064270,
+                    "company_id": 3347,
+                    "job_profile_id": 166142,
+                    "step_name": "HM Discussion",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 16,
+                    "is_first_step": null,
+                    "created_at": "2025-07-08T08:29:31.000Z",
+                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": null,
+                    "next_step_id": 1064271
+                },
+                {
+                    "id": 1064271,
+                    "company_id": 3347,
+                    "job_profile_id": 166142,
+                    "step_name": "HR Discussion",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 17,
+                    "is_first_step": null,
+                    "created_at": "2025-07-08T08:29:31.000Z",
+                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": null,
+                    "next_step_id": 1064264
+                }
+            ],
+            "experience_based_skills": [
+                {
+                    "id": 318873,
+                    "proficiency_period": 24,
+                    "owner_id": 166142,
+                    "proficiency": 1,
+                    "eligible_topic": null,
+                    "eligible_skill_id": null,
+                    "type": "SubTopic",
+                    "title": "Generative AI"
+                }
+            ],
+            "flexible_experience_lower": false,
+            "flexible_experience_upper": false,
+            "application_count": 0,
+            "application_timeline": null,
+            "previous_roles": null,
+            "visa_sponsorship": null,
+            "benefits": null,
+            "collect_rejection_reason_feedback": null,
+            "collect_recommendations_feedback": "true",
+            "form_builder_enabled": true,
+            "collect_recruiter_csat": null,
+            "existing_recruiter_csat": null,
+            "highlights": {
+                "confidence_note": "The Job Description provides excellent, specific details on technology, techniques, and responsibilities. However, the About the Company section is very high-level and lacks specifics on team culture, benefits, or project impact, leading to a MEDIUM score.",
+                "keywords": [
+                    "Generative AI",
+                    "LLMs \u0026 RAG",
+                    "Technical Leadership",
+                    "Python \u0026 Spark",
+                    "B2B Technology"
+                ],
+                "quality_score": "MEDIUM",
+                "highlights": [
+                    "Apply your expertise in cutting-edge technologies like Generative AI, Language Models (LLMs), and RAG at a global B2B leader pioneering the future of networks and cloud.",
+                    "Take on technical leadership responsibilities, driving data science projects and guiding R\u0026D efforts to shape the next generation of digital services.",
+                    "Work with a comprehensive and modern tech stack including Python, Spark, Docker, Kubernetes, and MLOps practices.",
+                    "Collaborate across diverse teams, including Product Management and Customer Interface, providing technical consulting to solve complex, real-world problems."
+                ]
+            }
+        },
+        "relationships": {
+            "company": {
+                "data": {
+                    "id": "3347",
+                    "type": "company"
+                }
+            },
+            "hiring_regions": {
+                "data": []
+            }
+        }
+    },
+    "included": [
+        {
+            "id": "3347",
+            "type": "company",
+            "attributes": {
+                "name": "Nokia (3347)",
+                "id": 3347,
+                "slug": "nokia",
+                "employee_count": null,
+                "company_website": "https://www.nokia.com",
+                "vision": null,
+                "benefits": null,
+                "perks": null,
+                "tagline": null,
+                "logo": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/companies/images/000/003/347/original/nokia_logo.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251211%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251211T083555Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=3afc80d471a6ba2856d0abdffaa09e58a71187d65b4edd3432860351c602118c",
+                "location": "Bangalore",
+                "tier": null,
+                "category": "large_enterprise",
+                "company_vision": "\u003cp\u003eAt Nokia, we create technology that helps the world act together. \u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003eAs a B2B technology innovation leader, we are pioneering the future where networks meet cloud to realize the full potential of digital in every industry.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003eThrough networks that sense, think and act, we work with our customers and partners to create the digital services and applications of the future. \u003c/p\u003e\u003cp\u003e\u003c/p\u003e"
+            }
+        }
+    ]
 }

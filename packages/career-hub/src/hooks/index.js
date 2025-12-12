@@ -6,3 +6,4 @@ export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useAccumulatedJobs } from './useAccumulatedJobs';
 export { useAsyncFilterOptions } from './useAsyncFilterOptions';
 export { useFilterMetaOptions } from './useFilterMetaOptions';
+export { default as useHasCompletedScreeningCall } from './useHasCompletedScreeningCall';

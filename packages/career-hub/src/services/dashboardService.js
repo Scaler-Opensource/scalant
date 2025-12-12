@@ -5,7 +5,7 @@ const dashboardService = careerHubApi.injectEndpoints({
     fetchProcessCounts: builder.query({
       query: () => ({
         url: '/job-tracker/fetch-process-counts/',
-        method: 'GET',
+        method: 'POST',
       }),
       transformResponse: (response) => {
         return response.process_counts || {};
@@ -18,4 +18,3 @@ const dashboardService = careerHubApi.injectEndpoints({
 export const { useFetchProcessCountsQuery } = dashboardService;
 
 export default dashboardService;
-

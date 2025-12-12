@@ -1,29 +1,17 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectActiveTab } from '../../store/jobPreviewSelectors';
 import { setActiveTab } from '../../store/jobPreviewSlice';
+import { useJobPreview } from '../../contexts';
 import JobDescriptionTab from '../JobDescriptionTab';
 import SkillsRequiredTab from '../SkillsRequiredTab';
 import styles from './ExpandedJobViewBody.module.scss';
 
-/**
- * ExpandedJobViewBody - Tab container component for expanded job view
- * 
- * Layout Component:
- * - Manages tab structure using Ant Design Tabs
- * - Handles tab switching via Redux
- * - Contains two tabs: "About Role" and "Requirements"
- */
-const ExpandedJobViewBody = ({
-  jobData,
-  companyData,
-  eligibilityCriteria,
-  currentTab,
-}) => {
+const ExpandedJobViewBody = () => {
   const dispatch = useDispatch();
   const activeTab = useSelector(selectActiveTab);
+  const { jobData, companyData, eligibilityCriteria } = useJobPreview();
 
   const handleTabChange = (key) => {
     dispatch(setActiveTab(key));
@@ -56,11 +44,7 @@ const ExpandedJobViewBody = ({
         onChange={handleTabChange}
         items={tabItems.map((item) => ({
           ...item,
-          children: (
-            <div data-tab-key={item.key}>
-              {item.children}
-            </div>
-          ),
+          children: <div data-tab-key={item.key}>{item.children}</div>,
         }))}
         className={styles.tabs}
       />
@@ -68,18 +52,4 @@ const ExpandedJobViewBody = ({
   );
 };
 
-ExpandedJobViewBody.propTypes = {
-  jobData: PropTypes.object.isRequired,
-  companyData: PropTypes.object,
-  eligibilityCriteria: PropTypes.object,
-  currentTab: PropTypes.string,
-};
-
-ExpandedJobViewBody.defaultProps = {
-  companyData: null,
-  eligibilityCriteria: null,
-  currentTab: 'all',
-};
-
 export default ExpandedJobViewBody;
-

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
-import CompanyLogo from './CompanyLogo';
+import CompanyLogo from '../../CompanyLogo';
 import JobTitleAndCompany from './JobTitleAndCompany';
 import JobCardActions from './JobCardActions';
 import styles from './JobCardHeader.module.scss';
