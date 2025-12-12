@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { DoubleRightOutlined } from '@ant-design/icons';
+import { APPLICATION_STATUS } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
 import { useHasCompletedScreeningCall } from '../../hooks';
 import { useJobPreview } from '../../contexts';
@@ -12,7 +13,8 @@ const INTERVIEW_QUESTIONS_URL =
 const InterviewExperiencesBanner = () => {
   const hasCompletedScreeningCall = useHasCompletedScreeningCall();
   const { jobData, companyData } = useJobPreview();
-  const { appliedOn, title: jobTitle } = jobData || {};
+  const { appliedOn, title: jobTitle, applicationStatus } = jobData || {};
+  const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const { name: companyName } = companyData || {};
 
   const handleClick = useCallback(() => {
@@ -24,7 +26,7 @@ const InterviewExperiencesBanner = () => {
     );
   }, [companyName, jobTitle]);
 
-  if (!hasCompletedScreeningCall || !appliedOn) {
+  if (!hasCompletedScreeningCall || !appliedOn || isWithdrawn) {
     return null;
   }
 

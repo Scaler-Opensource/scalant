@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { message } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons';
 
+import { APPLICATION_STATUS } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
 import { useIssueScreeningCallMutation } from '../../services/screeningCallService';
 import { useHasCompletedScreeningCall } from '../../hooks';
@@ -12,7 +13,8 @@ import styles from './ScreeningCallBanner.module.scss';
 const ScreeningCallBanner = () => {
   const hasCompletedScreeningCall = useHasCompletedScreeningCall();
   const { jobData } = useJobPreview();
-  const { appliedOn } = jobData || {};
+  const { appliedOn, applicationStatus } = jobData || {};
+  const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const [handleScreeningCall, { isLoading }] = useIssueScreeningCallMutation();
 
   const handleClick = useCallback(async () => {
@@ -25,7 +27,7 @@ const ScreeningCallBanner = () => {
     }
   }, [handleScreeningCall]);
 
-  if (hasCompletedScreeningCall || !appliedOn) {
+  if (hasCompletedScreeningCall || !appliedOn || isWithdrawn) {
     return null;
   }
 

@@ -67,12 +67,17 @@ const SaveButton = () => {
 
 const ApplyButton = () => {
   const { jobData, eligibilityCriteria } = useJobPreview();
-  const { appliedOn } = jobData || {};
+  const { appliedOn, applicationStatus } = jobData || {};
   const { isEligible } = eligibilityCriteria || {};
+  const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
 
   const handleApply = () => {
     // TODO: Implement apply logic
   };
+
+  if (isWithdrawn) {
+    return null;
+  }
 
   if (appliedOn) {
     return (

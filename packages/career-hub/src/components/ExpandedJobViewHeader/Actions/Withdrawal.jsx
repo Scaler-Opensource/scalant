@@ -9,7 +9,7 @@ import {
   Space,
   Typography,
 } from 'antd';
-import { CloseCircleFilled, WarningFilled } from '@ant-design/icons';
+import { CheckCircleFilled, WarningFilled } from '@ant-design/icons';
 import { APPLICATION_STATUS } from '../../../utils/constants';
 import { ICONS } from '../../../utils/icons';
 import { NON_WITHDRAW_STATUSES } from '../../../utils/jobCard/eligibility';
@@ -115,8 +115,8 @@ const Withdrawal = () => {
   if (applicationStatus === APPLICATION_STATUS.WITHDRAWN) {
     return (
       <div className={styles.withdrawnText}>
-        <CloseCircleFilled />
-        <Typography.Text>Your Application has been Withdrawn</Typography.Text>
+        <CheckCircleFilled />
+        Your Application has been Withdrawn
       </div>
     );
   }
