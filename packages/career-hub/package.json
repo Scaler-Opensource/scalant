@@ -1,6 +1,6 @@
 {
   "name": "@scalant/career-hub",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Career Hub package for MIT",
   "license": "MIT",
   "main": "dist/career-hub.umd.js",
