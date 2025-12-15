@@ -26,8 +26,7 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "prop-types": "^15.8.1",
-    "react-router-dom": "^7.10.1"
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
     "@reduxjs/toolkit": "^1.9.3",
