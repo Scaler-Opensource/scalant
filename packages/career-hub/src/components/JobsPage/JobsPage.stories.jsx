@@ -1,5 +1,6 @@
 import React from 'react';
 import JobsPage from './JobsPage';
+import userProfileData from './userProfileData.json';
 
 export default {
   title: 'Components/JobsPage',
@@ -16,6 +17,8 @@ export function Default() {
     archived: 0,
   };
 
-  return <JobsPage processCounts={processCounts} />;
+  return (
+    <JobsPage processCounts={processCounts} userProfileData={userProfileData} />
+  );
 }
 

@@ -3,6 +3,7 @@ import { DEFAULT_PROCESS_COUNTS } from '../utils/constants';
 
 const initialState = {
   processCounts: DEFAULT_PROCESS_COUNTS,
+  userProfileData: null,
   filterModalOpen: false,
   jobAlertModalOpen: false,
 };
@@ -13,6 +14,9 @@ const dashboardSlice = createSlice({
   reducers: {
     setProcessCounts: (state, action) => {
       state.processCounts = action.payload;
+    },
+    setUserProfileData: (state, action) => {
+      state.userProfileData = action.payload;
     },
     openFilterModal: (state) => {
       state.filterModalOpen = true;
@@ -31,6 +35,7 @@ const dashboardSlice = createSlice({
 
 export const {
   setProcessCounts,
+  setUserProfileData,
   openFilterModal,
   closeFilterModal,
   openJobAlertModal,
