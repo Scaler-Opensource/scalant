@@ -1,20 +1,3 @@
-// Components
-export {
-  HelloWorld,
-  ApplicationForm,
-  FormContainer,
-  FormContent,
-  FormHeader,
-  JobCard,
-  EligibilityTag,
-  SaveButton,
-  JobsPage,
-  JobsHeader,
-  JobsList,
-  ProfileDetails,
-  JobDetails,
-} from './components';
-
 // Layouts
 export { JobsLayout } from './layouts';
 
@@ -33,3 +16,5 @@ export { default as store } from './store';
 
 // Default export
 export { default } from './components/HelloWorld';
+
+export { default as JobsPage } from './components/JobsPage';
