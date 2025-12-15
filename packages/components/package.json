@@ -1,6 +1,6 @@
 {
   "name": "@scalant/components",
-  "version": "7.0.0-alpha.0",
+  "version": "7.1.0-alpha.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -21,5 +21,5 @@
     "build": "vite build",
     "storybook": "start-storybook -p 6006"
   },
-  "gitHead": "658186bdd37a8d0f560215b7f94cfa7ec00b3a47"
+  "gitHead": "a867a3538899b37de30eac85794e5b97b55f462d"
 }
