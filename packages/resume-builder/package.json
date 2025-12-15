@@ -1,6 +1,6 @@
 {
   "name": "@scalant/resume-builder",
-  "version": "12.6.3",
+  "version": "12.6.4",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -26,5 +26,5 @@
     "build": "vite build",
     "storybook": "start-storybook -p 6006"
   },
-  "gitHead": "7bc7d78eecf483c2113726b24659e517d9c15b52"
+  "gitHead": "545221d26e744ded21f204905a49913c9bd51a9b"
 }
