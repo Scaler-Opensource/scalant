@@ -69,3 +69,34 @@ export const SORTING_OPTIONS = {
     mapping: { property: 'date_posted_on', direction: 'DESC' },
   },
 };
+
+export const ALERT_FREQUENCY = {
+  REALTIME: 0,
+  DAILY: 1,
+  ALTERNATE_DAY: 2,
+  WEEKLY: 7,
+};
+
+export const ALERT_FREQUENCY_LABELS = {
+  [ALERT_FREQUENCY.REALTIME]: 'Realtime',
+  [ALERT_FREQUENCY.DAILY]: 'Daily',
+  [ALERT_FREQUENCY.ALTERNATE_DAY]: 'Every alternate day',
+  [ALERT_FREQUENCY.WEEKLY]: 'Weekly',
+};
+
+export const ALERT_NOTIFICATION_TYPE = {
+  EMAIL: 'email',
+  WHATSAPP: 'whatsapp',
+  BOTH: 'both',
+};
+
+export const ALERT_NOTIFICATION_LABELS = {
+  [ALERT_NOTIFICATION_TYPE.EMAIL]: 'On Email',
+  [ALERT_NOTIFICATION_TYPE.WHATSAPP]: 'On Whatsapp',
+  [ALERT_NOTIFICATION_TYPE.BOTH]: 'On Email & Whatsapp',
+};
+
+export const ALERT_STATUS = {
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+};

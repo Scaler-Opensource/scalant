@@ -138,6 +138,49 @@ app.get('/user/skills/all', (req, res) => {
   }
 });
 
+// POST /job-tracker/v1/alerts/
+app.post('/job-tracker/v1/alerts/', (req, res) => {
+  const data = readJsonFile('alerts.json');
+  // Optionally generate a new ID for each request
+  if (data.alert && data.alert.id) {
+    // Generate a random ID between 10000000 and 99999999
+    data.alert.id = Math.floor(Math.random() * 90000000) + 10000000;
+  }
+  res.status(200).json(data);
+});
+
+// GET /job-tracker/v1/alerts/list
+app.get('/job-tracker/v1/alerts/list', (req, res) => {
+  const data = readJsonFile('alerts-list.json');
+  res.status(200).json(data);
+});
+
+// PATCH /job-tracker/v1/alerts/update-status
+app.patch('/job-tracker/v1/alerts/update-status', (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  const { id, status } = req.body;
+  // Dummy endpoint - just returns success
+  res.status(200).json({ success: true });
+});
+
+// DELETE /job-tracker/v1/alerts/:id
+app.delete('/job-tracker/v1/alerts/:id', (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  const id = req.params.id;
+  // Dummy endpoint - just returns success
+  res.status(200).json({ success: true });
+});
+
+// PUT /job-tracker/v1/alerts/:id
+app.put('/job-tracker/v1/alerts/:id', (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  const id = req.params.id;
+  // eslint-disable-next-line no-unused-vars
+  const { alert } = req.body;
+  // Dummy endpoint - just returns success
+  res.status(200).json({ success: true });
+});
+
 // Start server
 const PORT = 8000;
 app.listen(PORT, () => {

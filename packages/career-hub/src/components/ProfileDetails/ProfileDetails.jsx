@@ -19,3 +19,4 @@ ProfileDetails.defaultProps = {
 
 export default ProfileDetails;
 
+
