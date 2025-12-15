@@ -7,6 +7,15 @@ export default {
 };
 
 export function Default() {
-  return <JobsPage />;
+  const processCounts = {
+    all: 153,
+    relevant: 0,
+    draft: 0,
+    applications: 9,
+    saved: 0,
+    archived: 0,
+  };
+
+  return <JobsPage processCounts={processCounts} />;
 }
 

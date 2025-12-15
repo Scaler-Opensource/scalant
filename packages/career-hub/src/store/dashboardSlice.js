@@ -1,14 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_PROCESS_COUNTS } from '../utils/constants';
 
 const initialState = {
-  processCounts: {
-    all: 0,
-    relevant: 0,
-    draft: 0,
-    applications: 0,
-    saved: 0,
-    archived: 0,
-  },
+  processCounts: DEFAULT_PROCESS_COUNTS,
   filterModalOpen: false,
   jobAlertModalOpen: false,
 };

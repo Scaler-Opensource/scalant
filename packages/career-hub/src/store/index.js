@@ -7,6 +7,7 @@ import dashboardReducer from './dashboardSlice';
 import filterFormReducer from './filterFormSlice';
 import metaDataReducer from './metaDataSlice';
 import filterOptionsReducer from './filterOptionsSlice';
+import alertReducer from './alertSlice';
 
 const rootReducer = combineReducers({
   [careerHubApi.reducerPath]: careerHubApi.reducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   filterForm: filterFormReducer,
   metaData: metaDataReducer,
   filterOptions: filterOptionsReducer,
+  alerts: alertReducer,
 });
 
 export default rootReducer;

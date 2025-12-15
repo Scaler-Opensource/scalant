@@ -34,8 +34,22 @@
 .createAlertContent {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2rem;
   margin-top: 1.6rem;
+  overflow-x: hidden;
+  max-width: 100%;
+
+  :global(.ant-form-item) {
+    margin-bottom: 0px !important;
+  }
+
+  :global(.ant-form-item-control) {
+    max-width: 100%;
+  }
+
+  :global(.ant-form-item-control-input) {
+    max-width: 100%;
+  }
 }
 
 .formField {
@@ -62,29 +76,20 @@
   gap: 0.8rem;
 }
 
-.existingAlertContent {
-  padding: 2rem 0;
-  text-align: center;
-  color: $colors-neutral-text-color-text-secondary;
-}
 
 .modal {
-  :global(.ant-modal) {
-    max-height: 60rem;
-    display: flex;
-    flex-direction: column;
-  }
 
   :global(.ant-modal-content) {
     display: flex;
     flex-direction: column;
     max-height: 60rem;
     overflow: hidden;
+    width: 100%;
   }
 
   :global(.ant-modal-body) {
     overflow-y: auto;
-    flex: 1;
+    width: 100%;
   }
 }
 
@@ -92,4 +97,14 @@
   display: flex;
   gap: 1.6rem;
   flex-wrap: wrap;
+}
+
+
+.drawerHeaderSubtitle {
+  font-weight: 400;
+  font-size: $h6-size;
+}
+
+.filterIcon {
+  color: $colors-brand-primary-color-primary;
 }

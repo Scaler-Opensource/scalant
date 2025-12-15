@@ -1,5 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import JobsLayout from '../../layouts/JobsLayout';
 import JobsHeader from '../JobsHeader';
 import ProfileDetails from '../ProfileDetails';
@@ -10,16 +11,26 @@ import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
 import FilterDrawer from '../FilterDrawer';
 import JobAlertModal from '../JobAlert/JobAlertModal';
-import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import { setProcessCounts } from '../../store/dashboardSlice';
+import {
+  SIDER_WIDTH,
+  TAG_TO_TAB_MAPPING,
+  DEFAULT_PROCESS_COUNTS,
+} from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
-function JobsPage() {
+function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS }) {
+  const dispatch = useDispatch();
   const selectedJobId = useSelector(
     (state) => state.scalantCareerHub.layout.selectedJobId
   );
   const currentTab = useSelector(
     (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
   );
+
+  useEffect(() => {
+    dispatch(setProcessCounts(processCounts));
+  }, [processCounts, dispatch]);
 
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
@@ -60,5 +71,16 @@ function JobsPage() {
     </>
   );
 }
+
+JobsPage.propTypes = {
+  processCounts: PropTypes.shape({
+    all: PropTypes.number,
+    relevant: PropTypes.number,
+    draft: PropTypes.number,
+    applications: PropTypes.number,
+    saved: PropTypes.number,
+    archived: PropTypes.number,
+  }),
+};
 
 export default JobsPage;
