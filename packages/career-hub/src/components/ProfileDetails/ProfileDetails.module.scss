@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   padding: 1.2rem 1.6rem;
+  position: sticky;
+  top: 9.6rem;
+  background-color: $colors-neutral-color-bg-base;
+  min-height: calc(100vh - 9.6rem);
 }
 
 
