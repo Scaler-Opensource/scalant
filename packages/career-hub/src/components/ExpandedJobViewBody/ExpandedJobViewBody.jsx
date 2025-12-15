@@ -29,7 +29,7 @@ const ExpandedJobViewBody = () => {
       label: JOB_BODY_TABS.REQUIREMENTS.label,
       children: <SkillsRequiredTab />,
     },
-  ];
+  ].filter(Boolean);
 
   return (
     <div className={styles.bodyContainer}>
