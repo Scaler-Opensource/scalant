@@ -36,9 +36,8 @@ const readJsonFile = (filename) => {
 // POST /job-tracker/fetch-all-jobs/
 app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
   const data = readJsonFile('fetch-all-jobs.json');
-  const pageNumber = req.body?.page_number || 1;
-  const manipulatedData = manipulateJobData(data, pageNumber);
-  res.status(200).json(manipulatedData);
+  console.log('data', data);
+  res.status(200).json(data);
 });
 
 // POST /job-tracker/fetch-pipeline-jobs/

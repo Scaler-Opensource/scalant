@@ -29,7 +29,7 @@ const ExpandedJobView = ({
   isActive,
   currentTab,
 }) => {
-  const { data, isLoading, error } = useGetJobPreviewQuery(jobId, {
+  const { data, isLoading, isFetching, error } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || !isActive,
   });
 
@@ -37,7 +37,7 @@ const ExpandedJobView = ({
     return null;
   }
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <Card className={`${styles.expandedJobView} ${styles.loadingCard}`}>
         <Spin size="large" />
