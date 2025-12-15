@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classnames from 'classnames';
 import {
   ClockCircleTwoTone,
@@ -10,12 +10,20 @@ import {
   ELIGIBILITY_TYPES,
   determineJobTag,
 } from '../../utils/jobCard/eligibility';
+import { JOB_BODY_TABS } from '../../utils/constants';
 import { toCamelCase } from '../../utils/caseUtil';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
 import styles from './JobHighlights.module.scss';
 
-const ActionAlert = ({ eligibilityStatus, metric }) => {
+const ActionAlert = ({ eligibilityStatus, metric, onScrollToEnd }) => {
+  const { setActiveTab } = useJobPreview();
+
+  const handleClick = () => {
+    setActiveTab(JOB_BODY_TABS.REQUIREMENTS.key);
+    onScrollToEnd();
+  };
+
   if (eligibilityStatus === ELIGIBILITY_TYPES.ineligible) {
     return (
       <div className={classnames(styles.actionAlert, styles.ineligible)}>
@@ -34,9 +42,10 @@ const ActionAlert = ({ eligibilityStatus, metric }) => {
         icon={<ClockCircleTwoTone className={styles.actionAlertIcon} />}
         title={`Eligible to apply in ${metric} more steps!`}
         description="Complete these three test to become eligible to apply!"
-        buttonText="Complete steps"
+        buttonText="Complete Tasks"
         buttonIcon={<EditOutlined />}
         className={styles.stepsToApply}
+        onClick={handleClick}
       />
     );
   }
@@ -119,6 +128,7 @@ const JobHighlights = () => {
     highlights: contextHighlights,
     eligibilityCriteria,
   } = useJobPreview();
+  const ref = useRef(null);
   const { highlights, keywords } =
     contextHighlights || jobData?.highlights || {};
   const { tag: eligibilityStatus, count: metric } = determineJobTag(
@@ -126,13 +136,39 @@ const JobHighlights = () => {
     eligibilityCriteria || {}
   );
 
+  const handleScrollToEnd = () => {
+    // Scrolling to the bottom of the action alert (bringing it to the middle)
+    if (ref.current && typeof window !== 'undefined') {
+      const element = ref.current;
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + window.pageYOffset;
+      const elementHeight = elementRect.height;
+      const viewportHeight = window.innerHeight;
+
+      const targetScrollPosition =
+        elementTop + elementHeight - viewportHeight / 2;
+
+      window.scrollTo({
+        top: targetScrollPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   if (jobData?.appliedOn || !highlights?.length) {
     return null;
   }
 
   return (
-    <div className={classnames(styles.container, styles[eligibilityStatus])}>
-      <ActionAlert eligibilityStatus={eligibilityStatus} metric={metric} />
+    <div
+      ref={ref}
+      className={classnames(styles.container, styles[eligibilityStatus])}
+    >
+      <ActionAlert
+        eligibilityStatus={eligibilityStatus}
+        metric={metric}
+        onScrollToEnd={handleScrollToEnd}
+      />
       <HighlightsList highlights={highlights} />
       <Keywords keywords={keywords} eligibilityStatus={eligibilityStatus} />
       <Exceptions exceptionalJob={jobData?.exceptionalJob} />

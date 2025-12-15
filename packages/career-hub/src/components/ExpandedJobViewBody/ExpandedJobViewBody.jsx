@@ -1,39 +1,33 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectActiveTab } from '../../store/jobPreviewSelectors';
-import { setActiveTab } from '../../store/jobPreviewSlice';
+import { JOB_BODY_TABS } from '../../utils/constants';
 import { useJobPreview } from '../../contexts';
+import ApplicationTimelineTab from '../ApplicationTimelineTab';
 import JobDescriptionTab from '../JobDescriptionTab';
 import SkillsRequiredTab from '../SkillsRequiredTab';
 import styles from './ExpandedJobViewBody.module.scss';
 
 const ExpandedJobViewBody = () => {
-  const dispatch = useDispatch();
-  const activeTab = useSelector(selectActiveTab);
-  const { jobData, companyData, eligibilityCriteria } = useJobPreview();
+  const { activeTab, setActiveTab, jobData } = useJobPreview();
+  const { applicationTimeline } = jobData || {};
 
-  const handleTabChange = (key) => {
-    dispatch(setActiveTab(key));
-  };
+  const isTimelineAvailable = applicationTimeline?.timeline?.length > 0;
 
   const tabItems = [
-    {
-      key: 'about-role',
-      label: 'About Role',
-      children: (
-        <JobDescriptionTab jobData={jobData} companyData={companyData} />
-      ),
+    isTimelineAvailable && {
+      key: JOB_BODY_TABS.APPLICATION_TIMELINE.key,
+      label: JOB_BODY_TABS.APPLICATION_TIMELINE.label,
+      children: <ApplicationTimelineTab />,
     },
     {
-      key: 'requirements',
-      label: 'Requirements',
-      children: (
-        <SkillsRequiredTab
-          eligibilityCriteria={eligibilityCriteria}
-          jobData={jobData}
-        />
-      ),
+      key: JOB_BODY_TABS.ABOUT_ROLE.key,
+      label: JOB_BODY_TABS.ABOUT_ROLE.label,
+      children: <JobDescriptionTab />,
+    },
+    {
+      key: JOB_BODY_TABS.REQUIREMENTS.key,
+      label: JOB_BODY_TABS.REQUIREMENTS.label,
+      children: <SkillsRequiredTab />,
     },
   ];
 
@@ -41,12 +35,9 @@ const ExpandedJobViewBody = () => {
     <div className={styles.bodyContainer}>
       <Tabs
         activeKey={activeTab}
-        onChange={handleTabChange}
-        items={tabItems.map((item) => ({
-          ...item,
-          children: <div data-tab-key={item.key}>{item.children}</div>,
-        }))}
         className={styles.tabs}
+        items={tabItems}
+        onChange={setActiveTab}
       />
     </div>
   );

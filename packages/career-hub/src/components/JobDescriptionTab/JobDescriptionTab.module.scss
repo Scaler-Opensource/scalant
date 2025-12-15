@@ -2,3 +2,53 @@
   width: 100%;
 }
 
+.contentContainer {
+  gap: 0;
+  width: 100%;
+}
+
+.descriptionTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: $colors-neutral-text-color-text-secondary;
+  display: flex;
+  justify-content: space-between;
+}
+
+.descriptionText {
+  color: $colors-neutral-text-color-text-secondary;
+
+  p {
+    margin-bottom: 0.2rem;
+  }
+
+  ul {
+    padding-inline-start: 2rem;
+  }
+
+  * {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+}
+
+.descriptionLink {
+  font-weight: 400;
+}
+
+.list {
+  padding-inline-start: 2rem;
+}
+
+.steps {
+  width: 100%;
+}
+
+.descriptionContainer {
+  width: 100%;
+  gap: 1rem;
+}
+
+.container {
+  gap: 3rem;
+}

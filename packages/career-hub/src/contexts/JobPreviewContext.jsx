@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useGetJobPreviewQuery } from '../services/jobPreviewApi';
 
 const JobPreviewContext = createContext(null);
@@ -11,17 +11,35 @@ const JobPreviewContext = createContext(null);
  * @param {boolean} props.skip - Whether to skip the query (optional)
  * @param {React.ReactNode} props.children - Child components
  */
-export const JobPreviewProvider = ({ jobId, skip = false, children }) => {
+export const JobPreviewProvider = ({
+  country = 'IN',
+  jobId,
+  openMockInterviewModal = (skillId, skillName) => {
+    console.log('Method not implemented. We should get it from MIT');
+    console.log(skillId, skillName);
+  },
+  openResume = () => {
+    console.log('Method not implemented. We should get it from MIT');
+  },
+  skip = false,
+  children,
+}) => {
   const { data, isLoading, error, refetch } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || skip,
   });
+  const [activeTab, setActiveTab] = useState();
 
   const value = {
+    activeTab,
+    setActiveTab,
+    country,
     jobId,
     data,
     isLoading,
     error,
     refetch,
+    openMockInterviewModal,
+    openResume,
     jobData: data?.jobData,
     companyData: data?.companyData,
     highlights: data?.highlights,

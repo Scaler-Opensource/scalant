@@ -1,6 +1,5 @@
 import React from 'react';
 import { Alert, App, Card, Spin } from 'antd';
-
 import { JobPreviewProvider } from '../../contexts';
 import { useGetJobPreviewQuery } from '../../services/jobPreviewApi';
 import ExpandedJobViewBody from '../ExpandedJobViewBody';
@@ -10,14 +9,14 @@ import InterviewExperiencesBanner from '../InterviewExperiencesBanner';
 import ScreeningCallBanner from '../ScreeningCallBanner';
 import styles from './ExpandedJobView.module.scss';
 
-const ExpandedJobViewContent = ({ currentTab }) => {
+const ExpandedJobViewContent = () => {
   return (
     <div className={styles.expandedJobView}>
       <ExpandedJobViewHeader />
       <JobHighlights />
       <ScreeningCallBanner />
       <InterviewExperiencesBanner />
-      <ExpandedJobViewBody currentTab={currentTab} />
+      <ExpandedJobViewBody />
     </div>
   );
 };

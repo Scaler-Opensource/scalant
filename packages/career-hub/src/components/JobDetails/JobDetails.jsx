@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { setActiveJob } from '../../store/jobPreviewSlice';
 import ExpandedJobView from '../ExpandedJobView/ExpandedJobView';
 
 /**
@@ -11,15 +9,6 @@ import ExpandedJobView from '../ExpandedJobView/ExpandedJobView';
  * This component just sets the active job ID in Redux for UI state tracking.
  */
 function JobDetails({ jobId, className }) {
-  const dispatch = useDispatch();
-
-  // Update active job when jobId changes
-  useEffect(() => {
-    if (jobId) {
-      dispatch(setActiveJob(jobId));
-    }
-  }, [jobId, dispatch]);
-
   if (!jobId) {
     return null;
   }

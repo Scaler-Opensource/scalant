@@ -1,4 +1,17 @@
-.skillsRequiredTab {
+.container {
   width: 100%;
 }
 
+.dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.successDot {
+  background-color: $colors-base-green-6;
+}
+
+.errorDot {
+  background-color: $colors-brand-error-color-error;
+}

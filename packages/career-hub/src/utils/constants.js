@@ -71,3 +71,18 @@ export const SORTING_OPTIONS = {
     mapping: { property: 'date_posted_on', direction: 'DESC' },
   },
 };
+
+export const JOB_BODY_TABS = {
+  ABOUT_ROLE: {
+    key: 'about-role',
+    label: 'About Role',
+  },
+  REQUIREMENTS: {
+    key: 'requirements',
+    label: 'Requirements',
+  },
+  APPLICATION_TIMELINE: {
+    key: 'application-timeline',
+    label: 'Application Timeline',
+  },
+};
