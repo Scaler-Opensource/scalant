@@ -100,3 +100,12 @@ export const ALERT_STATUS = {
   ACTIVE: 'active',
   INACTIVE: 'inactive',
 };
+
+export const DEFAULT_PROCESS_COUNTS = {
+  all: 0,
+  relevant: 0,
+  draft: 0,
+  applications: 0,
+  saved: 0,
+  archived: 0,
+};

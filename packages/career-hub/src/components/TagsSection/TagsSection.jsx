@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Tag } from 'antd';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTab } from '../../store/filterSlice';
-import { setProcessCounts } from '../../store/dashboardSlice';
-import { useFetchProcessCountsQuery } from '../../services/dashboardService';
 import {
   JOB_FILTER_TAGS,
   TAG_TO_TAB_MAPPING,
@@ -21,14 +19,6 @@ function TagsSection() {
   const processCounts = useSelector(
     (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
   );
-
-  const { data: countsData } = useFetchProcessCountsQuery();
-
-  useEffect(() => {
-    if (countsData) {
-      dispatch(setProcessCounts(countsData));
-    }
-  }, [countsData, dispatch]);
 
   const handleTagClick = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
