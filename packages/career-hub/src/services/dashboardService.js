@@ -15,6 +15,4 @@ const dashboardService = careerHubApi.injectEndpoints({
   }),
 });
 
-export const { useFetchProcessCountsQuery } = dashboardService;
-
 export default dashboardService;
