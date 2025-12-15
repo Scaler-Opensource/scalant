@@ -21,7 +21,14 @@ const ExpandedJobViewContent = () => {
   );
 };
 
-const ExpandedJobView = ({ jobId, isActive, currentTab }) => {
+const ExpandedJobView = ({
+  country,
+  openMockInterviewModal,
+  openResume,
+  jobId,
+  isActive,
+  currentTab,
+}) => {
   const { data, isLoading, error } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || !isActive,
   });
@@ -59,7 +66,13 @@ const ExpandedJobView = ({ jobId, isActive, currentTab }) => {
 
   return (
     <App>
-      <JobPreviewProvider jobId={jobId} skip={!isActive}>
+      <JobPreviewProvider
+        country={country}
+        openMockInterviewModal={openMockInterviewModal}
+        openResume={openResume}
+        jobId={jobId}
+        skip={!isActive}
+      >
         <ExpandedJobViewContent currentTab={currentTab} />
       </JobPreviewProvider>
     </App>

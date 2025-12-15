@@ -13,7 +13,7 @@ import JobAlertModal from '../JobAlert/JobAlertModal';
 import { SIDER_WIDTH, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
-function JobsPage() {
+function JobsPage({ country, openMockInterviewModal, openResume }) {
   const selectedJobId = useSelector(
     (state) => state.scalantCareerHub.layout.selectedJobId
   );
@@ -23,7 +23,12 @@ function JobsPage() {
 
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
-    <JobDetails jobId={selectedJobId} />
+    <JobDetails
+      country={country}
+      openMockInterviewModal={openMockInterviewModal}
+      openResume={openResume}
+      jobId={selectedJobId}
+    />
   ) : (
     <ProfileDetails />
   );
