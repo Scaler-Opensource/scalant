@@ -30,14 +30,13 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@reduxjs/toolkit', 'react-redux', 'antd'],
+      external: ['react', 'react-dom', '@reduxjs/toolkit', 'react-redux'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           '@reduxjs/toolkit': 'ReduxToolkit',
           'react-redux': 'ReactRedux',
-          antd: 'antd',
         },
       },
     },
