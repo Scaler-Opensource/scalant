@@ -234,7 +234,7 @@
   "userCompanyProfile": {
     "id": 621332,
     "preferredRole": "Engineering Leadership",
-    "preferredLocation": "anywhere_in_india",
+    "preferredLocation": "Hyderabad/Gurgaon/Noida",
     "resume": "/resumes/original/missing.png",
     "resumeFileName": null,
     "city": "Bangalore",
@@ -254,14 +254,14 @@
     "workAuthorization": null,
     "servingNotice": null,
     "availableJoiningDate": null,
-    "buyoutNotice": false,
+    "buyoutNotice": true,
     "showUserCity": false
   },
   "userAcademicProfile": null,
   "mentee": {
     "id": 4966,
     "coursePaused": false,
-    "careersHubProduct": null,
+    "careersHubProduct": "data_science",
     "careersHubCountry": "in"
   },
   "userEducations": [

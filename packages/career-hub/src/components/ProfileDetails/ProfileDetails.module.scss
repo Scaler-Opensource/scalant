@@ -1,0 +1,44 @@
+.profileName {
+  margin-bottom: 0 !important;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.6rem;
+}
+
+
+.profileDetailsItems {
+  margin-top: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.preferencesTitle {
+  margin-bottom: 0 !important;
+}
+
+.preferencesDivider {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+.preferencesContent {
+  margin-top: 0.8rem;
+}
+
+.preferenceLabel {
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+  margin-right: 0.5rem;
+}
+
+.preferenceValue {
+  font-size: $h5-size;
+  color: $colors-neutral-text-color-text;
+}
+
+.preferenceTag {
+  margin-top: 0.6rem;
+}
+
