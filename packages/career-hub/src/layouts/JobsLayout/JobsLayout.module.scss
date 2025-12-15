@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-color: $colors-neutral-color-white;
   margin-right: 2rem;
+  max-height: calc(100vh - 9.6rem);
 }
 
 .header {

@@ -35,3 +35,8 @@
   padding: 1rem;
   color: $colors-neutral-text-color-text-tertiary;
 }
+
+.jobsList {
+  max-height: calc(100vh - 9.6rem);
+  overflow-y: auto;
+}

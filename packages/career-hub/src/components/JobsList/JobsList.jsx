@@ -121,7 +121,7 @@ function JobsList({
           searches, and saves
         </Text>
       </Space>
-      <div>
+      <div className={styles.jobsList}>
         {jobs.map((jobData) => (
           <JobCard
             key={jobData.id}

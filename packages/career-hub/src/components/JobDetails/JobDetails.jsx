@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
 import ExpandedJobView from '../ExpandedJobView/ExpandedJobView';
+import styles from './JobDetails.module.scss';
 
 /**
  * JobDetails - Component that displays expanded job view
@@ -20,7 +23,7 @@ function JobDetails({
   }
 
   return (
-    <div className={className}>
+    <div className={classNames(styles.jobDetails, className)}>
       <ExpandedJobView
         country={country}
         openMockInterviewModal={openMockInterviewModal}
