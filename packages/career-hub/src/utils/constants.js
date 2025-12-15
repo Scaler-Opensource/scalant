@@ -7,6 +7,8 @@ import {
 
 export const APPLICATION_STATUS = {
   APPLICATION_FORM: 'application_form',
+  SAVED: 'Saved',
+  WITHDRAWN: 'Application Withdrawn',
 };
 
 export const SIDER_WIDTH = {
@@ -67,6 +69,21 @@ export const SORTING_OPTIONS = {
     label: 'Most Recent',
     value: 'mostRecent',
     mapping: { property: 'date_posted_on', direction: 'DESC' },
+  },
+};
+
+export const JOB_BODY_TABS = {
+  ABOUT_ROLE: {
+    key: 'about-role',
+    label: 'About Role',
+  },
+  REQUIREMENTS: {
+    key: 'requirements',
+    label: 'Requirements',
+  },
+  APPLICATION_TIMELINE: {
+    key: 'application-timeline',
+    label: 'Application Timeline',
   },
 };
 

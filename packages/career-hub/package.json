@@ -1,6 +1,6 @@
 {
   "name": "@scalant/career-hub",
-  "version": "1.0.0",
+  "version": "3.6.0-alpha.0",
   "description": "Career Hub package for MIT",
   "license": "MIT",
   "main": "dist/career-hub.umd.js",
@@ -26,18 +26,11 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "prop-types": "^15.8.1",
-    "react-router-dom": "^7.10.1"
-  },
-  "peerDependencies": {
-    "@reduxjs/toolkit": "^1.9.3",
-    "antd": "^5.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-redux": "^8.0.5"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
     "vite": "^4.3.9"
-  }
+  },
+  "gitHead": "3b977844723b82970f77f1150326e2220ce93582"
 }

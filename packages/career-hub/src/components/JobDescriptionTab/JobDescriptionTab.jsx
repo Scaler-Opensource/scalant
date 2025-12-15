@@ -1,43 +1,48 @@
 import React from 'react';
-import { Space } from 'antd';
-import PropTypes from 'prop-types';
+import { Space, Typography } from 'antd';
+import InterviewExperiencesBanner from '../InterviewExperiencesBanner';
+import Company from './Company';
+import Description from './Description';
+import Benefits from './Benefits';
+import HiringSteps from './HiringSteps';
 import styles from './JobDescriptionTab.module.scss';
 
-/**
- * JobDescriptionTab - Tab content container for "About Role" tab
- * 
- * Layout Component:
- * - Container for job description content components
- * - Will contain: JobDescription, Benefits, VisaSponsorship, PreviousRoles, PostApplicationProcess
- * - Currently placeholder 
- */
-const JobDescriptionTab = ({ jobData, companyData }) => {
+const BasicInfo = () => {
   return (
-    <div className={styles.jobDescriptionTab}>
-      <Space direction="vertical" size="large" style={{ width: '100%' }}>
-        {/* Content components will be added here in PR 2 */}
-        <div>Job Description Tab - Content components to be added</div>
-      </Space>
-    </div>
+    <Space
+      direction="vertical"
+      size="large"
+      className={styles.descriptionContainer}
+    >
+      <Typography.Title level={4}>Job Description</Typography.Title>
+      <Company />
+      <Description />
+      <Benefits />
+    </Space>
   );
 };
 
-JobDescriptionTab.propTypes = {
-  jobData: PropTypes.shape({
-    jobDescText: PropTypes.string,
-    benefits: PropTypes.string,
-    visaSponsorship: PropTypes.string,
-    previousRolesData: PropTypes.array,
-    applicationTimeline: PropTypes.object,
-    applicationStatus: PropTypes.string,
-  }),
-  companyData: PropTypes.object,
+const PostApplicationProcess = () => {
+  return (
+    <Space
+      direction="vertical"
+      size="large"
+      className={styles.descriptionContainer}
+    >
+      <Typography.Title level={4}>Post Application Process</Typography.Title>
+      <HiringSteps />
+    </Space>
+  );
 };
 
-JobDescriptionTab.defaultProps = {
-  jobData: {},
-  companyData: {},
+const JobDescriptionTab = () => {
+  return (
+    <Space direction="vertical" size="large" className={styles.container}>
+      <BasicInfo />
+      <PostApplicationProcess />
+      <InterviewExperiencesBanner />
+    </Space>
+  );
 };
 
 export default JobDescriptionTab;
-

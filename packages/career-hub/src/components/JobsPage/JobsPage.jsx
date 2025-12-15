@@ -22,7 +22,13 @@ import {
 } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
-function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS, userProfileData }) {
+function JobsPage({
+  country,
+  openMockInterviewModal,
+  openResume,
+  processCounts = DEFAULT_PROCESS_COUNTS,
+  userProfileData,
+}) {
   const dispatch = useDispatch();
   const selectedJobId = useSelector(
     (state) => state.scalantCareerHub.layout.selectedJobId
@@ -43,7 +49,12 @@ function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS, userProfileData }) {
 
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
-    <JobDetails jobId={selectedJobId} />
+    <JobDetails
+      country={country}
+      openMockInterviewModal={openMockInterviewModal}
+      openResume={openResume}
+      jobId={selectedJobId}
+    />
   ) : (
     <ProfileDetails />
   );

@@ -57,8 +57,8 @@ app.post('/job-tracker/relevancy/', (req, res) => {
   res.status(200).json(manipulatedData);
 });
 
-// GET /job-tracker/fetch-process-counts/
-app.get('/job-tracker/fetch-process-counts/', (req, res) => {
+// POST /job-tracker/fetch-process-counts/
+app.post('/job-tracker/fetch-process-counts/', (req, res) => {
   const data = readJsonFile('fetch-process-counts.json');
   res.status(200).json(data);
 });
@@ -136,6 +136,23 @@ app.get('/user/skills/all', (req, res) => {
     // Return full data structure with both all_skills and items
     res.status(200).json(skillsData);
   }
+});
+
+// POST /api/v3/careers-hub/screening-call/
+app.post('/api/v3/careers-hub/screening-call/', (req, res) => {
+  const data = {
+    url: 'https://www.google.com',
+  };
+  res.status(200).json(data);
+});
+
+// PATCH /job-tracker/update-application/
+app.patch('/job-tracker/update-application/', (req, res) => {
+  const data = {
+    success: true,
+    data: req.body,
+  };
+  res.status(200).json(data);
 });
 
 // POST /job-tracker/v1/alerts/

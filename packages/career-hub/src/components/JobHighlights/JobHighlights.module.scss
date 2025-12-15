@@ -1,0 +1,140 @@
+
+.container {
+  display: flex;
+  width: 100%;
+  padding: 1.6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid $colors-neutral-border-color-border;
+  background: white;
+}
+
+.actionAlert {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  border: 1px solid;
+  gap: 0.8rem;
+  width: 100%;
+  margin-bottom: 0.8rem;
+
+  &.ineligible {
+    border-color: $colors-base-red-3;
+    background: $colors-base-red-1;
+    color: $colors-base-red-6;
+  }
+
+  &.stepsToApply {
+    border-color: $colors-base-blue-2;
+    background: $colors-base-blue-1;
+    color: $colors-base-blue-5;
+  }
+}
+
+.actionAlertIcon {
+  padding-top: 0.4rem;
+  align-self: flex-start;
+}
+
+.stepsToApply {
+  border-color: $colors-base-blue-2;
+  background: $colors-base-blue-1;
+  color: $colors-base-blue-5;
+}
+
+.actionAlertTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.eligible {
+  border-color: $colors-base-green-3;
+  background: $colors-base-green-1;
+}
+
+.title {
+  color: $colors-neutral-text-color-text-secondary;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2.2rem;
+}
+
+.highlightsList {
+  color: $colors-neutral-text-color-text;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+  padding-inline-start: 2rem;
+}
+
+.keywordsList {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.keyword {
+  display: flex;
+  padding: 0.1rem 0.8rem;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.4rem;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 2rem;
+
+  &.eligible {
+    background: $colors-base-green-2;
+    color: $colors-base-green-8;
+  }
+
+  &.stepsToApply {
+    background: $colors-base-blue-1;
+    color: $colors-base-blue-5;
+  }
+}
+
+.exceptions {
+  display: flex;
+  gap: 0.4rem;
+  padding-top: 0.8rem;
+}
+
+.exceptionsIconContainer {
+  padding-top: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+.exceptionsIcon {
+  font-size: 2rem;
+}
+
+.exceptionsTitle {
+  color: $colors-neutral-text-color-text-secondary;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.exception, .exceptionItem {
+  color: $colors-neutral-text-color-text-secondary;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+}
+
+.exceptionsList {
+  padding-inline-start: 2rem;
+  margin-block-end: 0;
+  padding-top: 0.4rem;
+}
