@@ -11,7 +11,10 @@ import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
 import FilterDrawer from '../FilterDrawer';
 import JobAlertModal from '../JobAlert/JobAlertModal';
-import { setProcessCounts } from '../../store/dashboardSlice';
+import {
+  setProcessCounts,
+  setUserProfileData,
+} from '../../store/dashboardSlice';
 import {
   SIDER_WIDTH,
   TAG_TO_TAB_MAPPING,
@@ -19,7 +22,7 @@ import {
 } from '../../utils/constants';
 import styles from './JobsPage.module.scss';
 
-function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS }) {
+function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS, userProfileData }) {
   const dispatch = useDispatch();
   const selectedJobId = useSelector(
     (state) => state.scalantCareerHub.layout.selectedJobId
@@ -31,6 +34,12 @@ function JobsPage({ processCounts = DEFAULT_PROCESS_COUNTS }) {
   useEffect(() => {
     dispatch(setProcessCounts(processCounts));
   }, [processCounts, dispatch]);
+
+  useEffect(() => {
+    if (userProfileData) {
+      dispatch(setUserProfileData(userProfileData));
+    }
+  }, [userProfileData, dispatch]);
 
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
@@ -81,6 +90,7 @@ JobsPage.propTypes = {
     saved: PropTypes.number,
     archived: PropTypes.number,
   }),
+  userProfileData: PropTypes.object,
 };
 
 export default JobsPage;
