@@ -65,7 +65,7 @@ const ResumeSkills = () => {
     (reason) => reason.label === 'tech_stacks'
   );
 
-  if (!techStackReasons) {
+  if (!techStackReasons?.data) {
     return null;
   }
 
