@@ -37,7 +37,8 @@ const readJsonFile = (filename) => {
 app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
   const data = readJsonFile('fetch-all-jobs.json');
   const pageNumber = req.body?.page_number || 1;
-  const manipulatedData = manipulateJobData(data, pageNumber);
+  const perPage = req.body?.page_size || req.body?.per_page || 18;
+  const manipulatedData = manipulateJobData(data, pageNumber, perPage);
   res.status(200).json(manipulatedData);
 });
 
@@ -45,7 +46,8 @@ app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
 app.post('/job-tracker/fetch-pipeline-jobs/', (req, res) => {
   const data = readJsonFile('fetch-pipeline-jobs.json');
   const pageNumber = req.body?.page_number || 1;
-  const manipulatedData = manipulateJobData(data, pageNumber);
+  const perPage = req.body?.page_size || req.body?.per_page || 18;
+  const manipulatedData = manipulateJobData(data, pageNumber, perPage);
   res.status(200).json(manipulatedData);
 });
 
@@ -53,7 +55,8 @@ app.post('/job-tracker/fetch-pipeline-jobs/', (req, res) => {
 app.post('/job-tracker/relevancy/', (req, res) => {
   const data = readJsonFile('relevancy.json');
   const pageNumber = req.body?.page_number || 1;
-  const manipulatedData = manipulateJobData(data, pageNumber);
+  const perPage = req.body?.page_size || req.body?.per_page || 18;
+  const manipulatedData = manipulateJobData(data, pageNumber, perPage);
   res.status(200).json(manipulatedData);
 });
 
