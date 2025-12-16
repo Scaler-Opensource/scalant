@@ -113,16 +113,7 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
         <Input placeholder="Give your job alert a name" />
       </Form.Item>
 
-      <Form.Item
-        label="Job Function"
-        name="job_functions"
-        rules={[
-          {
-            required: true,
-            message: 'Please select at least one job function',
-          },
-        ]}
-      >
+      <Form.Item label="Job Function" name="job_functions">
         <Select
           mode="multiple"
           placeholder="Select job function"
@@ -136,11 +127,7 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
         </Select>
       </Form.Item>
 
-      <Form.Item
-        label="Minimum CTC (in Lakhs)?"
-        name="min_ctc"
-        rules={[{ required: true, message: 'Please select minimum CTC' }]}
-      >
+      <Form.Item label="Minimum CTC (in Lakhs)?" name="min_ctc">
         <Select placeholder="Select range" className={styles.formInput}>
           {ctcRanges.map((range) => (
             <Option key={range.value} value={range.value}>
@@ -150,13 +137,7 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
         </Select>
       </Form.Item>
 
-      <Form.Item
-        label="Locations?"
-        name="locations"
-        rules={[
-          { required: true, message: 'Please select at least one location' },
-        ]}
-      >
+      <Form.Item label="Locations?" name="locations">
         <Select
           mode="multiple"
           placeholder="Select locations"
@@ -173,35 +154,19 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
       <Form.Item label="Experience (Years)?">
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item
-              name="min_experience"
-              rules={[
-                { required: true, message: 'Please enter minimum experience' },
-              ]}
-              noStyle
-            >
+            <Form.Item name="min_experience" noStyle>
               <Input placeholder="Minimum" type="number" />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              name="max_experience"
-              rules={[
-                { required: true, message: 'Please enter maximum experience' },
-              ]}
-              noStyle
-            >
+            <Form.Item name="max_experience" noStyle>
               <Input placeholder="Maximum" type="number" />
             </Form.Item>
           </Col>
         </Row>
       </Form.Item>
 
-      <Form.Item
-        label="Alert Frequency"
-        name="frequency"
-        rules={[{ required: true, message: 'Please select alert frequency' }]}
-      >
+      <Form.Item label="Alert Frequency" name="frequency">
         <Radio.Group
           className={styles.radioGroup}
           onChange={(e) => {
@@ -222,13 +187,7 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
       </Form.Item>
 
       {frequency === 'realtime' && (
-        <Form.Item
-          label="Alert mode"
-          name="notification_type"
-          rules={[
-            { required: true, message: 'Please select notification type' },
-          ]}
-        >
+        <Form.Item label="Alert mode" name="notification_type">
           <Radio.Group className={styles.radioGroup}>
             <Radio value={ALERT_NOTIFICATION_TYPE.EMAIL}>Email</Radio>
             <Radio value={ALERT_NOTIFICATION_TYPE.WHATSAPP}>Whatsapp</Radio>
@@ -241,4 +200,3 @@ function JobAlertForm({ form, initialValues, onSubmit, isSubmitting }) {
 }
 
 export default JobAlertForm;
-

@@ -9,4 +9,3 @@ export default {
 export function Default() {
   return <JobsHeader />;
 }
-
