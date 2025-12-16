@@ -1,6 +1,6 @@
 {
   "name": "@scalant/career-hub",
-  "version": "3.10.0",
+  "version": "3.10.1",
   "description": "Career Hub package for MIT",
   "license": "MIT",
   "main": "dist/career-hub.umd.js",
@@ -28,5 +28,5 @@
     "@vitejs/plugin-react": "^4.0.0",
     "vite": "^4.3.9"
   },
-  "gitHead": "859e969cf79a05a9e3a6cc20866af609f58473c5"
+  "gitHead": "eb8c572878578587a5a567851c38e6c28e3a56e6"
 }
