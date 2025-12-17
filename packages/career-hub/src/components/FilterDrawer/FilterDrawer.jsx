@@ -7,6 +7,7 @@ import { closeFilterModal } from '../../store/dashboardSlice';
 import { updateFiltersFromForm } from '../../store/filterSlice';
 import { resetForm } from '../../store/filterFormSlice';
 import { clearAllOptions } from '../../store/filterOptionsSlice';
+import { updateURLWithFilters } from '../../utils/filterQueryParams';
 import FilterForm from './FilterForm';
 
 import styles from './FilterDrawer.module.scss';
@@ -128,6 +129,10 @@ function FilterDrawer() {
     });
 
     dispatch(updateFiltersFromForm(filterData));
+
+    // Update URL with filters
+    updateURLWithFilters(filterData);
+
     onClose();
   };
 
@@ -135,6 +140,9 @@ function FilterDrawer() {
     dispatch(resetForm());
     dispatch(clearAllOptions());
     dispatch(updateFiltersFromForm({}));
+
+    // Clear filters from URL
+    updateURLWithFilters({});
   };
 
   return (

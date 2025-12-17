@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import JobsLayout from '../../layouts/JobsLayout';
@@ -15,6 +15,8 @@ import {
   setProcessCounts,
   setUserProfileData,
 } from '../../store/dashboardSlice';
+import { updateFiltersFromForm } from '../../store/filterSlice';
+import { getFiltersFromURL } from '../../utils/filterQueryParams';
 import {
   SIDER_WIDTH,
   TAG_TO_TAB_MAPPING,
@@ -36,6 +38,18 @@ function JobsPage({
   const currentTab = useSelector(
     (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
   );
+  const hasInitializedFilters = useRef(false);
+
+  // Initialize filters from URL query params on mount
+  useEffect(() => {
+    if (!hasInitializedFilters.current) {
+      const urlFilters = getFiltersFromURL();
+      if (Object.keys(urlFilters).length > 0) {
+        dispatch(updateFiltersFromForm(urlFilters));
+      }
+      hasInitializedFilters.current = true;
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setProcessCounts(processCounts));
