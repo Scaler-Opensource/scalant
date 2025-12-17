@@ -20,6 +20,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "dev:standalone": "vite --config vite.standalone.config.js",
+    "build:standalone": "vite build --config vite.standalone.config.js",
     "lint": "eslint src",
     "lint:styles": "stylelint \"**/*.scss\"",
     "storybook": "start-storybook -p 6007"

@@ -136,3 +136,47 @@ export const getFiltersFromURL = () => {
   // eslint-disable-next-line no-undef
   return deserializeQueryParamsToFilters(window.location.search);
 };
+
+/**
+ * Update URL with job_ids query param
+ * @param {number|null} jobId - The job ID to set, or null to remove
+ */
+export const updateURLWithJobId = (jobId) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  // eslint-disable-next-line no-undef
+  const params = new URLSearchParams(window.location.search);
+
+  if (jobId) {
+    params.set('job_ids', String(jobId));
+  } else {
+    params.delete('job_ids');
+  }
+
+  const newURL = params.toString()
+    ? // eslint-disable-next-line no-undef
+      `${window.location.pathname}?${params.toString()}`
+    : // eslint-disable-next-line no-undef
+      window.location.pathname;
+
+  // Use replaceState to avoid adding to browser history
+  // eslint-disable-next-line no-undef
+  window.history.replaceState({}, '', newURL);
+};
+
+/**
+ * Get job_ids from current URL query params
+ * @returns {string|null} - The job_ids value or null if not present
+ */
+export const getJobIdFromURL = () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  // eslint-disable-next-line no-undef
+  const params = new URLSearchParams(window.location.search);
+  const jobIds = params.get('job_ids');
+  return jobIds || null;
+};

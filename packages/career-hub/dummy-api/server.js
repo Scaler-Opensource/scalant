@@ -38,7 +38,76 @@ app.post('/job-tracker/fetch-all-jobs/', (req, res) => {
   const data = readJsonFile('fetch-all-jobs.json');
   const pageNumber = req.body?.page_number || 1;
   const perPage = req.body?.page_size || req.body?.per_page || 18;
-  const manipulatedData = manipulateJobData(data, pageNumber, perPage);
+  const jobIds = req.body?.filters?.job_ids;
+
+  // Filter by job_ids if provided
+  let filteredData = data;
+  let shouldSkipPagination = false;
+
+  if (jobIds && Array.isArray(jobIds) && jobIds.length > 0) {
+    const hasJobsDataEnvelope = !!data?.jobs_data;
+    const payload = hasJobsDataEnvelope ? data.jobs_data : data;
+
+    // Filter jobs by job_ids - check both id and job_profile_id
+    if (payload.data && Array.isArray(payload.data)) {
+      const filteredJobs = payload.data.filter((job) => {
+        // Check both id (string) and job_profile_id (number) fields
+        const jobIdString = String(job.id || '');
+        const jobProfileId = job.attributes?.job_profile_id
+          ? String(job.attributes.job_profile_id)
+          : '';
+        // Match against any of the provided job_ids
+        return jobIds.some((id) => {
+          const idString = String(id);
+          return idString === jobIdString || idString === jobProfileId;
+        });
+      });
+
+      // Filter included companies to only those referenced by filtered jobs
+      const referencedCompanyIds = new Set();
+      filteredJobs.forEach((job) => {
+        if (job.relationships?.company?.data?.id) {
+          referencedCompanyIds.add(job.relationships.company.data.id);
+        }
+      });
+
+      const filteredIncluded = (payload.included || []).filter((item) => {
+        if (item.type === 'company') {
+          return referencedCompanyIds.has(item.id);
+        }
+        return true; // Keep non-company included items
+      });
+
+      // Update total_entries to match filtered jobs count
+      const filteredTotalEntries = filteredJobs.length;
+
+      filteredData = hasJobsDataEnvelope
+        ? {
+            ...data,
+            jobs_data: {
+              ...payload,
+              data: filteredJobs,
+              included: filteredIncluded,
+              total_entries: filteredTotalEntries,
+            },
+            total_entries: filteredTotalEntries,
+          }
+        : {
+            ...payload,
+            data: filteredJobs,
+            included: filteredIncluded,
+            total_entries: filteredTotalEntries,
+          };
+
+      // Skip pagination when filtering by job_ids (we want only the specific job(s))
+      shouldSkipPagination = true;
+    }
+  }
+
+  // Only apply pagination if not filtering by job_ids
+  const manipulatedData = shouldSkipPagination
+    ? filteredData
+    : manipulateJobData(filteredData, pageNumber, perPage);
   res.status(200).json(manipulatedData);
 });
 

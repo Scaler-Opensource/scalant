@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import JobsLayout from '../../layouts/JobsLayout';
@@ -16,7 +16,11 @@ import {
   setUserProfileData,
 } from '../../store/dashboardSlice';
 import { updateFiltersFromForm } from '../../store/filterSlice';
-import { getFiltersFromURL } from '../../utils/filterQueryParams';
+import { setSelectedJobId } from '../../store/layoutSlice';
+import {
+  getFiltersFromURL,
+  getJobIdFromURL,
+} from '../../utils/filterQueryParams';
 import {
   SIDER_WIDTH,
   TAG_TO_TAB_MAPPING,
@@ -40,13 +44,31 @@ function JobsPage({
   );
   const hasInitializedFilters = useRef(false);
 
-  // Initialize filters from URL query params on mount
-  useEffect(() => {
+  // Initialize filters and job_ids from URL query params synchronously before render
+  // This prevents the API from being called with default filters first
+  useLayoutEffect(() => {
     if (!hasInitializedFilters.current) {
       const urlFilters = getFiltersFromURL();
-      if (Object.keys(urlFilters).length > 0) {
-        dispatch(updateFiltersFromForm(urlFilters));
+      const jobIdFromURL = getJobIdFromURL();
+
+      // Combine all filters including job_ids in a single dispatch
+      const filtersToApply = { ...urlFilters };
+
+      if (jobIdFromURL) {
+        const jobIdNum = Number(jobIdFromURL);
+        if (!isNaN(jobIdNum)) {
+          // Add job_ids to filters for API calls
+          filtersToApply.job_ids = [jobIdFromURL];
+          // Set selected job ID in layout
+          dispatch(setSelectedJobId(jobIdNum));
+        }
       }
+
+      // Apply all filters in a single dispatch to avoid duplicate API calls
+      if (Object.keys(filtersToApply).length > 0) {
+        dispatch(updateFiltersFromForm(filtersToApply));
+      }
+
       hasInitializedFilters.current = true;
     }
   }, [dispatch]);
