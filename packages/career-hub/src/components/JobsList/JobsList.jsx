@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Spin, Alert, Space, Tag } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
+import {
+  initializeSavedJobs,
+  setJobSavedStatus,
+} from '../../store/savedJobsSlice';
+import { useUpdateApplicationStatusMutation } from '../../services/useUpdateApplicationStatus';
 import { useInfiniteScroll } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobCard from '../JobCard';
@@ -36,11 +41,20 @@ function JobsList({
   );
   const calculatedHasMore = hasMore !== undefined ? hasMore : true;
 
+  const [updateApplicationStatus] = useUpdateApplicationStatusMutation();
+
   const { sentinelRef } = useInfiniteScroll({
     hasMore: calculatedHasMore,
     isLoading,
     isFetchingMore,
   });
+
+  // Initialize saved jobs from API data when jobs are loaded
+  useEffect(() => {
+    if (jobs && jobs.length > 0) {
+      dispatch(initializeSavedJobs(jobs));
+    }
+  }, [jobs, dispatch]);
 
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
@@ -50,8 +64,30 @@ function JobsList({
     }
   };
 
-  const handleSave = async () => {
-    return Promise.resolve();
+  const handleSave = async (jobProfileId, action) => {
+    // Only allow saving, not unsaving
+    if (action !== 'save') {
+      return;
+    }
+
+    const payload = {
+      job_profile_id: jobProfileId,
+      application_status: 'Saved',
+    };
+
+    const result = await updateApplicationStatus(payload).unwrap();
+
+    // Update the saved jobs store
+    dispatch(
+      setJobSavedStatus({
+        jobId: jobProfileId,
+        status: 'Saved',
+        lastUpdatedAt:
+          result?.applicationLastUpdatedAt || new Date().toISOString(),
+      })
+    );
+
+    return result;
   };
 
   const heading =
