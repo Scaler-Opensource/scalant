@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { message } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons';
 
-import { APPLICATION_STATUS } from '../../utils/constants';
+import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
 import { useIssueScreeningCallMutation } from '../../services/screeningCallService';
 import { useHasCompletedScreeningCall } from '../../hooks';
@@ -12,8 +12,8 @@ import styles from './ScreeningCallBanner.module.scss';
 
 const ScreeningCallBanner = () => {
   const hasCompletedScreeningCall = useHasCompletedScreeningCall();
-  const { jobData } = useJobPreview();
-  const { appliedOn, applicationStatus } = jobData || {};
+  const { jobData, currentTab } = useJobPreview();
+  const { applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const [handleScreeningCall, { isLoading }] = useIssueScreeningCallMutation();
 
@@ -27,7 +27,11 @@ const ScreeningCallBanner = () => {
     }
   }, [handleScreeningCall]);
 
-  if (hasCompletedScreeningCall || !appliedOn || isWithdrawn) {
+  if (
+    hasCompletedScreeningCall ||
+    currentTab !== TAG_TO_TAB_MAPPING.applied ||
+    isWithdrawn
+  ) {
     return null;
   }
 

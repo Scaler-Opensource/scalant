@@ -5,7 +5,10 @@ import {
   RiseOutlined,
   SaveTwoTone,
 } from '@ant-design/icons';
-import { APPLICATION_STATUS } from '../../../utils/constants';
+import {
+  APPLICATION_STATUS,
+  TAG_TO_TAB_MAPPING,
+} from '../../../utils/constants';
 import { ICONS } from '../../../utils/icons';
 import { useJobPreview } from '../../../contexts';
 import { useUpdateApplicationStatusMutation } from '../../../services/useUpdateApplicationStatus';
@@ -13,11 +16,11 @@ import Withdrawal from './Withdrawal';
 import styles from './Actions.module.scss';
 
 const SaveButton = () => {
-  const { jobId, jobData, refetch } = useJobPreview();
+  const { jobId, jobData, refetch, currentTab } = useJobPreview();
   const [updateApplicationStatus, { isLoading }] =
     useUpdateApplicationStatusMutation();
 
-  const { applicationStatus, appliedOn } = jobData || {};
+  const { applicationStatus } = jobData || {};
   const isSaved = applicationStatus === APPLICATION_STATUS.SAVED;
 
   const handleSave = async () => {
@@ -34,7 +37,7 @@ const SaveButton = () => {
     }
   };
 
-  if (appliedOn) {
+  if (currentTab === TAG_TO_TAB_MAPPING.applied) {
     return null;
   }
 
@@ -66,9 +69,14 @@ const SaveButton = () => {
 };
 
 const ApplyButton = () => {
-  const { jobData, eligibilityCriteria, setActiveApplicationId, jobId } =
-    useJobPreview();
-  const { appliedOn, applicationStatus } = jobData || {};
+  const {
+    jobData,
+    eligibilityCriteria,
+    setActiveApplicationId,
+    jobId,
+    currentTab,
+  } = useJobPreview();
+  const { applicationStatus } = jobData || {};
   const { isEligible } = eligibilityCriteria || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
 
@@ -86,7 +94,7 @@ const ApplyButton = () => {
     return null;
   }
 
-  if (appliedOn) {
+  if (currentTab === TAG_TO_TAB_MAPPING.applied) {
     return (
       <Button
         icon={<CheckCircleFilled />}

@@ -74,8 +74,9 @@ const ExpandedJobView = ({
         openResume={openResume}
         jobId={jobId}
         skip={!isActive}
+        currentTab={currentTab}
       >
-        <ExpandedJobViewContent currentTab={currentTab} />
+        <ExpandedJobViewContent />
         <JobApplicationForm
           currentTab={currentTab}
           onUploadFile={onUploadFile}

@@ -87,6 +87,7 @@ function JobsPage({
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
     <JobDetails
+      currentTab={currentTab}
       onUploadFile={onUploadFile}
       country={country}
       openMockInterviewModal={openMockInterviewModal}

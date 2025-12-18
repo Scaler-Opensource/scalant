@@ -10,7 +10,10 @@ import {
   Typography,
 } from 'antd';
 import { CheckCircleFilled, WarningFilled } from '@ant-design/icons';
-import { APPLICATION_STATUS } from '../../../utils/constants';
+import {
+  APPLICATION_STATUS,
+  TAG_TO_TAB_MAPPING,
+} from '../../../utils/constants';
 import { ICONS } from '../../../utils/icons';
 import { NON_WITHDRAW_STATUSES } from '../../../utils/jobCard/eligibility';
 import { WITHDRAW_REASONS } from '../../../utils/jobCard/constants';
@@ -71,8 +74,8 @@ const ModalContent = ({
 };
 
 const Withdrawal = () => {
-  const { jobId, jobData, refetch } = useJobPreview();
-  const { applicationStatus, appliedOn } = jobData || {};
+  const { jobId, jobData, refetch, currentTab } = useJobPreview();
+  const { applicationStatus } = jobData || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [withdrawalReason, setWithdrawalReason] = useState(
     WITHDRAW_REASONS[0]?.value
@@ -121,7 +124,10 @@ const Withdrawal = () => {
     );
   }
 
-  if (appliedOn && !NON_WITHDRAW_STATUSES.includes(applicationStatus)) {
+  if (
+    currentTab === TAG_TO_TAB_MAPPING.applied &&
+    !NON_WITHDRAW_STATUSES.includes(applicationStatus)
+  ) {
     return (
       <>
         <Button

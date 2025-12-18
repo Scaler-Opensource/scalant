@@ -10,7 +10,7 @@ import {
   ELIGIBILITY_TYPES,
   determineJobTag,
 } from '../../utils/jobCard/eligibility';
-import { JOB_BODY_TABS } from '../../utils/constants';
+import { JOB_BODY_TABS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { toCamelCase } from '../../utils/caseUtil';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
@@ -127,6 +127,7 @@ const JobHighlights = () => {
     jobData,
     highlights: contextHighlights,
     eligibilityCriteria,
+    currentTab,
   } = useJobPreview();
   const ref = useRef(null);
   const { highlights, keywords } =
@@ -155,7 +156,7 @@ const JobHighlights = () => {
     }
   };
 
-  if (jobData?.appliedOn || !highlights?.length) {
+  if (currentTab === TAG_TO_TAB_MAPPING.applied || !highlights?.length) {
     return null;
   }
 

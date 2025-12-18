@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { DoubleRightOutlined } from '@ant-design/icons';
-import { APPLICATION_STATUS } from '../../utils/constants';
+import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
 import { useHasCompletedScreeningCall } from '../../hooks';
 import { useJobPreview } from '../../contexts';
@@ -12,8 +12,8 @@ const INTERVIEW_QUESTIONS_URL =
 
 const InterviewExperiencesBanner = () => {
   const hasCompletedScreeningCall = useHasCompletedScreeningCall();
-  const { jobData, companyData } = useJobPreview();
-  const { appliedOn, title: jobTitle, applicationStatus } = jobData || {};
+  const { jobData, companyData, currentTab } = useJobPreview();
+  const { title: jobTitle, applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const { name: companyName } = companyData || {};
 
@@ -26,7 +26,11 @@ const InterviewExperiencesBanner = () => {
     );
   }, [companyName, jobTitle]);
 
-  if (!hasCompletedScreeningCall || !appliedOn || isWithdrawn) {
+  if (
+    !hasCompletedScreeningCall ||
+    currentTab !== TAG_TO_TAB_MAPPING.applied ||
+    isWithdrawn
+  ) {
     return null;
   }
 

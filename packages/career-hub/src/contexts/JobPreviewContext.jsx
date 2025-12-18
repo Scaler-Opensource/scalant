@@ -14,6 +14,7 @@ const JobPreviewContext = createContext(null);
 export const JobPreviewProvider = ({
   country = 'IN',
   jobId,
+  currentTab,
   openMockInterviewModal = (skillId, skillName) => {
     console.log('Method not implemented. We should get it from MIT');
     console.log(skillId, skillName);
@@ -47,6 +48,7 @@ export const JobPreviewProvider = ({
     companyData: data?.companyData,
     highlights: data?.highlights,
     eligibilityCriteria: data?.eligibilityCriteria,
+    currentTab,
   };
 
   return (
