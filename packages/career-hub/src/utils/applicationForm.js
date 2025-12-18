@@ -30,6 +30,11 @@ export const CHECKBOX_FIELD_MAP = {
   notice_period_buyout: 'notice_period_buyout',
 };
 
+export const EXPERIENCE_FIELD_MAP = {
+  years_of_experience: 'years_of_experience',
+  months_of_experience: 'months_of_experience',
+};
+
 export const NON_CUSTOM_FIELDS = Object.values(NON_CUSTOM_FIELD_MAP);
 
 export const NON_CUSTOM_FIELD_COMPONENT_MAPPING = {
@@ -176,18 +181,34 @@ export const getInitialFormData = (data) => {
           return [key, value?.split('/')];
         case NON_CUSTOM_FIELD_MAP.preferred_location:
           return [key, value?.split('/')];
+        case NON_CUSTOM_FIELD_MAP.skills:
+          return [key, value?.map((skill) => skill.skill_id)];
         default:
           return [key, value];
       }
     })
   );
 
-  const noticePeriodFields =
-    data[NON_CUSTOM_FIELD_MAP.notice_period]?.response || {};
+  const noticePeriodFields = data[NON_CUSTOM_FIELD_MAP.notice_period] || {};
+  const experienceFields = data[NON_CUSTOM_FIELD_MAP.experience] || {};
 
   Object.entries(noticePeriodFields).forEach(([key, value]) => {
     initialFormData[key] = value;
   });
+  Object.entries(experienceFields).forEach(([key, value]) => {
+    initialFormData[key] = value;
+  });
+
+  return initialFormData;
+};
+
+export const getInitialCustomFormData = (data) => {
+  const initialFormData = data.reduce((acc, field) => {
+    return {
+      ...acc,
+      [field.id]: field.response,
+    };
+  }, {});
 
   return initialFormData;
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Space, Spin } from 'antd';
 import { useApplicationForm } from '../../../hooks';
 import {
+  getInitialCustomFormData,
   getInitialFormData,
   NON_CUSTOM_FIELD_COMPONENT_MAPPING,
   NON_CUSTOM_FIELDS,
@@ -29,15 +30,8 @@ function ApplicationForm({ jobProfileId, applicationId, status }) {
     applicationId,
     status,
   });
-  const {
-    defaultFormData,
-    customFormData,
-    setDefaultFormData,
-    setCustomFormData,
-  } = useApplicationFormContext();
+  const { setDefaultFormData, setCustomFormData } = useApplicationFormContext();
   const [form] = Form.useForm();
-
-  console.log({ defaultFormData, customFormData });
 
   const nonCustomFieldsMap = useMemo(
     () =>
@@ -73,6 +67,7 @@ function ApplicationForm({ jobProfileId, applicationId, status }) {
     setCustomFormData(initialCustomFormData);
 
     form.setFieldsValue(getInitialFormData(initialDefaultFormData));
+    form.setFieldsValue(getInitialCustomFormData(initialCustomFormData));
   }, [
     nonCustomFieldsMap,
     customFieldsMap,

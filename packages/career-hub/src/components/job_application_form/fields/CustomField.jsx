@@ -28,18 +28,21 @@ function GenericField({ formType, field }) {
 }
 
 function UploadField({ field }) {
-  const [fileName, setFileName] = useState('');
+  const { onUploadFile, updateCustomField, customFormData } =
+    useApplicationFormContext();
   const [isUploading, setIsUploading] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
-  const { onUploadFile, updateCustomField } = useApplicationFormContext();
+  const uploadedFileName = customFormData?.find?.(
+    (customField) => customField.id === field.id
+  )?.response?.file_name;
 
   const handleSelectFile = async (e) => {
-    setIsUploaded(false);
     const file = e?.target?.files?.[0];
 
     if (!file) return;
     setIsUploading(true);
-    setFileName(file.name);
+    updateCustomField(field.id, {
+      file_name: file.name,
+    });
 
     try {
       if (onUploadFile) {
@@ -48,7 +51,6 @@ function UploadField({ field }) {
           file_name: file.name,
           file_url: url,
         });
-        setIsUploaded(true);
         message.success('File uploaded successfully');
       } else {
         throw new Error('Upload file function not provided');
@@ -88,10 +90,10 @@ function UploadField({ field }) {
         <Button
           className={styles.field}
           loading={isUploading}
-          icon={isUploaded && <CheckCircleFilled />}
+          icon={!!uploadedFileName && <CheckCircleFilled />}
         >
-          {isUploaded && fileName}
-          {!isUploaded && !isUploaded && 'Upload File'}
+          {!!uploadedFileName && uploadedFileName}
+          {!uploadedFileName && !isUploading && 'Upload File'}
         </Button>
       </Upload>
     </Form.Item>

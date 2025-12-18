@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Select, Space } from 'antd';
 import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
-import { YEAR_OPTIONS, MONTH_OPTIONS } from '../../../utils/applicationForm';
+import {
+  YEAR_OPTIONS,
+  MONTH_OPTIONS,
+  EXPERIENCE_FIELD_MAP,
+} from '../../../utils/applicationForm';
 import styles from './Field.module.scss';
 
 function TotalYearsOfExperience({ fieldName }) {
@@ -33,7 +37,7 @@ function TotalYearsOfExperience({ fieldName }) {
     <Space className={styles.fieldGroup}>
       <Form.Item
         label="Experience Years"
-        name={`${fieldName}_years`}
+        name={EXPERIENCE_FIELD_MAP.years_of_experience}
         rules={[
           { required: true, message: 'Please select years of experience' },
         ]}
@@ -47,7 +51,7 @@ function TotalYearsOfExperience({ fieldName }) {
       </Form.Item>
       <Form.Item
         label="Experience Months"
-        name={`${fieldName}_months`}
+        name={EXPERIENCE_FIELD_MAP.months_of_experience}
         rules={[
           { required: true, message: 'Please select months of experience' },
         ]}

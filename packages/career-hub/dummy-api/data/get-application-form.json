@@ -13,7 +13,7 @@
             "form_type": "number",
             "meta": null,
             "custom": true,
-            "response": null
+            "response": "4"
           }
         },
         {
@@ -29,7 +29,10 @@
               "dataKey": "upload"
             },
             "custom": true,
-            "response": null
+            "response": {
+              "file_name": "dummy-pdf_2.pdf",
+              "file_url": "https://d1t59tgpzgv8ca.cloudfront.net/public_assets/assets/000/073/337/original/dummy-pdf_2.pdf?1765973287"
+            }
           }
         },
         {
@@ -42,7 +45,7 @@
             "form_type": "text",
             "meta": null,
             "custom": true,
-            "response": null
+            "response": "1"
           }
         },
         {
@@ -71,7 +74,7 @@
             "form_type": "date_time",
             "meta": null,
             "custom": true,
-            "response": null
+            "response": "2025-12-31"
           }
         },
         {
@@ -209,8 +212,8 @@
             "custom": false,
             "response": {
               "notice_period": "-1",
-              "serving_notice": "false",
-              "available_joining_date": null,
+              "serving_notice": "true",
+              "available_joining_date": "2025-12-20",
               "buyout_notice": "true"
             }
           }
