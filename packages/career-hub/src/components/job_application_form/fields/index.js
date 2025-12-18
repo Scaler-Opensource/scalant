@@ -1,0 +1,9 @@
+export { default as CTC } from './CTC';
+export { default as Linkedin } from './Linkedin';
+export { default as Company } from './Company';
+export { default as Top5Skills } from './Top5Skills';
+export { default as GradYear } from './GradYear';
+export { default as CurrentLocation } from './CurrentLocation';
+export { default as NoticePeriod } from './NoticePeriod';
+export { default as PreferredLocation } from './PreferredLocation';
+export { default as TotalYearsOfExperience } from './TotalYearsOfExperience';
