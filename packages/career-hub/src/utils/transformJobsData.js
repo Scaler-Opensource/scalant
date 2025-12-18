@@ -4,21 +4,14 @@
  * @returns {Array} - Array of transformed job objects
  */
 export const transformJobsData = (response) => {
-  if (
-    !response ||
-    !response.jobs_data?.data ||
-    !Array.isArray(response.jobs_data?.data)
-  ) {
+  if (!response || !response?.data || !Array.isArray(response?.data)) {
     return [];
   }
 
   // Create a map of companies from the included array
   const companiesMap = {};
-  if (
-    response.jobs_data?.included &&
-    Array.isArray(response.jobs_data?.included)
-  ) {
-    response.jobs_data?.included.forEach((company) => {
+  if (response?.included && Array.isArray(response?.included)) {
+    response?.included.forEach((company) => {
       if (company.type === 'company' && company.attributes) {
         companiesMap[company.id] = company.attributes;
       }
@@ -26,7 +19,7 @@ export const transformJobsData = (response) => {
   }
 
   // Transform each job in the data array
-  return response.jobs_data?.data
+  return response?.data
     .map((job) => {
       if (job.type !== 'job_profile' || !job.attributes) {
         return null;

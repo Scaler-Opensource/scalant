@@ -30,6 +30,9 @@ export function Default() {
           await new Promise(resolve => setTimeout(resolve, 3000));
           return "https://d1t59tgpzgv8ca.cloudfront.net/public_assets/assets/000/073/337/original/dummy-pdf_2.pdf?1765973287";
         }}
+        country="IN"
+        openMockInterviewModal={() => {}}
+        openResume={() => {}}
       />
     </>
   

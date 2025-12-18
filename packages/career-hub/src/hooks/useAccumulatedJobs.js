@@ -33,9 +33,15 @@ const useAccumulatedJobs = (
   }, [currentTab]);
 
   const totalCount = useMemo(() => {
+    // Prefer totalEntries coming from the API (new jobs_data envelope),
+    // fall back to dashboard processCounts for legacy pages.
+    if (typeof data?.totalEntries === 'number') {
+      return data.totalEntries;
+    }
+
     if (!countKey) return null;
     return processCounts[countKey] || 0;
-  }, [countKey, processCounts]);
+  }, [countKey, processCounts, data?.totalEntries]);
 
   useEffect(() => {
     if (pageNumber === 1) {
