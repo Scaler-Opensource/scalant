@@ -126,3 +126,30 @@ export const DEFAULT_PROCESS_COUNTS = {
   saved: 0,
   archived: 0,
 };
+
+export const INDIA = 'in';
+export const US = 'us';
+
+export const CURRENCY_FORMATTER = {
+  [INDIA]: {
+    symbol: '₹',
+    suffix: 'LPA',
+    ctc_currency: 0,
+    showSymbolDefault: false,
+    multiplier: 100000, // 1 lakh
+    unitName: 'lakh',
+    name: 'INR',
+  },
+  [US]: {
+    symbol: '$',
+    suffix: ' per annum',
+    ctc_currency: 2,
+    showSymbolDefault: true,
+    unit: 'k',
+    unitName: 'thousand',
+    multiplier: 1000, // 1k
+    name: 'USD',
+  },
+};
+
+export const HYDRATION_KEY = '__CAREERS_HUB__';

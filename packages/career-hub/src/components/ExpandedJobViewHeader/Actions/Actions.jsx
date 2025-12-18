@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, message } from 'antd';
 import {
   CheckCircleFilled,
@@ -66,14 +66,21 @@ const SaveButton = () => {
 };
 
 const ApplyButton = () => {
-  const { jobData, eligibilityCriteria } = useJobPreview();
+  const { jobData, eligibilityCriteria, setActiveApplicationId, jobId } =
+    useJobPreview();
   const { appliedOn, applicationStatus } = jobData || {};
   const { isEligible } = eligibilityCriteria || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
 
   const handleApply = () => {
-    // TODO: Implement apply logic
+    setActiveApplicationId(jobId);
   };
+
+  useEffect(() => {
+    return () => {
+      setActiveApplicationId(null);
+    };
+  }, [setActiveApplicationId]);
 
   if (isWithdrawn) {
     return null;

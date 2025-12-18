@@ -29,7 +29,80 @@
     }
   ],
   "modulesCompleted": [],
-  "experienceBasedSkills": [],
+  "experienceBasedSkills": [
+    {
+        "id": 6683180,
+        "skillType": "SubTopic",
+        "skillId": 1157,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "React Native"
+    },
+    {
+        "id": 6683181,
+        "skillType": "SubTopic",
+        "skillId": 1133,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "Angular"
+    },
+    {
+        "id": 6683182,
+        "skillType": "SubTopic",
+        "skillId": 1176,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 1,
+            "months": 1
+        },
+        "categoryType": "tools",
+        "name": "iOS Development"
+    },
+    {
+        "id": 6683183,
+        "skillType": "SubTopic",
+        "skillId": 58475,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "tools",
+        "name": "Power BI"
+    },
+    {
+        "id": 6683184,
+        "skillType": "SubTopic",
+        "skillId": 1148,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 5,
+            "months": 0
+        },
+        "categoryType": "programming_languages",
+        "name": "HTML"
+    },
+    {
+        "id": 6683185,
+        "skillType": "SubTopic",
+        "skillId": 1156,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 4,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "React"
+    }
+  ],
   "placementIntent": "Pending",
   "expertSessions": {
     "isEnabled": true,
