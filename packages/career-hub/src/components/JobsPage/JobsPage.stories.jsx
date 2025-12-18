@@ -18,7 +18,11 @@ export function Default() {
   };
 
   return (
-    <JobsPage processCounts={processCounts} userProfileData={userProfileData} />
+    <>
+      <div style={{ width: '100%', height: '7rem', backgroundColor: '#b2e1ff', position: 'sticky', top: 0, left: 0, zIndex: 1000 }}>Scaler Header</div>
+      <JobsPage processCounts={processCounts} userProfileData={userProfileData} />
+    </>
+  
   );
 }
 

@@ -4,6 +4,25 @@ import {
   createCompaniesMap,
 } from '../utils/transformJobsData';
 
+// Normalize API response shape to support both legacy and new `jobs_data` wrapper
+const normalizeJobsResponse = (response = {}) => {
+  const jobsPayload = response.jobs_data || response;
+  const jobs = transformJobsData(jobsPayload);
+  const companiesMap = createCompaniesMap(jobsPayload);
+  const totalEntries =
+    response.total_entries ??
+    jobsPayload.total_entries ??
+    jobsPayload?.meta?.total_entries ??
+    null;
+
+  return {
+    jobs,
+    companiesMap,
+    results: jobs, // Backward compatibility
+    totalEntries,
+  };
+};
+
 const jobsService = careerHubApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchAllJobs: builder.query({
@@ -12,15 +31,7 @@ const jobsService = careerHubApi.injectEndpoints({
         method: 'POST',
         body: params,
       }),
-      transformResponse: (response) => {
-        const jobs = transformJobsData(response);
-        const companiesMap = createCompaniesMap(response);
-        return {
-          jobs,
-          companiesMap,
-          results: jobs, // Keep for backward compatibility
-        };
-      },
+      transformResponse: normalizeJobsResponse,
       providesTags: ['Jobs'],
     }),
     fetchPipelineJobs: builder.query({
@@ -29,15 +40,7 @@ const jobsService = careerHubApi.injectEndpoints({
         method: 'POST',
         body: params,
       }),
-      transformResponse: (response) => {
-        const jobs = transformJobsData(response);
-        const companiesMap = createCompaniesMap(response);
-        return {
-          jobs,
-          companiesMap,
-          results: jobs, // Keep for backward compatibility
-        };
-      },
+      transformResponse: normalizeJobsResponse,
       providesTags: ['PipelineJobs'],
     }),
     fetchRelevantJobs: builder.query({
@@ -46,15 +49,7 @@ const jobsService = careerHubApi.injectEndpoints({
         method: 'POST',
         body: params,
       }),
-      transformResponse: (response) => {
-        const jobs = transformJobsData(response);
-        const companiesMap = createCompaniesMap(response);
-        return {
-          jobs,
-          companiesMap,
-          results: jobs, // Keep for backward compatibility
-        };
-      },
+      transformResponse: normalizeJobsResponse,
       providesTags: ['RelevantJobs'],
     }),
   }),

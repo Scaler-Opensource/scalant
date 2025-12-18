@@ -82,5 +82,3 @@ export const {
 } = filterService;
 
 export default filterService;
-
-

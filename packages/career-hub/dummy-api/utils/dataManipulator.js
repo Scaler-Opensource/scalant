@@ -93,66 +93,91 @@ function updateCompanyIds(company, newCompanyId) {
  * @param {number} pageNumber - Current page number
  * @returns {Object} Modified response data with new IDs
  */
-function manipulateJobData(responseData, pageNumber) {
-  const clonedData = deepClone(responseData);
-  const perPage = 18; // Default per_page value
+function manipulateJobData(responseData, pageNumber, perPage = 18) {
+  const hasJobsDataEnvelope = !!responseData?.jobs_data;
+  const payload = deepClone(hasJobsDataEnvelope ? responseData.jobs_data : responseData);
 
-  if (!clonedData.data || !Array.isArray(clonedData.data)) {
-    return clonedData;
+  const baseData = Array.isArray(payload.data) ? payload.data : [];
+  const baseIncluded = Array.isArray(payload.included) ? payload.included : [];
+
+  // Prefer explicit total_entries, otherwise simulate a larger total to allow infinite scroll testing
+  const totalEntries =
+    responseData?.total_entries ??
+    payload?.total_entries ??
+    payload?.meta?.total_entries ??
+    baseData.length * 5;
+
+  const startIndex = Math.max((pageNumber - 1) * perPage, 0);
+  if (startIndex >= totalEntries) {
+    const emptyPayload = {
+      ...payload,
+      data: [],
+      included: [],
+    };
+    return hasJobsDataEnvelope
+      ? { jobs_data: emptyPayload, total_entries: totalEntries }
+      : { ...emptyPayload, total_entries: totalEntries };
   }
 
-  // Create a map to track company ID mappings
+  const count = Math.min(perPage, totalEntries - startIndex);
+
+  // Map to keep company IDs consistent within a page
   const companyIdMap = new Map();
 
-  // Process jobs in the data array
-  clonedData.data.forEach((item, index) => {
-    if (item.type === 'job_profile') {
-      // Generate new IDs based on page number and index
-      const newJobId = generatePageBasedId(pageNumber, index, 'job');
-      const oldCompanyId = item.relationships?.company?.data?.id;
+  // Build paginated jobs by cycling through the base data if needed
+  const pageData = [];
+  for (let i = 0; i < count; i += 1) {
+    const sourceJob = deepClone(baseData[(startIndex + i) % baseData.length] || {});
+    if (sourceJob.type === 'job_profile') {
+      const newJobId = generatePageBasedId(pageNumber, i, 'job');
+      const oldCompanyId = sourceJob.relationships?.company?.data?.id;
 
-      // Generate or reuse company ID
-      let newCompanyId;
-      if (oldCompanyId && companyIdMap.has(oldCompanyId)) {
-        newCompanyId = companyIdMap.get(oldCompanyId);
-      } else {
-        newCompanyId = generatePageBasedId(pageNumber, index, 'company');
-        if (oldCompanyId) {
-          companyIdMap.set(oldCompanyId, newCompanyId);
-        }
-      }
-
-      // Update job IDs
-      updateJobIds(item, newJobId, newCompanyId);
-    }
-  });
-
-  // Process companies in the included array
-  if (clonedData.included && Array.isArray(clonedData.included)) {
-    clonedData.included.forEach((item, index) => {
-      if (item.type === 'company') {
-        const oldCompanyId = item.id;
-        let newCompanyId;
-
-        // Use mapped ID if available, otherwise generate new one
+      let newCompanyId = oldCompanyId;
+      if (oldCompanyId) {
         if (companyIdMap.has(oldCompanyId)) {
           newCompanyId = companyIdMap.get(oldCompanyId);
         } else {
-          // Generate a new ID for companies not referenced by jobs
-          newCompanyId = generatePageBasedId(
-            pageNumber,
-            index + 1000,
-            'company'
-          );
+          newCompanyId = generatePageBasedId(pageNumber, i, 'company');
           companyIdMap.set(oldCompanyId, newCompanyId);
         }
-
-        updateCompanyIds(item, newCompanyId);
       }
-    });
+
+      updateJobIds(sourceJob, newJobId, newCompanyId);
+    }
+    pageData.push(sourceJob);
   }
 
-  return clonedData;
+  // Include only companies referenced on the current page
+  const pageIncluded = [];
+  baseIncluded.forEach((item, index) => {
+    if (item.type === 'company') {
+      const oldCompanyId = item.id;
+      if (companyIdMap.has(oldCompanyId)) {
+        const clonedCompany = deepClone(item);
+        updateCompanyIds(clonedCompany, companyIdMap.get(oldCompanyId));
+        pageIncluded.push(clonedCompany);
+      }
+    } else {
+      // Keep any non-company included items
+      pageIncluded.push(deepClone(item));
+    }
+  });
+
+  const resultPayload = {
+    ...payload,
+    data: pageData,
+    included: pageIncluded,
+  };
+
+  return hasJobsDataEnvelope
+    ? {
+        jobs_data: resultPayload,
+        total_entries: totalEntries,
+      }
+    : {
+        ...resultPayload,
+        total_entries: totalEntries,
+      };
 }
 
 module.exports = {

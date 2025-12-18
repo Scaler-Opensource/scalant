@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Spin, Alert, Space, Tag } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
+import {
+  initializeSavedJobs,
+  setJobSavedStatus,
+} from '../../store/savedJobsSlice';
+import { useUpdateApplicationStatusMutation } from '../../services/useUpdateApplicationStatus';
+import { updateURLWithJobId } from '../../utils/filterQueryParams';
 import { useInfiniteScroll } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobCard from '../JobCard';
@@ -36,22 +42,82 @@ function JobsList({
   );
   const calculatedHasMore = hasMore !== undefined ? hasMore : true;
 
+  const [updateApplicationStatus] = useUpdateApplicationStatusMutation();
+
   const { sentinelRef } = useInfiniteScroll({
     hasMore: calculatedHasMore,
     isLoading,
     isFetchingMore,
   });
 
+  // Initialize saved jobs from API data when jobs are loaded
+  useEffect(() => {
+    if (jobs && jobs.length > 0) {
+      dispatch(initializeSavedJobs(jobs));
+    }
+  }, [jobs, dispatch]);
+
+  // Auto-select job if job_ids is in URL and job is loaded
+  useEffect(() => {
+    if (jobs && jobs.length > 0) {
+      // Check if there's a job_ids in URL
+      // eslint-disable-next-line no-undef
+      const params = new URLSearchParams(window.location.search);
+      const jobIdFromURL = params.get('job_ids');
+      if (jobIdFromURL) {
+        const jobIdNum = Number(jobIdFromURL);
+        // Find the job with matching ID (check both id and jobProfileId)
+        const matchingJob = jobs.find(
+          (job) =>
+            job.id === jobIdNum ||
+            job.jobProfileId === jobIdNum ||
+            String(job.id) === jobIdFromURL ||
+            String(job.jobProfileId) === jobIdFromURL
+        );
+        // Only set if not already selected or if selected job doesn't match
+        if (matchingJob && selectedJobId !== matchingJob.id) {
+          dispatch(setSelectedJobId(matchingJob.id));
+        }
+      }
+    }
+  }, [jobs, selectedJobId, dispatch]);
+
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
       dispatch(clearSelectedJobId());
+      // Remove job_ids from URL
+      updateURLWithJobId(null);
     } else {
       dispatch(setSelectedJobId(jobId));
+      // Update URL with job_ids
+      updateURLWithJobId(jobId);
     }
   };
 
-  const handleSave = async () => {
-    return Promise.resolve();
+  const handleSave = async (jobProfileId, action) => {
+    // Only allow saving, not unsaving
+    if (action !== 'save') {
+      return;
+    }
+
+    const payload = {
+      job_profile_id: jobProfileId,
+      application_status: 'Saved',
+    };
+
+    const result = await updateApplicationStatus(payload).unwrap();
+
+    // Update the saved jobs store
+    dispatch(
+      setJobSavedStatus({
+        jobId: jobProfileId,
+        status: 'Saved',
+        lastUpdatedAt:
+          result?.applicationLastUpdatedAt || new Date().toISOString(),
+      })
+    );
+
+    return result;
   };
 
   const heading =
