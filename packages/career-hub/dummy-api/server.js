@@ -197,6 +197,21 @@ app.put('/job-tracker/v1/alerts/:id', (req, res) => {
   res.status(200).json({ success: true });
 });
 
+app.post('/api/v3/careers-hub/applications/', (req, res) => {
+  const data = readJsonFile('application-step-1.json');
+  res.status(200).json(data);
+});
+
+app.get('/api/v3/careers-hub/applications/:id', (req, res) => {
+  const data = readJsonFile('get-application-form.json');
+  res.status(200).json(data);
+});
+
+app.get('/job-tracker/v1/custom-data', (req, res) => {
+  const data = readJsonFile('custom-select-data.json');
+  res.status(200).json(data);
+});
+
 // Start server
 const PORT = 8000;
 app.listen(PORT, () => {

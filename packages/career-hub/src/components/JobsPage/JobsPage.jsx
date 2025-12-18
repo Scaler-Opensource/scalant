@@ -28,6 +28,7 @@ function JobsPage({
   openResume,
   processCounts = DEFAULT_PROCESS_COUNTS,
   userProfileData,
+  onUploadFile,
 }) {
   const dispatch = useDispatch();
   const selectedJobId = useSelector(
@@ -50,6 +51,7 @@ function JobsPage({
   const header = <JobsHeader />;
   const sider = selectedJobId ? (
     <JobDetails
+      onUploadFile={onUploadFile}
       country={country}
       openMockInterviewModal={openMockInterviewModal}
       openResume={openResume}

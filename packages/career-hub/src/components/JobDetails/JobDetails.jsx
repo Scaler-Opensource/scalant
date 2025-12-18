@@ -17,6 +17,7 @@ function JobDetails({
   openResume,
   jobId,
   className,
+  onUploadFile,
 }) {
   if (!jobId) {
     return null;
@@ -25,6 +26,7 @@ function JobDetails({
   return (
     <div className={classNames(styles.jobDetails, className)}>
       <ExpandedJobView
+        onUploadFile={onUploadFile}
         country={country}
         openMockInterviewModal={openMockInterviewModal}
         openResume={openResume}

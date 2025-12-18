@@ -119,13 +119,13 @@
             "job_profile_status": "active",
             "date_posted_on": "2025-07-08T08:41:41.000Z",
             "open_for_discussion_ctc": true,
-            "applied_on": "2025-07-08T08:41:41.000Z",
+            "applied_on": null,
             "seniority_level": "Mid - Senior",
             "role_type": "full_time",
             "duration": null,
             "stipend": null,
             "eligibility_criteria": {
-                "is_eligible": false,
+                "is_eligible": true,
                 "reasons": [
                     {
                         "label": "placed_mentee",
@@ -300,7 +300,7 @@
                     }
                 ]
             },
-            "exceptional_job": false,
+            "exceptional_job": true,
             "is_relevant": false,
             "recruiters": [
                 {

@@ -4,6 +4,7 @@ import { JobPreviewProvider } from '../../contexts';
 import { useGetJobPreviewQuery } from '../../services/jobPreviewApi';
 import ExpandedJobViewBody from '../ExpandedJobViewBody';
 import ExpandedJobViewHeader from '../ExpandedJobViewHeader';
+import JobApplicationForm from '../job_application_form';
 import JobHighlights from '../JobHighlights';
 import InterviewExperiencesBanner from '../InterviewExperiencesBanner';
 import ScreeningCallBanner from '../ScreeningCallBanner';
@@ -28,6 +29,7 @@ const ExpandedJobView = ({
   jobId,
   isActive,
   currentTab,
+  onUploadFile,
 }) => {
   const { data, isLoading, isFetching, error } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || !isActive,
@@ -74,6 +76,10 @@ const ExpandedJobView = ({
         skip={!isActive}
       >
         <ExpandedJobViewContent currentTab={currentTab} />
+        <JobApplicationForm
+          currentTab={currentTab}
+          onUploadFile={onUploadFile}
+        />
       </JobPreviewProvider>
     </App>
   );
