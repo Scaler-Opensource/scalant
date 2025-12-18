@@ -51,4 +51,3 @@ const useCreateApplication = ({
 };
 
 export default useCreateApplication;
-

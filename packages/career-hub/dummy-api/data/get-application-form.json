@@ -1,0 +1,265 @@
+{
+    "success": true,
+    "message": null,
+    "details": {
+      "data": [
+        {
+          "id": "6630274",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 6630274,
+            "title": "Uihnjhiu",
+            "description": null,
+            "form_type": "number",
+            "meta": null,
+            "custom": true,
+            "response": null
+          }
+        },
+        {
+          "id": "6616866",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 6616866,
+            "title": "Resume",
+            "description": null,
+            "form_type": "upload",
+            "meta": {
+              "path": "/upload-editor-image/",
+              "dataKey": "upload"
+            },
+            "custom": true,
+            "response": null
+          }
+        },
+        {
+          "id": "5646662",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5646662,
+            "title": "Ror Experience",
+            "description": null,
+            "form_type": "text",
+            "meta": null,
+            "custom": true,
+            "response": null
+          }
+        },
+        {
+          "id": "5507278",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5507278,
+            "title": "Please Share Your Cv",
+            "description": null,
+            "form_type": "upload",
+            "meta": {
+              "path": "/upload-editor-image/",
+              "dataKey": "upload"
+            },
+            "custom": true,
+            "response": null
+          }
+        },
+        {
+          "id": "5507277",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5507277,
+            "title": "What Is You Birthdate",
+            "description": null,
+            "form_type": "date_time",
+            "meta": null,
+            "custom": true,
+            "response": null
+          }
+        },
+        {
+          "id": "5393179",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393179,
+            "title": "skills",
+            "description": null,
+            "form_type": "array_of_objects",
+            "meta": {
+              "default_mapped_to": "skills"
+            },
+            "custom": false,
+            "response": [
+              {
+                "skill_id": "1157",
+                "skill_type": "SubTopic",
+                "proficiency_period": {
+                  "years": "0",
+                  "months": "0"
+                },
+                "name": "React Native"
+              },
+              {
+                "skill_id": "1133",
+                "skill_type": "SubTopic",
+                "proficiency_period": {
+                  "years": "0",
+                  "months": "0"
+                },
+                "name": "Angular"
+              },
+              {
+                "skill_id": "1157",
+                "skill_type": "SubTopic",
+                "proficiency_period": {
+                  "years": "0",
+                  "months": "0"
+                },
+                "name": "React Native"
+              }
+            ]
+          }
+        },
+        {
+          "id": "5393178",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393178,
+            "title": "preferred_location",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "anywhere_in_india"
+          }
+        },
+        {
+          "id": "5393177",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393177,
+            "title": "current_location",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "Bangalore/Hyderabad"
+          }
+        },
+        {
+          "id": "5393175",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393175,
+            "title": "experience",
+            "description": null,
+            "form_type": "object",
+            "meta": {
+              "default_mapped_to": "experience"
+            },
+            "custom": false,
+            "response": {
+              "years_of_experience": "1",
+              "months_of_experience": "1"
+            }
+          }
+        },
+        {
+          "id": "5393174",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393174,
+            "title": "linkedin",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "https://www.linkedin.com/in/ghanshyam-jangir/"
+          }
+        },
+        {
+          "id": "5393173",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393173,
+            "title": "current_company",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "Newgen Software"
+          }
+        },
+        {
+          "id": "5393172",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393172,
+            "title": "notice_period",
+            "description": null,
+            "form_type": "object",
+            "meta": {
+              "default_mapped_to": "notice_period"
+            },
+            "custom": false,
+            "response": {
+              "notice_period": "-1",
+              "serving_notice": "false",
+              "available_joining_date": null,
+              "buyout_notice": "true"
+            }
+          }
+        },
+        {
+          "id": "5393171",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393171,
+            "title": "orgyear",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "2023-01-01"
+          }
+        },
+        {
+          "id": "5393167",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393167,
+            "title": "current_ctc",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "20"
+          }
+        },
+        {
+          "id": "5393166",
+          "type": "job_application_ib_form",
+          "attributes": {
+            "id": 5393166,
+            "title": "expected_ctc",
+            "description": null,
+            "form_type": "text",
+            "meta": {
+              "default_mapped_to": null
+            },
+            "custom": false,
+            "response": "35"
+          }
+        }
+      ]
+    }
+  }

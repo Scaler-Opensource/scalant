@@ -28,8 +28,11 @@ export const JobPreviewProvider = ({
     skip: !jobId || skip,
   });
   const [activeTab, setActiveTab] = useState();
+  const [activeApplicationId, setActiveApplicationId] = useState(null);
 
   const value = {
+    activeApplicationId,
+    setActiveApplicationId,
     activeTab,
     setActiveTab,
     country,

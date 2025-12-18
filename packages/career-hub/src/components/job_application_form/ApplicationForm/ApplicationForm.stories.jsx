@@ -2,7 +2,7 @@ import React from 'react';
 import ApplicationForm from './ApplicationForm';
 
 export default {
-  title: 'Components/ApplicationForm',
+  title: 'Components/JobApplicationForms/ApplicationForm',
   component: ApplicationForm,
 };
 
@@ -13,4 +13,3 @@ export const Default = () => (
     status="application_form"
   />
 );
-

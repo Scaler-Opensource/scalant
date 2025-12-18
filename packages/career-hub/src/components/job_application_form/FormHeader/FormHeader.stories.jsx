@@ -3,7 +3,7 @@ import FormHeader from './FormHeader';
 import { FileTextTwoTone, InfoCircleFilled } from '@ant-design/icons';
 
 export default {
-  title: 'Components/FormHeader',
+  title: 'Components/JobApplicationForms/FormHeader',
   component: FormHeader,
 };
 
@@ -24,4 +24,3 @@ export const Step2 = () => (
     totalSteps={2}
   />
 );
-

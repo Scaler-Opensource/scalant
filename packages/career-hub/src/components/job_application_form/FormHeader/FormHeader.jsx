@@ -27,4 +27,3 @@ FormHeader.propTypes = {
 };
 
 export default FormHeader;
-

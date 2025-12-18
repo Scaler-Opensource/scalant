@@ -28,4 +28,3 @@ const useApplicationForm = ({ jobProfileId, applicationId, status }) => {
 };
 
 export default useApplicationForm;
-
