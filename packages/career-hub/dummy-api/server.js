@@ -270,18 +270,41 @@ app.put('/job-tracker/v1/alerts/:id', (req, res) => {
   res.status(200).json({ success: true });
 });
 
-app.post('/api/v3/careers-hub/applications/', (req, res) => {
+app.post('/api/v3/careers-hub/applications/', async (req, res) => {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = readJsonFile('application-step-1.json');
   res.status(200).json(data);
 });
 
-app.get('/api/v3/careers-hub/applications/:id', (req, res) => {
-  const data = readJsonFile('get-application-form.json');
+app.get('/api/v3/careers-hub/applications/:id', async (req, res) => {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
+  let data = readJsonFile('get-application-form.json');
+
+  if (req.params.step_name === 'resume_choice_select') {
+    data = { success: true, message: null, details: null };
+  }
   res.status(200).json(data);
+});
+
+app.patch('/api/v3/careers-hub/applications/:id', async (req, res) => {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
+  res.status(200).json({ success: true, message: null, details: null });
 });
 
 app.get('/job-tracker/v1/custom-data', (req, res) => {
   const data = readJsonFile('custom-select-data.json');
+  res.status(200).json(data);
+});
+
+app.get('/api/v3/user-resumes/eligibility', (req, res) => {
+  const data = readJsonFile('resume-eligibility.json');
+  res.status(200).json(data);
+});
+
+app.get('/api/v3/user-resumes/:id/download', (req, res) => {
+  const data = {
+    link: 'https://moonshot-assets.s3.us-west-2.amazonaws.com/generated/4c6049d2fae5bab90ad698a4c17bc55bc9d21549affb6e7356dd8c2af3547fa7?AWSAccessKeyId=ASIAY7MGLG6ZFVNUFOSB&Expires=1766151741&Signature=1kyxTPC5eQyysYNUS2CCZNcnHqs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDaQBBIz9Rzyi%2F0xb8OlFlfVjiZdRPkQiYpDeIlOxydpQIhANc4M6SEcsNypY33GKDiHixcFwXtmXHqgi4aYrAm%2F9rrKoAECKn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMNjE3MTQ2NDMxNDEwIgxJ2KTJdoD%2Be67MDsAq1ANUlmksOFuyWvb1HuVtOgXytqGMhvcrlP%2BZVuJNpDPNBmSDcVkUE4EIKmkPQCeAROsLXlxmSCG9aE9Sb%2F%2B31Umj8gyA9aEbCmsanuLxL8D8rRwPfD8eM5%2FHwFTkCVVOb2JTR2LlueYLx6tMD8TPLyFeEB5SdZ67UfGzsOM2yIzUlFjM9M8pPfDF9R%2Fd7WwJeHKJ%2BT7l%2Bsbno33kK0YeEZAmOOrLtjUh6fAhHULcEdsoHCFAJ0CtlAlc%2FK4MbNhHxNWT5chYIu%2BjAVzzDsWWiy9lviGKkQGnCRxkhRNpkUbH6ORCVfC98DeHZor6kdAl%2BeczjIetobJYUxbWV%2Fb%2BPSXULr0JRrftv2fN4ZMCyaMFWmJCjO1E8kfaWvP%2FPvBwgrQMnrLwJgRWTiAaSOaj2O07vOLB5EUU07kLBFmoyQSLBTe9oNgBlyIRIc3x2nPOCvVVkW5MEJVoQYbgSQZ%2FdRWEeCdBmjLfFXO09n2OazBWTGXexylE90MXZiIBN23nN8fIw1bMy%2FBieVo4adC%2Bb4i6qAbqo5bZaQQrGq1bGmVKBjZLCTSZMydcqTnInTWkKnUtPht4ClenKV09QVeMQ8vDZRPPjJ%2Box2iyirN2TNJVghZV1jww8P6TygY6pAGaYv5iYhoLG7fOMgyGCxf8TSpJ8rGboZ0%2BJahm4%2FY7Q5yaH0brJM1nUx1BeJn4NCnS2ADVIHt7GZyy0p3FFYfUvPA%2BIKNVuCaM6cSPiDDD0zBJCROW64%2FV88HBcE4wyhwIFuxjw5rD4vQ9juxHWD69ZqqiptJIUYuh0upx%2FUXOAbCXZv0o%2FSQ5hzPTvgk3kWB47i%2FPv6ocHc1kimTWgDJcRUJCVg%3D%3D',
+  };
   res.status(200).json(data);
 });
 

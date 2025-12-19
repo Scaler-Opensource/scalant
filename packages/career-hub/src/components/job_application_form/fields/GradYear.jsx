@@ -1,15 +1,8 @@
 import React from 'react';
 import { Form, Select } from 'antd';
 import styles from './Field.module.scss';
-import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 
 function GradYear({ fieldName, label }) {
-  const { updateDefaultField } = useApplicationFormContext();
-
-  const handleChange = (value) => {
-    updateDefaultField(fieldName, value);
-  };
-
   return (
     <Form.Item
       label={label}
@@ -18,7 +11,6 @@ function GradYear({ fieldName, label }) {
       className={styles.field}
     >
       <Select
-        onChange={handleChange}
         showSearch
         options={[...Array(71)]
           .map((_, i) => {

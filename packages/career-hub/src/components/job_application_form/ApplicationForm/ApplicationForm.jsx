@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Space, Spin } from 'antd';
+import { Form, Skeleton } from 'antd';
 import { useApplicationForm } from '../../../hooks';
 import {
   getInitialCustomFormData,
@@ -8,7 +8,7 @@ import {
   NON_CUSTOM_FIELD_COMPONENT_MAPPING,
   NON_CUSTOM_FIELDS,
 } from '../../../utils/applicationForm';
-import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
+import { useApplicationFormContext } from '../../../contexts';
 import styles from './ApplicationForm.module.scss';
 import CustomField from '../fields/CustomField';
 
@@ -24,14 +24,15 @@ function NonCustomField({ field }) {
   return <FieldComponent {...props} />;
 }
 
-function ApplicationForm({ jobProfileId, applicationId, status }) {
+function ApplicationForm() {
+  const { applicationId, stepName, jobProfileId } = useApplicationFormContext();
   const { data, isLoading } = useApplicationForm({
     jobProfileId,
     applicationId,
-    status,
+    status: stepName,
   });
-  const { setDefaultFormData, setCustomFormData } = useApplicationFormContext();
   const [form] = Form.useForm();
+  const { setFormInstance } = useApplicationFormContext();
 
   const nonCustomFieldsMap = useMemo(
     () =>
@@ -63,34 +64,29 @@ function ApplicationForm({ jobProfileId, applicationId, status }) {
       response: field.attributes.response,
     }));
 
-    setDefaultFormData(initialDefaultFormData);
-    setCustomFormData(initialCustomFormData);
+    form.setFieldsValue({
+      ...getInitialFormData(initialDefaultFormData),
+      ...getInitialCustomFormData(initialCustomFormData),
+    });
+  }, [nonCustomFieldsMap, customFieldsMap, form]);
 
-    form.setFieldsValue(getInitialFormData(initialDefaultFormData));
-    form.setFieldsValue(getInitialCustomFormData(initialCustomFormData));
-  }, [
-    nonCustomFieldsMap,
-    customFieldsMap,
-    setDefaultFormData,
-    setCustomFormData,
-    form,
-  ]);
+  useEffect(() => {
+    setFormInstance(form);
+  }, [form, setFormInstance]);
 
-  if (isLoading) {
-    return <Spin size="large" />;
+  if (isLoading || !nonCustomFieldsMap || !customFieldsMap) {
+    return <Skeleton active />;
   }
 
   return (
-    <Space direction="vertical" size="middle">
-      <Form layout="vertical" className={styles.form} form={form}>
-        {NON_CUSTOM_FIELDS.map((field) => (
-          <NonCustomField key={field} field={nonCustomFieldsMap[field]} />
-        ))}
-        {Object.entries(customFieldsMap).map(([key, value]) => (
-          <CustomField key={key} field={value} />
-        ))}
-      </Form>
-    </Space>
+    <Form layout="vertical" className={styles.form} form={form}>
+      {NON_CUSTOM_FIELDS.map((field) => (
+        <NonCustomField key={field} field={nonCustomFieldsMap[field]} />
+      ))}
+      {Object.entries(customFieldsMap).map(([key, value]) => (
+        <CustomField key={key} field={value} />
+      ))}
+    </Form>
   );
 }
 

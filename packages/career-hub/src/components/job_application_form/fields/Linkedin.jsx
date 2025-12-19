@@ -1,15 +1,8 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 import styles from './Field.module.scss';
 
 function Linkedin({ fieldName, label, fieldProps }) {
-  const { updateDefaultField } = useApplicationFormContext();
-
-  const handleChange = (event) => {
-    updateDefaultField(fieldName, event.target.value);
-  };
-
   return (
     <Form.Item
       label={label}
@@ -24,7 +17,7 @@ function Linkedin({ fieldName, label, fieldProps }) {
       layout="vertical"
       className={styles.field}
     >
-      <Input {...fieldProps} onChange={handleChange} />
+      <Input {...fieldProps} />
     </Form.Item>
   );
 }

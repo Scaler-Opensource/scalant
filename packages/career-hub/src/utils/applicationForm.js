@@ -27,12 +27,23 @@ const NON_CUSTOM_FIELD_MAP = {
 
 export const CHECKBOX_FIELD_MAP = {
   preferred_location_anywhere_in_india: 'preferred_location_anywhere_in_india',
-  notice_period_buyout: 'notice_period_buyout',
 };
 
 export const EXPERIENCE_FIELD_MAP = {
   years_of_experience: 'years_of_experience',
   months_of_experience: 'months_of_experience',
+};
+
+export const NOTICE_PERIOD_FIELD_MAP = {
+  notice_period: 'notice_period',
+  serving_notice: 'serving_notice',
+  available_joining_date: 'available_joining_date',
+  buyout_notice: 'buyout_notice',
+};
+
+const LOCATION_FIELD_MAP = {
+  current_location: 'current_location',
+  preferred_location: 'preferred_location',
 };
 
 export const NON_CUSTOM_FIELDS = Object.values(NON_CUSTOM_FIELD_MAP);
@@ -66,7 +77,7 @@ export const NON_CUSTOM_FIELD_COMPONENT_MAPPING = {
       fieldName: NON_CUSTOM_FIELD_MAP.current_location,
       label: 'Current Locations',
       fieldProps: {
-        options: globalThis?.[HYDRATION_KEY]?.job_locations || [],
+        options: window?.[HYDRATION_KEY]?.job_locations || [],
         mode: 'multiple',
       },
     },
@@ -77,7 +88,7 @@ export const NON_CUSTOM_FIELD_COMPONENT_MAPPING = {
       fieldName: NON_CUSTOM_FIELD_MAP.preferred_location,
       label: 'Preferred Locations',
       fieldProps: {
-        options: globalThis?.[HYDRATION_KEY]?.job_locations || [],
+        options: window?.[HYDRATION_KEY]?.job_locations || [],
         mode: 'multiple',
       },
     },
@@ -132,11 +143,11 @@ export const NON_CUSTOM_FIELD_COMPONENT_MAPPING = {
 
 export const YEAR_OPTIONS = new Array(50)
   .fill(0)
-  .map((v, i) => ({ label: `${i} Years`, value: i }));
+  .map((v, i) => ({ label: `${i} Years`, value: `${i}` }));
 
 export const MONTH_OPTIONS = new Array(12)
   .fill(0)
-  .map((v, i) => ({ label: `${i} Months`, value: i }));
+  .map((v, i) => ({ label: `${i} Months`, value: `${i}` }));
 
 export const NOTICE_PERIOD_OPTIONS = [
   { value: '-1', label: 'Currently Serving' },
@@ -160,7 +171,7 @@ export const getSkillOptions = (skills) => {
 
       return {
         label: `${skill.name} (${years}Y ${months}M)`,
-        value: skill.id,
+        value: `${skill.skillId}`,
       };
     }) || []
   );
@@ -180,6 +191,9 @@ export const getInitialFormData = (data) => {
         case NON_CUSTOM_FIELD_MAP.current_location:
           return [key, value?.split('/')];
         case NON_CUSTOM_FIELD_MAP.preferred_location:
+          if (value === ANYWHERE_IN_INDIA) {
+            return [key, null];
+          }
           return [key, value?.split('/')];
         case NON_CUSTOM_FIELD_MAP.skills:
           return [key, value?.map((skill) => skill.skill_id)];
@@ -191,13 +205,22 @@ export const getInitialFormData = (data) => {
 
   const noticePeriodFields = data[NON_CUSTOM_FIELD_MAP.notice_period] || {};
   const experienceFields = data[NON_CUSTOM_FIELD_MAP.experience] || {};
+  const preferredLocationFieldValue =
+    data[NON_CUSTOM_FIELD_MAP.preferred_location];
 
   Object.entries(noticePeriodFields).forEach(([key, value]) => {
-    initialFormData[key] = value;
+    if (key === NOTICE_PERIOD_FIELD_MAP.buyout_notice) {
+      initialFormData[key] = value === 'true';
+    } else {
+      initialFormData[key] = value;
+    }
   });
   Object.entries(experienceFields).forEach(([key, value]) => {
     initialFormData[key] = value;
   });
+
+  initialFormData[CHECKBOX_FIELD_MAP.preferred_location_anywhere_in_india] =
+    preferredLocationFieldValue === ANYWHERE_IN_INDIA;
 
   return initialFormData;
 };
@@ -211,4 +234,92 @@ export const getInitialCustomFormData = (data) => {
   }, {});
 
   return initialFormData;
+};
+
+const createNoticePeriodFieldPayload = (fields) => {
+  return {
+    ...fields,
+    [NOTICE_PERIOD_FIELD_MAP.serving_notice]:
+      fields[NOTICE_PERIOD_FIELD_MAP.notice_period] === '-1',
+  };
+};
+
+const createExperienceFieldPayload = (fields) => {
+  let result = 0;
+
+  result +=
+    (Number(fields[EXPERIENCE_FIELD_MAP.years_of_experience]) || 0) * 12;
+  result += Number(fields[EXPERIENCE_FIELD_MAP.months_of_experience]) || 0;
+
+  return result;
+};
+
+const createSkillsFieldPayload = (fieldValues, allSkills) => {
+  return allSkills.map((skill) => ({
+    ...skill,
+    is_top_5: fieldValues.includes(String(skill.skillId)),
+  }));
+};
+
+const createCustomFieldsPayload = (fromData) => {
+  const defaultFieldKeys =
+    Object.keys(NON_CUSTOM_FIELD_MAP) +
+    Object.keys(CHECKBOX_FIELD_MAP) +
+    Object.keys(EXPERIENCE_FIELD_MAP) +
+    Object.keys(NOTICE_PERIOD_FIELD_MAP);
+
+  return Object.entries(fromData)
+    .filter(([key]) => !defaultFieldKeys.includes(key))
+    .map(([key, value]) => ({
+      id: key,
+      response: value,
+    }));
+};
+
+export const createDefaultFieldsPayload = (fromData, allSkills) => {
+  const defaultFieldsData = {};
+
+  Object.entries(fromData).forEach(([key, value]) => {
+    if (NON_CUSTOM_FIELDS.includes(key)) {
+      if (LOCATION_FIELD_MAP[key]) {
+        defaultFieldsData[key] = value?.join('/');
+      } else {
+        defaultFieldsData[key] = value;
+      }
+    }
+  });
+
+  const noticePeriodFields = {};
+  const experienceFields = {};
+  Object.entries(fromData).forEach(([key, value]) => {
+    if (NOTICE_PERIOD_FIELD_MAP[key]) {
+      noticePeriodFields[key] = value;
+    } else if (EXPERIENCE_FIELD_MAP[key]) {
+      experienceFields[key] = value;
+    } else if (
+      CHECKBOX_FIELD_MAP.preferred_location_anywhere_in_india === key &&
+      value
+    ) {
+      defaultFieldsData[NON_CUSTOM_FIELD_MAP.preferred_location] =
+        ANYWHERE_IN_INDIA;
+    }
+  });
+
+  defaultFieldsData[NON_CUSTOM_FIELD_MAP.notice_period] =
+    createNoticePeriodFieldPayload(noticePeriodFields);
+  defaultFieldsData[NON_CUSTOM_FIELD_MAP.experience] =
+    createExperienceFieldPayload(experienceFields);
+  defaultFieldsData[NON_CUSTOM_FIELD_MAP.skills] = createSkillsFieldPayload(
+    fromData[NON_CUSTOM_FIELD_MAP.skills],
+    allSkills
+  );
+
+  return defaultFieldsData;
+};
+
+export const createApplicationFormPayload = (fromData, allSkills) => {
+  return {
+    default_fields: createDefaultFieldsPayload(fromData, allSkills),
+    custom_fields: createCustomFieldsPayload(fromData),
+  };
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export const ApplicationFormContext = createContext();
 
@@ -14,31 +14,30 @@ export function ApplicationFormProvider({
     console.log('Method not implemented. We should get it from MIT');
     return '';
   },
+  stepName: initialStepName,
+  jobProfileId,
+  applicationId,
 }) {
-  const [defaultFormData, setDefaultFormData] = useState({});
-  const [customFormData, setCustomFormData] = useState([]);
+  const [formInstance, setFormInstance] = useState(null);
+  const [stepName, setStepName] = useState(initialStepName);
+  const [selectedResume, setSelectedResume] = useState(null);
 
-  const updateCustomField = (id, response) => {
-    setCustomFormData((prev) => [
-      ...prev.filter((field) => field.id !== id),
-      { id, response },
-    ]);
-  };
-
-  const updateDefaultField = (fieldName, value) => {
-    setDefaultFormData((prev) => ({ ...prev, [fieldName]: value }));
-  };
+  useEffect(() => {
+    setStepName(initialStepName);
+  }, [initialStepName]);
 
   return (
     <ApplicationFormContext.Provider
       value={{
-        defaultFormData,
-        updateDefaultField,
-        setDefaultFormData,
-        customFormData,
-        updateCustomField,
-        setCustomFormData,
         onUploadFile,
+        formInstance,
+        setFormInstance,
+        stepName,
+        setStepName,
+        jobProfileId,
+        applicationId,
+        selectedResume,
+        setSelectedResume,
       }}
     >
       {children}

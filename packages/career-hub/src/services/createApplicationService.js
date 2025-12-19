@@ -1,10 +1,12 @@
 import baseService from './baseService';
 
+const BASE_URL = '/api/v3/careers-hub/applications';
+
 const createApplicationService = baseService.injectEndpoints({
   endpoints: (builder) => ({
     createApplication: builder.mutation({
       query: ({ jobProfileId, utmMedium, utmSource, currentTab, utmId }) => ({
-        url: '/api/v3/careers-hub/applications/',
+        url: BASE_URL,
         method: 'POST',
         body: {
           job_profile_id: jobProfileId,
@@ -17,17 +19,27 @@ const createApplicationService = baseService.injectEndpoints({
     }),
     getApplication: builder.query({
       query: ({ applicationId, jobProfileId, status }) => ({
-        url: `/api/v3/careers-hub/applications/${applicationId}`,
+        url: `${BASE_URL}/${applicationId}`,
         params: {
           job_profile_id: jobProfileId,
           step_name: status,
         },
       }),
     }),
+    updateApplication: builder.mutation({
+      query: ({ applicationId, payload }) => ({
+        url: `${BASE_URL}/${applicationId}`,
+        method: 'PATCH',
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useCreateApplicationMutation, useGetApplicationQuery } =
-  createApplicationService;
+export const {
+  useCreateApplicationMutation,
+  useGetApplicationQuery,
+  useUpdateApplicationMutation,
+} = createApplicationService;
 
 export default createApplicationService;

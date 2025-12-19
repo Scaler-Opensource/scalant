@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Drawer } from 'antd';
-import { InfoCircleFilled } from '@ant-design/icons';
 import PropTypes from 'prop-types';
-import { ApplicationFormProvider } from '../../../contexts/ApplicationFormContext';
+import {
+  ApplicationFormProvider,
+  useApplicationFormContext,
+} from '../../../contexts/ApplicationFormContext';
 import { useCreateApplication } from '../../../hooks';
 import { APPLICATION_STATUS } from '../../../utils/constants';
 import ApplicationForm from '../ApplicationForm';
+import Footer from '../Footer';
 import FormHeader from '../FormHeader';
+import ResumeChoiceSelect from '../ResumeChoiceSelect';
 
-function FormStep({ jobProfileId, applicationData }) {
-  const { applicationId, status } = applicationData;
+function FormStep() {
+  const { stepName } = useApplicationFormContext();
 
-  switch (status) {
+  switch (stepName) {
     case APPLICATION_STATUS.APPLICATION_FORM:
-      return (
-        <ApplicationForm
-          jobProfileId={jobProfileId}
-          applicationId={applicationId}
-          status={status}
-        />
-      );
+      return <ApplicationForm />;
+    case APPLICATION_STATUS.RESUME_CHOICE_SELECT:
+      return <ResumeChoiceSelect />;
     default:
       return null;
   }
@@ -43,10 +43,11 @@ function FormContainer({
     currentTab,
     utmId,
   });
+  const { applicationId, status } = data || {};
 
   const handleClose = () => {
-    setOpen(false);
     onClose();
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -54,7 +55,12 @@ function FormContainer({
   }, [jobProfileId]);
 
   return (
-    <ApplicationFormProvider onUploadFile={onUploadFile}>
+    <ApplicationFormProvider
+      onUploadFile={onUploadFile}
+      stepName={status}
+      jobProfileId={jobProfileId}
+      applicationId={applicationId}
+    >
       <Drawer
         closable={{ placement: 'end' }}
         loading={isLoading}
@@ -62,16 +68,10 @@ function FormContainer({
         open={open}
         placement="bottom"
         height={600}
-        title={
-          <FormHeader
-            currentStep={1}
-            icon={InfoCircleFilled}
-            title="Required Details"
-            totalSteps={2}
-          />
-        }
+        title={<FormHeader />}
+        footer={<Footer onCancel={handleClose} />}
       >
-        <FormStep jobProfileId={jobProfileId} applicationData={data} />
+        <FormStep />
       </Drawer>
     </ApplicationFormProvider>
   );

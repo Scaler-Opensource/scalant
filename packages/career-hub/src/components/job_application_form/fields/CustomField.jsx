@@ -2,16 +2,10 @@ import React, { useState } from 'react';
 import { Button, Form, Input, message, Upload } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { CUSTOM_FIELD_TYPE_MAP } from '../../../utils/applicationForm';
-import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
+import { useApplicationFormContext } from '../../../contexts';
 import styles from './Field.module.scss';
 
 function GenericField({ formType, field }) {
-  const { updateCustomField } = useApplicationFormContext();
-
-  const handleChange = (event) => {
-    updateCustomField(field.id, event.target.value);
-  };
-
   return (
     <Form.Item
       label={field.attributes.title}
@@ -22,32 +16,30 @@ function GenericField({ formType, field }) {
       layout="vertical"
       className={styles.field}
     >
-      <Input onChange={handleChange} type={formType} />
+      <Input type={formType} />
     </Form.Item>
   );
 }
 
 function UploadField({ field }) {
-  const { onUploadFile, updateCustomField, customFormData } =
-    useApplicationFormContext();
+  const { onUploadFile } = useApplicationFormContext();
   const [isUploading, setIsUploading] = useState(false);
-  const uploadedFileName = customFormData?.find?.(
-    (customField) => customField.id === field.id
-  )?.response?.file_name;
+  const form = Form.useFormInstance();
+  const fieldValue = Form.useWatch(field.id) || {};
 
   const handleSelectFile = async (e) => {
     const file = e?.target?.files?.[0];
 
     if (!file) return;
     setIsUploading(true);
-    updateCustomField(field.id, {
+    form.setFieldValue(field.id, {
       file_name: file.name,
     });
 
     try {
       if (onUploadFile) {
         const url = await onUploadFile(file);
-        updateCustomField(field.id, {
+        form.setFieldValue(field.id, {
           file_name: file.name,
           file_url: url,
         });
@@ -90,10 +82,10 @@ function UploadField({ field }) {
         <Button
           className={styles.field}
           loading={isUploading}
-          icon={!!uploadedFileName && <CheckCircleFilled />}
+          icon={!!fieldValue.file_name && <CheckCircleFilled />}
         >
-          {!!uploadedFileName && uploadedFileName}
-          {!uploadedFileName && !isUploading && 'Upload File'}
+          {!!fieldValue.file_name && fieldValue.file_name}
+          {!fieldValue.file_name && !isUploading && 'Upload File'}
         </Button>
       </Upload>
     </Form.Item>

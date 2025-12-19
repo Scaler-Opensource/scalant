@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Select } from 'antd';
-import { useApplicationFormContext } from '../../../contexts/ApplicationFormContext';
 import { useLazyGetSelectOptionsQuery } from '../../../services/selectOptionsService';
 import styles from './Field.module.scss';
 
 function Company({ fieldName, label }) {
-  const { updateDefaultField } = useApplicationFormContext();
   const [fetchSelectOptions] = useLazyGetSelectOptionsQuery();
   const [options, setOptions] = useState([]);
-
-  const handleChange = (value) => {
-    updateDefaultField(fieldName, value);
-  };
 
   const handleSearch = async (value) => {
     const response = await fetchSelectOptions({
@@ -35,7 +29,6 @@ function Company({ fieldName, label }) {
         showSearch
         filterOption={false}
         onSearch={handleSearch}
-        onChange={handleChange}
       />
     </Form.Item>
   );

@@ -7,6 +7,7 @@ import {
 
 export const APPLICATION_STATUS = {
   APPLICATION_FORM: 'application_form',
+  RESUME_CHOICE_SELECT: 'resume_choice_select',
   SAVED: 'Saved',
   WITHDRAWN: 'Application Withdrawn',
 };
