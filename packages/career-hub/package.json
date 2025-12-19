@@ -30,6 +30,6 @@
   },
   "gitHead": "859e969cf79a05a9e3a6cc20866af609f58473c5",
   "dependencies": {
-    "react-pdf": "^10.2.0"
+    "react-pdf": "5.7.2"
   }
 }
