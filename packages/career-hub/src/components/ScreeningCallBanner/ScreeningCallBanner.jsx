@@ -1,17 +1,21 @@
 import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { message } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons';
 
 import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
 import { useIssueScreeningCallMutation } from '../../services/screeningCallService';
-import { useHasCompletedScreeningCall } from '../../hooks';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
 import styles from './ScreeningCallBanner.module.scss';
 
-const ScreeningCallBanner = () => {
-  const hasCompletedScreeningCall = useHasCompletedScreeningCall();
+const ScreeningCallBanner = ({ forceShow = false }) => {
+  const userProfileData = useSelector(
+    (state) => state.scalantCareerHub.dashboard.userProfileData
+  );
+  const hasCompletedScreeningCall =
+    userProfileData?.hasCompletedScreeningCall ?? false;
   const { jobData, currentTab } = useJobPreview();
   const { applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
@@ -27,10 +31,13 @@ const ScreeningCallBanner = () => {
     }
   }, [handleScreeningCall]);
 
+  if (hasCompletedScreeningCall) {
+    return null;
+  }
+
   if (
-    hasCompletedScreeningCall ||
-    currentTab !== TAG_TO_TAB_MAPPING.applied ||
-    isWithdrawn
+    !forceShow &&
+    (currentTab !== TAG_TO_TAB_MAPPING.applied || isWithdrawn)
   ) {
     return null;
   }

@@ -6,4 +6,6 @@ export const ICONS = {
     'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/170/451/original/Vector.svg?1765523747',
   monitor:
     'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/170/455/original/Vector_%281%29.svg?1765526679',
+  likeBadge:
+    'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/171/516/original/Like-badge-_remix__1.svg?1766402587',
 };

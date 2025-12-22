@@ -10,6 +10,7 @@ export const APPLICATION_STATUS = {
   RESUME_CHOICE_SELECT: 'resume_choice_select',
   SAVED: 'Saved',
   WITHDRAWN: 'Application Withdrawn',
+  SUCCESSFULLY_APPLIED: 'successfully_applied',
 };
 
 export const SIDER_WIDTH = {

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
-import { Button, Flex, Radio, Skeleton, Typography } from 'antd';
+import { Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { PlusOutlined } from '@ant-design/icons';
-import { MAX_RESUMES } from '../../../utils/constants';
 import { toDDMMYY } from '../../../utils/date';
 import { useApplicationFormContext } from '../../../contexts';
 import {
@@ -77,7 +75,7 @@ function ResumePreview() {
 }
 
 function ResumeChoiceSelect() {
-  const { setSelectedResume, onAddResume } = useApplicationFormContext();
+  const { setSelectedResume } = useApplicationFormContext();
   const { jobProfileId } = useApplicationFormContext();
   const { data, isLoading } = useGetResumesEligibilityQuery({ jobProfileId });
 
@@ -101,7 +99,7 @@ function ResumeChoiceSelect() {
         {Object.entries(data).map(([key, value]) => {
           return <ResumeChoiceOptionLabel key={key} value={value} />;
         })}
-        {Object.keys(data).length < MAX_RESUMES && (
+        {/* {Object.keys(data).length < MAX_RESUMES && (
           <Button
             type="link"
             onClick={onAddResume}
@@ -110,7 +108,7 @@ function ResumeChoiceSelect() {
             <PlusOutlined />
             Create New Resume
           </Button>
-        )}
+        )} */}
       </Flex>
       <Flex className={styles.resumePreviewContainer} flex={1}>
         <ResumePreview />

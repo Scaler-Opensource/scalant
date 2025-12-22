@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
-import { useHasCompletedScreeningCall } from '../../hooks';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
 import styles from './InterviewExperiencesBanner.module.scss';
@@ -11,7 +11,11 @@ const INTERVIEW_QUESTIONS_URL =
   'https://companion.scaler.com/interview-experiences';
 
 const InterviewExperiencesBanner = () => {
-  const hasCompletedScreeningCall = useHasCompletedScreeningCall();
+  const userProfileData = useSelector(
+    (state) => state.scalantCareerHub.dashboard.userProfileData
+  );
+  const hasCompletedScreeningCall =
+    userProfileData?.hasCompletedScreeningCall ?? false;
   const { jobData, companyData, currentTab } = useJobPreview();
   const { title: jobTitle, applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
