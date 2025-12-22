@@ -11,6 +11,7 @@ import ApplicationForm from '../ApplicationForm';
 import Footer from '../Footer';
 import FormHeader from '../FormHeader';
 import ResumeChoiceSelect from '../ResumeChoiceSelect';
+import SuccessScreen from '../SuccessScreen';
 
 function FormStep() {
   const { stepName } = useApplicationFormContext();
@@ -20,6 +21,8 @@ function FormStep() {
       return <ApplicationForm />;
     case APPLICATION_STATUS.RESUME_CHOICE_SELECT:
       return <ResumeChoiceSelect />;
+    case APPLICATION_STATUS.SUCCESSFULLY_APPLIED:
+      return <SuccessScreen />;
     default:
       return null;
   }
@@ -66,13 +69,12 @@ function FormContainer({
       onAddResume={onAddResume}
     >
       <Drawer
-        closable={{ placement: 'end' }}
+        closable={false}
         loading={isLoading}
-        onClose={handleClose}
         open={open}
         placement="bottom"
         height={600}
-        title={<FormHeader />}
+        title={<FormHeader onClose={handleClose} />}
         footer={<Footer onCancel={handleClose} />}
       >
         <FormStep />

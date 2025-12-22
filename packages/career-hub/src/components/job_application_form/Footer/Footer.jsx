@@ -76,7 +76,7 @@ const ResumeChoiceSelectFooter = () => {
       });
 
       if (response?.data?.success) {
-        window.location.reload();
+        setStepName(APPLICATION_STATUS.SUCCESSFULLY_APPLIED);
       } else {
         message.error('Failed to update application');
       }
