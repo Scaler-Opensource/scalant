@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tag } from 'antd';
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { setTab } from '../../store/filterSlice';
+import { useSelector } from 'react-redux';
+import { useJobQueryParams } from '../../hooks';
 import {
   JOB_FILTER_TAGS,
   TAG_TO_TAB_MAPPING,
@@ -12,10 +12,10 @@ import {
 import styles from './TagsSection.module.scss';
 
 function TagsSection() {
-  const dispatch = useDispatch();
-  const currentTab = useSelector(
-    (state) => state.scalantCareerHub?.filter?.tab || 'all'
-  );
+  const { currentTab, updateTab } = useJobQueryParams({
+    syncToURL: true,
+    syncFromURL: false, // Don't sync from URL here, let JobsPage handle initialization
+  });
   const processCounts = useSelector(
     (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
   );
@@ -23,7 +23,7 @@ function TagsSection() {
   const handleTagClick = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
     if (tabValue) {
-      dispatch(setTab(tabValue));
+      updateTab(tabValue);
     }
   };
 

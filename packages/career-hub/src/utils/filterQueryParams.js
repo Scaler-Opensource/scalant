@@ -180,3 +180,47 @@ export const getJobIdFromURL = () => {
   const jobIds = params.get('job_ids');
   return jobIds || null;
 };
+
+/**
+ * Update URL with tab query param
+ * @param {string|null} tab - The tab value to set, or null to remove
+ */
+export const updateURLWithTab = (tab) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  // eslint-disable-next-line no-undef
+  const params = new URLSearchParams(window.location.search);
+
+  if (tab) {
+    params.set('tab', String(tab));
+  } else {
+    params.delete('tab');
+  }
+
+  const newURL = params.toString()
+    ? // eslint-disable-next-line no-undef
+      `${window.location.pathname}?${params.toString()}`
+    : // eslint-disable-next-line no-undef
+      window.location.pathname;
+
+  // Use replaceState to avoid adding to browser history
+  // eslint-disable-next-line no-undef
+  window.history.replaceState({}, '', newURL);
+};
+
+/**
+ * Get tab from current URL query params
+ * @returns {string|null} - The tab value or null if not present
+ */
+export const getTabFromURL = () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  // eslint-disable-next-line no-undef
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  return tab || null;
+};

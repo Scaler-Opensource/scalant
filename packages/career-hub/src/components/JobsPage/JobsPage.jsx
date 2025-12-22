@@ -16,11 +16,8 @@ import {
   setUserProfileData,
 } from '../../store/dashboardSlice';
 import { updateFiltersFromForm } from '../../store/filterSlice';
-import { setSelectedJobId } from '../../store/layoutSlice';
-import {
-  getFiltersFromURL,
-  getJobIdFromURL,
-} from '../../utils/filterQueryParams';
+import { getFiltersFromURL } from '../../utils/filterQueryParams';
+import { useJobQueryParams } from '../../hooks';
 import {
   SIDER_WIDTH,
   TAG_TO_TAB_MAPPING,
@@ -37,32 +34,33 @@ function JobsPage({
   onUploadFile,
 }) {
   const dispatch = useDispatch();
-  const selectedJobId = useSelector(
-    (state) => state.scalantCareerHub.layout.selectedJobId
-  );
   const currentTab = useSelector(
     (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
   );
   const hasInitializedFilters = useRef(false);
 
-  // Initialize filters and job_ids from URL query params synchronously before render
+  // Use custom hook to manage job_ids and tab query params
+  // This hook handles reading from URL and syncing to Redux state
+  const { selectedJobId } = useJobQueryParams({
+    syncToURL: true,
+    syncFromURL: true, // Read from URL on mount
+  });
+
+  // Initialize filters from URL query params synchronously before render
   // This prevents the API from being called with default filters first
   useLayoutEffect(() => {
     if (!hasInitializedFilters.current) {
       const urlFilters = getFiltersFromURL();
-      const jobIdFromURL = getJobIdFromURL();
 
-      // Combine all filters including job_ids in a single dispatch
+      // Combine all filters in a single dispatch
       const filtersToApply = { ...urlFilters };
 
+      // Add job_ids to filters for API calls if present in URL
+      // eslint-disable-next-line no-undef
+      const params = new URLSearchParams(window.location.search);
+      const jobIdFromURL = params.get('job_ids');
       if (jobIdFromURL) {
-        const jobIdNum = Number(jobIdFromURL);
-        if (!isNaN(jobIdNum)) {
-          // Add job_ids to filters for API calls
-          filtersToApply.job_ids = [jobIdFromURL];
-          // Set selected job ID in layout
-          dispatch(setSelectedJobId(jobIdNum));
-        }
+        filtersToApply.job_ids = [jobIdFromURL];
       }
 
       // Apply all filters in a single dispatch to avoid duplicate API calls

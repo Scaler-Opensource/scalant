@@ -2,16 +2,13 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Spin, Alert, Space, Tag, Button } from 'antd';
-import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
 import {
   initializeSavedJobs,
   setJobSavedStatus,
 } from '../../store/savedJobsSlice';
 import { useUpdateApplicationStatusMutation } from '../../services/useUpdateApplicationStatus';
-import { updateURLWithJobId } from '../../utils/filterQueryParams';
-import { useInfiniteScroll } from '../../hooks';
+import { useInfiniteScroll, useJobQueryParams } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
-import { setTab } from '../../store/filterSlice';
 import JobCard from '../JobCard';
 import { RightOutlined } from '@ant-design/icons';
 
@@ -35,15 +32,18 @@ function JobsList({
   hasMore = true,
 }) {
   const dispatch = useDispatch();
-  const selectedJobId = useSelector(
-    (state) => state.scalantCareerHub.layout.selectedJobId
-  );
   const processCounts = useSelector(
     (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
   );
   const calculatedHasMore = hasMore !== undefined ? hasMore : true;
 
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation();
+
+  // Use custom hook to manage job_ids and tab query params
+  const { selectedJobId, updateJobId, updateTab } = useJobQueryParams({
+    syncToURL: true,
+    syncFromURL: false, // Don't sync from URL here, let JobsPage handle initialization
+  });
 
   const { sentinelRef } = useInfiniteScroll({
     hasMore: calculatedHasMore,
@@ -77,21 +77,17 @@ function JobsList({
         );
         // Only set if not already selected or if selected job doesn't match
         if (matchingJob && selectedJobId !== matchingJob.id) {
-          dispatch(setSelectedJobId(matchingJob.id));
+          updateJobId(matchingJob.id);
         }
       }
     }
-  }, [jobs, selectedJobId, dispatch]);
+  }, [jobs, selectedJobId, updateJobId]);
 
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
-      dispatch(clearSelectedJobId());
-      // Remove job_ids from URL
-      updateURLWithJobId(null);
+      updateJobId(null);
     } else {
-      dispatch(setSelectedJobId(jobId));
-      // Update URL with job_ids
-      updateURLWithJobId(jobId);
+      updateJobId(jobId);
     }
   };
 
@@ -122,7 +118,7 @@ function JobsList({
   };
 
   const handleAllJobsClick = () => {
-    dispatch(setTab(TAG_TO_TAB_MAPPING.all));
+    updateTab(TAG_TO_TAB_MAPPING.all);
   };
 
   const heading =

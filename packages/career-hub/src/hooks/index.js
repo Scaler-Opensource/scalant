@@ -7,3 +7,4 @@ export { default as useAccumulatedJobs } from './useAccumulatedJobs';
 export { useAsyncFilterOptions } from './useAsyncFilterOptions';
 export { useFilterMetaOptions } from './useFilterMetaOptions';
 export { default as useHasCompletedScreeningCall } from './useHasCompletedScreeningCall';
+export { default as useJobQueryParams } from './useJobQueryParams';
