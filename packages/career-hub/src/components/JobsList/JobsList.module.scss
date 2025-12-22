@@ -40,3 +40,21 @@
   max-height: calc(100vh - 9.6rem);
   overflow-y: auto;
 }
+
+.noJobsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 6rem;
+  text-align: center;
+}
+
+.noJobsImage {
+  height: 20rem;
+}
+
+.noJobsHeading {
+  margin-bottom: 0rem !important;
+}

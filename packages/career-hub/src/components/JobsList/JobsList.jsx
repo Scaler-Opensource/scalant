@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Spin, Alert, Space, Tag } from 'antd';
+import { Typography, Spin, Alert, Space, Tag, Button } from 'antd';
 import { setSelectedJobId, clearSelectedJobId } from '../../store/layoutSlice';
 import {
   initializeSavedJobs,
@@ -11,7 +11,10 @@ import { useUpdateApplicationStatusMutation } from '../../services/useUpdateAppl
 import { updateURLWithJobId } from '../../utils/filterQueryParams';
 import { useInfiniteScroll } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import { setTab } from '../../store/filterSlice';
 import JobCard from '../JobCard';
+import { RightOutlined } from '@ant-design/icons';
+
 import styles from './JobsList.module.scss';
 const { Title, Text } = Typography;
 const TAB_HEADINGS = {
@@ -20,6 +23,7 @@ const TAB_HEADINGS = {
   [TAG_TO_TAB_MAPPING.saved]: 'Saved Jobs',
   [TAG_TO_TAB_MAPPING.applied]: 'Applied Jobs',
 };
+
 function JobsList({
   className,
   currentTab,
@@ -117,6 +121,10 @@ function JobsList({
     return result;
   };
 
+  const handleAllJobsClick = () => {
+    dispatch(setTab(TAG_TO_TAB_MAPPING.all));
+  };
+
   const heading =
     TAB_HEADINGS[currentTab] || TAB_HEADINGS[TAG_TO_TAB_MAPPING.all];
 
@@ -127,9 +135,15 @@ function JobsList({
   if (isLoading) {
     return (
       <div className={className}>
-        <Title level={2} className={styles.heading}>
-          {heading}
-        </Title>
+        <Space direction="vertical" className={styles.header}>
+          <Title level={4} className={styles.heading}>
+            {heading} <Tag color="green">{getCountForTab()} Found</Tag>
+          </Title>
+          <Text>
+            Based on your profile, preferences, and activity like applies,
+            searches, and saves
+          </Text>
+        </Space>
         <Spin size="large" className={styles.spinner} />
       </div>
     );
@@ -138,20 +152,28 @@ function JobsList({
   if (error) {
     return (
       <div className={className}>
-        <Title level={2} className={styles.heading}>
-          {heading}
-        </Title>
-        <Alert
-          message="Error loading jobs"
-          description={
-            error?.data?.message ||
-            error?.message ||
-            'Failed to fetch jobs. Please try again later.'
-          }
-          type="error"
-          showIcon
-          className={styles.alert}
-        />
+        <Space direction="vertical" className={styles.header}>
+          <Title level={4} className={styles.heading}>
+            {heading} <Tag color="green">{getCountForTab()} Found</Tag>
+          </Title>
+          <Text>
+            Based on your profile, preferences, and activity like applies,
+            searches, and saves
+          </Text>
+        </Space>
+        <div className={styles.header}>
+          <Alert
+            message="Error loading jobs"
+            description={
+              error?.data?.message ||
+              error?.message ||
+              'Failed to fetch jobs. Please try again later.'
+            }
+            type="error"
+            showIcon
+            className={styles.alert}
+          />
+        </div>
       </div>
     );
   }
@@ -159,16 +181,33 @@ function JobsList({
   if (!jobs || jobs.length === 0) {
     return (
       <div className={className}>
-        <Title level={2} className={styles.heading}>
-          {heading}
-        </Title>
-        <Alert
-          message="No jobs found"
-          description="There are no jobs available at the moment."
-          type="info"
-          showIcon
-          className={styles.alert}
-        />
+        <Space direction="vertical" className={styles.header}>
+          <Title level={4} className={styles.heading}>
+            {heading} <Tag color="green">{getCountForTab()} Found</Tag>
+          </Title>
+          <Text>
+            Based on your profile, preferences, and activity like applies,
+            searches, and saves
+          </Text>
+        </Space>
+        <div className={styles.noJobsContainer}>
+          <img
+            src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/171/464/original/3cd470a8085619f7775acfa9e3f15053ee5eb687.png?1766383387"
+            alt="No Jobs Found"
+            className={styles.noJobsImage}
+          />
+          <Title level={3} className={styles.noJobsHeading}>
+            No Suitable Roles Available at the Moment
+          </Title>
+          <Text className={styles.noJobsText}>
+            Your current preferences do not match any active opportunities,
+            Please visit the All Jobs section to explore existing job
+            opportunities.
+          </Text>
+          <Button type="primary" onClick={handleAllJobsClick}>
+            Go to All Jobs <RightOutlined />
+          </Button>
+        </div>
       </div>
     );
   }
