@@ -19,7 +19,7 @@ export const SIDER_WIDTH = {
 
 export const JOB_FILTER_TAGS = {
   relevant: {
-    label: 'Unlocked Jobs',
+    label: 'Preferred Jobs',
     icon: UnlockOutlined,
   },
   all: {

@@ -39,10 +39,10 @@ export const JOB_CARD_CONFIG = {
     isApplicationStatusAvailable: false,
   },
   applications: {
-    isExperienceCtcAvailable: false,
-    isNoticePeriodAvailable: false,
+    isExperienceCtcAvailable: true,
+    isNoticePeriodAvailable: true,
     isAppliedDateAvailable: true,
-    isArchivedStatusAvailable: false,
+    isArchivedStatusAvailable: true,
     isApplicationStatusAvailable: true,
   },
   archived: {

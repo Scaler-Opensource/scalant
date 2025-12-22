@@ -3,7 +3,7 @@ import { JOB_CARD_CONFIG } from '../utils/jobCard/constants';
 
 /**
  * Custom hook to manage job card state and configuration
- * 
+ *
  * @param {Object} params - Hook parameters
  * @param {string} params.currentTab - Current active tab
  * @param {boolean} params.isActive - Whether card is active/selected
@@ -25,7 +25,7 @@ export const useJobCardState = ({ currentTab, isActive, jobData }) => {
   // Check if job is expired
   const isExpired = useMemo(() => {
     if (!jobData.expiry) return false;
-    
+
     return (
       new Date(jobData.expiry) < new Date() ||
       jobData.jobProfileStatus !== 'active'
@@ -35,7 +35,7 @@ export const useJobCardState = ({ currentTab, isActive, jobData }) => {
   return {
     cardConfig,
     shouldShowBody,
-    isExpired
+    isExpired,
   };
 };
 
