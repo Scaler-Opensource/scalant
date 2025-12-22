@@ -103,7 +103,7 @@ function JobsList({
 
     const payload = {
       job_profile_id: jobProfileId,
-      application_status: 'Saved',
+      update_action: 'save',
     };
 
     const result = await updateApplicationStatus(payload).unwrap();
