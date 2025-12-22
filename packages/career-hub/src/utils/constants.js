@@ -154,3 +154,5 @@ export const CURRENCY_FORMATTER = {
 };
 
 export const HYDRATION_KEY = '__CAREERS_HUB__';
+
+export const MAX_RESUMES = 5;

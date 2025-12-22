@@ -96,7 +96,12 @@ const ResumeChoiceSelectFooter = () => {
       </Space>
       <Space>
         <Button onClick={handleGoBack}>Go Back</Button>
-        <Button type="primary" onClick={handleSubmit} loading={isLoading}>
+        <Button
+          type="primary"
+          onClick={handleSubmit}
+          loading={isLoading}
+          disabled={!selectedResume}
+        >
           Proceed to Apply
         </Button>
       </Space>

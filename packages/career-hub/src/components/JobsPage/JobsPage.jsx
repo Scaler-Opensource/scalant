@@ -34,6 +34,8 @@ function JobsPage({
   onUploadFile,
   onViewResume,
   onEditPreferences,
+  onEditResume,
+  onAddResume,
 }) {
   const dispatch = useDispatch();
   const currentTab = useSelector(
@@ -94,6 +96,8 @@ function JobsPage({
       openMockInterviewModal={openMockInterviewModal}
       openResume={openResume}
       jobId={selectedJobId}
+      onEditResume={onEditResume}
+      onAddResume={onAddResume}
     />
   ) : (
     <ProfileDetails

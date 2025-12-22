@@ -19,6 +19,8 @@ function JobDetails({
   className,
   onUploadFile,
   currentTab,
+  onEditResume,
+  onAddResume,
 }) {
   if (!jobId) {
     return null;
@@ -34,6 +36,8 @@ function JobDetails({
         jobId={jobId}
         isActive={!!jobId}
         currentTab={currentTab}
+        onEditResume={onEditResume}
+        onAddResume={onAddResume}
       />
     </div>
   );

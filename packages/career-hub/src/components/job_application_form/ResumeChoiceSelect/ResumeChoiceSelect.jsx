@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { Flex, Radio, Skeleton, Typography } from 'antd';
+import classNames from 'classnames';
+import { Button, Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
-// import {
-//   DownOutlined,
-//   ExclamationCircleTwoTone,
-//   UpOutlined,
-// } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
+import { MAX_RESUMES } from '../../../utils/constants';
 import { toDDMMYY } from '../../../utils/date';
 import { useApplicationFormContext } from '../../../contexts';
 import {
@@ -13,32 +11,29 @@ import {
   useGetResumesEligibilityQuery,
 } from '../../../services/resumeService';
 import styles from './ResumeChoiceSelect.module.scss';
-import classNames from 'classnames';
+import BlockerPoints from './BlockerPoints';
 
 // Set the worker source for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function ResumeChoiceOptionLabel({ value }) {
   const { selectedResume, setSelectedResume } = useApplicationFormContext();
-  const { resume_details } = value || {};
+  const { resume_details, is_blocker } = value || {};
   const { id, name, modified_at } = resume_details || {};
-  // const [isCollapsed, setIsCollapsed] = useState(true);
+  const isSelected = selectedResume === id && !is_blocker;
 
   const handleChange = () => {
     setSelectedResume(id);
   };
 
-  // const handleCollapse = () => {
-  //   setIsCollapsed(!isCollapsed);
-  // };
-
   return (
     <Radio
       onChange={handleChange}
-      checked={selectedResume === id}
+      checked={isSelected}
       className={classNames(styles.resumeChoiceOptionLabel, {
-        [styles.resumeChoiceOptionLabelChecked]: selectedResume === id,
+        [styles.resumeChoiceOptionLabelChecked]: isSelected,
       })}
+      disabled={is_blocker}
     >
       <Flex vertical gap={12} className={styles.resumeChoiceOptionLabelContent}>
         <Flex>
@@ -53,33 +48,7 @@ function ResumeChoiceOptionLabel({ value }) {
             </Typography.Text>
           </Flex>
         </Flex>
-        {/* <Card size="small" rootClassName={styles.resumeChoiceOptionLabelCard}>
-          <Flex gap={8} className={styles.resumeChoiceOptionLabelCardHeader}>
-            <ExclamationCircleTwoTone twoToneColor="#FAAD14" />
-            <Typography.Text>Improvements to be made (2)</Typography.Text>
-            <Button
-              type="link"
-              className={styles.resumeChoiceOptionLabelEditButton}
-            >
-              Edit
-            </Button>
-            <Button
-              type="text"
-              className={styles.resumeChoiceOptionLabelCollapseButton}
-              onClick={handleCollapse}
-            >
-              {isCollapsed ? <DownOutlined /> : <UpOutlined />}
-            </Button>
-          </Flex>
-          {!isCollapsed && (
-            <ul className={styles.resumeChoiceOptionLabelImprovementsList}>
-              <li>Missing skills to be added: SQL (+1yr exp) </li>
-              <li>
-                Missing project: Tech stack used to build and test product
-              </li>
-            </ul>
-          )}
-        </Card> */}
+        <BlockerPoints value={value} />
       </Flex>
     </Radio>
   );
@@ -108,7 +77,7 @@ function ResumePreview() {
 }
 
 function ResumeChoiceSelect() {
-  const { setSelectedResume } = useApplicationFormContext();
+  const { setSelectedResume, onAddResume } = useApplicationFormContext();
   const { jobProfileId } = useApplicationFormContext();
   const { data, isLoading } = useGetResumesEligibilityQuery({ jobProfileId });
 
@@ -116,7 +85,7 @@ function ResumeChoiceSelect() {
     if (!data) return;
 
     const defaultResumeId = Object.values(data).find(
-      (value) => value?.resume_details?.default
+      (value) => value?.resume_details?.default && !value?.is_blocker
     )?.resume_details?.id;
 
     setSelectedResume(defaultResumeId);
@@ -132,6 +101,16 @@ function ResumeChoiceSelect() {
         {Object.entries(data).map(([key, value]) => {
           return <ResumeChoiceOptionLabel key={key} value={value} />;
         })}
+        {Object.keys(data).length < MAX_RESUMES && (
+          <Button
+            type="link"
+            onClick={onAddResume}
+            className={styles.createNewResumeButton}
+          >
+            <PlusOutlined />
+            Create New Resume
+          </Button>
+        )}
       </Flex>
       <Flex className={styles.resumePreviewContainer} flex={1}>
         <ResumePreview />

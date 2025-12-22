@@ -33,6 +33,8 @@ function FormContainer({
   utmMedium,
   utmSource,
   onUploadFile,
+  onEditResume,
+  onAddResume,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -60,6 +62,8 @@ function FormContainer({
       stepName={status}
       jobProfileId={jobProfileId}
       applicationId={applicationId}
+      onEditResume={onEditResume}
+      onAddResume={onAddResume}
     >
       <Drawer
         closable={{ placement: 'end' }}

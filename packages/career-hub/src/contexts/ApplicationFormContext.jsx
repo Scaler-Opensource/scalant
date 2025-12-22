@@ -14,6 +14,14 @@ export function ApplicationFormProvider({
     console.log('Method not implemented. We should get it from MIT');
     return '';
   },
+  onEditResume = () => {
+    console.log('Method not implemented. We should get it from MIT');
+    return '';
+  },
+  onAddResume = () => {
+    console.log('Method not implemented. We should get it from MIT');
+    return '';
+  },
   stepName: initialStepName,
   jobProfileId,
   applicationId,
@@ -38,6 +46,8 @@ export function ApplicationFormProvider({
         applicationId,
         selectedResume,
         setSelectedResume,
+        onEditResume,
+        onAddResume,
       }}
     >
       {children}

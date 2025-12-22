@@ -16,10 +16,14 @@
   &.resumeChoiceOptionLabelChecked {
     border-color: $colors-brand-primary-color-primary;
   }
+
+  & > :global(span.ant-radio-label) {
+    flex: 1;
+  }
 }
 
 .resumeChoiceOptionLabelContent {
-  width: 100%;
+  flex: 1;
 }
 
 .resumeChoiceOptionLabelName {
@@ -34,7 +38,7 @@
 }
 
 .resumeChoiceOptionLabelCard {
-  width: 50rem;
+  flex: 1;
 }
 
 .resumeChoiceOptionLabelCardHeader {

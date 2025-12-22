@@ -2,7 +2,12 @@ import React from 'react';
 import FormContainer from './FormContainer';
 import { useJobPreview } from '../../contexts';
 
-const JobApplicationForm = ({ currentTab, onUploadFile }) => {
+const JobApplicationForm = ({
+  currentTab,
+  onUploadFile,
+  onEditResume,
+  onAddResume,
+}) => {
   const { activeApplicationId, setActiveApplicationId } = useJobPreview();
 
   const handleClose = () => {
@@ -19,6 +24,8 @@ const JobApplicationForm = ({ currentTab, onUploadFile }) => {
       jobProfileId={activeApplicationId}
       onClose={handleClose}
       currentTab={currentTab}
+      onEditResume={onEditResume}
+      onAddResume={onAddResume}
     />
   );
 };
