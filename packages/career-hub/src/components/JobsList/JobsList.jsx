@@ -262,7 +262,7 @@ JobsList.propTypes = {
 
 JobsList.defaultProps = {
   className: '',
-  currentTab: TAG_TO_TAB_MAPPING.all,
+  currentTab: TAG_TO_TAB_MAPPING.relevant,
   jobs: [],
   companiesMap: {},
   isLoading: false,

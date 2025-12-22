@@ -16,6 +16,8 @@ function TagsSection() {
     syncToURL: true,
     syncFromURL: false, // Don't sync from URL here, let JobsPage handle initialization
   });
+  // Fallback to relevant if currentTab is not set
+  const activeTab = currentTab || TAG_TO_TAB_MAPPING.relevant;
   const processCounts = useSelector(
     (state) => state.scalantCareerHub?.dashboard?.processCounts || {}
   );
@@ -29,7 +31,7 @@ function TagsSection() {
 
   const isTagActive = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
-    return currentTab === tabValue;
+    return activeTab === tabValue;
   };
 
   const getCountForTag = (tag) => {

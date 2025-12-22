@@ -32,10 +32,13 @@ function JobsPage({
   processCounts = DEFAULT_PROCESS_COUNTS,
   userProfileData,
   onUploadFile,
+  onViewResume,
+  onEditPreferences,
 }) {
   const dispatch = useDispatch();
   const currentTab = useSelector(
-    (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
+    (state) =>
+      state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.relevant
   );
   const hasInitializedFilters = useRef(false);
 
@@ -93,7 +96,10 @@ function JobsPage({
       jobId={selectedJobId}
     />
   ) : (
-    <ProfileDetails />
+    <ProfileDetails
+      onViewResume={onViewResume}
+      onEditPreferences={onEditPreferences}
+    />
   );
   const siderWidth = selectedJobId
     ? SIDER_WIDTH.JOB_DETAILS

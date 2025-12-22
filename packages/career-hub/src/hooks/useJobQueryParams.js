@@ -25,7 +25,8 @@ function useJobQueryParams({ syncToURL = true, syncFromURL = true } = {}) {
     (state) => state.scalantCareerHub.layout.selectedJobId
   );
   const currentTab = useSelector(
-    (state) => state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.all
+    (state) =>
+      state.scalantCareerHub?.filter?.tab || TAG_TO_TAB_MAPPING.relevant
   );
   const hasInitialized = useRef(false);
   const isUpdatingFromURL = useRef(false);

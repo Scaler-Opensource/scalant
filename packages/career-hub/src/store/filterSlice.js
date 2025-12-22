@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   per_page: 18,
-  tab: 'all',
+  tab: 'relevant',
   filters: {
     keyword: '',
   },
