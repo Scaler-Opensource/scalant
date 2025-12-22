@@ -15,7 +15,7 @@ import { RightOutlined } from '@ant-design/icons';
 import styles from './JobsList.module.scss';
 const { Title, Text } = Typography;
 const TAB_HEADINGS = {
-  [TAG_TO_TAB_MAPPING.relevant]: 'Unlocked Jobs',
+  [TAG_TO_TAB_MAPPING.relevant]: 'Preferred Jobs',
   [TAG_TO_TAB_MAPPING.all]: 'All Jobs',
   [TAG_TO_TAB_MAPPING.saved]: 'Saved Jobs',
   [TAG_TO_TAB_MAPPING.applied]: 'Applied Jobs',
