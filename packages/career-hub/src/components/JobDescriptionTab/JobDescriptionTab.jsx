@@ -14,7 +14,7 @@ const BasicInfo = () => {
       size="large"
       className={styles.descriptionContainer}
     >
-      <Typography.Title level={4}>Job Description</Typography.Title>
+      <Typography.Title level={3}>Job Description</Typography.Title>
       <Company />
       <Description />
       <Benefits />
@@ -29,7 +29,7 @@ const PostApplicationProcess = () => {
       size="large"
       className={styles.descriptionContainer}
     >
-      <Typography.Title level={4}>Post Application Process</Typography.Title>
+      <Typography.Title level={3}>Post Application Process</Typography.Title>
       <HiringSteps />
     </Space>
   );

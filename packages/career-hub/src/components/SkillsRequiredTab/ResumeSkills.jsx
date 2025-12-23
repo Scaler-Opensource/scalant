@@ -87,7 +87,7 @@ const ResumeSkills = () => {
   return (
     <Table
       title={() => (
-        <Typography.Text strong>
+        <Typography.Text className={styles.tableTitle} strong>
           Skills and Toolsets in your Resume
         </Typography.Text>
       )}

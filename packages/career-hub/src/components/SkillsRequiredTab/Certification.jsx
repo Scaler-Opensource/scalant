@@ -142,7 +142,7 @@ const Certification = () => {
   return (
     <Table
       title={() => (
-        <Typography.Text strong>
+        <Typography.Text className={styles.tableTitle} strong>
           Scaler certifications you need to apply
         </Typography.Text>
       )}

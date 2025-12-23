@@ -3,6 +3,7 @@ import { Table, Tag, Typography } from 'antd';
 import { toTitleCase } from '../../utils/caseUtil';
 import { useJobPreview } from '../../contexts';
 import { ADDITIONAL_ELIGIBILITY_MAPPING } from '../../utils/requirements';
+import styles from './SkillsRequiredTab.module.scss';
 
 const STATUS_MAP = {
   eligible: 'Eligible',
@@ -60,7 +61,7 @@ const OtherRequirements = () => {
   return (
     <Table
       title={() => (
-        <Typography.Text strong>
+        <Typography.Text className={styles.tableTitle} strong>
           Skills and Toolsets in your Resume
         </Typography.Text>
       )}

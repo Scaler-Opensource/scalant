@@ -16,7 +16,7 @@ const SkillsRequiredTab = () => {
 
   return (
     <Space direction="vertical" size="large" className={styles.container}>
-      <Typography.Title level={4}>Job Check-list</Typography.Title>
+      <Typography.Title level={3}>Job Check-list</Typography.Title>
       <Certification />
       <ResumeSkills />
       <OtherRequirements />

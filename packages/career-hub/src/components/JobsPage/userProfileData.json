@@ -240,7 +240,7 @@
   "featureFlags": {
     "practiceArenaEnable": true
   },
-  "hasCompletedScreeningCall": true,
+  "hasCompletedScreeningCall": false,
   "maxOfferedSalary": null,
   "name": "User 549613",
   "username": "u549613",

@@ -12,7 +12,7 @@ const Timeline = () => {
       size="large"
       className={styles.descriptionContainer}
     >
-      <Typography.Title level={4}>Your Application Status</Typography.Title>
+      <Typography.Title level={3}>Your Application Status</Typography.Title>
       <TimelineSteps />
     </Space>
   );
@@ -31,7 +31,7 @@ const RecruiterDetails = () => {
       size="large"
       className={styles.descriptionContainer}
     >
-      <Typography.Title level={4}>Recruiter Details</Typography.Title>
+      <Typography.Title level={3}>Recruiter Details</Typography.Title>
       <Recruiters />
     </Space>
   );

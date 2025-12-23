@@ -12,7 +12,7 @@ const SuccessScreen = () => {
         alt="like-badge"
         className={styles.likeBadge}
       />
-      <Typography.Title level={4}>
+      <Typography.Title level={3}>
         Application Submitted successfully!
       </Typography.Title>
       <Typography.Text className={styles.description}>

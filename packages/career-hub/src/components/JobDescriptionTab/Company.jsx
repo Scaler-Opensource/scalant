@@ -1,6 +1,5 @@
 import React from 'react';
 import { Space, Typography } from 'antd';
-import { LinkOutlined } from '@ant-design/icons';
 import { useJobPreview } from '../../contexts';
 import { toTitleCase } from '../../utils/caseUtil';
 import styles from './JobDescriptionTab.module.scss';
@@ -22,21 +21,13 @@ const Company = () => {
       direction="vertical"
       size="large"
     >
-      <Typography.Text className={styles.descriptionTitle}>
+      <Typography.Link
+        className={styles.descriptionTitle}
+        href={companyWebsite}
+        target="_blank"
+      >
         About {name}
-        {companyWebsite && (
-          <Typography.Link
-            className={styles.descriptionLink}
-            href={companyWebsite}
-            target="_blank"
-          >
-            <Space>
-              <LinkOutlined />
-              Company Website
-            </Space>
-          </Typography.Link>
-        )}
-      </Typography.Text>
+      </Typography.Link>
       {companyVision && (
         <Typography.Paragraph className={styles.descriptionText}>
           {React.createElement('div', {

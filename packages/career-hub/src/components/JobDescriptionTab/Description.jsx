@@ -17,24 +17,24 @@ const Description = () => {
     >
       <Typography.Text className={styles.descriptionTitle}>
         About the Role
-        {jobDesc && (
-          <Typography.Link
-            className={styles.descriptionLink}
-            href={jobDesc}
-            target="_blank"
-          >
-            <Space>
-              <LinkOutlined />
-              Know More
-            </Space>
-          </Typography.Link>
-        )}
       </Typography.Text>
       {jobDescText && (
         <CollapsableHTML
           html={jobDescText}
           contentClassName={styles.descriptionText}
         />
+      )}
+      {jobDesc && (
+        <Typography.Link
+          className={styles.descriptionLink}
+          href={jobDesc}
+          target="_blank"
+        >
+          <Space>
+            <LinkOutlined />
+            Know More
+          </Space>
+        </Typography.Link>
       )}
     </Space>
   );
