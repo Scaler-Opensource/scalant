@@ -1,7 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PageHeader from '../PageHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { nextStep } from '../../store/resumeBuilderSlice';
+import {
+  nextStep,
+  setCurrentStep,
+  setIsEditingPreferences,
+} from '../../store/resumeBuilderSlice';
 import {
   Form,
   Input,
@@ -16,6 +20,7 @@ import { PREFERRED_JOB_ROLES } from './constants';
 import styles from './PreferenceSettings.module.scss';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
+import { RESUME_BUILDER_STEPS, STEPS_ORDER } from '../../utils/constants';
 
 const FORM_ID = 'preferenceSettings';
 const ANYWHERE_IN_INDIA = 'anywhere_in_india';
@@ -38,6 +43,12 @@ const PreferenceSettings = ({ isLastStep = false }) => {
 
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
+  );
+  const steps = useSelector(
+    (state) => state.scalantResumeBuilder.resumeBuilder.steps
+  );
+  const isEditingPreferences = useSelector(
+    (state) => state.scalantResumeBuilder.resumeBuilder.isEditingPreferences
   );
   const formData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms[FORM_ID]
@@ -195,7 +206,19 @@ const PreferenceSettings = ({ isLastStep = false }) => {
     } catch (error) {
       message.error(`Failed to update preference details: ${error.message}`);
     }
-    dispatch(nextStep());
+
+    if (isEditingPreferences) {
+      dispatch(setIsEditingPreferences(false));
+      dispatch(
+        setCurrentStep(
+          steps.findIndex(
+            (step) => step.key === RESUME_BUILDER_STEPS.RESUME_STEPS.key
+          )
+        )
+      );
+    } else {
+      dispatch(nextStep());
+    }
   };
 
   return (

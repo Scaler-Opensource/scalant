@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, Flex, Card, Button, Typography } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { formatExperience } from '../../utils/resumeUtils';
-import { setCurrentStep } from '../../store/resumeBuilderSlice';
+import {
+  setCurrentStep,
+  setIsEditingPreferences,
+} from '../../store/resumeBuilderSlice';
 import { RESUME_BUILDER_STEPS, STEPS_ORDER } from '../../utils/constants';
 
 import styles from './ResumeProfileCard.module.scss';
@@ -16,14 +19,18 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
   );
+  const steps = useSelector(
+    (state) => state.scalantResumeBuilder.resumeBuilder.steps
+  );
   const fullName = resumeData?.personal_details?.name;
   const jobTitleFromApi = resumeData?.personal_details?.job_title;
 
   const handleEditProfile = () => {
+    dispatch(setIsEditingPreferences(true));
     dispatch(
       setCurrentStep(
-        STEPS_ORDER.findIndex(
-          (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
+        steps.findIndex(
+          (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
         )
       )
     );
