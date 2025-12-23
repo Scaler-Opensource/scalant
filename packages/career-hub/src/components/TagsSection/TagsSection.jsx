@@ -12,7 +12,7 @@ import {
 import styles from './TagsSection.module.scss';
 
 function TagsSection() {
-  const { currentTab, updateTab } = useJobQueryParams({
+  const { currentTab, updateTabAndJobId } = useJobQueryParams({
     syncToURL: true,
     syncFromURL: false, // Don't sync from URL here, let JobsPage handle initialization
   });
@@ -25,7 +25,7 @@ function TagsSection() {
   const handleTagClick = (tag) => {
     const tabValue = TAG_TO_TAB_MAPPING[tag];
     if (tabValue) {
-      updateTab(tabValue);
+      updateTabAndJobId(tabValue);
     }
   };
 
