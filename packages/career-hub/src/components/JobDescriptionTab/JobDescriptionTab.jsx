@@ -5,6 +5,7 @@ import Company from './Company';
 import Description from './Description';
 import Benefits from './Benefits';
 import HiringSteps from './HiringSteps';
+import PlacementProcessDisclaimerBanner from '../PlacementProcessDisclaimerBanner';
 import styles from './JobDescriptionTab.module.scss';
 
 const BasicInfo = () => {
@@ -40,6 +41,7 @@ const JobDescriptionTab = () => {
     <Space direction="vertical" size="large" className={styles.container}>
       <BasicInfo />
       <PostApplicationProcess />
+      <PlacementProcessDisclaimerBanner />
       <InterviewExperiencesBanner />
     </Space>
   );
