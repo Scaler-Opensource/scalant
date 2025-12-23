@@ -36,23 +36,35 @@ import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
 
-const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
+// const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
 
-const areCoreSectionsEmpty = (resumeData) => {
-  const education = resumeData?.[FORM_KEYS.education];
-  const experience = resumeData?.[FORM_KEYS.experience];
-  const projects = resumeData?.[FORM_KEYS.projects];
-  return (
-    isEmptyArray(education) &&
-    isEmptyArray(experience) &&
-    isEmptyArray(projects)
-  );
-};
+// const areCoreSectionsEmpty = (resumeData) => {
+//   const education = resumeData?.[FORM_KEYS.education];
+//   const experience = resumeData?.[FORM_KEYS.experience];
+//   const projects = resumeData?.[FORM_KEYS.projects];
+//   return (
+//     isEmptyArray(education) &&
+//     isEmptyArray(experience) &&
+//     isEmptyArray(projects)
+//   );
+// };
 
-const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
+// const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
+//   const baseSteps = STEPS_ORDER;
+//   const shouldShowParsing =
+//     Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
+
+//   if (shouldShowParsing) return baseSteps;
+//   return baseSteps.filter(
+//     (s) => s.key !== RESUME_BUILDER_STEPS.RESUME_PARSING.key
+//   );
+// };
+
+const computeStepsWithSkip = (enableResumeParsing, isOnboarding) => {
   const baseSteps = STEPS_ORDER;
+  if (isOnboarding) return baseSteps;
   const shouldShowParsing =
-    Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
+    Boolean(enableResumeParsing);
 
   if (shouldShowParsing) return baseSteps;
   return baseSteps.filter(
@@ -92,6 +104,12 @@ const ResumeBuilderContent = ({
   const { currentStep, steps } = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder
   );
+  const incompleteForms = useSelector(
+    (state) => state.scalantResumeBuilder.resumeForms.incompleteForms
+  );
+  const resumeFormsCompleted = useSelector(
+    (state) => state.scalantResumeBuilder.resumeForms.completed
+  );
   const visitedStepsRef = useRef(new Set());
   const initialStepSetRef = useRef(false);
   const previousResumeIdRef = useRef();
@@ -99,10 +117,13 @@ const ResumeBuilderContent = ({
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
 
-  // Handle upload button click - delegate to host app
+  // Handle upload button click - go to resume parsing step
   const handleUploadClick = useCallback(() => {
-    onUploadClick?.();
-  }, [onUploadClick]);
+    const parsingStepIndex = STEPS_ORDER.findIndex(
+      (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
+    );
+    dispatch(setCurrentStep(parsingStepIndex));
+  }, [dispatch]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {
@@ -135,10 +156,13 @@ const ResumeBuilderContent = ({
         dispatch(setIsLoading(false));
       }
 
-      const shouldShow = isOnboarding ? shouldShowOnboarding(resumeId) : false;
+      // Only show onboarding if not completed in localStorage AND resume is not complete
+      const shouldShow = isOnboarding
+        ? shouldShowOnboarding(resumeId) && incompleteForms.length > 0 && !resumeFormsCompleted
+        : false;
       const filteredSteps = computeStepsWithSkip(
         enableResumeParsing,
-        resumeData
+        isOnboarding
       );
       dispatch(setSteps(filteredSteps));
 
@@ -174,7 +198,7 @@ const ResumeBuilderContent = ({
         // Only trigger callback for initial step if onboarding should be shown
         const resumeId = resumeData?.resume_details?.id;
         const shouldShow = isOnboarding
-          ? shouldShowOnboarding(resumeId)
+          ? shouldShowOnboarding(resumeId) && incompleteForms.length > 0 && !resumeFormsCompleted
           : false;
 
         if (shouldShow && stepKey) {

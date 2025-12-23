@@ -10,12 +10,16 @@ const initialState = {
   steps: STEPS_ORDER,
   resumeData: {},
   program: null,
+  isEditingPreferences: false,
 };
 
 const resumeBuilderSlice = createSlice({
   name: 'resumeBuilder',
   initialState,
   reducers: {
+    setIsEditingPreferences: (state, action) => {
+      state.isEditingPreferences = action.payload;
+    },
     setOnboarding: (state, action) => {
       state.isOnboarding = action.payload;
     },
@@ -57,6 +61,7 @@ const resumeBuilderSlice = createSlice({
 });
 
 export const {
+  setIsEditingPreferences,
   setOnboarding,
   setCurrentStep,
   setSteps,
