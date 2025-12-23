@@ -5,8 +5,13 @@ import {
   FileTextTwoTone,
   CloseOutlined,
 } from '@ant-design/icons';
-import { APPLICATION_STATUS } from '../../../utils/constants';
+import {
+  APPLICATION_STATUS,
+  TAG_TO_TAB_MAPPING,
+} from '../../../utils/constants';
 import { useApplicationFormContext } from '../../../contexts';
+import { useJobQueryParams } from '../../../hooks';
+import { useGetJobPreviewQuery } from '../../../services/jobPreviewApi';
 import styles from './FormHeader.module.scss';
 
 const { Text } = Typography;
@@ -33,7 +38,14 @@ const STEP_MAP = {
 };
 
 function FormHeader({ onClose }) {
-  const { stepName } = useApplicationFormContext();
+  const { stepName, jobProfileId } = useApplicationFormContext();
+  const { updateTab } = useJobQueryParams({
+    syncToURL: true,
+    syncFromURL: false,
+  });
+  const { refetch: refetchJobPreview } = useGetJobPreviewQuery(jobProfileId, {
+    skip: !jobProfileId,
+  });
 
   if (!STEP_MAP[stepName]) return null;
 
@@ -46,10 +58,10 @@ function FormHeader({ onClose }) {
 
   const handleClose = () => {
     if (stepName === APPLICATION_STATUS.SUCCESSFULLY_APPLIED) {
-      window.location.reload();
-    } else {
-      onClose?.();
+      updateTab(TAG_TO_TAB_MAPPING.applied);
+      refetchJobPreview();
     }
+    onClose?.();
   };
 
   return (

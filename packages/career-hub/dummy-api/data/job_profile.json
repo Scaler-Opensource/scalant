@@ -1,95 +1,45 @@
 {
     "data": {
-        "id": "166142",
+        "id": "138835",
         "type": "job_profile",
         "attributes": {
-            "title": "Data Scientist",
-            "slug": "senior-r-d-engineer-afbda84f-0bb9-4ccc-9264-5b399367b4b8",
-            "job_desc": "/job_descs/original/missing.png",
-            "job_desc_text": "\u003cp\u003e\u003cstrong\u003eKEY SKILLS AND EXPERIENCE\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eMasters Degree in Statistics, Machine Learning, Data Science, Computer Science, or Computer Engineering (PhD preferred).\u003c/li\u003e\u003cli\u003e3-4 years of significant professional experience in Data Science.\u003c/li\u003e\u003cli\u003eExpertise in Machine Learning\u003c/li\u003e\u003cli\u003eProficient in both supervised and unsupervised learning.\u003c/li\u003e\u003cli\u003eTechniques: Linear and logistic regressions, random forests, gradient boosting, neural networks (RNN, LSTM, CNN), text mining, topic extraction, NLP, K-Means, decision trees.\u003c/li\u003e\u003cli\u003eApplications: Computer vision, Generative AI, Language Models (e.g., GPT), Retrieval-Augmented Generation (RAG), Agentic AI\u003c/li\u003e\u003cli\u003eHands on experience with Natural Language Processing, Language Models (SLM, LLM, CLM), Generative AI and Agentic AI\u003c/li\u003e\u003cli\u003eDeep knowledge of Python (including libraries such as scikit-learn, Pandas, NumPy).\u003c/li\u003e\u003cli\u003eExperience with Jupyter, Spark/Scala or R, PostgreSQL, and ELK stack.\u003c/li\u003e\u003cli\u003eProficiency in Java, Kubernetes, Docker, and microservices-oriented architecture.\u003c/li\u003e\u003cli\u003eFamiliarity with MLOps practices and collaborative tools (e.g., GitLab).\u003c/li\u003e\u003cli\u003eEnglish fluency (both written and verbal) is mandatory.\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003cstrong\u003eHOW YOU WILL CONTRIBUTE AND WHAT YOU WILL LEARN\u003c/strong\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eTechnical Leadership: Drive and manage projects, activities, and technical responsibilities within your area of expertise, ensuring high-quality deliverables and documentation.\u003c/li\u003e\u003cli\u003eInnovation \u0026amp; Development: Develop tools, methods, and processes; write requirements and specifications to guide R\u0026amp;D efforts.\u003c/li\u003e\u003cli\u003eCollaboration \u0026amp; Support: Partner with internal and external teams, providing training, consulting, and technical support to Product Management, Customer Interface, and business lines.\u003c/li\u003e\u003cli\u003eProblem-Solving \u0026amp; Efficiency: Lead serious issue resolution, seek cost-efficient solutions, and foster change in the environment.\u003c/li\u003e\u003cli\u003ePredictive Analysis: Apply deep expertise in predictive analytics to deliver insights and solutions.\u003c/li\u003e\u003cli\u003ePlanning \u0026amp; Organization: Contribute to resource planning, work estimation, and process optimization.\u003c/li\u003e\u003c/ul\u003e",
-            "min_experience": "36.0",
-            "max_experience": "60.0",
-            "max_ctc": null,
-            "min_ctc": null,
-            "valid_till": "2025-07-09",
-            "created_at": "2025-07-08T08:29:30.000Z",
+            "title": "SDE-1 (Backend)",
+            "slug": "sde-1-backend-02a86f88-122d-4e45-91b6-21a4e0520edf",
+            "job_desc": "https://scaler-staging.s3.ap-southeast-1.amazonaws.com/job_profiles/job_descs/000/138/835/original/moglix.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251223%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251223T043239Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=10eaf41444116513b7beb8667da4b43933b06ff7683b266bb8facae37b077012",
+            "job_desc_text": "\u003cp\u003eExperience:\tFresher\u003c/p\u003e\u003cp\u003eProfile opened for:\tSDE-1- (Service Bond for 2yrs.)\u003c/p\u003e\u003cp\u003eSkills:\tJava \u003c/p\u003e\u003cp\u003eInterview Process:\t3 rounds - written- aptitude + programing, F2F rounds-2 (all 3 rounds on same day)\u003c/p\u003e\u003cp\u003eCTC Range:\t5 LPA\u003c/p\u003e\u003cp\u003eLocation:\tNoida\u003c/p\u003e\u003cp\u003eWork Model:\tWFO\u003c/p\u003e\u003cp\u003e\u003c/p\u003e",
+            "min_experience": "0.0",
+            "max_experience": "12.0",
+            "max_ctc": "5.0",
+            "min_ctc": "5.0",
+            "valid_till": null,
+            "created_at": "2024-04-12T13:08:22.000Z",
             "job_type": "lateral",
-            "preferred_cities": "Bangalore",
-            "preferred_notice_period": 30,
+            "preferred_cities": "Noida",
+            "preferred_notice_period": 0,
             "merit_based_skills": [
                 {
-                    "id": 37191,
-                    "title": "Python Libraries",
+                    "id": 37183,
+                    "title": "Data Structures \u0026 Algorithms",
                     "proficiency": 0
                 },
                 {
-                    "id": 37192,
-                    "title": "SQL",
+                    "id": 37185,
+                    "title": "Java",
                     "proficiency": 0
                 },
                 {
-                    "id": 37194,
-                    "title": "EDA Fundamentals",
-                    "proficiency": 0
-                },
-                {
-                    "id": 37195,
-                    "title": "Supervised Learning",
-                    "proficiency": 0
-                },
-                {
-                    "id": 37196,
-                    "title": "Unsupervised Learning",
-                    "proficiency": 0
-                },
-                {
-                    "id": 37198,
-                    "title": "Natural Language Processing",
+                    "id": 37223,
+                    "title": "Databases and SQL",
                     "proficiency": 0
                 }
             ],
-            "application_status": null,
+            "application_status": "In Review",
             "contest_skills": [
                 {
-                    "id": 37191,
-                    "skill_id": 37191,
+                    "id": 37183,
+                    "skill_id": 37183,
                     "proficiency": 0,
-                    "skill_title": "Python Libraries",
-                    "tag_name": "mbe_and_contest"
-                },
-                {
-                    "id": 37192,
-                    "skill_id": 37192,
-                    "proficiency": 0,
-                    "skill_title": "SQL",
-                    "tag_name": "mbe_and_contest"
-                },
-                {
-                    "id": 37194,
-                    "skill_id": 37194,
-                    "proficiency": 0,
-                    "skill_title": "EDA Fundamentals",
-                    "tag_name": "mbe_and_contest"
-                },
-                {
-                    "id": 37195,
-                    "skill_id": 37195,
-                    "proficiency": 0,
-                    "skill_title": "Supervised Learning",
-                    "tag_name": "mbe_and_contest"
-                },
-                {
-                    "id": 37196,
-                    "skill_id": 37196,
-                    "proficiency": 0,
-                    "skill_title": "Unsupervised Learning",
-                    "tag_name": "mbe_and_contest"
-                },
-                {
-                    "id": 37198,
-                    "skill_id": 37198,
-                    "proficiency": 0,
-                    "skill_title": "Natural Language Processing",
+                    "skill_title": "Data Structures \u0026 Algorithms",
                     "tag_name": "mbe_and_contest"
                 }
             ],
@@ -111,16 +61,16 @@
                 }
             ],
             "expiry": null,
-            "application_id": null,
-            "user_company_status": null,
-            "application_last_upated_at": null,
+            "application_id": 849486,
+            "user_company_status": "candidate-interested",
+            "application_last_upated_at": "2025-12-22T17:18:54.000Z",
             "job_source": null,
-            "job_profile_id": 166142,
+            "job_profile_id": 138835,
             "job_profile_status": "active",
-            "date_posted_on": "2025-07-08T08:41:41.000Z",
-            "open_for_discussion_ctc": true,
-            "applied_on": null,
-            "seniority_level": "Mid - Senior",
+            "date_posted_on": "2024-04-19T11:20:42.000Z",
+            "open_for_discussion_ctc": false,
+            "applied_on": "2025-12-22T13:27:33.000Z",
+            "seniority_level": "Fresher",
             "role_type": "full_time",
             "duration": null,
             "stipend": null,
@@ -143,9 +93,9 @@
                     },
                     {
                         "label": "experience",
-                        "text": "You cannot apply since you do not have the required minimum experience",
+                        "text": "You have the required experience for this job profile",
                         "show_text": true,
-                        "is_eligible": false,
+                        "is_eligible": true,
                         "data": null
                     },
                     {
@@ -157,134 +107,70 @@
                     },
                     {
                         "label": "skills",
-                        "text": "You are not eligible to apply for this job profile as you have not cleared all the required skills",
+                        "text": "You are eligible to apply for this job profile as you have cleared all the required skills",
                         "show_text": false,
-                        "is_eligible": false,
+                        "is_eligible": true,
                         "data": {
-                            "EDA Fundamentals": {
+                            "Data Structures \u0026 Algorithms": {
                                 "id": null,
                                 "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/dav_fundamentals_dsml",
-                                    "show_text": false
+                                    "cleared": true,
+                                    "details": "Skill obtained through DSA Full Syllabus Contest on 2025-12-18",
+                                    "join_link": "",
+                                    "show_text": true
                                 },
                                 "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 9018954,
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
                                     "show_text": false
                                 },
-                                "skill_name": "EDA Fundamentals",
-                                "skill_id": 37194
+                                "skill_name": "Data Structures \u0026 Algorithms",
+                                "skill_id": 37183
                             },
-                            "Natural Language Processing": {
+                            "Databases and SQL": {
                                 "id": null,
-                                "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/nlp_test",
-                                    "show_text": false
-                                },
+                                "contests": null,
                                 "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 7956868,
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
                                     "show_text": false
                                 },
-                                "skill_name": "Natural Language Processing",
-                                "skill_id": 37198
+                                "skill_name": "Databases and SQL",
+                                "skill_id": 37223
                             },
-                            "Python Libraries": {
+                            "Java": {
                                 "id": null,
-                                "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/dav-libraries",
-                                    "show_text": false
-                                },
+                                "contests": null,
                                 "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 9018952,
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
                                     "show_text": false
                                 },
-                                "skill_name": "Python Libraries",
-                                "skill_id": 37191
-                            },
-                            "SQL": {
-                                "id": null,
-                                "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/sql_test_dsml",
-                                    "show_text": false
-                                },
-                                "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 9623215,
-                                    "show_text": false
-                                },
-                                "skill_name": "SQL",
-                                "skill_id": 37192
-                            },
-                            "Supervised Learning": {
-                                "id": null,
-                                "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/ml2_test",
-                                    "show_text": false
-                                },
-                                "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 8923464,
-                                    "show_text": false
-                                },
-                                "skill_name": "Supervised Learning",
-                                "skill_id": 37195
-                            },
-                            "Unsupervised Learning": {
-                                "id": null,
-                                "contests": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this contest.",
-                                    "join_link": "https://www.scaler.com/test/a/ml3_test",
-                                    "show_text": false
-                                },
-                                "skills": {
-                                    "cleared": false,
-                                    "details": "You have not cleared this skill.",
-                                    "mentee_module_id": 8923465,
-                                    "show_text": false
-                                },
-                                "skill_name": "Unsupervised Learning",
-                                "skill_id": 37196
+                                "skill_name": "Java",
+                                "skill_id": 37185
                             }
                         }
                     },
                     {
                         "label": "tech_stacks",
-                        "text": "You are not eligible to apply for this job profile as you do not have all the required experience skills",
+                        "text": "You are eligible to apply for this job profile as you have all the required experience skills",
                         "show_text": false,
-                        "is_eligible": false,
+                        "is_eligible": true,
                         "data": {
-                            "Python": {
-                                "id": 166142,
-                                "skill_id": 1213,
+                            "Java": {
+                                "id": 138835,
+                                "skill_id": 1211,
                                 "skill_type": "SubTopic",
-                                "proficiency_period": 36,
-                                "owner_id": 166142,
+                                "proficiency_period": 1,
+                                "owner_id": 138835,
                                 "proficiency": 3,
-                                "skill_name": "Python",
+                                "skill_name": "Java",
                                 "eligible_topic": null,
-                                "eligible_skill_id": 7596,
+                                "eligible_skill_id": 7590,
                                 "data": {
-                                    "cleared": false,
-                                    "details": "You don't have this experience skill.",
-                                    "show_text": true
+                                    "cleared": true,
+                                    "details": "You have cleared this experience skill.",
+                                    "show_text": false
                                 }
                             }
                         }
@@ -300,105 +186,189 @@
                     }
                 ]
             },
-            "exceptional_job": true,
+            "exceptional_job": false,
             "is_relevant": false,
             "recruiters": [
                 {
-                    "name": "Krishnaa Bistha",
+                    "name": "Swati Bhargava",
                     "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
                     "slack_dm_link": null,
-                    "email": "krishnaa.bistha@scaler.com",
+                    "email": "swati@scaler.com",
                     "position": "team lead"
                 },
                 {
-                    "name": "Jennifer r",
+                    "name": "Kriti",
                     "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
                     "slack_dm_link": null,
-                    "email": "jennifer.r@scaler.com",
+                    "email": "kaushik.kriti@scaler.com",
                     "position": "recruiter"
                 }
             ],
             "hiring_steps": [
                 {
-                    "id": 1064268,
-                    "company_id": 3347,
-                    "job_profile_id": 166142,
-                    "step_name": "Technical Discussion",
+                    "id": 963293,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Coding Test 1",
                     "interview_type": "Online Interview",
-                    "interview_mode_id": 15,
-                    "is_first_step": null,
-                    "created_at": "2025-07-08T08:29:31.000Z",
-                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "interview_mode_id": 14,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
                     "step_meta_data": null,
-                    "parent_company_step_id": null,
-                    "next_step_id": 1064269
+                    "parent_company_step_id": 96420,
+                    "next_step_id": 963294
                 },
                 {
-                    "id": 1064269,
-                    "company_id": 3347,
-                    "job_profile_id": 166142,
-                    "step_name": "Technical Discussion",
+                    "id": 963294,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Tech Interview 1",
                     "interview_type": "Online Interview",
                     "interview_mode_id": 15,
-                    "is_first_step": null,
-                    "created_at": "2025-07-08T08:29:31.000Z",
-                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
                     "step_meta_data": null,
-                    "parent_company_step_id": null,
-                    "next_step_id": 1064270
+                    "parent_company_step_id": 96421,
+                    "next_step_id": 963295
                 },
                 {
-                    "id": 1064270,
-                    "company_id": 3347,
-                    "job_profile_id": 166142,
-                    "step_name": "HM Discussion",
+                    "id": 963295,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Tech Interview 2",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 15,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": 96422,
+                    "next_step_id": 963296
+                },
+                {
+                    "id": 963296,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Behavorial Round",
                     "interview_type": "Online Interview",
                     "interview_mode_id": 16,
-                    "is_first_step": null,
-                    "created_at": "2025-07-08T08:29:31.000Z",
-                    "updated_at": "2025-07-08T08:29:31.000Z",
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
                     "step_meta_data": null,
-                    "parent_company_step_id": null,
-                    "next_step_id": 1064271
-                },
-                {
-                    "id": 1064271,
-                    "company_id": 3347,
-                    "job_profile_id": 166142,
-                    "step_name": "HR Discussion",
-                    "interview_type": "Online Interview",
-                    "interview_mode_id": 17,
-                    "is_first_step": null,
-                    "created_at": "2025-07-08T08:29:31.000Z",
-                    "updated_at": "2025-07-08T08:29:31.000Z",
-                    "step_meta_data": null,
-                    "parent_company_step_id": null,
-                    "next_step_id": 1064264
+                    "parent_company_step_id": 96423,
+                    "next_step_id": 963297
                 }
             ],
-            "experience_based_skills": [
-                {
-                    "id": 318873,
-                    "proficiency_period": 24,
-                    "owner_id": 166142,
-                    "proficiency": 1,
-                    "eligible_topic": null,
-                    "eligible_skill_id": null,
-                    "type": "SubTopic",
-                    "title": "Generative AI"
-                }
-            ],
+            "experience_based_skills": [],
             "flexible_experience_lower": false,
             "flexible_experience_upper": false,
             "application_count": 0,
-            "application_timeline": null,
+            "application_timeline": {
+                "timeline": [
+                    {
+                        "type": "status",
+                        "expected_update_date": "2025-12-23T13:27:33.000Z",
+                        "actual_update_date": "2025-12-22T13:27:33.000Z",
+                        "stage_name": "Application in Review",
+                        "terminate_timeline_here": true,
+                        "stage_status": "ongoing",
+                        "stage_comments": "Our internal team is reviewing your application",
+                        "status": "in_review"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2025-12-31T13:27:33.000Z",
+                        "stage_name": "Resume Sent to Company",
+                        "stage_status": "pending",
+                        "stage_comments": "Your resume will be shared with the company",
+                        "status": "resume_sent"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-03T13:27:33.000Z",
+                        "stage_name": "Resume Shortlist",
+                        "stage_status": "pending",
+                        "stage_comments": "Company will be shortlisting your resume for interviews",
+                        "status": "resume_shortlisted"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-09T13:27:33.000Z",
+                        "stage_name": "Coding Test 1",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Data Structures \u0026 Algorithms",
+                        "status": "Coding Test 1"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-15T13:27:33.000Z",
+                        "stage_name": "Tech Interview 1",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Java",
+                        "status": "Tech Interview 1"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-21T13:27:33.000Z",
+                        "stage_name": "Tech Interview 2",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Data Structures \u0026 Algorithms",
+                        "status": "Tech Interview 2"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-27T13:27:33.000Z",
+                        "stage_name": "Behavorial Round",
+                        "stage_status": "pending",
+                        "stage_comments": "",
+                        "status": "Behavorial Round"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-29T13:27:33.000Z",
+                        "stage_name": "To be offered",
+                        "stage_status": "pending",
+                        "stage_comments": "This is when you will negotiate your offer",
+                        "status": "to_be_offered"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Offer Received",
+                        "stage_status": "pending",
+                        "stage_comments": "When you receive an offer letter from the company",
+                        "status": "offer_received"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Offer Accepted",
+                        "stage_status": "pending",
+                        "stage_comments": "Once you accept the offer received",
+                        "status": "offer_accepted"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Joined",
+                        "stage_status": "pending",
+                        "stage_comments": "No text",
+                        "status": "joined"
+                    }
+                ],
+                "was_shortlisted": false,
+                "status": "In Review"
+            },
             "previous_roles": null,
             "visa_sponsorship": null,
             "benefits": null,
             "collect_rejection_reason_feedback": null,
             "collect_recommendations_feedback": "true",
             "form_builder_enabled": true,
-            "collect_recruiter_csat": null,
+            "collect_recruiter_csat": false,
             "existing_recruiter_csat": null,
             "highlights": {
                 "confidence_note": "The Job Description provides excellent, specific details on technology, techniques, and responsibilities. However, the About the Company section is very high-level and lacks specifics on team culture, benefits, or project impact, leading to a MEDIUM score.",
@@ -421,7 +391,7 @@
         "relationships": {
             "company": {
                 "data": {
-                    "id": "3347",
+                    "id": "1594",
                     "type": "company"
                 }
             },
@@ -432,23 +402,23 @@
     },
     "included": [
         {
-            "id": "3347",
+            "id": "1594",
             "type": "company",
             "attributes": {
-                "name": "Nokia (3347)",
-                "id": 3347,
-                "slug": "nokia",
-                "employee_count": null,
-                "company_website": "https://www.nokia.com",
-                "vision": null,
+                "name": "Moglix",
+                "id": 1594,
+                "slug": "moglix",
+                "employee_count": "100-1000",
+                "company_website": "https://www.moglix.com",
+                "vision": "",
                 "benefits": null,
-                "perks": null,
-                "tagline": null,
-                "logo": "https://scaler-production-new.s3.ap-southeast-1.amazonaws.com/companies/images/000/003/347/original/nokia_logo.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251211%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251211T083555Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=3afc80d471a6ba2856d0abdffaa09e58a71187d65b4edd3432860351c602118c",
-                "location": "Bangalore",
+                "perks": "",
+                "tagline": "Aapke Office Ki Sabhi Zaroori Samaan Ke Liye #MoglixHaiNa",
+                "logo": "https://scaler-staging.s3.ap-southeast-1.amazonaws.com/companies/images/000/001/594/original/1662045823381_%281%29.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251223%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251223T043239Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=4988d8d844765e9b20c3592bc7e89dddb681ff4dc15f452b38cd5539de8d95ca",
+                "location": "Noida",
                 "tier": null,
-                "category": "large_enterprise",
-                "company_vision": "\u003cp\u003eAt Nokia, we create technology that helps the world act together. \u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003eAs a B2B technology innovation leader, we are pioneering the future where networks meet cloud to realize the full potential of digital in every industry.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003eThrough networks that sense, think and act, we work with our customers and partners to create the digital services and applications of the future. \u003c/p\u003e\u003cp\u003e\u003c/p\u003e"
+                "category": "start_up",
+                "company_vision": "\u003cp\u003eWe are an Asia-based B2B commerce company intensively inclined towards B2B procurement of industrial supplies, in particular, MRO, Safety, Electrical \u0026amp; Lighting, Cleaning \u0026amp; Laundry Supplies, Office Supplies, Tools and many more industry essentials. Owing to the fragmentation of products and categories, industrial procurement is deemed to be a complex subject, across the globe. However, we at Moglix, through our extensive range of products and dedicated team of professionals are tapping into the responsibility of providing a seamless solution to this deep-rooted problem of the industry. We take pride in delivering world-class services and, our clients are well aware of the fact that we do not just deliver products; we deliver a satisfying experience, which has enabled us to forge strong relationship with our customers. It’s a cultural belief that is demonstrated every day, through exceptional customer service, product selection and, paramount industry knowledge.\u003c/p\u003e"
             }
         }
     ]

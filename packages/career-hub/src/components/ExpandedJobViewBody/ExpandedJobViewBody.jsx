@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { JOB_BODY_TABS } from '../../utils/constants';
+import { JOB_BODY_TABS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { useJobPreview } from '../../contexts';
 import ApplicationTimelineTab from '../ApplicationTimelineTab';
 import JobDescriptionTab from '../JobDescriptionTab';
@@ -8,10 +8,12 @@ import SkillsRequiredTab from '../SkillsRequiredTab';
 import styles from './ExpandedJobViewBody.module.scss';
 
 const ExpandedJobViewBody = () => {
-  const { activeTab, setActiveTab, jobData } = useJobPreview();
+  const { activeTab, setActiveTab, jobData, currentTab } = useJobPreview();
   const { applicationTimeline } = jobData || {};
 
-  const isTimelineAvailable = applicationTimeline?.timeline?.length > 0;
+  const isTimelineAvailable =
+    applicationTimeline?.timeline?.length > 0 &&
+    currentTab === TAG_TO_TAB_MAPPING.applied;
 
   const tabItems = [
     isTimelineAvailable && {
