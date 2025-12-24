@@ -69,7 +69,7 @@ const useAccumulatedJobs = (
     accumulatedCompaniesMap,
     hasMore,
     isFetchingMore,
-    isLoading: isLoading && pageNumber === 1,
+    isLoading: (isLoading || isFetching) && pageNumber === 1,
   };
 };
 
