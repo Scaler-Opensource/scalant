@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Layout } from 'antd';
+import FilterTags from '../../components/FilterTags';
 
 import styles from './JobsLayout.module.scss';
 
@@ -10,6 +10,7 @@ function JobsLayout({ header, children, className, sider, siderWidth }) {
   return (
     <Layout className={className}>
       <Header className={styles.header}>{header || 'Header'}</Header>
+      <FilterTags />
       <Layout className={styles.layout}>
         <Content className={styles.content}>{children}</Content>
         {sider && (

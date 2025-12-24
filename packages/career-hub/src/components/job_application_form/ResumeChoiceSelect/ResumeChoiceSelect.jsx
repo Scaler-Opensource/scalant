@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -13,6 +13,7 @@ import BlockerPoints from './BlockerPoints';
 
 // Set the worker source for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+const MAX_RETRY_COUNT = 6;
 
 function ResumeChoiceOptionLabel({ value }) {
   const { selectedResume, setSelectedResume } = useApplicationFormContext();
@@ -53,11 +54,24 @@ function ResumeChoiceOptionLabel({ value }) {
 }
 
 function ResumePreview() {
+  const [retryCount, setRetryCount] = useState(0);
   const { selectedResume } = useApplicationFormContext();
   const { data, isFetching } = useGetResumeLinkQuery(
     { resumeId: selectedResume },
     { skip: !selectedResume }
   );
+
+  const onDocumentLoadError = (error) => {
+    if (retryCount < MAX_RETRY_COUNT) {
+      // eslint-disable-next-line no-undef
+      setTimeout(() => {
+        setRetryCount(retryCount + 1);
+      }, 1000);
+    } else {
+      // eslint-disable-next-line no-console, no-undef
+      console.error('Error while loading pdf! ', error.message);
+    }
+  };
 
   if (!data?.link || isFetching) {
     return <Skeleton active />;
@@ -68,6 +82,9 @@ function ResumePreview() {
       className={styles.resumePreview}
       file={data?.link}
       loading={<Skeleton active />}
+      onLoadError={onDocumentLoadError}
+      error={<Skeleton active />}
+      key={retryCount} // Force re-render on retry
     >
       <Page pageNumber={1} />
     </Document>
@@ -99,16 +116,6 @@ function ResumeChoiceSelect() {
         {Object.entries(data).map(([key, value]) => {
           return <ResumeChoiceOptionLabel key={key} value={value} />;
         })}
-        {/* {Object.keys(data).length < MAX_RESUMES && (
-          <Button
-            type="link"
-            onClick={onAddResume}
-            className={styles.createNewResumeButton}
-          >
-            <PlusOutlined />
-            Create New Resume
-          </Button>
-        )} */}
       </Flex>
       <Flex className={styles.resumePreviewContainer} flex={1}>
         <ResumePreview />

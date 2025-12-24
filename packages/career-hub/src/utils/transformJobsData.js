@@ -59,7 +59,7 @@ export const transformJobsData = (response) => {
         meritBasedSkills: attributes.merit_based_skills || [],
         contestSkills: attributes.contest_skills || [],
         applicationStatus: attributes.application_status || null,
-        expiry: attributes.expiry || attributes.valid_till || null,
+        expiry: attributes.expiry || null,
         applicationId: attributes.application_id || null,
         userCompanyStatus: attributes.user_company_status || null,
         applicationLastUpdatedAt: attributes.application_last_upated_at || null,

@@ -57,6 +57,12 @@ const filterSlice = createSlice({
       };
       state.page_number = 1;
     },
+    updateFormFilters: (state, action) => {
+      state.filters = {
+        ...state.filters,
+        ...action.payload,
+      };
+    },
   },
 });
 
@@ -69,6 +75,7 @@ export const {
   setSkipExpiredJobs,
   resetFilters,
   updateFiltersFromForm,
+  updateFormFilters,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

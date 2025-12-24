@@ -16,6 +16,7 @@ const createApplicationService = baseService.injectEndpoints({
           action_type: utmId ?? 'apply',
         },
       }),
+      invalidatesTags: ['Jobs', 'PipelineJobs', 'RelevantJobs'],
     }),
     getApplication: builder.query({
       query: ({ applicationId, jobProfileId, status }) => ({
@@ -32,6 +33,7 @@ const createApplicationService = baseService.injectEndpoints({
         method: 'PATCH',
         body: payload,
       }),
+      invalidatesTags: ['Jobs', 'PipelineJobs', 'RelevantJobs'],
     }),
   }),
 });

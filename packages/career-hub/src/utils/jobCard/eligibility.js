@@ -1,3 +1,5 @@
+import { toCamelCaseObject } from '../caseUtil';
+
 /**
  * Count pending steps (mocks + contests + tech stacks)
  * Reference: frontend/src/modules/job_tracker/utils/eligibility_tags.js (lines 20-39)
@@ -81,8 +83,9 @@ export const NON_WITHDRAW_STATUSES = [
  * @returns {Object} Tag data with text, icon, color, etc.
  */
 export const determineJobTag = (jobData, eligibilityCriteria) => {
-  const { isRelevant, expiry, jobProfileStatus } = jobData;
-  const { isEligible, reasons = [] } = eligibilityCriteria || {};
+  const { isRelevant, expiry, jobProfileStatus } = toCamelCaseObject(jobData);
+  const { isEligible, reasons = [] } =
+    toCamelCaseObject(eligibilityCriteria) || {};
 
   // Priority 1: Expired (highest priority)
   const isExpired =

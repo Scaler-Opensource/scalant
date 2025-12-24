@@ -6,6 +6,7 @@ import {
   initializeSavedJobs,
   setJobSavedStatus,
 } from '../../store/savedJobsSlice';
+import { updateFormFilters } from '../../store/filterSlice';
 import { useUpdateApplicationStatusMutation } from '../../services/useUpdateApplicationStatus';
 import { useInfiniteScroll, useJobQueryParams } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
@@ -86,6 +87,7 @@ function JobsList({
   const handleCardClick = (jobId) => {
     if (selectedJobId === jobId) {
       updateJobId(null);
+      dispatch(updateFormFilters({ job_ids: null }));
     } else {
       updateJobId(jobId);
     }
