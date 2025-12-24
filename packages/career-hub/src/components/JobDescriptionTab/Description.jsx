@@ -2,12 +2,17 @@ import React from 'react';
 import { Space, Typography } from 'antd';
 import { LinkOutlined } from '@ant-design/icons';
 import { useJobPreview } from '../../contexts';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import CollapsableHTML from '../CollapsableHTML';
 import styles from './JobDescriptionTab.module.scss';
 
 const Description = () => {
-  const { jobData } = useJobPreview();
+  const { jobData, analytics } = useJobPreview();
   const { jobDescText, jobDesc } = jobData || {};
+
+  const handleKnowMoreClick = () => {
+    analytics?.click('Job Description - Know More', PRODUCT_NAME);
+  };
 
   return (
     <Space
@@ -20,6 +25,7 @@ const Description = () => {
       </Typography.Text>
       {jobDescText && (
         <CollapsableHTML
+          analytics={analytics}
           html={jobDescText}
           contentClassName={styles.descriptionText}
         />
@@ -29,6 +35,7 @@ const Description = () => {
           className={styles.descriptionLink}
           href={jobDesc}
           target="_blank"
+          onClick={handleKnowMoreClick}
         >
           <Space>
             <LinkOutlined />

@@ -6,11 +6,11 @@ import FilterTags from '../../components/FilterTags';
 import styles from './JobsLayout.module.scss';
 
 const { Header, Sider, Content } = Layout;
-function JobsLayout({ header, children, className, sider, siderWidth }) {
+function JobsLayout({ analytics, header, children, className, sider, siderWidth }) {
   return (
     <Layout className={className}>
       <Header className={styles.header}>{header || 'Header'}</Header>
-      <FilterTags />
+      <FilterTags analytics={analytics} />
       <Layout className={styles.layout}>
         <Content className={styles.content}>{children}</Content>
         {sider && (
@@ -24,6 +24,7 @@ function JobsLayout({ header, children, className, sider, siderWidth }) {
 }
 
 JobsLayout.propTypes = {
+  analytics: PropTypes.object,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   sider: PropTypes.node,

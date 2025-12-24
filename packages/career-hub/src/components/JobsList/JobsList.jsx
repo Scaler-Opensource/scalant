@@ -10,6 +10,7 @@ import { updateFormFilters } from '../../store/filterSlice';
 import { useUpdateApplicationStatusMutation } from '../../services/useUpdateApplicationStatus';
 import { useInfiniteScroll, useJobQueryParams } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import JobCard from '../JobCard';
 import { RightOutlined } from '@ant-design/icons';
 
@@ -23,6 +24,7 @@ const TAB_HEADINGS = {
 };
 
 function JobsList({
+  analytics,
   className,
   currentTab,
   jobs = [],
@@ -85,6 +87,7 @@ function JobsList({
   }, [jobs, selectedJobId, updateJobId]);
 
   const handleCardClick = (jobId) => {
+    analytics?.click('Jobs List - Job Card Click', PRODUCT_NAME);
     if (selectedJobId === jobId) {
       updateJobId(null);
       dispatch(updateFormFilters({ job_ids: null }));
@@ -120,6 +123,7 @@ function JobsList({
   };
 
   const handleAllJobsClick = () => {
+    analytics?.click('Jobs List - Go to All Jobs', PRODUCT_NAME);
     updateTab(TAG_TO_TAB_MAPPING.all);
   };
 
@@ -228,6 +232,7 @@ function JobsList({
             jobData={jobData}
             isActive={selectedJobId === jobData.id}
             currentTab={currentTab}
+            analytics={analytics}
             onClick={handleCardClick}
             onSave={handleSave}
             companiesList={companiesMap}
@@ -252,6 +257,7 @@ function JobsList({
 }
 
 JobsList.propTypes = {
+  analytics: PropTypes.object,
   className: PropTypes.string,
   currentTab: PropTypes.string,
   jobs: PropTypes.arrayOf(PropTypes.object),

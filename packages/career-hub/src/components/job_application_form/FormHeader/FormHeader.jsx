@@ -9,9 +9,10 @@ import {
   APPLICATION_STATUS,
   TAG_TO_TAB_MAPPING,
 } from '../../../utils/constants';
-import { useApplicationFormContext } from '../../../contexts';
+import { useApplicationFormContext, useJobPreview } from '../../../contexts';
 import { useJobQueryParams } from '../../../hooks';
 import { useGetJobPreviewQuery } from '../../../services/jobPreviewApi';
+import { PRODUCT_NAME } from '../../../utils/tracking';
 import styles from './FormHeader.module.scss';
 
 const { Text } = Typography;
@@ -39,6 +40,7 @@ const STEP_MAP = {
 
 function FormHeader({ onClose }) {
   const { stepName, jobProfileId } = useApplicationFormContext();
+  const { analytics } = useJobPreview();
   const { updateTab } = useJobQueryParams({
     syncToURL: true,
     syncFromURL: false,
@@ -57,6 +59,7 @@ function FormHeader({ onClose }) {
   } = STEP_MAP[stepName] || {};
 
   const handleClose = () => {
+    analytics?.click('Application Form - Close', PRODUCT_NAME);
     if (stepName === APPLICATION_STATUS.SUCCESSFULLY_APPLIED) {
       updateTab(TAG_TO_TAB_MAPPING.applied);
       refetchJobPreview();

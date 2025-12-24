@@ -11,6 +11,7 @@ import SavedJobsPage from '../SavedJobsPage';
 import AppliedJobsPage from '../AppliedJobsPage';
 import FilterDrawer from '../FilterDrawer';
 import JobAlertModal from '../JobAlert/JobAlertModal';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import {
   setProcessCounts,
   setUserProfileData,
@@ -26,6 +27,7 @@ import {
 import styles from './JobsPage.module.scss';
 
 function JobsPage({
+  analytics,
   country,
   openMockInterviewModal,
   openResume,
@@ -87,9 +89,10 @@ function JobsPage({
     }
   }, [userProfileData, dispatch]);
 
-  const header = <JobsHeader />;
+  const header = <JobsHeader analytics={analytics} />;
   const sider = selectedJobId ? (
     <JobDetails
+      analytics={analytics}
       currentTab={currentTab}
       onUploadFile={onUploadFile}
       country={country}
@@ -101,6 +104,7 @@ function JobsPage({
     />
   ) : (
     <ProfileDetails
+      analytics={analytics}
       onViewResume={onViewResume}
       onEditPreferences={onEditPreferences}
     />
@@ -109,23 +113,32 @@ function JobsPage({
     ? SIDER_WIDTH.JOB_DETAILS
     : SIDER_WIDTH.PROFILE_DETAILS;
 
+  useEffect(() => {
+    if (analytics) {
+      analytics.view('Jobs Page - Tab Rendered', PRODUCT_NAME, {
+        currentTab: currentTab,
+      });
+    }
+  }, [analytics, currentTab]);
+
   const renderPageContent = () => {
     switch (currentTab) {
       case TAG_TO_TAB_MAPPING.relevant:
-        return <RelevantJobsPage />;
+        return <RelevantJobsPage analytics={analytics} />;
       case TAG_TO_TAB_MAPPING.saved:
-        return <SavedJobsPage />;
+        return <SavedJobsPage analytics={analytics} />;
       case TAG_TO_TAB_MAPPING.applied:
-        return <AppliedJobsPage />;
+        return <AppliedJobsPage analytics={analytics} />;
       case TAG_TO_TAB_MAPPING.all:
       default:
-        return <AllJobsPage />;
+        return <AllJobsPage analytics={analytics} />;
     }
   };
 
   return (
     <>
       <JobsLayout
+        analytics={analytics}
         header={header}
         sider={sider}
         siderWidth={siderWidth}
@@ -133,8 +146,8 @@ function JobsPage({
       >
         {renderPageContent()}
       </JobsLayout>
-      <FilterDrawer />
-      <JobAlertModal />
+      <FilterDrawer analytics={analytics} />
+      <JobAlertModal analytics={analytics} />
     </>
   );
 }

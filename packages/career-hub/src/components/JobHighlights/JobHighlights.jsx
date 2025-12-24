@@ -11,17 +11,20 @@ import {
   determineJobTag,
 } from '../../utils/jobCard/eligibility';
 import { JOB_BODY_TABS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import { toCamelCase } from '../../utils/caseUtil';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
 import styles from './JobHighlights.module.scss';
 
 const ActionAlert = ({ eligibilityStatus, metric, onScrollToEnd }) => {
-  const { setActiveTab } = useJobPreview();
+  const { analytics, setActiveTab } = useJobPreview();
 
   const handleClick = () => {
     setActiveTab(JOB_BODY_TABS.REQUIREMENTS.key);
     onScrollToEnd();
+
+    analytics?.click('Job Highlights - Complete Tasks', PRODUCT_NAME);
   };
 
   if (eligibilityStatus === ELIGIBILITY_TYPES.ineligible) {

@@ -22,10 +22,11 @@ import {
   ALERT_NOTIFICATION_LABELS,
   ALERT_STATUS,
 } from '../../utils/constants';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import JobAlertForm from './JobAlertForm';
 import styles from './ExistingAlerts.module.scss';
 
-function ExistingAlerts() {
+function ExistingAlerts({ analytics }) {
   const dispatch = useDispatch();
   const { data: alerts = [], isLoading, error } = useFetchAlertsQuery();
   const [updateAlertStatus] = useUpdateAlertStatusMutation();
@@ -79,17 +80,20 @@ function ExistingAlerts() {
   };
 
   const handleEdit = (alertId) => {
+    analytics?.click('Existing Alerts - Edit', PRODUCT_NAME);
     setEditingAlertId(alertId);
     // Form will be prefilled via JobAlertForm's useEffect
   };
 
   const handleCancelEdit = () => {
+    analytics?.click('Existing Alerts - Cancel Edit', PRODUCT_NAME);
     setEditingAlertId(null);
     editForm.resetFields();
   };
 
   const handleUpdateAlert = async (payload) => {
     try {
+      analytics?.click('Existing Alerts - Update Alert', PRODUCT_NAME);
       await updateAlert({
         id: editingAlertId,
         payload,
@@ -107,6 +111,7 @@ function ExistingAlerts() {
 
   const handleDelete = async (alertId) => {
     try {
+      analytics?.click('Existing Alerts - Delete', PRODUCT_NAME);
       await deleteAlert(alertId).unwrap();
       message.success('Alert deleted successfully');
     } catch (err) {

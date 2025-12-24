@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Space, Table, Typography } from 'antd';
 import { useJobPreview } from '../../contexts';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './SkillsRequiredTab.module.scss';
 
 const STATUS_MAP = {
@@ -43,14 +44,19 @@ const StatusColumnContent = ({ status }) => {
 };
 
 const ActionColumnContent = ({ status }) => {
-  const { openResume } = useJobPreview();
+  const { openResume, analytics } = useJobPreview();
+
+  const handleClick = () => {
+    analytics?.click('Resume Skills - Add Skill', PRODUCT_NAME);
+    openResume();
+  };
 
   if (status === STATUS_MAP.added) {
     return null;
   }
 
   return (
-    <Typography.Link onClick={openResume} underline>
+    <Typography.Link onClick={handleClick} underline>
       Add Skill
     </Typography.Link>
   );

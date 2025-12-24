@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ExpandedJobView from '../ExpandedJobView/ExpandedJobView';
 import styles from './JobDetails.module.scss';
+import { PRODUCT_NAME } from '../../utils/tracking';
 
 /**
  * JobDetails - Component that displays expanded job view
@@ -12,6 +13,7 @@ import styles from './JobDetails.module.scss';
  * This component just sets the active job ID in Redux for UI state tracking.
  */
 function JobDetails({
+  analytics,
   country,
   openMockInterviewModal,
   openResume,
@@ -22,6 +24,15 @@ function JobDetails({
   onEditResume,
   onAddResume,
 }) {
+  useEffect(() => {
+    if (jobId) {
+      analytics?.view('Job Details - Render', PRODUCT_NAME, {
+        jobId,
+        currentTab: currentTab,
+      });
+    }
+  }, [analytics, currentTab, jobId]);
+
   if (!jobId) {
     return null;
   }
@@ -29,6 +40,7 @@ function JobDetails({
   return (
     <div className={classNames(styles.jobDetails, className)}>
       <ExpandedJobView
+        analytics={analytics}
         onUploadFile={onUploadFile}
         country={country}
         openMockInterviewModal={openMockInterviewModal}

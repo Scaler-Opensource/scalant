@@ -7,16 +7,17 @@ import Actions from '../Actions';
 
 import styles from './JobsHeader.module.scss';
 
-function JobsHeader({ className }) {
+function JobsHeader({ analytics, className }) {
   return (
     <div className={classNames(className, styles.jobsHeaderContainer)}>
-      <TagsSection />
-      <Actions />
+      <TagsSection analytics={analytics} />
+      <Actions analytics={analytics} />
     </div>
   );
 }
 
 JobsHeader.propTypes = {
+  analytics: PropTypes.object,
   className: PropTypes.string,
 };
 

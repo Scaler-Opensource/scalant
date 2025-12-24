@@ -5,6 +5,7 @@ import { PhoneOutlined } from '@ant-design/icons';
 
 import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import { useIssueScreeningCallMutation } from '../../services/screeningCallService';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
@@ -16,7 +17,7 @@ const ScreeningCallBanner = ({ forceShow = false }) => {
   );
   const hasCompletedScreeningCall =
     userProfileData?.hasCompletedScreeningCall ?? false;
-  const { jobData, currentTab } = useJobPreview();
+  const { analytics, jobData, currentTab } = useJobPreview();
   const { applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const [handleScreeningCall, { isLoading }] = useIssueScreeningCallMutation();
@@ -29,7 +30,8 @@ const ScreeningCallBanner = ({ forceShow = false }) => {
     } else {
       message.error('Failed to initiate screening call. Please try again.');
     }
-  }, [handleScreeningCall]);
+    analytics?.click('Screening Call - Take Call', PRODUCT_NAME);
+  }, [analytics, handleScreeningCall]);
 
   if (hasCompletedScreeningCall) {
     return null;

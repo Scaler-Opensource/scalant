@@ -4,12 +4,14 @@ import { Button } from 'antd';
 import { SaveOutlined, SaveTwoTone } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { formatDate } from '../../../utils/jobCard/formatting';
+import { PRODUCT_NAME } from '../../../utils/tracking';
 import styles from './SaveButton.module.scss';
 /**
  * - SaveOutlined icon when not saved
  * - SaveTwoTone icon when saved (with date) - filled and grey
  */
 const SaveButton = ({
+  analytics,
   jobProfileId,
   applicationStatus,
   applicationLastUpdatedAt,
@@ -39,6 +41,7 @@ const SaveButton = ({
       return;
     }
 
+    analytics?.click('Job Card - Save', PRODUCT_NAME);
     setLoading(true);
     try {
       await onSave(jobProfileId, 'save');
@@ -80,6 +83,7 @@ const SaveButton = ({
   );
 };
 SaveButton.propTypes = {
+  analytics: PropTypes.object,
   jobProfileId: PropTypes.number.isRequired,
   applicationStatus: PropTypes.string,
   applicationLastUpdatedAt: PropTypes.string,

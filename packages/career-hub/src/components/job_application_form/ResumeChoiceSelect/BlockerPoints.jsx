@@ -6,7 +6,8 @@ import {
   ExclamationCircleTwoTone,
   UpOutlined,
 } from '@ant-design/icons';
-import { useApplicationFormContext } from '../../../contexts';
+import { useApplicationFormContext, useJobPreview } from '../../../contexts';
+import { PRODUCT_NAME } from '../../../utils/tracking';
 import styles from './ResumeChoiceSelect.module.scss';
 
 export const RESUME_BLOCKER_POINTS = {
@@ -46,6 +47,7 @@ export const RESUME_BLOCKER_POINTS = {
 function BlockerPoints({ value }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { onEditResume } = useApplicationFormContext();
+  const { analytics } = useJobPreview();
   const {
     resume_details,
     blocker_and_garbage_details,
@@ -61,10 +63,12 @@ function BlockerPoints({ value }) {
   pointCount += user_educations?.length || 0;
 
   const handleCollapse = () => {
+    analytics?.click('Blocker Points - Collapse', PRODUCT_NAME);
     setIsCollapsed(!isCollapsed);
   };
 
   const handleEditResume = () => {
+    analytics?.click('Blocker Points - Edit Resume', PRODUCT_NAME);
     onEditResume(id);
   };
 

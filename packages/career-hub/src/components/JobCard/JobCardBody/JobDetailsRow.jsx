@@ -31,6 +31,7 @@ DetailItem.propTypes = {
  * - When selectedJobId is null: Show all details
  */
 const JobDetailsRow = ({
+  analytics,
   jobData,
   cardConfig,
   userCountry,
@@ -97,6 +98,7 @@ const JobDetailsRow = ({
       )}
       <div className={styles.saveButtonWrapper}>
         <SaveButton
+          analytics={analytics}
           jobProfileId={jobData.id}
           applicationStatus={jobData.applicationStatus}
           applicationLastUpdatedAt={jobData.applicationLastUpdatedAt}
@@ -108,6 +110,7 @@ const JobDetailsRow = ({
 };
 
 JobDetailsRow.propTypes = {
+  analytics: PropTypes.object,
   jobData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     preferredCities: PropTypes.string,

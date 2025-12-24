@@ -5,7 +5,7 @@ import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobsList from '../JobsList';
 import styles from './AppliedJobsPage.module.scss';
 
-function AppliedJobsPage() {
+function AppliedJobsPage({ analytics }) {
   const queryParams = useJobFilters();
   const { data, isLoading, error, isFetching } = useFetchPipelineJobsQuery({
     type: TAG_TO_TAB_MAPPING.applied,
@@ -28,6 +28,7 @@ function AppliedJobsPage() {
   return (
     <div className={styles.appliedJobsPage}>
       <JobsList
+        analytics={analytics}
         currentTab={TAG_TO_TAB_MAPPING.applied}
         jobs={accumulatedJobs}
         companiesMap={accumulatedCompaniesMap}

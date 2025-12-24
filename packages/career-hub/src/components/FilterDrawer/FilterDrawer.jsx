@@ -8,6 +8,7 @@ import { updateFiltersFromForm } from '../../store/filterSlice';
 import { resetForm } from '../../store/filterFormSlice';
 import { clearAllOptions } from '../../store/filterOptionsSlice';
 import { updateURLWithFilters } from '../../utils/filterQueryParams';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import FilterForm from './FilterForm';
 
 import styles from './FilterDrawer.module.scss';
@@ -30,7 +31,7 @@ function FilterDrawerTitle({ onClose }) {
   );
 }
 
-function FilterDrawer() {
+function FilterDrawer({ analytics }) {
   const dispatch = useDispatch();
   const open = useSelector(
     (state) => state.scalantCareerHub.dashboard.filterModalOpen
@@ -38,10 +39,12 @@ function FilterDrawer() {
   const formData = useSelector((state) => state.scalantCareerHub.filterForm);
 
   const onClose = () => {
+    analytics?.click('Filter Drawer - Close', PRODUCT_NAME);
     dispatch(closeFilterModal());
   };
 
   const handleApply = () => {
+    analytics?.click('Filter Drawer - Apply', PRODUCT_NAME);
     // Transform mbe_skill_ids from object to array format
     let transformedMbeSkillIds = undefined;
     if (
@@ -137,6 +140,7 @@ function FilterDrawer() {
   };
 
   const handleReset = () => {
+    analytics?.click('Filter Drawer - Reset', PRODUCT_NAME);
     dispatch(resetForm());
     dispatch(clearAllOptions());
     dispatch(updateFiltersFromForm({}));

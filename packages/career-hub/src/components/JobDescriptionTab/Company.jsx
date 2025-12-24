@@ -2,10 +2,11 @@ import React from 'react';
 import { Space, Typography } from 'antd';
 import { useJobPreview } from '../../contexts';
 import { toTitleCase } from '../../utils/caseUtil';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './JobDescriptionTab.module.scss';
 
 const Company = () => {
-  const { companyData } = useJobPreview();
+  const { companyData, analytics } = useJobPreview();
   const {
     name,
     employeeCount,
@@ -14,6 +15,12 @@ const Company = () => {
     category,
     companyWebsite,
   } = companyData || {};
+
+  const handleCompanyWebsiteClick = () => {
+    analytics?.click('Company - Website Link', PRODUCT_NAME, {
+      companyName: name,
+    });
+  };
 
   return (
     <Space
@@ -25,6 +32,7 @@ const Company = () => {
         className={styles.descriptionTitle}
         href={companyWebsite}
         target="_blank"
+        onClick={handleCompanyWebsiteClick}
       >
         About {name}
       </Typography.Link>

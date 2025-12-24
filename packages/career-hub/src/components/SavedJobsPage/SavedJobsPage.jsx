@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useFetchPipelineJobsQuery } from '../../services/jobsService';
 import { useJobFilters, useAccumulatedJobs } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobsList from '../JobsList';
 import styles from './SavedJobsPage.module.scss';
 
-function SavedJobsPage() {
+function SavedJobsPage({ analytics }) {
   const queryParams = useJobFilters();
   const { data, isLoading, error, isFetching } = useFetchPipelineJobsQuery({
     type: TAG_TO_TAB_MAPPING.saved,
@@ -23,6 +24,7 @@ function SavedJobsPage() {
   return (
     <div className={styles.savedJobsPage}>
       <JobsList
+        analytics={analytics}
         currentTab={TAG_TO_TAB_MAPPING.saved}
         jobs={accumulatedJobs}
         companiesMap={accumulatedCompaniesMap}

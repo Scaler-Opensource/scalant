@@ -8,11 +8,12 @@ import {
   ALERT_FREQUENCY,
   ALERT_NOTIFICATION_TYPE,
 } from '../../utils/constants';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import ExistingAlerts from './ExistingAlerts';
 import JobAlertForm from './JobAlertForm';
 import styles from './JobAlertModal.module.scss';
 
-function JobAlertModal() {
+function JobAlertModal({ analytics }) {
   const dispatch = useDispatch();
   const open = useSelector(
     (state) => state.scalantCareerHub.dashboard.jobAlertModalOpen
@@ -30,10 +31,12 @@ function JobAlertModal() {
   }, [open, form]);
 
   const onClose = () => {
+    analytics?.click('Job Alert Modal - Close', PRODUCT_NAME);
     dispatch(closeJobAlertModal());
   };
 
   const handleCancel = () => {
+    analytics?.click('Job Alert Modal - Cancel', PRODUCT_NAME);
     onClose();
   };
 
@@ -74,6 +77,7 @@ function JobAlertModal() {
       const response = await createAlert(payload).unwrap();
 
       if (response.success && response.alert) {
+        analytics?.click('Job Alert Modal - Create Alert', PRODUCT_NAME);
         // The alert list will be automatically refetched due to tag invalidation
         form.resetFields();
         setActiveTab('existing');
@@ -128,7 +132,6 @@ function JobAlertModal() {
     />
   );
 
-  const existingAlertContent = <ExistingAlerts />;
 
   return (
     <Modal
@@ -142,7 +145,10 @@ function JobAlertModal() {
     >
       <Tabs
         activeKey={activeTab}
-        onChange={setActiveTab}
+        onChange={(key) => {
+          analytics?.click(`Job Alert Modal - Tab ${key}`, PRODUCT_NAME);
+          setActiveTab(key);
+        }}
         items={[
           {
             key: 'create',
@@ -152,7 +158,7 @@ function JobAlertModal() {
           {
             key: 'existing',
             label: 'Existing alerts',
-            children: existingAlertContent,
+            children: <ExistingAlerts analytics={analytics} />,
           },
         ]}
       />

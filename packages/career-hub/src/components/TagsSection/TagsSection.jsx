@@ -8,10 +8,11 @@ import {
   TAG_TO_TAB_MAPPING,
   COUNT_TO_TAB_MAPPING,
 } from '../../utils/constants';
+import { PRODUCT_NAME } from '../../utils/tracking';
 
 import styles from './TagsSection.module.scss';
 
-function TagsSection() {
+function TagsSection({ analytics }) {
   const { currentTab, updateTabAndJobId } = useJobQueryParams({
     syncToURL: true,
     syncFromURL: false, // Don't sync from URL here, let JobsPage handle initialization
@@ -23,6 +24,7 @@ function TagsSection() {
   );
 
   const handleTagClick = (tag) => {
+    analytics?.click(`Tags Section - ${JOB_FILTER_TAGS[tag]?.label || tag}`, PRODUCT_NAME);
     const tabValue = TAG_TO_TAB_MAPPING[tag];
     if (tabValue) {
       updateTabAndJobId(tabValue);

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import JobCardHeader from './JobCardHeader';
 import JobCardBody from './JobCardBody';
 import { useJobCardState } from '../../hooks/useJobCardState';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './JobCard.module.scss';
 
 /**
@@ -17,6 +18,7 @@ import styles from './JobCard.module.scss';
  * - Multiple eligibility states
  */
 const JobCard = ({
+  analytics,
   jobData,
   isActive,
   currentTab,
@@ -34,6 +36,7 @@ const JobCard = ({
   });
 
   const handleClick = () => {
+    analytics?.click('Job Card - Click', PRODUCT_NAME);
     if (onClick) {
       onClick(jobData.id);
     }
@@ -60,6 +63,7 @@ const JobCard = ({
         />
         {shouldShowBody && (
           <JobCardBody
+            analytics={analytics}
             jobData={jobData}
             cardConfig={cardConfig}
             userCountry={userCountry}
@@ -73,6 +77,7 @@ const JobCard = ({
 };
 
 JobCard.propTypes = {
+  analytics: PropTypes.object,
   jobData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

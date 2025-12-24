@@ -16,17 +16,20 @@ import {
   parsePreferredLocations,
   parsePreferredJobRoles,
 } from '../../utils/profileUtil';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './ProfileDetails.module.scss';
-function ProfileDetails({ className, onViewResume, onEditPreferences }) {
+function ProfileDetails({ analytics, className, onViewResume, onEditPreferences }) {
   const userProfileData = useSelector(
     (state) => state.scalantCareerHub.dashboard.userProfileData
   );
 
   const handleViewResume = () => {
+    analytics?.click('Profile Details - View Resume', PRODUCT_NAME);
     onViewResume?.();
   };
 
   const handleEditPreferences = () => {
+    analytics?.click('Profile Details - Edit Preferences', PRODUCT_NAME);
     onEditPreferences?.();
   };
 
@@ -145,6 +148,7 @@ function ProfileDetails({ className, onViewResume, onEditPreferences }) {
 }
 
 ProfileDetails.propTypes = {
+  analytics: PropTypes.object,
   className: PropTypes.string,
 };
 

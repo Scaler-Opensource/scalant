@@ -16,6 +16,7 @@ import {
 } from '../../../utils/constants';
 import { ICONS } from '../../../utils/icons';
 import { NON_WITHDRAW_STATUSES } from '../../../utils/jobCard/eligibility';
+import { PRODUCT_NAME } from '../../../utils/tracking';
 import { WITHDRAW_REASONS } from '../../../utils/jobCard/constants';
 import { useJobPreview } from '../../../contexts';
 import { useUpdateApplicationStatusMutation } from '../../../services/useUpdateApplicationStatus';
@@ -74,7 +75,7 @@ const ModalContent = ({
 };
 
 const Withdrawal = () => {
-  const { jobId, jobData, refetch, currentTab } = useJobPreview();
+  const { analytics, jobId, jobData, refetch, currentTab } = useJobPreview();
   const { applicationStatus } = jobData || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [withdrawalReason, setWithdrawalReason] = useState(
@@ -101,6 +102,11 @@ const Withdrawal = () => {
     } else {
       message.error('Failed to withdraw application');
     }
+
+    analytics?.click('Withdraw Application Ok', PRODUCT_NAME, {
+      currentTab,
+      jobId,
+    });
   };
 
   const handleCancel = () => {
@@ -113,6 +119,11 @@ const Withdrawal = () => {
     setWithdrawalReason(WITHDRAW_REASONS[0]?.value);
     setWithdrawalMessage('');
     setIsModalOpen(true);
+
+    analytics?.click('Expanded View - Withdraw Application', PRODUCT_NAME, {
+      currentTab,
+      jobId,
+    });
   };
 
   if (applicationStatus === APPLICATION_STATUS.WITHDRAWN) {

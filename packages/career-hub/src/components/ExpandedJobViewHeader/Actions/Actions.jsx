@@ -16,7 +16,7 @@ import Withdrawal from './Withdrawal';
 import styles from './Actions.module.scss';
 
 const SaveButton = () => {
-  const { jobId, jobData, refetch, currentTab } = useJobPreview();
+  const { analytics, jobId, jobData, refetch, currentTab } = useJobPreview();
   const [updateApplicationStatus, { isLoading }] =
     useUpdateApplicationStatusMutation();
 
@@ -35,6 +35,11 @@ const SaveButton = () => {
     } else {
       message.error('Failed to save application');
     }
+
+    analytics?.click('Expanded View - Save', 'Jobs Page V2', {
+      currentTab,
+      jobId,
+    });
   };
 
   if (currentTab === TAG_TO_TAB_MAPPING.applied) {
@@ -75,6 +80,7 @@ const ApplyButton = () => {
     setActiveApplicationId,
     jobId,
     currentTab,
+    analytics,
   } = useJobPreview();
   const { applicationStatus } = jobData || {};
   const { isEligible } = eligibilityCriteria || {};
@@ -82,6 +88,10 @@ const ApplyButton = () => {
 
   const handleApply = () => {
     setActiveApplicationId(jobId);
+    analytics?.click('Expanded View - Apply Now', 'Jobs Page V2', {
+      currentTab,
+      jobId,
+    });
   };
 
   useEffect(() => {

@@ -4,15 +4,17 @@ import { Flex, Tag, Typography } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { updateFormFilters } from '../../store/filterSlice';
 import { useJobQueryParams } from '../../hooks';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './FilterTags.module.scss';
 
-function FilterTags() {
+function FilterTags({ analytics }) {
   const dispatch = useDispatch();
   const { selectedJobId, updateJobId } = useJobQueryParams({
     syncFromURL: false,
   });
 
   const handleRemoveJobIdFilter = () => {
+    analytics?.click('Filter Tags - Remove Job Filter', PRODUCT_NAME);
     updateJobId(null);
     dispatch(updateFormFilters({ job_ids: null }));
   };

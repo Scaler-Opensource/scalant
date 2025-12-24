@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Space, Table, Tag, Typography } from 'antd';
 import { useJobPreview } from '../../contexts';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './SkillsRequiredTab.module.scss';
 
 const STATUS_MAP = {
@@ -38,15 +39,21 @@ const StatusColumnContent = ({ status }) => {
 };
 
 const ContestColumnContent = ({ contestDetails }) => {
+  const { analytics } = useJobPreview();
+
   if (!contestDetails) {
     return STATUS_MAP.notRequired;
   }
 
   const { cleared, joinLink } = contestDetails;
 
+  const handleClick = () => {
+    analytics?.click('Certification - Attempt Contest', PRODUCT_NAME);
+  };
+
   if (!cleared) {
     return (
-      <Typography.Link href={joinLink} underline>
+      <Typography.Link href={joinLink} onClick={handleClick} underline>
         Attempt Contest
       </Typography.Link>
     );
@@ -65,19 +72,21 @@ const MockInterviewColumnContent = ({
   skillId,
   skillName,
 }) => {
-  const { openMockInterviewModal } = useJobPreview();
+  const { openMockInterviewModal, analytics } = useJobPreview();
   if (!mockInterviewDetails) {
     return STATUS_MAP.notRequired;
   }
 
   const { cleared } = mockInterviewDetails;
 
+  const handleClick = () => {
+    analytics?.click('Certification - Schedule Interview', PRODUCT_NAME);
+    openMockInterviewModal(skillId, skillName);
+  };
+
   if (!cleared) {
     return (
-      <Typography.Link
-        onClick={() => openMockInterviewModal(skillId, skillName)}
-        underline
-      >
+      <Typography.Link onClick={handleClick} underline>
         Schedule Interview
       </Typography.Link>
     );

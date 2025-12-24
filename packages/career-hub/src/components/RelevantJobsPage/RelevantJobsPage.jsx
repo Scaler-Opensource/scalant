@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useFetchRelevantJobsQuery } from '../../services/jobsService';
 import { useJobFilters, useAccumulatedJobs } from '../../hooks';
 import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobsList from '../JobsList';
 import styles from './RelevantJobsPage.module.scss';
 
-function RelevantJobsPage() {
+function RelevantJobsPage({ analytics }) {
   const queryParams = useJobFilters();
   const { data, isLoading, error, isFetching } =
     useFetchRelevantJobsQuery(queryParams);
@@ -26,6 +27,7 @@ function RelevantJobsPage() {
   return (
     <div className={styles.relevantJobsPage}>
       <JobsList
+        analytics={analytics}
         currentTab={TAG_TO_TAB_MAPPING.relevant}
         jobs={accumulatedJobs}
         companiesMap={accumulatedCompaniesMap}

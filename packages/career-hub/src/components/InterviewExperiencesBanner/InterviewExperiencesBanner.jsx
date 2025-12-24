@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import { APPLICATION_STATUS, TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import { ICONS } from '../../utils/icons';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import { useJobPreview } from '../../contexts';
 import ActionBanner from '../ActionBanner';
 import styles from './InterviewExperiencesBanner.module.scss';
@@ -16,7 +17,7 @@ const InterviewExperiencesBanner = () => {
   );
   const hasCompletedScreeningCall =
     userProfileData?.hasCompletedScreeningCall ?? false;
-  const { jobData, companyData, currentTab } = useJobPreview();
+  const { analytics, jobData, companyData, currentTab } = useJobPreview();
   const { title: jobTitle, applicationStatus } = jobData || {};
   const isWithdrawn = applicationStatus === APPLICATION_STATUS.WITHDRAWN;
   const { name: companyName } = companyData || {};
@@ -28,7 +29,8 @@ const InterviewExperiencesBanner = () => {
       )}&role=${encodeURIComponent(jobTitle)}`,
       '_blank'
     );
-  }, [companyName, jobTitle]);
+    analytics?.click('Interview Experiences - Explore', PRODUCT_NAME);
+  }, [analytics, companyName, jobTitle]);
 
   if (
     !hasCompletedScreeningCall ||

@@ -5,7 +5,7 @@ import { TAG_TO_TAB_MAPPING } from '../../utils/constants';
 import JobsList from '../JobsList';
 import styles from './AllJobsPage.module.scss';
 
-function AllJobsPage() {
+function AllJobsPage({ analytics }) {
   const queryParams = useJobFilters();
   const { data, isLoading, error, isFetching } =
     useFetchAllJobsQuery(queryParams);
@@ -21,6 +21,7 @@ function AllJobsPage() {
   return (
     <div className={styles.allJobsPage}>
       <JobsList
+        analytics={analytics}
         currentTab={TAG_TO_TAB_MAPPING.all}
         jobs={accumulatedJobs}
         companiesMap={accumulatedCompaniesMap}

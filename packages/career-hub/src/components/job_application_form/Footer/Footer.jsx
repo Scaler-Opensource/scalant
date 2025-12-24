@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { Button, message, Space, Typography } from 'antd';
 import { BulbTwoTone } from '@ant-design/icons';
 import { APPLICATION_STATUS } from '../../../utils/constants';
-import { useApplicationFormContext } from '../../../contexts';
+import { useApplicationFormContext, useJobPreview } from '../../../contexts';
 import { useUpdateApplicationMutation } from '../../../services/createApplicationService';
 import { createApplicationFormPayload } from '../../../utils/applicationForm';
+import { PRODUCT_NAME } from '../../../utils/tracking';
 import styles from './Footer.module.scss';
 
 const ApplicationFormFooter = ({ onCancel }) => {
@@ -15,9 +16,11 @@ const ApplicationFormFooter = ({ onCancel }) => {
   const experienceBasedSkills = userProfileData?.experienceBasedSkills || [];
   const { applicationId, formInstance, jobProfileId, stepName, setStepName } =
     useApplicationFormContext();
+  const { analytics } = useJobPreview();
   const [updateApplication, { isLoading }] = useUpdateApplicationMutation();
 
   const handleNext = async () => {
+    analytics?.click('Application Form - Next', PRODUCT_NAME);
     try {
       const payload = {
         job_profile_id: jobProfileId,
@@ -43,9 +46,14 @@ const ApplicationFormFooter = ({ onCancel }) => {
     }
   };
 
+  const handleCancel = () => {
+    analytics?.click('Application Form - Cancel', PRODUCT_NAME);
+    onCancel();
+  };
+
   return (
     <Space className={styles.applicationFormFooterContainer}>
-      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={handleCancel}>Cancel</Button>
       <Button loading={isLoading} type="primary" onClick={handleNext}>
         Next
       </Button>
@@ -56,13 +64,16 @@ const ApplicationFormFooter = ({ onCancel }) => {
 const ResumeChoiceSelectFooter = () => {
   const { applicationId, selectedResume, jobProfileId, stepName, setStepName } =
     useApplicationFormContext();
+  const { analytics } = useJobPreview();
   const [updateApplication, { isLoading }] = useUpdateApplicationMutation();
 
   const handleGoBack = () => {
+    analytics?.click('Resume Choice - Go Back', PRODUCT_NAME);
     setStepName(APPLICATION_STATUS.APPLICATION_FORM);
   };
 
   const handleSubmit = async () => {
+    analytics?.click('Resume Choice - Proceed to Apply', PRODUCT_NAME);
     try {
       const payload = {
         job_profile_id: jobProfileId,

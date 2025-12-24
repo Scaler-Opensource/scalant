@@ -23,6 +23,7 @@ const ExpandedJobViewContent = () => {
 };
 
 const ExpandedJobView = ({
+  analytics,
   country,
   openMockInterviewModal,
   openResume,
@@ -71,6 +72,7 @@ const ExpandedJobView = ({
   return (
     <App>
       <JobPreviewProvider
+        analytics={analytics}
         country={country}
         openMockInterviewModal={openMockInterviewModal}
         openResume={openResume}

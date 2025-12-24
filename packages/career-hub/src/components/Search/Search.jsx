@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { setKeyword } from '../../store/filterSlice';
+import { PRODUCT_NAME } from '../../utils/tracking';
 import styles from './Search.module.scss';
 
-function Search() {
+function Search({ analytics }) {
   const dispatch = useDispatch();
   const keyword = useSelector(
     (state) => state.scalantCareerHub?.filter?.filters?.keyword || ''
@@ -26,6 +27,7 @@ function Search() {
   }, [isInputVisible]);
 
   const handleIconClick = () => {
+    analytics?.click('Search - Icon Click', PRODUCT_NAME);
     setIsInputVisible(true);
   };
 

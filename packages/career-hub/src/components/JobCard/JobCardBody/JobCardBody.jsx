@@ -8,6 +8,7 @@ import styles from './JobCardBody.module.scss';
  * Conditionally renders job details based on card state
  */
 const JobCardBody = ({
+  analytics,
   jobData,
   cardConfig,
   userCountry,
@@ -17,6 +18,7 @@ const JobCardBody = ({
   return (
     <div className={styles.body}>
       <JobDetailsRow
+        analytics={analytics}
         jobData={jobData}
         cardConfig={cardConfig}
         userCountry={userCountry}
@@ -28,6 +30,7 @@ const JobCardBody = ({
 };
 
 JobCardBody.propTypes = {
+  analytics: PropTypes.object,
   jobData: PropTypes.object.isRequired,
   cardConfig: PropTypes.object.isRequired,
   userCountry: PropTypes.oneOf(['IN', 'US']),

@@ -12,6 +12,7 @@ const JobPreviewContext = createContext(null);
  * @param {React.ReactNode} props.children - Child components
  */
 export const JobPreviewProvider = ({
+  analytics,
   country = 'IN',
   jobId,
   currentTab,
@@ -31,11 +32,20 @@ export const JobPreviewProvider = ({
   const [activeTab, setActiveTab] = useState();
   const [activeApplicationId, setActiveApplicationId] = useState(null);
 
+  const handleActiveTabChange = (tab) => {
+    setActiveTab(tab);
+    analytics?.click('Job Preview - Active Tab Changed', 'Jobs Page V2', {
+      tab,
+      jobId,
+    });
+  };
+
   const value = {
+    analytics,
     activeApplicationId,
     setActiveApplicationId,
     activeTab,
-    setActiveTab,
+    setActiveTab: handleActiveTabChange,
     country,
     jobId,
     data,
