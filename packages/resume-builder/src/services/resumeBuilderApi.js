@@ -16,15 +16,6 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
           headers.set('X-CSRF-Token', csrfMeta.content);
         }
       }
-      // Add Authorization header with Bearer token from cookies (e.g., remember_user_token)
-      if (typeof window !== 'undefined') {
-        const cookies = document.cookie.split(';');
-        const tokenCookie = cookies.find(c => c.trim().startsWith('remember_user_token='));
-        if (tokenCookie) {
-          const token = tokenCookie.split('=')[1];
-          headers.set('Authorization', `Bearer ${token}`);
-        }
-      }
       return headers;
     },
   });
