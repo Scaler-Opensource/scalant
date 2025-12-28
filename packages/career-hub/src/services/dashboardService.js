@@ -12,7 +12,19 @@ const dashboardService = careerHubApi.injectEndpoints({
       },
       providesTags: ['ProcessCounts'],
     }),
+    updateJobStatus: builder.mutation({
+      query: (payload) => ({
+        url: '/academy/mentee/jobs-mapping/update-status',
+        method: 'POST',
+        body: payload,
+      }),
+      transformResponse: (response) => {
+        return response;
+      },
+    }),
   }),
 });
+
+export const { useUpdateJobStatusMutation } = dashboardService;
 
 export default dashboardService;

@@ -308,6 +308,14 @@ app.get('/api/v3/user-resumes/:id/download', (req, res) => {
   res.status(200).json(data);
 });
 
+// POST /academy/mentee/jobs-mapping/update-status
+app.post('/academy/mentee/jobs-mapping/update-status', (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  const { source, status } = req.body;
+  // Dummy endpoint - returns success response
+  res.status(200).json({ success: true });
+});
+
 // Start server
 const PORT = 8000;
 app.listen(PORT, () => {
