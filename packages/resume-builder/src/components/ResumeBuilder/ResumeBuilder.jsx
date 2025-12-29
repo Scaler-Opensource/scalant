@@ -36,30 +36,7 @@ import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
 
-// const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
-
-// const areCoreSectionsEmpty = (resumeData) => {
-//   const education = resumeData?.[FORM_KEYS.education];
-//   const experience = resumeData?.[FORM_KEYS.experience];
-//   const projects = resumeData?.[FORM_KEYS.projects];
-//   return (
-//     isEmptyArray(education) &&
-//     isEmptyArray(experience) &&
-//     isEmptyArray(projects)
-//   );
-// };
-
-// const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
-//   const baseSteps = STEPS_ORDER;
-//   const shouldShowParsing =
-//     Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
-
-//   if (shouldShowParsing) return baseSteps;
-//   return baseSteps.filter(
-//     (s) => s.key !== RESUME_BUILDER_STEPS.RESUME_PARSING.key
-//   );
-// };
-
+// remove areCoresection empty to enable resume parsing step for all users
 const computeStepsWithSkip = (enableResumeParsing) => {
   const baseSteps = STEPS_ORDER;
   const shouldShowParsing =
