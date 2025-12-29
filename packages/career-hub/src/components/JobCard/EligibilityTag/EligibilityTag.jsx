@@ -4,7 +4,7 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   ClockCircleOutlined,
-  RocketOutlined
+  RocketOutlined,
 } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { determineJobTag } from '../../../utils/jobCard/eligibility';
@@ -14,7 +14,7 @@ const ICON_MAP = {
   CheckCircleOutlined: CheckCircleOutlined,
   CloseCircleOutlined: CloseCircleOutlined,
   ClockCircleOutlined: ClockCircleOutlined,
-  RocketOutlined: RocketOutlined
+  RocketOutlined: RocketOutlined,
 };
 
 /**
@@ -23,7 +23,7 @@ const ICON_MAP = {
  */
 const EligibilityTag = ({ jobData, currentTab }) => {
   const tagData = determineJobTag(jobData, jobData.eligibilityCriteria);
-  
+
   if (!tagData) return null;
 
   const IconComponent = ICON_MAP[tagData.icon];
@@ -33,7 +33,11 @@ const EligibilityTag = ({ jobData, currentTab }) => {
       icon={IconComponent && <IconComponent />}
       color={tagData.antdColor}
       className={styles.tag}
-      style={tagData.tag === 'expired' ? { color: tagData.color, borderColor: tagData.color } : {}}
+      style={
+        tagData.tag === 'expired'
+          ? { color: tagData.color, borderColor: tagData.color }
+          : {}
+      }
     >
       {tagData.text}
     </Tag>
@@ -47,19 +51,20 @@ EligibilityTag.propTypes = {
     jobProfileStatus: PropTypes.string,
     eligibilityCriteria: PropTypes.shape({
       isEligible: PropTypes.bool,
-      reasons: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string,
-        isEligible: PropTypes.bool,
-        data: PropTypes.object
-      }))
-    })
+      reasons: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string,
+          isEligible: PropTypes.bool,
+          data: PropTypes.object,
+        })
+      ),
+    }),
   }).isRequired,
-  currentTab: PropTypes.string
+  currentTab: PropTypes.string,
 };
 
 EligibilityTag.defaultProps = {
-  currentTab: 'all'
+  currentTab: 'all',
 };
 
 export default EligibilityTag;
-

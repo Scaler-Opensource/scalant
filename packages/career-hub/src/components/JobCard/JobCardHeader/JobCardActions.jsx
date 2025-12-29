@@ -10,21 +10,18 @@ import styles from './JobCardHeader.module.scss';
 const JobCardActions = ({ jobData, currentTab }) => {
   return (
     <div className={styles.actions}>
-      <EligibilityTag
-        jobData={jobData}
-        currentTab={currentTab}
-      />
+      <EligibilityTag jobData={jobData} currentTab={currentTab} />
     </div>
   );
 };
 
 JobCardActions.propTypes = {
   jobData: PropTypes.object.isRequired,
-  currentTab: PropTypes.string
+  currentTab: PropTypes.string,
 };
 
 JobCardActions.defaultProps = {
-  currentTab: 'all'
+  currentTab: 'all',
 };
 
 export default JobCardActions;

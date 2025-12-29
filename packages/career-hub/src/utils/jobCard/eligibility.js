@@ -96,8 +96,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
       tag: 'expired',
       text: 'Job Expired',
       icon: 'ClockCircleOutlined',
-      color: '#5a2780',
-      antdColor: 'default', // Will be styled with custom color
+      color: '#FF9C6E',
+      antdColor: 'volcano', // Will be styled with custom color
     };
   }
 
@@ -118,8 +118,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
       tag: 'quick_apply',
       text: 'Quick Apply',
       icon: 'CheckCircleOutlined',
-      color: '#20a164',
-      antdColor: 'success',
+      color: '#1A8452',
+      antdColor: 'green',
     };
   }
 
@@ -129,8 +129,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
       tag: 'eligible',
       text: 'Eligible',
       icon: 'CheckCircleOutlined',
-      color: '#20a164',
-      antdColor: 'success',
+      color: '#1A8452',
+      antdColor: 'green',
     };
   }
 
@@ -174,8 +174,8 @@ export const determineJobTag = (jobData, eligibilityCriteria) => {
         tag: 'steps_to_apply',
         text: `${pendingSteps} ${pendingSteps === 1 ? 'step' : 'steps'} pending`,
         icon: 'RocketOutlined',
-        color: '#20a164',
-        antdColor: 'success',
+        color: '#2F54EB',
+        antdColor: 'geekblue',
         count: pendingSteps,
       };
     }

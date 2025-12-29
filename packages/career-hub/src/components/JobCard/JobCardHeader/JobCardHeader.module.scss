@@ -25,11 +25,12 @@
 }
 
 .companyName {
-  font-size: 1.1rem;
-  color: rgba(0, 0, 0, 0.45);
+  font-size: $default-font-size;
+  color: rgba(0, 0, 0, 0.88);
 }
 
 .actions {
   width: 100%;
+  margin-right: 0;
 }
 

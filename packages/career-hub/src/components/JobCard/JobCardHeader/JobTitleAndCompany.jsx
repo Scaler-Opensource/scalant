@@ -23,7 +23,7 @@ const JobTitleAndCompany = ({ title, companyName, isExpanded }) => {
       <Title level={5} className={styles.jobTitle} ellipsis={{ rows: 1 }}>
         {title}
       </Title>
-      <Text type="secondary" ellipsis className={styles.companyName}>
+      <Text ellipsis className={styles.companyName}>
         {companyName}
       </Text>
     </Space>

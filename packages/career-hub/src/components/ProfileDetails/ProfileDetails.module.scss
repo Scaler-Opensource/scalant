@@ -10,10 +10,11 @@
   // top: 9.6rem;
   background-color: $colors-neutral-color-bg-base;
   // min-height: calc(100vh - 9.6rem);
+  border-radius: 0.8rem;
 }
 
 .profileDetailsItems {
-  margin-top: 0.8rem;
+  margin-top: 1.6rem;
   margin-bottom: 1.6rem;
 }
 
@@ -31,7 +32,7 @@
 }
 
 .preferenceLabel {
-  font-size: $h6-size;
+  font-size: $default-font-size;
   color: $colors-neutral-text-color-text-secondary;
   margin-right: 0.5rem;
 }
@@ -43,8 +44,17 @@
 
 .preferenceTag {
   margin-top: 0.6rem;
+  background-color: $colors-neutral-bg-color-bg-layout;
+  border-radius: 0.4rem;
+  border-color: #F0F0F0;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: $h6-size
 }
 
 .jobIntentContainer {
   margin-top: 1.5rem;
+}
+
+.preferencesContainer {
+  margin-top: 2.4rem;
 }

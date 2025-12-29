@@ -71,7 +71,7 @@ const SaveButton = ({
   return (
     <Button
       type="text"
-      icon={<SaveOutlined />}
+      icon={<SaveOutlined twoToneColor="#006AFF" />}
       onClick={handleClick}
       disabled={disabled || loading}
       loading={loading}

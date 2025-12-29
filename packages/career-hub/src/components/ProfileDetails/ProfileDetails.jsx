@@ -157,7 +157,7 @@ function ProfileDetails({
           />
         </Flex>
       </Flex>
-      <Flex vertical>
+      <Flex vertical className={styles.preferencesContainer}>
         <Flex justify="space-between">
           <Typography.Title level={5} className={styles.preferencesTitle}>
             Your Preferences
@@ -166,7 +166,7 @@ function ProfileDetails({
           <EditTwoTone onClick={handleEditPreferences} />
         </Flex>
         <Divider className={styles.preferencesDivider} />
-        <Flex vertical gap={8} className={styles.preferencesContent}>
+        <Flex vertical gap={16} className={styles.preferencesContent}>
           <Flex vertical gap={0.4}>
             <Typography.Text className={styles.preferenceLabel}>
               Location
@@ -194,11 +194,7 @@ function ProfileDetails({
               {parsePreferredJobRoles(
                 userProfileData?.userCompanyProfile?.preferredRole
               ).map((role, index) => (
-                <Tag
-                  key={index}
-                  bordered={false}
-                  className={styles.preferenceTag}
-                >
+                <Tag key={index} className={styles.preferenceTag}>
                   {role}
                 </Tag>
               ))}

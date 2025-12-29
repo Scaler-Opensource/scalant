@@ -8,6 +8,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 0rem;
+  margin-bottom: 2rem;
 
   &:hover:not(.expired) {
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); // 2px 8px
