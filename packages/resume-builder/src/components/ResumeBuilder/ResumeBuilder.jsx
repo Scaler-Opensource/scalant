@@ -36,30 +36,6 @@ import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
 
-// const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
-
-// const areCoreSectionsEmpty = (resumeData) => {
-//   const education = resumeData?.[FORM_KEYS.education];
-//   const experience = resumeData?.[FORM_KEYS.experience];
-//   const projects = resumeData?.[FORM_KEYS.projects];
-//   return (
-//     isEmptyArray(education) &&
-//     isEmptyArray(experience) &&
-//     isEmptyArray(projects)
-//   );
-// };
-
-// const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
-//   const baseSteps = STEPS_ORDER;
-//   const shouldShowParsing =
-//     Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
-
-//   if (shouldShowParsing) return baseSteps;
-//   return baseSteps.filter(
-//     (s) => s.key !== RESUME_BUILDER_STEPS.RESUME_PARSING.key
-//   );
-// };
-
 const computeStepsWithSkip = (enableResumeParsing) => {
   const baseSteps = STEPS_ORDER;
   const shouldShowParsing =
@@ -118,11 +94,14 @@ const ResumeBuilderContent = ({
 
   // Handle upload button click - go to resume parsing step
   const handleUploadClick = useCallback(() => {
-    const parsingStepIndex = STEPS_ORDER.findIndex(
+    // Use the actual steps array (which may be filtered) instead of STEPS_ORDER
+    const parsingStepIndex = steps.findIndex(
       (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
     );
-    dispatch(setCurrentStep(parsingStepIndex));
-  }, [dispatch]);
+    if (parsingStepIndex >= 0) {
+      dispatch(setCurrentStep(parsingStepIndex));
+    }
+  }, [dispatch, steps]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {

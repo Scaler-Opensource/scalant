@@ -62,14 +62,11 @@ const ResumeTimeline = ({
 
   // Force re-render when resumeData changes
   useEffect(() => {
-    if (parseStatus === PARSING_STATUS.SUCCESS) {
-      // parsing succeeded; mark all steps as incomplete and prepare the flow
-      dispatch(setIncompleteForms(Object.values(FORM_KEYS)));
-      dispatch(setCurrentIncompleteForm(FORM_KEYS.personal_details));
-      setExpandedStep(null);
-      setTourDismissed(false);
-    } else if (resumeData) {
+    if (resumeData) {
       setSteps([]);
+      // Recalculate incomplete forms based on current resume data
+      // This will show the actual number of completed sections (e.g., "4 of 6" or "6 of 6")
+      // based on what data is actually present in the resume
       const newIncompleteForms = getAllIncompleteForms(resumeData);
       batch(() => {
         dispatch(setIncompleteForms(newIncompleteForms));
@@ -80,6 +77,11 @@ const ResumeTimeline = ({
           setExpandedStep(null);
         }
       });
+      
+      // If parsing was successful, reset tour state for the tour to show
+      if (parseStatus === PARSING_STATUS.SUCCESS) {
+        setTourDismissed(false);
+      }
     }
   }, [resumeData, dispatch, parseStatus]);
 
