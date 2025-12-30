@@ -11,6 +11,7 @@
     "dist"
   ],
   "dependencies": {
+    "@rails/actioncable": "^7.1.0",
     "deepmerge": "^4.3.1",
     "react-pdf": "5.7.2",
     "react-quill": "^2.0.0"
