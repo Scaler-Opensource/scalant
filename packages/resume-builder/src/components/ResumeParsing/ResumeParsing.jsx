@@ -158,8 +158,11 @@ const ResumeParsing = ({
         dispatch(setParsingPercent(0));
         startTimeout();
         startProgress();
-        await parseResume({ resumeId, resourceLink: url }).unwrap();
+        // Enable websocket connection BEFORE calling API to ensure it's ready to receive broadcasts
         setIsParsingStarted(true);
+        // Small delay to allow websocket to connect before backend starts processing
+        await new Promise(resolve => setTimeout(resolve, 200));
+        await parseResume({ resumeId, resourceLink: url }).unwrap();
       } else {
         throw new Error('Upload file function not provided');
       }
