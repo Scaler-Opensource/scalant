@@ -1,10 +1,9 @@
 import {
   Button,
+  Checkbox,
   Flex,
   Space,
   message,
-  Modal,
-  Switch,
   Typography,
   Tooltip,
 } from 'antd';
@@ -14,13 +13,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
-import SkillSection from './SkillSection';
 import SectionFeedback from '../SectionFeedback/SectionFeedback';
 
 import styles from './SkillsAndToolkit.module.scss';
 import { FORM_KEYS } from '../../utils/constants';
 import SkillDemoVideoModal from './SkillDemoVideoModal';
 import { SKILL_VIEW_TOOLTIPS } from './constants';
+import SearchableSkillPicker from './SearchableSkillPicker';
+import ExperienceModal from './ExperienceModal';
+import SelectedSkillsPanel from './SelectedSkillsPanel';
+import SuggestedSkillsPanel from './SuggestedSkillsPanel';
 
 const { Text } = Typography;
 
@@ -55,6 +57,8 @@ const initialFormData = {
 const SkillsAndToolkit = ({ onComplete }) => {
   const dispatch = useDispatch();
   const [categorizeSkills, setCategorizeSkills] = useState(false);
+  const [pendingSkill, setPendingSkill] = useState(null);
+  const [isExperienceModalOpen, setIsExperienceModalOpen] = useState(false);
 
   const resumeData = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.resumeData
@@ -78,8 +82,11 @@ const SkillsAndToolkit = ({ onComplete }) => {
   const markComplete =
     incompleteForms.length === 0 ||
     (incompleteForms.length <= 1 && currentIncompleteForm === FORM_KEYS.skills);
-  const { resume_builder_skills: resumeBuilderSkills, skill_data: skillsData } =
-    useSelector((state) => state.scalantResumeBuilder.metaData.meta);
+  const {
+    resume_builder_skills: resumeBuilderSkills,
+    skill_data: skillsData = [],
+    course_based_skills: metaCourseBasedSkills = [],
+  } = useSelector((state) => state.scalantResumeBuilder.metaData.meta);
 
   const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
 
@@ -105,14 +112,41 @@ const SkillsAndToolkit = ({ onComplete }) => {
     return skillsSection?.config?.view || 'view1';
   };
 
+  const handleSkillSelect = (skill) => {
+    if (!skill) return;
+    const isAlreadySelected = selectedSkills.some(
+      (s) => s.skill_id === skill.subtopic_id
+    );
+    if (isAlreadySelected) {
+      message.warning(`${skill.subtopic || skill.name} is already added`);
+      return;
+    }
+    setPendingSkill(skill);
+    setIsExperienceModalOpen(true);
+  };
+
+  const handleSkillSelectFromSearch = handleSkillSelect;
+
+  const handleExperienceModalSubmit = ({ years, months }) => {
+    if (!pendingSkill) return;
+    handleExperienceUpdate(pendingSkill, years, months);
+    setPendingSkill(null);
+    setIsExperienceModalOpen(false);
+  };
+
+  const handleExperienceModalCancel = () => {
+    setPendingSkill(null);
+    setIsExperienceModalOpen(false);
+  };
+
   // Prefill categorizeSkills from resumeData
   useEffect(() => {
     const view = getSkillsSectionView(resumeData);
     setCategorizeSkills(view === 'view2');
   }, [resumeData]);
 
-  const handleCategorizeToggle = (checked) => {
-    setCategorizeSkills(checked);
+  const handleCategorizeToggle = (e) => {
+    setCategorizeSkills(e.target.checked);
   };
 
   const getUpdatedTemplateStructure = () => {
@@ -145,8 +179,42 @@ const SkillsAndToolkit = ({ onComplete }) => {
     };
   };
 
+  const selectedSkills = formData?.selectedSkills || [];
+  const courseBasedSkills =
+    resumeData?.course_based_skills || metaCourseBasedSkills || [];
+  const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
+
+  const handleRemoveSkill = (skillId) => {
+    const updatedSelectedSkills = selectedSkills.filter(
+      (s) => s.skill_id !== skillId
+    );
+    dispatch(
+      updateFormData({
+        formId: FORM_ID,
+        data: {
+          selectedSkills: updatedSelectedSkills,
+        },
+      })
+    );
+  };
+
+  const handleEditSkill = (skill) => {
+    // Find the skill in skillsData or use the skill object directly
+    const skillFromData = skillsData.find(
+      (s) => s.subtopic_id === skill.skill_id
+    );
+    const skillToEdit = {
+      ...(skillFromData || {
+        subtopic_id: skill.skill_id,
+        subtopic: skill.name,
+      }),
+      proficiency_period: skill.proficiency_period,
+    };
+    setPendingSkill(skillToEdit);
+    setIsExperienceModalOpen(true);
+  };
+
   const handleFinish = async () => {
-    const selectedSkills = formData?.selectedSkills || [];
     const updatedTemplateStructure = getUpdatedTemplateStructure();
 
     try {
@@ -199,10 +267,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
     }
   }, [dispatch, isFormInitialized, initialValues]);
 
-  const handleTagClick = () => { };
-
   const handleExperienceUpdate = (skill, years, months) => {
-    const selectedSkills = formData?.selectedSkills || [];
+    if (!skill) return;
     const selectedSkill = selectedSkills.find(
       (s) => s.skill_id === skill.subtopic_id
     );
@@ -263,50 +329,39 @@ const SkillsAndToolkit = ({ onComplete }) => {
     handleFinish();
   };
 
-  const renderSkillSection = (section) => {
-    const { title, type } = section;
-    const filteredSkills = skillsData.filter((skill) =>
-      resumeBuilderSkills[type].includes(skill.subtopic_id)
-    );
-
-    return (
-      <SkillSection
-        key={type}
-        title={title}
-        skills={filteredSkills}
-        selectedSkills={formData?.selectedSkills || []}
-        onSkillClick={handleTagClick}
-        onExperienceUpdate={handleExperienceUpdate}
-        skillExperience={formData?.skillExperience || {}}
-        formId={FORM_ID}
-      />
-    );
-  };
-
   return (
     <Space direction="vertical" size={24} className={styles.container}>
       <SectionFeedback feedbackData={skillsFeedback} />
       <SkillDemoVideoModal />
       <Flex align="center" gap={16}>
-        <Flex align="center" gap={8}>
-          <Text>Linear skills</Text>
-          <Tooltip title={SKILL_VIEW_TOOLTIPS.LINEAR}>
-            <InfoCircleOutlined
-              style={{ color: '#8c8c8c', cursor: 'pointer' }}
-            />
-          </Tooltip>
-        </Flex>
-        <Switch checked={categorizeSkills} onChange={handleCategorizeToggle} />
-        <Flex align="center" gap={8}>
-          <Text>Categorize skills</Text>
-          <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
-            <InfoCircleOutlined
-              style={{ color: '#8c8c8c', cursor: 'pointer' }}
-            />
-          </Tooltip>
-        </Flex>
+        <Checkbox checked={categorizeSkills} onChange={handleCategorizeToggle}>
+          <Text>
+            Group skills as <strong>Languages, Libraries, Tools.</strong>
+          </Text>
+        </Checkbox>
+        <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
+          <InfoCircleOutlined
+            style={{ color: '#8c8c8c', cursor: 'pointer' }}
+          />
+        </Tooltip>
       </Flex>
-      {Object.values(SKILL_SECTIONS).map(renderSkillSection)}
+      {selectedSkills.length > 0 && (
+        <SelectedSkillsPanel
+          selectedSkills={selectedSkills}
+          onRemove={handleRemoveSkill}
+          onEdit={handleEditSkill}
+        />
+      )}
+      <SuggestedSkillsPanel
+        courseBasedSkills={courseBasedSkills}
+        selectedSkillIds={selectedSkillIds}
+        onSkillSelect={handleSkillSelect}
+      />
+      <SearchableSkillPicker
+        skillsData={skillsData}
+        selectedSkillIds={selectedSkillIds}
+        onSkillSelect={handleSkillSelectFromSearch}
+      />
       <Flex gap={16}>
         <Button
           type="primary"
@@ -325,6 +380,12 @@ const SkillsAndToolkit = ({ onComplete }) => {
           Save and Next
         </Button>
       </Flex>
+      <ExperienceModal
+        open={isExperienceModalOpen}
+        skill={pendingSkill}
+        onCancel={handleExperienceModalCancel}
+        onSubmit={handleExperienceModalSubmit}
+      />
     </Space>
   );
 };
