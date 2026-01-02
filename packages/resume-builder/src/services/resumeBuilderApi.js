@@ -7,7 +7,7 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
-        headers.set('Content-Type', 'application/json');
+      headers.set('Content-Type', 'application/json');
       // Add CSRF token if available
       if (typeof window !== 'undefined') {
         // eslint-disable-next-line no-undef
@@ -73,12 +73,6 @@ export const resumeBuilderApi = createApi({
         method: 'POST',
       }),
     }),
-    getCurrentUserSlug: builder.query({
-      query: () => ({
-        url: `/api/v3/user-resumes/current-user-slug`,
-        method: 'GET',
-      }),
-    }),
   }),
 });
 
@@ -95,7 +89,6 @@ export const {
   useUpdateResumePreferencesMutation,
   useGetResumeReviewMutation,
   useGetResumeFeedbackMutation,
-  useGetCurrentUserSlugQuery,
 } = resumeBuilderApi;
 
 export default resumeBuilderApi;
