@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { isNullOrUndefined } from '../utils/type';
 
 const initialState = {
   fitmentScore: {},
@@ -19,7 +20,7 @@ const resumeFitmentSlice = createSlice({
       const score = action.payload?.score;
       const remarks = action.payload?.remarks;
 
-      if (jobProfileId && resumeId && score) {
+      if (jobProfileId && resumeId && !isNullOrUndefined(score)) {
         state.fitmentScore[jobProfileId] = {
           ...state.fitmentScore[jobProfileId],
           [resumeId]: { score, remarks },
