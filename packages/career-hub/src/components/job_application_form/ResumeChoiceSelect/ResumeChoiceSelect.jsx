@@ -5,6 +5,7 @@ import { Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { toDDMMYY } from '../../../utils/date';
 import { useApplicationFormContext } from '../../../contexts';
+import { useGetFitmentQuery } from '../../../services/fitmentService';
 import {
   useGetResumeLinkQuery,
   useGetResumesEligibilityQuery,
@@ -103,6 +104,8 @@ function ResumeChoiceSelect() {
   const { setSelectedResume } = useApplicationFormContext();
   const { jobProfileId } = useApplicationFormContext();
   const { data, isLoading } = useGetResumesEligibilityQuery({ jobProfileId });
+
+  useGetFitmentQuery({ jobProfileId }, { skip: !jobProfileId });
 
   useEffect(() => {
     if (!data) return;

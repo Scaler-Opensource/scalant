@@ -1,5 +1,6 @@
 import React from 'react';
 import { Flex, Progress, Typography } from 'antd';
+import { isNullOrUndefined } from '../../../utils/type';
 import styles from './ResumeChoiceSelect.module.scss';
 
 function FitmentScore({ score }) {
@@ -25,6 +26,10 @@ function FitmentScore({ score }) {
     };
 
     trailColor = '#1A845233';
+  }
+
+  if (isNullOrUndefined(score)) {
+    return null;
   }
 
   return (
