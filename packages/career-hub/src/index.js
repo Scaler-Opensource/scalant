@@ -13,6 +13,7 @@ export { default as careerHubApi, setBaseUrl } from './services/baseService';
 
 // Store
 export { default as store } from './store';
+export { setChecklistOpen, setFitmentScore } from './store/resumeFitmentSlice';
 
 // Default export
 export { default } from './components/HelloWorld';

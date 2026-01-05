@@ -37,7 +37,7 @@ const ApplicationFormFooter = ({ onCancel }) => {
       });
 
       if (response?.data?.success) {
-        setStepName(APPLICATION_STATUS.RESUME_CHOICE_SELECT);
+        setStepName(APPLICATION_STATUS.RESUME_FITMENT_CHECK);
       } else {
         message.error('Failed to update application');
       }

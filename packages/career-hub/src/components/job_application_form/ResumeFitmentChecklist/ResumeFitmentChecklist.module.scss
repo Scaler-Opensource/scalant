@@ -1,0 +1,15 @@
+.container {
+  padding: 1.6rem !important;
+
+  :global(.ant-notification-notice-description) {
+    margin-inline-start: 0 !important;
+  }
+}
+
+.footer {
+  width: 35rem;
+}
+
+.footerText {
+  font-size: $h6-size;
+}

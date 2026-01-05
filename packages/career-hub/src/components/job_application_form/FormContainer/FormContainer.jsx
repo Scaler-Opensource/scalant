@@ -11,6 +11,8 @@ import ApplicationForm from '../ApplicationForm';
 import Footer from '../Footer';
 import FormHeader from '../FormHeader';
 import ResumeChoiceSelect from '../ResumeChoiceSelect';
+import ResumeFitmentCheck from '../ResumeFitmentCheck';
+import ResumeFitmentChecklist from '../ResumeFitmentChecklist';
 import SuccessScreen from '../SuccessScreen';
 
 function FormStep() {
@@ -19,6 +21,8 @@ function FormStep() {
   switch (stepName) {
     case APPLICATION_STATUS.APPLICATION_FORM:
       return <ApplicationForm />;
+    case APPLICATION_STATUS.RESUME_FITMENT_CHECK:
+      return <ResumeFitmentCheck />;
     case APPLICATION_STATUS.RESUME_CHOICE_SELECT:
       return <ResumeChoiceSelect />;
     case APPLICATION_STATUS.SUCCESSFULLY_APPLIED:
@@ -79,6 +83,7 @@ function FormContainer({
       >
         <FormStep />
       </Drawer>
+      <ResumeFitmentChecklist />
     </ApplicationFormProvider>
   );
 }

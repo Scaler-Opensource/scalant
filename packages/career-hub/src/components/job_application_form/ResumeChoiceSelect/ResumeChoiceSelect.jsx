@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -8,18 +9,24 @@ import {
   useGetResumeLinkQuery,
   useGetResumesEligibilityQuery,
 } from '../../../services/resumeService';
-import styles from './ResumeChoiceSelect.module.scss';
+import FitmentScore from './FitmentScore';
 import BlockerPoints from './BlockerPoints';
+import styles from './ResumeChoiceSelect.module.scss';
 
 // Set the worker source for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const MAX_RETRY_COUNT = 6;
 
 function ResumeChoiceOptionLabel({ value }) {
-  const { selectedResume, setSelectedResume } = useApplicationFormContext();
+  const { selectedResume, setSelectedResume, jobProfileId } =
+    useApplicationFormContext();
+  const fitmentScore = useSelector(
+    (state) => state.scalantCareerHub.resumeFitment?.fitmentScore
+  );
   const { resume_details, is_blocker } = value || {};
   const { id, name, modified_at } = resume_details || {};
   const isSelected = selectedResume === id && !is_blocker;
+  const score = fitmentScore?.[jobProfileId]?.[id]?.score;
 
   const handleChange = () => {
     setSelectedResume(id);
@@ -35,7 +42,7 @@ function ResumeChoiceOptionLabel({ value }) {
       disabled={is_blocker}
     >
       <Flex vertical gap={12} className={styles.resumeChoiceOptionLabelContent}>
-        <Flex>
+        <Flex justify="space-between">
           <Flex vertical gap={4}>
             <Typography.Text className={styles.resumeChoiceOptionLabelName}>
               {name}
@@ -46,6 +53,7 @@ function ResumeChoiceOptionLabel({ value }) {
               Last Modified: {toDDMMYY(modified_at, '/')}
             </Typography.Text>
           </Flex>
+          <FitmentScore score={score} />
         </Flex>
         <BlockerPoints value={value} />
       </Flex>

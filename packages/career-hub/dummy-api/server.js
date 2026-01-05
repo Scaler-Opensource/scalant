@@ -316,6 +316,21 @@ app.post('/academy/mentee/jobs-mapping/update-status', (req, res) => {
   res.status(200).json({ success: true });
 });
 
+app.post('/api/v3/user-resumes/job-fitment-evaluation', async (req, res) => {
+  const { job_profile_id } = req.query;
+  const data = {
+    data: {
+      job_profile_id,
+      user_resume_id: 8080,
+      score: 80,
+    },
+  };
+
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
+  res.status(200).json(data);
+});
+
 // Start server
 const PORT = 8000;
 app.listen(PORT, () => {
