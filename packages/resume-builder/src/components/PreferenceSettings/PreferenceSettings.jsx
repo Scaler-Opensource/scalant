@@ -20,7 +20,7 @@ import { PREFERRED_JOB_ROLES } from './constants';
 import styles from './PreferenceSettings.module.scss';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
-import { RESUME_BUILDER_STEPS, STEPS_ORDER } from '../../utils/constants';
+import { RESUME_BUILDER_STEPS } from '../../utils/constants';
 
 const FORM_ID = 'preferenceSettings';
 const ANYWHERE_IN_INDIA = 'anywhere_in_india';

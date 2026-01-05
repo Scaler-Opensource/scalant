@@ -46,15 +46,15 @@ const CustomForm = ({ onComplete }) => {
     () =>
       resumeData?.achievements
         ? {
-          achievementsItems: resumeData.achievements.map((achievement) => ({
-            id: achievement.id,
-            completed: true,
-            saved: true,
-            formData: {
-              description: achievement.description,
-            },
-          })),
-        }
+            achievementsItems: resumeData.achievements.map((achievement) => ({
+              id: achievement.id,
+              completed: true,
+              saved: true,
+              formData: {
+                description: achievement.description,
+              },
+            })),
+          }
         : initialFormData,
     [resumeData?.achievements]
   );
@@ -119,15 +119,15 @@ const CustomForm = ({ onComplete }) => {
           {(formData?.achievementsItems?.length
             ? formData.achievementsItems
             : [
-              {
-                id: null,
-                completed: false,
-                saved: false,
-                formData: {
-                  description: '',
+                {
+                  id: null,
+                  completed: false,
+                  saved: false,
+                  formData: {
+                    description: '',
+                  },
                 },
-              },
-            ]
+              ]
           ).map((item) => (
             <CustomFormItem key={item.id} item={item} formId={FORM_ID} />
           ))}

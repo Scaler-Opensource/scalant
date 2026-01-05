@@ -8,7 +8,7 @@ import {
   setCurrentStep,
   setIsEditingPreferences,
 } from '../../store/resumeBuilderSlice';
-import { RESUME_BUILDER_STEPS, STEPS_ORDER } from '../../utils/constants';
+import { RESUME_BUILDER_STEPS } from '../../utils/constants';
 
 import styles from './ResumeProfileCard.module.scss';
 
@@ -41,8 +41,7 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
   }
 
   // Determine job title with API fallback
-  const jobTitle =
-    resumePersonaData?.currentJobRole || jobTitleFromApi || '';
+  const jobTitle = resumePersonaData?.currentJobRole || jobTitleFromApi || '';
 
   // Determine experience in tech with API fallback (expects years/months)
   const experienceInTechMonths = resumeData?.personal_details?.experience;
@@ -73,10 +72,7 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
             </Title>
             <Text type="secondary">
               {jobTitle} |{' '}
-              {formatExperience(
-                yearsExperienceInTech,
-                monthsExperienceInTech
-              )}{' '}
+              {formatExperience(yearsExperienceInTech, monthsExperienceInTech)}{' '}
               of Work experience
             </Text>
           </Flex>

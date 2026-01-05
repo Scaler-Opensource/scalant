@@ -12,6 +12,7 @@ import { setIsLoading } from '../../store/resumeReviewSlice';
 const { Title, Text } = Typography;
 
 const ResumeReviewModal = () => {
+  // eslint-disable-next-line no-unused-vars
   const [modalState, setModalState] = useState('INITIATE_REVIEW');
   const dispatch = useDispatch();
   const [getResumeFeedback] = useGetResumeFeedbackMutation();
@@ -41,7 +42,6 @@ const ResumeReviewModal = () => {
 
   const handleDownloadResume = useCallback(() => {
     // Implement download logic here
-    console.log('Downloading resume...');
   }, []);
 
   const MODAL_STATES = {

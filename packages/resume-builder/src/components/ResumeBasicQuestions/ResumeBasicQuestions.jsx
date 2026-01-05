@@ -64,7 +64,10 @@ const ResumeBasicQuestions = ({ isLastStep = false }) => {
     const initialJobRole =
       formData?.currentJobRole || (jobTitleExists ? apiJobTitle : undefined);
 
-    if (initialJobRole && form.getFieldValue('currentJobRole') !== initialJobRole) {
+    if (
+      initialJobRole &&
+      form.getFieldValue('currentJobRole') !== initialJobRole
+    ) {
       form.setFieldsValue({ currentJobRole: initialJobRole });
     }
 

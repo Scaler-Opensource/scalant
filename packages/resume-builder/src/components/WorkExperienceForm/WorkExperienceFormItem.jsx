@@ -74,12 +74,12 @@ const WorkExperienceFormItem = ({ item, formId, required = false, index }) => {
 
   const handleDeleteModalOk = () => {
     const currentItems = formData?.workExperienceItems || [];
-    const updatedItems = currentItems.filter(
-      (workExperienceItem) => workExperienceItem.index !== index
-    ).map((workExperienceItem, newIndex) => ({
-      ...workExperienceItem,
-      index: newIndex,
-    }));
+    const updatedItems = currentItems
+      .filter((workExperienceItem) => workExperienceItem.index !== index)
+      .map((workExperienceItem, newIndex) => ({
+        ...workExperienceItem,
+        index: newIndex,
+      }));
 
     dispatch(
       updateFormData({
@@ -125,7 +125,7 @@ const WorkExperienceFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text>Work Experience {index + 1}</Text>
-            <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
+          <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>

@@ -57,42 +57,42 @@ const EducationForm = ({ onComplete, required = false }) => {
     let value =
       resumeData?.education && resumeData?.education.length > 0
         ? {
-          educationItems: resumeData.education.map((item, index) => ({
-            id: item.id,
-            index: index,
-            completed: true,
-            expanded: false,
-            formData: {
-              university: item.university,
-              degree: item.degree,
-              field: item.field,
-              marks: item.marks,
-              marks_type: item.marks_type,
-              graduation_date: item.graduation_date
-                ? dayjs(item.graduation_date)
-                : null,
-              short_description: item.short_description,
-            },
-          })),
-        }
+            educationItems: resumeData.education.map((item, index) => ({
+              id: item.id,
+              index: index,
+              completed: true,
+              expanded: false,
+              formData: {
+                university: item.university,
+                degree: item.degree,
+                field: item.field,
+                marks: item.marks,
+                marks_type: item.marks_type,
+                graduation_date: item.graduation_date
+                  ? dayjs(item.graduation_date)
+                  : null,
+                short_description: item.short_description,
+              },
+            })),
+          }
         : { ...initialFormData };
 
     value.customEducation =
       resumeData?.resume_custom_section &&
-        Object.keys(resumeData?.resume_custom_section).length
+      Object.keys(resumeData?.resume_custom_section).length
         ? {
-          id: resumeData?.resume_custom_section?.id,
-          completed: true,
-          expanded: true,
-          formData: {
-            name: resumeData?.resume_custom_section?.name,
-            description: resumeData?.resume_custom_section?.description,
-            created_at: resumeData?.resume_custom_section?.created_at,
-            updated_at: resumeData?.resume_custom_section?.updated_at,
             id: resumeData?.resume_custom_section?.id,
-            user_id: resumeData?.resume_custom_section?.user_id,
-          },
-        }
+            completed: true,
+            expanded: true,
+            formData: {
+              name: resumeData?.resume_custom_section?.name,
+              description: resumeData?.resume_custom_section?.description,
+              created_at: resumeData?.resume_custom_section?.created_at,
+              updated_at: resumeData?.resume_custom_section?.updated_at,
+              id: resumeData?.resume_custom_section?.id,
+              user_id: resumeData?.resume_custom_section?.user_id,
+            },
+          }
         : null;
 
     return { ...value };

@@ -11,10 +11,10 @@ export default {
 
 export const WithDummyData = () => {
   const [useResumeData1, setUseResumeData1] = useState(false);
-  
+
   return (
     <div>
-      <button 
+      <button
         onClick={() => setUseResumeData1(!useResumeData1)}
         style={{ marginBottom: '20px', padding: '8px 16px' }}
       >

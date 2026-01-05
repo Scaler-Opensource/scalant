@@ -3,7 +3,6 @@ import {
   Flex,
   Space,
   message,
-  Modal,
   Switch,
   Typography,
   Tooltip,
@@ -87,10 +86,10 @@ const SkillsAndToolkit = ({ onComplete }) => {
     () =>
       resumeData?.skills
         ? {
-          selectedSkills: resumeData.skills.filter((skill) =>
-            skillsData.some((data) => data.subtopic_id === skill.skill_id)
-          ),
-        }
+            selectedSkills: resumeData.skills.filter((skill) =>
+              skillsData.some((data) => data.subtopic_id === skill.skill_id)
+            ),
+          }
         : initialFormData,
     [resumeData?.skills, skillsData]
   );
@@ -199,7 +198,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
     }
   }, [dispatch, isFormInitialized, initialValues]);
 
-  const handleTagClick = () => { };
+  const handleTagClick = () => {};
 
   const handleExperienceUpdate = (skill, years, months) => {
     const selectedSkills = formData?.selectedSkills || [];
