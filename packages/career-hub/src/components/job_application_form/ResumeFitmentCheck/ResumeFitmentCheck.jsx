@@ -12,7 +12,7 @@ import { useGetFitmentQuery } from '../../../services/fitmentService';
 import { useGetResumesEligibilityQuery } from '../../../services/resumeService';
 import styles from './ResumeFitmentCheck.module.scss';
 
-const EVALUATION_COMPLETION_TIMEOUT = 30000; // 30 seconds
+const EVALUATION_COMPLETION_TIMEOUT = 60000; // 1 minute
 
 function ResumeFitmentCheck() {
   // const dispatch = useDispatch();
