@@ -75,6 +75,9 @@ ReactDOM.render(
         onUploadFile={() => {
           return 'https://d1t59tgpzgv8ca.cloudfront.net/public_assets/assets/000/073/337/original/dummy-pdf_2.pdf?1765973287';
         }}
+        onCloseResumeBuilder={() => {
+          console.log('onCloseResumeBuilder');
+        }}
       />
     </Provider>
   </React.StrictMode>,

@@ -24,6 +24,7 @@ export const JobPreviewProvider = ({
     console.log('Method not implemented. We should get it from MIT');
   },
   skip = false,
+  onCloseResumeBuilder,
   children,
 }) => {
   const { data, isLoading, error, refetch } = useGetJobPreviewQuery(jobId, {
@@ -59,6 +60,7 @@ export const JobPreviewProvider = ({
     highlights: data?.highlights,
     eligibilityCriteria: data?.eligibilityCriteria,
     currentTab,
+    onCloseResumeBuilder,
   };
 
   return (

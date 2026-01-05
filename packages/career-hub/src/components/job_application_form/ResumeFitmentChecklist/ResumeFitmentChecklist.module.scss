@@ -10,6 +10,12 @@
   width: 35rem;
 }
 
-.footerText {
+.text {
   font-size: $h6-size;
+}
+
+.heading {
+  font-size: $default-font-size;
+  font-weight: 600;
+  color: $colors-neutral-text-color-text-secondary;
 }
