@@ -1,0 +1,281 @@
+{
+  "eligible": {
+    "id": 1,
+    "title": "Software Engineer",
+    "name": "Amazon",
+    "company": [1],
+    "logo": "https://logo.clearbit.com/amazon.com",
+    "preferredCities": "Bengaluru",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 24,
+    "maxExperience": 60,
+    "minCtc": 8,
+    "maxCtc": 15,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": [
+        {
+          "label": "experience",
+          "isEligible": true
+        },
+        {
+          "label": "notice_period",
+          "isEligible": true
+        }
+      ]
+    }
+  },
+  "quickApply": {
+    "id": 2,
+    "title": "Cloud DevOps Engineer",
+    "name": "Amazon",
+    "company": [1],
+    "logo": "https://logo.clearbit.com/amazon.com",
+    "preferredCities": "Gurugram",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": true,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 24,
+    "maxExperience": 60,
+    "minCtc": 8,
+    "maxCtc": 15,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": [
+        {
+          "label": "experience",
+          "isEligible": true
+        },
+        {
+          "label": "notice_period",
+          "isEligible": true
+        }
+      ]
+    }
+  },
+  "stepsPending": {
+    "id": 3,
+    "title": "Software Engineer (Experience Builder)",
+    "name": "Swiggy",
+    "company": [2],
+    "logo": "https://logo.clearbit.com/swiggy.com",
+    "preferredCities": "Gurugram",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 0,
+    "maxExperience": 24,
+    "minCtc": 50,
+    "maxCtc": 3,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": false,
+      "reasons": [
+        {
+          "label": "experience",
+          "isEligible": true
+        },
+        {
+          "label": "notice_period",
+          "isEligible": true
+        },
+        {
+          "label": "skills",
+          "isEligible": false,
+          "data": {
+            "DSA": {
+              "contests": { "cleared": false },
+              "skills": { "cleared": false }
+            },
+            "System Design": {
+              "skills": { "cleared": false }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "ineligible": {
+    "id": 4,
+    "title": "Senior Backend Engineer",
+    "name": "Google",
+    "company": [3],
+    "logo": "https://logo.clearbit.com/google.com",
+    "preferredCities": "Bengaluru",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 60,
+    "maxExperience": 120,
+    "minCtc": 20,
+    "maxCtc": 40,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": false,
+      "reasons": [
+        {
+          "label": "experience",
+          "isEligible": false
+        }
+      ]
+    }
+  },
+  "expired": {
+    "id": 5,
+    "title": "Frontend Developer",
+    "name": "Netflix",
+    "company": [4],
+    "logo": "https://logo.clearbit.com/netflix.com",
+    "preferredCities": "Mumbai",
+    "expiry": "2024-01-01T23:59:59Z",
+    "jobProfileStatus": "inactive",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 12,
+    "maxExperience": 36,
+    "minCtc": 10,
+    "maxCtc": 18,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": []
+    }
+  },
+  "saved": {
+    "id": 6,
+    "title": "Full Stack Developer",
+    "name": "Microsoft",
+    "company": [5],
+    "logo": "https://logo.clearbit.com/microsoft.com",
+    "preferredCities": "Hyderabad",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Saved",
+    "applicationLastUpdatedAt": "2024-12-01T10:30:00Z",
+    "minExperience": 24,
+    "maxExperience": 48,
+    "minCtc": 12,
+    "maxCtc": 20,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": []
+    }
+  },
+  "noticePeriodMismatch": {
+    "id": 7,
+    "title": "Data Scientist",
+    "name": "American Express",
+    "company": [6],
+    "logo": "https://logo.clearbit.com/americanexpress.com",
+    "preferredCities": "Gurugram",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 12,
+    "maxExperience": 60,
+    "minCtc": 80,
+    "maxCtc": 5,
+    "preferredNoticePeriod": 0,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": false,
+      "reasons": [
+        {
+          "label": "experience",
+          "isEligible": true
+        },
+        {
+          "label": "notice_period",
+          "isEligible": false
+        }
+      ]
+    }
+  },
+  "multipleCities": {
+    "id": 8,
+    "title": "DevOps Engineer",
+    "name": "Uber",
+    "company": [7],
+    "logo": "https://logo.clearbit.com/uber.com",
+    "preferredCities": "Bengaluru, Mumbai, Delhi, Hyderabad",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 24,
+    "maxExperience": 60,
+    "minCtc": 10,
+    "maxCtc": 18,
+    "preferredNoticePeriod": 30,
+    "openForDiscussionCtc": false,
+    "isInternship": false,
+    "stipend": null,
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": []
+    }
+  },
+  "internship": {
+    "id": 9,
+    "title": "Software Engineering Intern",
+    "name": "Flipkart",
+    "company": [8],
+    "logo": "https://logo.clearbit.com/flipkart.com",
+    "preferredCities": "Bengaluru",
+    "expiry": "2025-12-31T23:59:59Z",
+    "jobProfileStatus": "active",
+    "isRelevant": false,
+    "applicationStatus": "Not Applied",
+    "applicationLastUpdatedAt": null,
+    "minExperience": 0,
+    "maxExperience": 0,
+    "minCtc": 0,
+    "maxCtc": 0,
+    "preferredNoticePeriod": 0,
+    "openForDiscussionCtc": false,
+    "isInternship": true,
+    "stipend": "50000",
+    "eligibilityCriteria": {
+      "isEligible": true,
+      "reasons": []
+    }
+  }
+}

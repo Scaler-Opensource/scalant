@@ -1,0 +1,18 @@
+.saveButton,
+.savedButton {
+  font-size: 1.2rem; 
+  padding: 0.375rem 0.75rem;
+  height: auto;
+  
+  &:hover {
+    background: rgba($colors-brand-primary-color-primary, 0.05);
+  }
+}
+
+.savedButton {
+  color: $colors-neutral-text-color-text-tertiary;
+}
+
+.savedIcon {
+  color: $colors-neutral-text-color-text-tertiary;
+}
