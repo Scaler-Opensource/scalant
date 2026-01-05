@@ -18,7 +18,6 @@ import {
   PREFERENCE_SETTINGS_IMAGE,
   PARSING_STATUS,
   STEPS_ORDER,
-  FORM_KEYS,
 } from '../../utils/constants';
 import {
   shouldShowOnboarding,
@@ -38,8 +37,7 @@ import styles from './ResumeBuilder.module.scss';
 
 const computeStepsWithSkip = (enableResumeParsing) => {
   const baseSteps = STEPS_ORDER;
-  const shouldShowParsing =
-    Boolean(enableResumeParsing);
+  const shouldShowParsing = Boolean(enableResumeParsing);
 
   if (shouldShowParsing) return baseSteps;
   return baseSteps.filter(
@@ -73,6 +71,7 @@ const ResumeBuilderContent = ({
   onRetry,
   onContinue,
   onSkip,
+  // eslint-disable-next-line no-unused-vars
   onUploadClick,
 }) => {
   const dispatch = useDispatch();
@@ -136,11 +135,11 @@ const ResumeBuilderContent = ({
 
       // Only show onboarding if not completed in localStorage AND resume is not complete
       const shouldShow = isOnboarding
-        ? shouldShowOnboarding(resumeId) && incompleteForms.length > 0 && !resumeFormsCompleted
+        ? shouldShowOnboarding(resumeId) &&
+          incompleteForms.length > 0 &&
+          !resumeFormsCompleted
         : false;
-      const filteredSteps = computeStepsWithSkip(
-        enableResumeParsing
-      );
+      const filteredSteps = computeStepsWithSkip(enableResumeParsing);
       dispatch(setSteps(filteredSteps));
 
       if (!shouldShow) {
@@ -175,7 +174,9 @@ const ResumeBuilderContent = ({
         // Only trigger callback for initial step if onboarding should be shown
         const resumeId = resumeData?.resume_details?.id;
         const shouldShow = isOnboarding
-          ? shouldShowOnboarding(resumeId) && incompleteForms.length > 0 && !resumeFormsCompleted
+          ? shouldShowOnboarding(resumeId) &&
+            incompleteForms.length > 0 &&
+            !resumeFormsCompleted
           : false;
 
         if (shouldShow && stepKey) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Popover } from 'antd';
+import { Popover } from 'antd';
 
 import { getResumeHighlightImage } from '../../utils/resumeHightlightUtils';
 

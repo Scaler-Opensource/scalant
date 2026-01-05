@@ -12,13 +12,10 @@ import {
   setParsingError,
   resetParsing,
   setParsingPercent,
-  setParsingSuccess,
-  setParsedData,
 } from '../../store/resumeParsingSlice';
 import { useParseResumeMutation } from '../../services/resumeBuilderApi';
 // import resumeParseData from '../../dummyData/resumeParseData.json';
 import { PARSING_STATUS } from '../../utils/constants';
-
 
 // Constants controlling parsing progress and timeout behavior
 const TOTAL_TIMEOUT_MS = 60000; // 60 seconds
@@ -40,7 +37,6 @@ const ResumeParsing = ({
   const progressStartTsRef = useRef(null);
   const doneRef = useRef(false);
 
-
   const resumeData = useSelector(
     (s) => s.scalantResumeBuilder?.resumeBuilder?.resumeData
   );
@@ -55,8 +51,6 @@ const ResumeParsing = ({
   );
 
   const [parseResume] = useParseResumeMutation();
-
-
 
   // ----- Helpers: timeout and progress management -----
   const clearTimeoutTimer = useCallback(() => {
@@ -170,12 +164,10 @@ const ResumeParsing = ({
       if (typeof parsingPercent !== 'number' || parsingPercent < 100) {
         dispatch(setParsingPercent(100));
       }
-
     } else if (parsingStatus === PARSING_STATUS.ERROR) {
       doneRef.current = false;
       clearTimeoutTimer();
       stopProgress();
-
     } else if (parsingStatus === PARSING_STATUS.LOADING) {
       doneRef.current = false;
     }

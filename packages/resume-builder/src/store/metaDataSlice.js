@@ -1,6 +1,6 @@
+/* global window */
 import { createSlice } from '@reduxjs/toolkit';
 import commonData from '../dummyData/commonData.json';
-
 const initialState = {
   meta: window.__CAREERS_HUB__ || commonData,
 };

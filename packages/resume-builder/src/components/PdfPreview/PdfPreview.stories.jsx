@@ -7,7 +7,8 @@ export default {
 };
 
 // Dummy PDF link - using a sample PDF from Mozilla
-const dummyPdfLink = 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf';
+const dummyPdfLink =
+  'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf';
 
 export const Default = () => (
   <PDFPreview
@@ -60,7 +61,7 @@ export const Invalid = () => (
 );
 
 export const InvalidWithDelay = () => {
-  const [pdfLink, setPdfLink] = React.useState("https://www.google.com");
+  const [pdfLink, setPdfLink] = React.useState('https://www.google.com');
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setPdfLink(dummyPdfLink);

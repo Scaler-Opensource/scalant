@@ -21,34 +21,29 @@ export const useBasicQuestionsForm = (basicQuestionsData, jobRoles = []) => {
   const isFormInitialized = useSelector(
     (state) => state.scalantResumeBuilder.formStore.initializedForms[FORM_ID]
   );
-  
-  const initialValues = useMemo(
-    () => {
-      if (!basicQuestionsData) {
-        return initialFormData;
-      }
-      
-      // Check if job title exists in jobRoles list
-      const jobTitleExists = jobRoles.some(role => role.value === basicQuestionsData?.job_title);
-      
-      return {
-        totalWorkExperience: {
-          yearsExperience: Math.floor(
-            basicQuestionsData?.total_experience / 12
-          ),
-          monthsExperience: basicQuestionsData?.total_experience % 12,
-        },
-        totalWorkExperienceInTech: {
-          yearsExperienceInTech: Math.floor(
-            basicQuestionsData?.experience / 12
-          ),
-          monthsExperienceInTech: basicQuestionsData?.experience % 12,
-        },
-        currentJobRole: jobTitleExists ? basicQuestionsData?.job_title : '',
-      };
-    },
-    [basicQuestionsData, jobRoles]
-  );
+
+  const initialValues = useMemo(() => {
+    if (!basicQuestionsData) {
+      return initialFormData;
+    }
+
+    // Check if job title exists in jobRoles list
+    const jobTitleExists = jobRoles.some(
+      (role) => role.value === basicQuestionsData?.job_title
+    );
+
+    return {
+      totalWorkExperience: {
+        yearsExperience: Math.floor(basicQuestionsData?.total_experience / 12),
+        monthsExperience: basicQuestionsData?.total_experience % 12,
+      },
+      totalWorkExperienceInTech: {
+        yearsExperienceInTech: Math.floor(basicQuestionsData?.experience / 12),
+        monthsExperienceInTech: basicQuestionsData?.experience % 12,
+      },
+      currentJobRole: jobTitleExists ? basicQuestionsData?.job_title : '',
+    };
+  }, [basicQuestionsData, jobRoles]);
 
   useEffect(() => {
     if (!isFormInitialized) {

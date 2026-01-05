@@ -4,6 +4,7 @@ import {
   Flex,
   Space,
   message,
+  Switch,
   Typography,
   Tooltip,
 } from 'antd';
@@ -266,6 +267,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
       );
     }
   }, [dispatch, isFormInitialized, initialValues]);
+
+  const handleTagClick = () => { };
 
   const handleExperienceUpdate = (skill, years, months) => {
     if (!skill) return;
