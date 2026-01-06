@@ -71,7 +71,6 @@ const ResumeBuilderContent = ({
   onRetry,
   onContinue,
   onSkip,
-  // eslint-disable-next-line no-unused-vars
   onUploadClick,
 }) => {
   const dispatch = useDispatch();
@@ -91,16 +90,21 @@ const ResumeBuilderContent = ({
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
 
-  // Handle upload button click - go to resume parsing step
+  // Handle upload button click - show modal via external callback or navigate directly
   const handleUploadClick = useCallback(() => {
-    // Use the actual steps array (which may be filtered) instead of STEPS_ORDER
+    // If external callback provided, use it (shows modal)
+    if (onUploadClick) {
+      onUploadClick();
+      return;
+    }
+    // Fallback: navigate to resume parsing step directly
     const parsingStepIndex = steps.findIndex(
       (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
     );
     if (parsingStepIndex >= 0) {
       dispatch(setCurrentStep(parsingStepIndex));
     }
-  }, [dispatch, steps]);
+  }, [dispatch, steps, onUploadClick]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PageHeader from '../PageHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { nextStep, previousStep } from '../../store/resumeBuilderSlice';
+import {
+  nextStep,
+  previousStep,
+  setCurrentStep,
+  setIsEditingPreferences,
+} from '../../store/resumeBuilderSlice';
 import { Timeline, Button, Typography } from 'antd';
 import { getResumeTips } from '../../utils/resumeTips';
+import { RESUME_BUILDER_STEPS } from '../../utils/constants';
 const { Paragraph, Text } = Typography;
 
 import styles from './ResumeTips.module.scss';
@@ -16,6 +22,12 @@ const ResumeTips = () => {
   const program = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder.program
   );
+  const isEditingPreferences = useSelector(
+    (state) => state.scalantResumeBuilder.resumeBuilder.isEditingPreferences
+  );
+  const steps = useSelector(
+    (state) => state.scalantResumeBuilder.resumeBuilder.steps
+  );
 
   const [tips, setTips] = useState([]);
 
@@ -26,7 +38,19 @@ const ResumeTips = () => {
   }, [resumePersonaData, program]);
 
   const handleStartBuilding = () => {
-    dispatch(nextStep());
+    // Skip Resume Parsing when editing preferences
+    if (isEditingPreferences) {
+      dispatch(setIsEditingPreferences(false));
+      dispatch(
+        setCurrentStep(
+          steps.findIndex(
+            (step) => step.key === RESUME_BUILDER_STEPS.RESUME_STEPS.key
+          )
+        )
+      );
+    } else {
+      dispatch(nextStep());
+    }
   };
 
   return (

@@ -30,7 +30,7 @@ const ResumeProfileCard = ({ className, resumePersonaData }) => {
     dispatch(
       setCurrentStep(
         steps.findIndex(
-          (step) => step.key === RESUME_BUILDER_STEPS.PREFERENCE_SETTINGS.key
+          (step) => step.key === RESUME_BUILDER_STEPS.RESUME_BASIC_QUESTIONS.key
         )
       )
     );
