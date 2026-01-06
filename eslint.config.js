@@ -7,26 +7,27 @@ import prettier from "eslint-plugin-prettier";
 import configPrettier from "eslint-config-prettier";
 
 export default [
+  // Global ignores - must be a separate object with ONLY ignores key to apply globally
+  {
+    ignores: [
+      "**/dist/**",
+      "**/build/**",
+      "**/node_modules/**",
+      "**/.storybook/**",
+      "**/*.stories.*",
+      "**/*.test.*",
+      "**/coverage/**",
+      "**/.next/**",
+      "**/.vite/**",
+      "**/.turbo/**",
+      "**/storybook-static/**",
+      "eslint.config.js",
+    ],
+  },
   js.configs.recommended,
   configPrettier,
   {
     files: ["**/*.js", "**/*.jsx"],
-    ignores: [
-      "dist/**",
-      "build/**",
-      "packages/*/dist/**",
-      "packages/*/build/**",
-      "packages/*/.storybook/**",
-      "packages/**/*.stories.*",
-      "packages/**/*.test.*",
-      "node_modules/**",
-      "coverage/**",
-      ".next/**",
-      ".vite/**",
-      ".turbo/**",
-      "storybook-static/**",
-      "eslint.config.js",
-    ],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
