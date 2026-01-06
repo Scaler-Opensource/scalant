@@ -153,7 +153,15 @@ const ResumeBuilderContent = ({
         dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
     }
-  }, [resumeData, dispatch, isOnboarding, courseProduct, enableResumeParsing]);
+  }, [
+    resumeData,
+    dispatch,
+    isOnboarding,
+    courseProduct,
+    enableResumeParsing,
+    incompleteForms.length,
+    resumeFormsCompleted,
+  ]);
 
   useEffect(() => {
     const currentStepData = steps[currentStep];
@@ -202,6 +210,8 @@ const ResumeBuilderContent = ({
     onResumeBuilderPageView,
     resumeData?.resume_details?.id,
     isOnboarding,
+    incompleteForms.length,
+    resumeFormsCompleted,
   ]);
 
   useEffect(() => {
