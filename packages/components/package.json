@@ -21,5 +21,5 @@
     "build": "vite build",
     "storybook": "start-storybook -p 6006"
   },
-  "gitHead": "aa81e83d9fba101cecc614691ab250c46000e915"
+  "gitHead": "16cb06ae339c7a67bf3ee018062a42eaa2f97f81"
 }

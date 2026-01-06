@@ -4,6 +4,7 @@ import {
   Flex,
   Space,
   message,
+  // eslint-disable-next-line no-unused-vars
   Switch,
   Typography,
   Tooltip,
@@ -29,6 +30,7 @@ const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
 
+// eslint-disable-next-line no-unused-vars
 const SKILL_SECTIONS = {
   PROGRAMMING_LANGUAGES: {
     title: 'Programming Languages',
@@ -95,10 +97,10 @@ const SkillsAndToolkit = ({ onComplete }) => {
     () =>
       resumeData?.skills
         ? {
-          selectedSkills: resumeData.skills.filter((skill) =>
-            skillsData.some((data) => data.subtopic_id === skill.skill_id)
-          ),
-        }
+            selectedSkills: resumeData.skills.filter((skill) =>
+              skillsData.some((data) => data.subtopic_id === skill.skill_id)
+            ),
+          }
         : initialFormData,
     [resumeData?.skills, skillsData]
   );
@@ -111,6 +113,63 @@ const SkillsAndToolkit = ({ onComplete }) => {
     const sections = template[templateKey]?.sections || [];
     const skillsSection = sections.find((section) => section.name === 'Skills');
     return skillsSection?.config?.view || 'view1';
+  };
+
+  const selectedSkills = formData?.selectedSkills || [];
+  const courseBasedSkills =
+    resumeData?.course_based_skills || metaCourseBasedSkills || [];
+  const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
+
+  const handleExperienceUpdate = (skill, years, months) => {
+    if (!skill) return;
+    const selectedSkill = selectedSkills.find(
+      (s) => s.skill_id === skill.subtopic_id
+    );
+
+    if (selectedSkill) {
+      // Update existing skill experience
+      const updatedSelectedSkills = selectedSkills.map((s) => {
+        if (s.skill_id === skill.subtopic_id) {
+          return {
+            ...s,
+            proficiency_period: {
+              years,
+              months,
+            },
+          };
+        }
+        return s;
+      });
+
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: {
+            selectedSkills: updatedSelectedSkills,
+          },
+        })
+      );
+    } else {
+      // Create new skill with experience
+      const newSkill = {
+        skill_id: skill.subtopic_id,
+        skill_type: 'SubTopic',
+        name: skill.subtopic,
+        proficiency_period: {
+          years,
+          months,
+        },
+      };
+
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: {
+            selectedSkills: [...selectedSkills, newSkill],
+          },
+        })
+      );
+    }
   };
 
   const handleSkillSelect = (skill) => {
@@ -179,11 +238,6 @@ const SkillsAndToolkit = ({ onComplete }) => {
       [templateKey]: updatedTemplate,
     };
   };
-
-  const selectedSkills = formData?.selectedSkills || [];
-  const courseBasedSkills =
-    resumeData?.course_based_skills || metaCourseBasedSkills || [];
-  const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
 
   const handleRemoveSkill = (skillId) => {
     const updatedSelectedSkills = selectedSkills.filter(
@@ -268,59 +322,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
     }
   }, [dispatch, isFormInitialized, initialValues]);
 
-  const handleTagClick = () => { };
-
-  const handleExperienceUpdate = (skill, years, months) => {
-    if (!skill) return;
-    const selectedSkill = selectedSkills.find(
-      (s) => s.skill_id === skill.subtopic_id
-    );
-
-    if (selectedSkill) {
-      // Update existing skill experience
-      const updatedSelectedSkills = selectedSkills.map((s) => {
-        if (s.skill_id === skill.subtopic_id) {
-          return {
-            ...s,
-            proficiency_period: {
-              years,
-              months,
-            },
-          };
-        }
-        return s;
-      });
-
-      dispatch(
-        updateFormData({
-          formId: FORM_ID,
-          data: {
-            selectedSkills: updatedSelectedSkills,
-          },
-        })
-      );
-    } else {
-      // Create new skill with experience
-      const newSkill = {
-        skill_id: skill.subtopic_id,
-        skill_type: 'SubTopic',
-        name: skill.subtopic,
-        proficiency_period: {
-          years,
-          months,
-        },
-      };
-
-      dispatch(
-        updateFormData({
-          formId: FORM_ID,
-          data: {
-            selectedSkills: [...selectedSkills, newSkill],
-          },
-        })
-      );
-    }
-  };
+  // eslint-disable-next-line no-unused-vars
+  const handleTagClick = () => {};
 
   const handleSaveAndCompile = () => {
     onComplete?.(FORM_KEYS.skills, true);
@@ -343,9 +346,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
           </Text>
         </Checkbox>
         <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
-          <InfoCircleOutlined
-            style={{ color: '#8c8c8c', cursor: 'pointer' }}
-          />
+          <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
         </Tooltip>
       </Flex>
       {selectedSkills.length > 0 && (

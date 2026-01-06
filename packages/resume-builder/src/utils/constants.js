@@ -62,10 +62,7 @@ export const PROFILE_TYPES = {
   SCALER: 'scaler',
 };
 
-export const PROJECT_FORM_REQUIRED_FIELDS = [
-  'title',
-  'description',
-];
+export const PROJECT_FORM_REQUIRED_FIELDS = ['title', 'description'];
 
 export const PERSONAL_DETAILS_FORM_REQUIRED_FIELDS = [
   'name',
