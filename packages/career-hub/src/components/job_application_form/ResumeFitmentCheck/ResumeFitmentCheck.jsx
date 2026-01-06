@@ -100,7 +100,9 @@ function ResumeFitmentCheck() {
       justify="center"
       align="center"
     >
-      <FileTextTwoTone size={72} className={styles.icon} />
+      <div className={styles.iconContainer}>
+        <div className={styles.iconScannerLine} />
+      </div>
       <Typography.Text className={styles.title} strong>
         Analysing the Right Resume for you to Apply!
       </Typography.Text>
