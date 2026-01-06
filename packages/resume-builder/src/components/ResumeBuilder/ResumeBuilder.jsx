@@ -72,6 +72,7 @@ const ResumeBuilderContent = ({
   onContinue,
   onSkip,
   onUploadClick,
+  startFromResumeParsing = false,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
@@ -140,8 +141,8 @@ const ResumeBuilderContent = ({
       // Only show onboarding if not completed in localStorage AND resume is not complete
       const shouldShow = isOnboarding
         ? shouldShowOnboarding(resumeId) &&
-          incompleteForms.length > 0 &&
-          !resumeFormsCompleted
+        incompleteForms.length > 0 &&
+        !resumeFormsCompleted
         : false;
       const filteredSteps = computeStepsWithSkip(enableResumeParsing);
       dispatch(setSteps(filteredSteps));
@@ -152,6 +153,7 @@ const ResumeBuilderContent = ({
         );
         dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
+      // Note: startFromResumeParsing navigation is handled in a separate effect
     }
   }, [
     resumeData,
@@ -162,6 +164,19 @@ const ResumeBuilderContent = ({
     incompleteForms.length,
     resumeFormsCompleted,
   ]);
+
+  // Separate effect to handle navigation to parsing step when startFromResumeParsing is set
+  // This handles the case where startFromResumeParsing is set after the main effect runs
+  useEffect(() => {
+    if (startFromResumeParsing && enableResumeParsing && steps.length > 0) {
+      const parsingStepIndex = steps.findIndex(
+        (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
+      );
+      if (parsingStepIndex >= 0 && currentStep !== parsingStepIndex) {
+        dispatch(setCurrentStep(parsingStepIndex));
+      }
+    }
+  }, [startFromResumeParsing, enableResumeParsing, steps, currentStep, dispatch]);
 
   useEffect(() => {
     const currentStepData = steps[currentStep];
@@ -187,8 +202,8 @@ const ResumeBuilderContent = ({
         const resumeId = resumeData?.resume_details?.id;
         const shouldShow = isOnboarding
           ? shouldShowOnboarding(resumeId) &&
-            incompleteForms.length > 0 &&
-            !resumeFormsCompleted
+          incompleteForms.length > 0 &&
+          !resumeFormsCompleted
           : false;
 
         if (shouldShow && stepKey) {
@@ -365,6 +380,7 @@ const ResumeBuilder = ({
   onContinue,
   onSkip,
   onUploadClick,
+  startFromResumeParsing = false,
 }) => {
   return (
     <ResumeBuilderContent
@@ -395,6 +411,7 @@ const ResumeBuilder = ({
       onContinue={onContinue}
       onSkip={onSkip}
       onUploadClick={onUploadClick}
+      startFromResumeParsing={startFromResumeParsing}
     />
   );
 };
