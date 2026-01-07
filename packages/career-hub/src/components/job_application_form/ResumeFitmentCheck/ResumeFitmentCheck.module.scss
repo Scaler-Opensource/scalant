@@ -3,9 +3,38 @@
   height: 100%;
 }
 
-.icon {
-  margin-bottom: 1.6rem;
-  font-size: 7.2rem;
+.carouselContainer {
+  max-width: 45rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dots {
+  bottom: -3.6rem !important;
+
+  & > li {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    border-radius: 50% !important;
+  }
+
+  & > li > button::after {
+    background-color: $colors-base-blue-2 !important;
+    opacity: 1 !important;
+  }
+
+  & > li > button {
+    background-color: $colors-base-blue-2 !important;
+    opacity: 1 !important;
+    height: 0.8rem !important;
+    border-radius: 50% !important;
+  }
+
+  & > li::after {
+    background-color: $colors-base-blue-6 !important;
+    height: 0.8rem !important;
+    border-radius: 50% !important;
+  }
 }
 
 .title {
@@ -28,7 +57,8 @@
   background-repeat: no-repeat;
   width: 7.2rem;
   height: 7.2rem;
-  animation: pulse 3s linear infinite;
+  animation: pulse 4s linear infinite;
+  margin-bottom: 1.6rem;
 }
 
 .iconScannerLine {

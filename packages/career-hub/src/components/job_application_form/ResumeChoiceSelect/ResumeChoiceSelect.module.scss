@@ -17,6 +17,11 @@
     border-color: $colors-brand-primary-color-primary;
   }
 
+  & > :global(span.ant-radio) {
+    align-self: flex-start;
+    padding-top: 0.4rem;
+  }
+
   & > :global(span.ant-radio-label) {
     flex: 1;
   }

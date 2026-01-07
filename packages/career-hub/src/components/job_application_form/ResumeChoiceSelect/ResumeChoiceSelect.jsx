@@ -24,9 +24,9 @@ function ResumeChoiceOptionLabel({ value }) {
   const fitmentScore = useSelector(
     (state) => state.scalantCareerHub.resumeFitment?.fitmentScore
   );
-  const { resume_details, is_blocker } = value || {};
+  const { resume_details } = value || {};
   const { id, name, modified_at } = resume_details || {};
-  const isSelected = selectedResume === id && !is_blocker;
+  const isSelected = selectedResume === id;
   const score = fitmentScore?.[jobProfileId]?.[id]?.score;
 
   const handleChange = () => {
@@ -40,7 +40,6 @@ function ResumeChoiceOptionLabel({ value }) {
       className={classNames(styles.resumeChoiceOptionLabel, {
         [styles.resumeChoiceOptionLabelChecked]: isSelected,
       })}
-      disabled={is_blocker}
     >
       <Flex vertical gap={12} className={styles.resumeChoiceOptionLabelContent}>
         <Flex justify="space-between">
@@ -111,7 +110,7 @@ function ResumeChoiceSelect() {
     if (!data) return;
 
     const defaultResumeId = Object.values(data).find(
-      (value) => value?.resume_details?.default && !value?.is_blocker
+      (value) => value?.resume_details?.default
     )?.resume_details?.id;
 
     setSelectedResume(defaultResumeId);

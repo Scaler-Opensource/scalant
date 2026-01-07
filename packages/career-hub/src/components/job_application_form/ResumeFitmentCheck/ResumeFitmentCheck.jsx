@@ -1,26 +1,35 @@
 import React, { useEffect } from 'react';
-import { Flex, message, Typography } from 'antd';
-import { FileTextTwoTone } from '@ant-design/icons';
-import {
-  // useDispatch,
-  useSelector,
-} from 'react-redux';
+import { Carousel, Flex, message, Typography } from 'antd';
+import { useSelector } from 'react-redux';
 import { APPLICATION_STATUS } from '../../../utils/constants';
-// import { setFitmentScore } from '../../../store/resumeFitmentSlice';
 import { useApplicationFormContext } from '../../../contexts';
 import { useGetFitmentQuery } from '../../../services/fitmentService';
 import { useGetResumesEligibilityQuery } from '../../../services/resumeService';
 import styles from './ResumeFitmentCheck.module.scss';
 
-const EVALUATION_COMPLETION_TIMEOUT = 60000; // 1 minute
+const EVALUATION_COMPLETION_TIMEOUT = 600000; // 1 minute
+
+const TIPS = [
+  {
+    title: 'Analysing the Right Resume for you to Apply!',
+    description:
+      'We’re preparing a fitment score and instant insights to know which resume works best for this application',
+  },
+  {
+    title: 'Preparing quick steps to Strengthen your Resume!',
+    description:
+      'We’re also figuring out suggestions to improve your resume with final touch ups at lightning speed',
+  },
+  {
+    title: 'Your Analysis will be Ready in just a Few Seconds!',
+    description:
+      'Fix key gaps we identify and boost your chances of getting noticed by top companies',
+  },
+];
 
 function ResumeFitmentCheck() {
-  // const dispatch = useDispatch();
   const { jobProfileId, setStepName } = useApplicationFormContext();
-  const {
-    // data,
-    isError,
-  } = useGetFitmentQuery({
+  const { isError } = useGetFitmentQuery({
     jobProfileId,
   });
   const { data: resumesEligibilityData } = useGetResumesEligibilityQuery({
@@ -57,41 +66,6 @@ function ResumeFitmentCheck() {
     }
   }, [isError, setStepName]);
 
-  // TODO: Remove this
-  // useEffect(() => {
-  //   if (!data?.data) {
-  //     return;
-  //   }
-  //   dispatch(setFitmentScore(data?.data));
-  //   dispatch(
-  //     setFitmentScore({
-  //       job_profile_id: jobProfileId,
-  //       user_resume_id: 45507,
-  //       score: 60,
-  //       remarks:
-  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
-  //     })
-  //   );
-  //   dispatch(
-  //     setFitmentScore({
-  //       job_profile_id: jobProfileId,
-  //       user_resume_id: 45504,
-  //       score: 50,
-  //       remarks:
-  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
-  //     })
-  //   );
-  //   dispatch(
-  //     setFitmentScore({
-  //       job_profile_id: jobProfileId,
-  //       user_resume_id: 45461,
-  //       score: 40,
-  //       remarks:
-  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
-  //     })
-  //   );
-  // }, [data, dispatch, jobProfileId]);
-
   return (
     <Flex
       vertical
@@ -103,14 +77,29 @@ function ResumeFitmentCheck() {
       <div className={styles.iconContainer}>
         <div className={styles.iconScannerLine} />
       </div>
-      <Typography.Text className={styles.title} strong>
-        Analysing the Right Resume for you to Apply!
-      </Typography.Text>
-      <Typography.Text className={styles.description}>
-        Receive instant insights and a fitment score to know which resume works
-        best. Fix key gaps and boost your chances of getting noticed by top
-        companies
-      </Typography.Text>
+      <div className={styles.carouselContainer}>
+        <Carousel
+          autoplay
+          autoplaySpeed={10000}
+          dots={{ className: styles.dots }}
+          effect="fade"
+          className={styles.carousel}
+          adaptiveHeight
+        >
+          {TIPS.map((tip) => (
+            <div>
+              <Flex className={styles.tip} vertical gap={8} key={tip.title}>
+                <Typography.Text className={styles.title} strong>
+                  {tip.title}
+                </Typography.Text>
+                <Typography.Text className={styles.description}>
+                  {tip.description}
+                </Typography.Text>
+              </Flex>
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </Flex>
   );
 }

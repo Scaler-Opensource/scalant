@@ -102,7 +102,7 @@ const ResumeChoiceSelectFooter = () => {
         <BulbTwoTone />
         <Typography.Text strong>Quick Tip: </Typography.Text>
         <Typography.Text>
-          Complete the steps below to boost your chances
+          Complete the improvements to boost your hiring chances
         </Typography.Text>
       </Space>
       <Space>

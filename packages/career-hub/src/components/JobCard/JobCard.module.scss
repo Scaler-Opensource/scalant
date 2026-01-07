@@ -15,7 +15,6 @@
   }
 
     &.active {
-      border-bottom: 1px solid $colors-brand-primary-color-primary-border;
       border-left: 2px solid $colors-brand-primary-color-primary-border;
       background: $colors-brand-primary-color-primary-bg;
       box-shadow: 0 0.25rem 0.75rem rgba(0, 106, 255, 0.15); // 4px 12px
