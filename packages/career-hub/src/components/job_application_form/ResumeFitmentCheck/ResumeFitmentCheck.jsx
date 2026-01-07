@@ -11,7 +11,7 @@ import {
   setFitmentScore,
 } from '../../../store/resumeFitmentSlice';
 
-const EVALUATION_COMPLETION_TIMEOUT = 3000; // 1 minute
+const EVALUATION_COMPLETION_TIMEOUT = 60000; // 1 minute
 
 const TIPS = [
   {
