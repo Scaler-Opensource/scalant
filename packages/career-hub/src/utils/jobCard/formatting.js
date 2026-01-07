@@ -73,15 +73,17 @@ export const formatCtc = ({
     return `${currencySymbol} (Flexible)`;
   }
 
-  if (openForDiscussionCtc) {
-    return `${currencySymbol}${minCtc}${unit}+ (Negotiable)`;
-  }
+  let ctcText = `${currencySymbol}${minCtc}${unit} - ${currencySymbol}${maxCtc}${unit} CTC`;
 
   if (minCtc === maxCtc) {
-    return `${currencySymbol}${minCtc}${unit} CTC`;
+    ctcText = `${currencySymbol}${minCtc}${unit} CTC`;
   }
 
-  return `${currencySymbol}${minCtc}${unit} - ${currencySymbol}${maxCtc}${unit} CTC`;
+  if (openForDiscussionCtc) {
+    return `${ctcText} (Negotiable)`;
+  }
+
+  return ctcText;
 };
 
 /**
