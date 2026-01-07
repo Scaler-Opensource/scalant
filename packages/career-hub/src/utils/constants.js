@@ -53,6 +53,11 @@ export const COUNT_TO_TAB_MAPPING = {
 };
 
 export const SORTING_OPTIONS = {
+  default: {
+    label: 'Default',
+    value: 'default',
+    mapping: { property: 'default', direction: 'DESC' },
+  },
   eligibility: {
     label: 'Eligibility',
     value: 'eligibility',

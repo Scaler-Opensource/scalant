@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { SORTING_OPTIONS } from '../utils/constants';
 
 const initialState = {
   per_page: 18,
@@ -6,12 +7,7 @@ const initialState = {
   filters: {
     keyword: '',
   },
-  sortings: [
-    {
-      property: 'eligibility',
-      direction: 'DESC',
-    },
-  ],
+  sortings: [SORTING_OPTIONS.default.mapping],
   page_number: 1,
   skip_expired_jobs: false,
 };
