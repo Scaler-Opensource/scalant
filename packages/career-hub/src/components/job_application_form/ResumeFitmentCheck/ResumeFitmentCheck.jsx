@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { Carousel, Flex, message, Typography } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { APPLICATION_STATUS } from '../../../utils/constants';
 import { useApplicationFormContext } from '../../../contexts';
 import { useGetFitmentQuery } from '../../../services/fitmentService';
 import { useGetResumesEligibilityQuery } from '../../../services/resumeService';
 import styles from './ResumeFitmentCheck.module.scss';
+import {
+  setResumeReviewData,
+  setFitmentScore,
+} from '../../../store/resumeFitmentSlice';
 
-const EVALUATION_COMPLETION_TIMEOUT = 600000; // 1 minute
+const EVALUATION_COMPLETION_TIMEOUT = 3000; // 1 minute
 
 const TIPS = [
   {
@@ -28,8 +32,9 @@ const TIPS = [
 ];
 
 function ResumeFitmentCheck() {
+  const dispatch = useDispatch();
   const { jobProfileId, setStepName } = useApplicationFormContext();
-  const { isError } = useGetFitmentQuery({
+  const { isError, data } = useGetFitmentQuery({
     jobProfileId,
   });
   const { data: resumesEligibilityData } = useGetResumesEligibilityQuery({
@@ -66,6 +71,42 @@ function ResumeFitmentCheck() {
     }
   }, [isError, setStepName]);
 
+  // TODO: Remove this
+  // useEffect(() => {
+  //   if (!data?.data) {
+  //     return;
+  //   }
+  //   dispatch(setFitmentScore(data?.data));
+  //   dispatch(
+  //     setFitmentScore({
+  //       job_profile_id: jobProfileId,
+  //       user_resume_id: 45507,
+  //       score: 60,
+  //       remarks:
+  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
+  //     })
+  //   );
+  //   dispatch(
+  //     setFitmentScore({
+  //       job_profile_id: jobProfileId,
+  //       user_resume_id: 45504,
+  //       score: 50,
+  //       remarks:
+  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
+  //     })
+  //   );
+  //   dispatch(
+  //     setFitmentScore({
+  //       job_profile_id: jobProfileId,
+  //       user_resume_id: 45461,
+  //       score: 40,
+  //       remarks:
+  //         'The candidate does not meet the minimum experience requirement specified in the job description.',
+  //     })
+  //   );
+  //   dispatch(setResumeReviewData(data?.data));
+  // }, [data, dispatch, jobProfileId]);
+
   return (
     <Flex
       vertical
@@ -86,8 +127,8 @@ function ResumeFitmentCheck() {
           className={styles.carousel}
           adaptiveHeight
         >
-          {TIPS.map((tip) => (
-            <div>
+          {TIPS.map((tip, index) => (
+            <div key={index}>
               <Flex className={styles.tip} vertical gap={8} key={tip.title}>
                 <Typography.Text className={styles.title} strong>
                   {tip.title}

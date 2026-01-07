@@ -26,7 +26,7 @@ const Description = () => {
       {activeResumeChecklist
         .slice(0, MAX_CHECKLIST_ITEMS)
         .map((item, index) => (
-          <Checkbox>
+          <Checkbox className={styles.checkbox} key={index}>
             <Typography.Text className={styles.text} key={index}>
               {item}
             </Typography.Text>

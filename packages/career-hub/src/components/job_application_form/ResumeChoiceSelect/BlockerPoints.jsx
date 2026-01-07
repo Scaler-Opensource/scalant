@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Flex, Typography } from 'antd';
 import {
   CheckCircleTwoTone,
@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { PRODUCT_NAME } from '../../../utils/tracking';
 import { useApplicationFormContext, useJobPreview } from '../../../contexts';
-import { getBlockerPointsList } from '../../../utils/resumeUtils';
+import { getBlockerPointsChecklist } from '../../../utils/resumeUtils';
 import {
   setActiveResume,
   setChecklistOpen,
@@ -20,11 +20,14 @@ function BlockerPoints({ value }) {
   const dispatch = useDispatch();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { onEditResume, jobProfileId } = useApplicationFormContext();
+  const { resumeReviewData } =
+    useSelector((state) => state.scalantCareerHub.resumeFitment) || {};
   const { analytics } = useJobPreview();
-  const { resume_details, is_blocker } = value || {};
+  const { resume_details } = value || {};
   const { id, name } = resume_details || {};
-  const blockerPointsList = getBlockerPointsList(value);
+  const blockerPointsList = getBlockerPointsChecklist(resumeReviewData?.[id]);
   const pointCount = blockerPointsList.length;
+  const isBlocker = blockerPointsList.length > 0;
 
   const handleCollapse = () => {
     analytics?.click('Blocker Points - Collapse', PRODUCT_NAME);
@@ -48,10 +51,10 @@ function BlockerPoints({ value }) {
   return (
     <Card size="small" rootClassName={styles.resumeChoiceOptionLabelCard}>
       <Flex gap={8} className={styles.resumeChoiceOptionLabelCardHeader}>
-        {is_blocker && <ExclamationCircleTwoTone twoToneColor="#FAAD14" />}
-        {!is_blocker && <CheckCircleTwoTone twoToneColor="#52c41a" />}
+        {isBlocker && <ExclamationCircleTwoTone twoToneColor="#FAAD14" />}
+        {!isBlocker && <CheckCircleTwoTone twoToneColor="#52c41a" />}
         <Typography.Text>
-          {is_blocker
+          {isBlocker
             ? `Improvements to be made (${pointCount})`
             : 'No improvements to be made'}
         </Typography.Text>
@@ -62,7 +65,7 @@ function BlockerPoints({ value }) {
         >
           Edit
         </Button>
-        {is_blocker && (
+        {isBlocker && (
           <Button
             type="text"
             className={styles.resumeChoiceOptionLabelCollapseButton}

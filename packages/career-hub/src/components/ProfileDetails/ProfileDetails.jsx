@@ -143,7 +143,7 @@ function ProfileDetails({
           </Typography.Link>
         </Flex>
         <Flex vertical className={styles.jobIntentContainer} gap={8}>
-          <Typography.Text secondary>
+          <Typography.Text type="secondary">
             Select your intent in Career's Hub
           </Typography.Text>
           <Select

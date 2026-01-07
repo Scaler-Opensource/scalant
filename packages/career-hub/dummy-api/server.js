@@ -323,10 +323,44 @@ app.post('/api/v3/user-resumes/job-fitment-evaluation', async (req, res) => {
       job_profile_id,
       user_resume_id: 8080,
       score: 80,
+      resume_id: 8080,
+      resume_evaluation_result: {
+        overall_resume_score: 1,
+        section_feedback: {
+          work_experience: [
+            "The experience section currently lists your role as 'Data Scientist' at 'Scaler Academy' but doesn't include any details about your responsibilities or achievements. This is the most critical part of your resume.",
+            'You should add 3-4 bullet points under this role to describe what you did. Focus on quantifiable impact. Use the STAR method (Situation, Task, Action, Result) to frame your accomplishments.',
+            "For example, instead of just the title, you could write: 'Analyzed student performance data to identify learning gaps, leading to a 15% improvement in course completion rates.' This shows clear impact and what you are capable of.",
+          ],
+          skills: [
+            "You have listed 'Java', 'Javascript', and 'MERN' as your skills. That's a solid foundation for a software developer role.",
+            'Currently, these skills are not connected to any specific projects or experiences in your resume. To make them more credible, you should add project or experience bullet points that explicitly mention how you used these skills.',
+            "For example, if you have a project using MERN, add it to a new 'Projects' section. This will validate your skills and show recruiters you have hands-on experience.",
+          ],
+          projects: [
+            "Your resume mentions 'Made a lot of cool projects' under the education section, which is a great starting point! To make it impactful, you should create a separate 'Projects' section.",
+            'For each project, include a title, a link to your GitHub repository, and 2-3 bullet points. These points should describe the problem you solved, the technologies you used (like Java, Javascript, MERN), and what you accomplished.',
+            "Example of a good project description: 'E-commerce Website | [GitHub Link] - Developed a full-stack e-commerce platform using the MERN stack. - Implemented features like user authentication, product catalog, and a shopping cart. - Deployed the application on AWS, resulting in a fully functional online store.'",
+          ],
+          accuracy_and_presentation: [
+            "Your resume is a great start, but it needs more structure and professional language to make a strong impression. For example, sections like 'Achievements' with 'Smol ones count?' and bullet points in 'Education' like 'Had a lot of Fun' can be rephrased to better showcase your capabilities.",
+            "Instead of 'Made a lot of cool projects', you could create a dedicated 'Projects' section and describe one or two of them in detail. This will give recruiters a clear idea of your skills.",
+            "Use a standard resume template with clear sections. Every bullet point should start with an action verb and describe a specific task or accomplishment. For instance, a bullet point under a project could be: 'Developed a full-stack web application using the MERN stack to solve [problem X].'",
+          ],
+        },
+        section_scores: {
+          accuracy_and_presentation: 1,
+          work_experience: 1,
+          skills: 1,
+          projects: 1,
+        },
+      },
     },
+    evaluation_state: 'completed',
+    message: 'Successfully evaluated resume',
   };
 
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   res.status(200).json(data);
 });

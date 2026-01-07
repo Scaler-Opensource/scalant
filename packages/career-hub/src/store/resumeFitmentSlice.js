@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { isNullOrUndefined } from '../utils/type';
+import { getBlockerPointsChecklist } from '../utils/resumeUtils';
 
 const initialState = {
   fitmentScore: {},
@@ -8,6 +9,7 @@ const initialState = {
   activeJobProfileId: null,
   activeResumeChecklist: [],
   isChecklistOpen: false,
+  resumeReviewData: {},
 };
 
 const resumeFitmentSlice = createSlice({
@@ -27,23 +29,25 @@ const resumeFitmentSlice = createSlice({
         };
       }
     },
+    setResumeReviewData: (state, action) => {
+      const resumeId = action.payload.resume_id;
+      if (resumeId) {
+        state.resumeReviewData[resumeId] = action.payload;
+      }
+    },
     setActiveResume: (state, action) => {
       const jobProfileId = action.payload?.jobProfileId;
       const resumeId = action.payload?.resumeId;
-      const blockerPoints = action.payload?.blockerPoints;
       const resumeName = action.payload?.resumeName;
 
       if (jobProfileId && resumeId) {
         state.activeResumeId = resumeId;
         state.activeJobProfileId = jobProfileId;
         state.activeResumeName = resumeName;
-        const remarks = state.fitmentScore[jobProfileId]?.[resumeId]?.remarks;
-        const score = state.fitmentScore[jobProfileId]?.[resumeId]?.score;
 
-        state.activeResumeChecklist = [
-          ...(score < 80 && remarks ? [remarks] : []),
-          ...blockerPoints,
-        ];
+        state.activeResumeChecklist = getBlockerPointsChecklist(
+          state.resumeReviewData[resumeId]
+        );
       }
     },
     setChecklistOpen: (state, action) => {
@@ -56,7 +60,11 @@ const resumeFitmentSlice = createSlice({
   },
 });
 
-export const { setFitmentScore, setActiveResume, setChecklistOpen } =
-  resumeFitmentSlice.actions;
+export const {
+  setFitmentScore,
+  setActiveResume,
+  setChecklistOpen,
+  setResumeReviewData,
+} = resumeFitmentSlice.actions;
 
 export default resumeFitmentSlice.reducer;
