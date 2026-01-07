@@ -45,7 +45,105 @@
     "hackerrank": "",
     "hackerearth": "",
     "geeksforgeeks": "",
-    "portfolio": "hscvbskhavhjvahjvscjasvhj"
+    "portfolio": "hscvbskhavhjvahjvscjasvhj",
+    "course_based_skills": [
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1213,
+        "subtopic": "Python",
+        "eligible_topic_id": 7596,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1270,
+        "subtopic": "C#",
+        "eligible_topic_id": 7584,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1150,
+        "subtopic": "JavaScript",
+        "eligible_topic_id": 7591,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1210,
+        "subtopic": "Go",
+        "eligible_topic_id": 8761,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1218,
+        "subtopic": "Swift",
+        "eligible_topic_id": 8766,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1211,
+        "subtopic": "Java",
+        "eligible_topic_id": 7590,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1167,
+        "subtopic": "TypeScript",
+        "eligible_topic_id": 8768,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1276,
+        "subtopic": "C++",
+        "eligible_topic_id": 7585,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1209,
+        "subtopic": "C",
+        "eligible_topic_id": 8755,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1156,
+        "subtopic": "React",
+        "eligible_topic_id": 7597,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1200,
+        "subtopic": "Node.js",
+        "eligible_topic_id": 7594,
+        "eligible_class": "Topic"
+      },
+      {
+        "topic": "Cloud Computing",
+        "topic_id": 564,
+        "subtopic_id": 2430,
+        "subtopic": "AWS",
+        "eligible_topic_id": 7581,
+        "eligible_class": "Topic"
+      }
+    ]
   },
   "education": [
     {

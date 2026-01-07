@@ -19,7 +19,7 @@ import {
 } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
-import { FORM_KEYS } from '../../utils/constants';
+import { FORM_KEYS, PROFILE_TYPES } from '../../utils/constants';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 import { ADDITIONAL_PROFILES } from '../../utils/constants';
 
@@ -45,6 +45,7 @@ const initialFormData = {
 // URL validation regex pattern
 const urlPattern =
   /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/;
+
 
 const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   const dispatch = useDispatch();
@@ -199,6 +200,12 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
     );
   };
 
+  const updateProfileAtIndex = (index, updater) => {
+    setAdditionalProfiles((prev) =>
+      prev.map((profile, idx) => (idx === index ? updater(profile) : profile))
+    );
+  };
+
   const handleAddProfile = () => {
     // Get existing profile types
     const existingTypes = additionalProfiles.map((profile) => profile.type);
@@ -231,11 +238,20 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
   };
 
   const handleProfileChange = (index, field, value) => {
-    setAdditionalProfiles((prev) =>
-      prev.map((profile, idx) =>
-        idx === index ? { ...profile, [field]: value } : profile
-      )
-    );
+    updateProfileAtIndex(index, (profile) => {
+      if (field === 'type' && value === PROFILE_TYPES.SCALER) {
+        return {
+          ...profile,
+          type: value,
+          url: resumeData?.personal_details?.scaler || profile.url,
+        };
+      }
+
+      return {
+        ...profile,
+        [field]: value,
+      };
+    });
   };
 
   const getAvailableProfileTypes = (currentIndex) => {
@@ -276,6 +292,10 @@ const PersonalInfoAndSocial = ({ onComplete, required = false }) => {
             <Input
               placeholder="Enter Profile URL"
               value={profile.url}
+              disabled={
+                profile.type === PROFILE_TYPES.SCALER &&
+                Boolean(resumeData?.personal_details?.scaler)
+              }
               onChange={(e) => handleProfileChange(idx, 'url', e.target.value)}
             />
           </Form.Item>

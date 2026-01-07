@@ -55,11 +55,15 @@ export const ADDITIONAL_PROFILES = [
   { label: 'HackerRank', value: 'hackerrank' },
   { label: 'HackerEarth', value: 'hackerearth' },
   { label: 'Geeksforgeeks', value: 'geeksforgeeks' },
+  { label: 'Scaler Profile', value: 'scaler' },
 ];
+
+export const PROFILE_TYPES = {
+  SCALER: 'scaler',
+};
 
 export const PROJECT_FORM_REQUIRED_FIELDS = [
   'title',
-  'project_link',
   'description',
 ];
 
@@ -80,7 +84,6 @@ export const WORK_EXPERIENCE_FORM_REQUIRED_FIELDS = [
 export const EDUCATION_FORM_REQUIRED_FIELDS = [
   'university',
   'degree',
-  'marks',
   'graduation_date',
 ];
 

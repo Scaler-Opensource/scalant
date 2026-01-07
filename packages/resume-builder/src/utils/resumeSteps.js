@@ -92,7 +92,7 @@ const STEP_ORDERS = {
       'experience',
       'achievements',
     ],
-    requiredForms: ['personalDetails', 'skills', 'projects', 'education'],
+    requiredForms: ['personalDetails', 'skills', 'projects'],
   },
   ACADEMY_QA_AND_SALESFORCE: {
     order: [
@@ -108,7 +108,6 @@ const STEP_ORDERS = {
       'skills',
       'projects',
       'experience',
-      'education',
     ],
   },
   ACADEMY_EXCEPT_ENGINEERING: {
@@ -120,7 +119,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: ['personalDetails', 'skills', 'experience', 'education'],
+    requiredForms: ['personalDetails', 'skills', 'experience'],
   },
   ACADEMY_ENGINEERING: {
     order: [
@@ -131,7 +130,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: ['personalDetails', 'skills', 'experience', 'education'],
+    requiredForms: ['personalDetails', 'skills', 'experience'],
   },
   DSML_FRESHER: {
     order: [
@@ -142,7 +141,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: ['personalDetails', 'skills', 'projects', 'education'],
+    requiredForms: ['personalDetails', 'skills', 'projects'],
   },
   DSML_NON_DEV_IT_PROFESSIONAL: {
     order: [
@@ -158,7 +157,6 @@ const STEP_ORDERS = {
       'skills',
       'projects',
       'experience',
-      'education',
     ],
   },
   DSML_DEVELOPER: {
@@ -175,7 +173,6 @@ const STEP_ORDERS = {
       'skills',
       'projects',
       'experience',
-      'education',
     ],
   },
   DSML_DATA_ML_ENGINEER: {
@@ -187,7 +184,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: ['personalDetails', 'skills', 'experience', 'education'],
+    requiredForms: ['personalDetails', 'skills', 'experience'],
   },
 };
 
