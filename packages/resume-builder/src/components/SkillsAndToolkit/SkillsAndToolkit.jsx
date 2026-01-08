@@ -4,8 +4,6 @@ import {
   Flex,
   Space,
   message,
-  // eslint-disable-next-line no-unused-vars
-  Switch,
   Typography,
   Tooltip,
 } from 'antd';
@@ -29,22 +27,6 @@ import SuggestedSkillsPanel from './SuggestedSkillsPanel';
 const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
-
-// eslint-disable-next-line no-unused-vars
-const SKILL_SECTIONS = {
-  PROGRAMMING_LANGUAGES: {
-    title: 'Programming Languages',
-    type: 'language',
-  },
-  FRAMEWORKS: {
-    title: 'Libraries and Frameworks',
-    type: 'framework',
-  },
-  TOOLS: {
-    title: 'Tools, databases, version control and everything else:',
-    type: 'tools',
-  },
-};
 
 const CATEGORY_TYPE_MAP = {
   language: 0, // Programming Languages
@@ -97,10 +79,10 @@ const SkillsAndToolkit = ({ onComplete }) => {
     () =>
       resumeData?.skills
         ? {
-            selectedSkills: resumeData.skills.filter((skill) =>
-              skillsData.some((data) => data.subtopic_id === skill.skill_id)
-            ),
-          }
+          selectedSkills: resumeData.skills.filter((skill) =>
+            skillsData.some((data) => data.subtopic_id === skill.skill_id)
+          ),
+        }
         : initialFormData,
     [resumeData?.skills, skillsData]
   );
@@ -323,7 +305,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
   }, [dispatch, isFormInitialized, initialValues]);
 
   // eslint-disable-next-line no-unused-vars
-  const handleTagClick = () => {};
+  const handleTagClick = () => { };
 
   const handleSaveAndCompile = () => {
     onComplete?.(FORM_KEYS.skills, true);

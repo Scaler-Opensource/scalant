@@ -91,21 +91,10 @@ const ResumeBuilderContent = ({
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
 
-  // Handle upload button click - show modal via external callback or navigate directly
+  // Handle upload button click - deligate to host app
   const handleUploadClick = useCallback(() => {
-    // If external callback provided, use it (shows modal)
-    if (onUploadClick) {
-      onUploadClick();
-      return;
-    }
-    // Fallback: navigate to resume parsing step directly
-    const parsingStepIndex = steps.findIndex(
-      (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
-    );
-    if (parsingStepIndex >= 0) {
-      dispatch(setCurrentStep(parsingStepIndex));
-    }
-  }, [dispatch, steps, onUploadClick]);
+    onUploadClick?.();
+  }, [onUploadClick]);
 
   // Reset parsing only when resumeId value changes between renders
   useEffect(() => {

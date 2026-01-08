@@ -69,6 +69,7 @@ const ResumeTimeline = ({
       setExpandedStep(null);
       setTourDismissed(false);
     } else if (resumeData) {
+      setSteps([]);
       const newIncompleteForms = getAllIncompleteForms(resumeData);
       batch(() => {
         dispatch(setIncompleteForms(newIncompleteForms));
