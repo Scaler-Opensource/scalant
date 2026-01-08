@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { Flex, Radio, Skeleton, Typography } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { toDDMMYY } from '../../../utils/date';
 import { useApplicationFormContext } from '../../../contexts';
+import { useGetFitmentQuery } from '../../../services/fitmentService';
 import {
   useGetResumeLinkQuery,
   useGetResumesEligibilityQuery,
 } from '../../../services/resumeService';
-import styles from './ResumeChoiceSelect.module.scss';
+import FitmentScore from './FitmentScore';
 import BlockerPoints from './BlockerPoints';
+import styles from './ResumeChoiceSelect.module.scss';
 
 // Set the worker source for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const MAX_RETRY_COUNT = 6;
 
 function ResumeChoiceOptionLabel({ value }) {
-  const { selectedResume, setSelectedResume } = useApplicationFormContext();
-  const { resume_details, is_blocker } = value || {};
+  const { selectedResume, setSelectedResume, jobProfileId } =
+    useApplicationFormContext();
+  const fitmentScore = useSelector(
+    (state) => state.scalantCareerHub.resumeFitment?.fitmentScore
+  );
+  const { resume_details } = value || {};
   const { id, name, modified_at } = resume_details || {};
-  const isSelected = selectedResume === id && !is_blocker;
+  const isSelected = selectedResume === id;
+  const score = fitmentScore?.[jobProfileId]?.[id]?.score;
 
   const handleChange = () => {
     setSelectedResume(id);
@@ -32,10 +40,9 @@ function ResumeChoiceOptionLabel({ value }) {
       className={classNames(styles.resumeChoiceOptionLabel, {
         [styles.resumeChoiceOptionLabelChecked]: isSelected,
       })}
-      disabled={is_blocker}
     >
       <Flex vertical gap={12} className={styles.resumeChoiceOptionLabelContent}>
-        <Flex>
+        <Flex justify="space-between">
           <Flex vertical gap={4}>
             <Typography.Text className={styles.resumeChoiceOptionLabelName}>
               {name}
@@ -46,6 +53,7 @@ function ResumeChoiceOptionLabel({ value }) {
               Last Modified: {toDDMMYY(modified_at, '/')}
             </Typography.Text>
           </Flex>
+          <FitmentScore score={score} />
         </Flex>
         <BlockerPoints value={value} />
       </Flex>
@@ -96,11 +104,13 @@ function ResumeChoiceSelect() {
   const { jobProfileId } = useApplicationFormContext();
   const { data, isLoading } = useGetResumesEligibilityQuery({ jobProfileId });
 
+  useGetFitmentQuery({ jobProfileId }, { skip: !jobProfileId });
+
   useEffect(() => {
     if (!data) return;
 
     const defaultResumeId = Object.values(data).find(
-      (value) => value?.resume_details?.default && !value?.is_blocker
+      (value) => value?.resume_details?.default
     )?.resume_details?.id;
 
     setSelectedResume(defaultResumeId);

@@ -23,6 +23,7 @@ function JobDetails({
   currentTab,
   onEditResume,
   onAddResume,
+  onCloseResumeBuilder,
 }) {
   useEffect(() => {
     if (jobId) {
@@ -50,6 +51,7 @@ function JobDetails({
         currentTab={currentTab}
         onEditResume={onEditResume}
         onAddResume={onAddResume}
+        onCloseResumeBuilder={onCloseResumeBuilder}
       />
     </div>
   );

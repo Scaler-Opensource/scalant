@@ -1,8 +1,8 @@
 .container {
   display: flex;
   padding: 1.2rem;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.8rem;
   align-self: stretch;
   border-radius: 0.8rem;
   border: 1px solid $colors-base-purple-3;

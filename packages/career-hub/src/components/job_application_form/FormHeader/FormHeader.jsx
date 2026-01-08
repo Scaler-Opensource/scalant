@@ -24,6 +24,12 @@ const STEP_MAP = {
     title: 'Required Details',
     totalSteps: 2,
   },
+  [APPLICATION_STATUS.RESUME_FITMENT_CHECK]: {
+    currentStep: 2,
+    icon: FileTextTwoTone,
+    title: 'Select which Resume to share for this job application',
+    totalSteps: 2,
+  },
   [APPLICATION_STATUS.RESUME_CHOICE_SELECT]: {
     currentStep: 2,
     icon: FileTextTwoTone,

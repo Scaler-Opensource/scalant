@@ -120,7 +120,6 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
           name={`project_link`}
           label="Project Link"
           rules={[
-            { required: required },
             {
               pattern: urlPattern,
               message: 'Please enter a valid URL',

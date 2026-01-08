@@ -47,8 +47,8 @@ const HiringSteps = () => {
     <Flex vertical gap={12}>
       <Indicator />
       <Flex className={styles.steps} gap={12}>
-        {items.map((item) => (
-          <Flex vertical flex={1}>
+        {items.map((item, index) => (
+          <Flex vertical flex={1} key={index}>
             {item.title}
             {item.description}
           </Flex>

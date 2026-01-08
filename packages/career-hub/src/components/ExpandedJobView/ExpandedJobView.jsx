@@ -33,6 +33,7 @@ const ExpandedJobView = ({
   onUploadFile,
   onEditResume,
   onAddResume,
+  onCloseResumeBuilder,
 }) => {
   const { data, isLoading, isFetching, error } = useGetJobPreviewQuery(jobId, {
     skip: !jobId || !isActive,
@@ -79,6 +80,7 @@ const ExpandedJobView = ({
         jobId={jobId}
         skip={!isActive}
         currentTab={currentTab}
+        onCloseResumeBuilder={onCloseResumeBuilder}
       >
         <ExpandedJobViewContent />
         <JobApplicationForm

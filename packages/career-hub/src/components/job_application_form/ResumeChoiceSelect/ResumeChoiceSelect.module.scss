@@ -17,6 +17,11 @@
     border-color: $colors-brand-primary-color-primary;
   }
 
+  & > :global(span.ant-radio) {
+    align-self: flex-start;
+    padding-top: 0.4rem;
+  }
+
   & > :global(span.ant-radio-label) {
     flex: 1;
   }
@@ -62,4 +67,11 @@
   border: 0.1rem dashed $colors-neutral-border-color-border-secondary;
   background: $colors-neutral-bg-color-bg-layout;
   justify-content: center;
+}
+
+.fitmentScoreTitle {
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+  font-weight: 600;
+  line-height: 2rem;
 }

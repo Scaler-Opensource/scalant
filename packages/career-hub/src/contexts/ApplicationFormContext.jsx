@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { APPLICATION_STATUS } from '../utils/constants';
 
 export const ApplicationFormContext = createContext();
 
@@ -31,7 +32,11 @@ export function ApplicationFormProvider({
   const [selectedResume, setSelectedResume] = useState(null);
 
   useEffect(() => {
-    setStepName(initialStepName);
+    if (initialStepName === APPLICATION_STATUS.RESUME_CHOICE_SELECT) {
+      setStepName(APPLICATION_STATUS.RESUME_FITMENT_CHECK);
+    } else {
+      setStepName(initialStepName);
+    }
   }, [initialStepName]);
 
   return (

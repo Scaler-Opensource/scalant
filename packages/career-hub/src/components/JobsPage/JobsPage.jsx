@@ -38,6 +38,7 @@ function JobsPage({
   onEditPreferences,
   onEditResume,
   onAddResume,
+  onCloseResumeBuilder,
 }) {
   const dispatch = useDispatch();
   const currentTab = useSelector(
@@ -101,6 +102,7 @@ function JobsPage({
       jobId={selectedJobId}
       onEditResume={onEditResume}
       onAddResume={onAddResume}
+      onCloseResumeBuilder={onCloseResumeBuilder}
     />
   ) : (
     <ProfileDetails

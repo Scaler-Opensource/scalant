@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Skeleton } from 'antd';
 import { useApplicationForm } from '../../../hooks';
 import {
@@ -89,11 +88,5 @@ function ApplicationForm() {
     </Form>
   );
 }
-
-ApplicationForm.propTypes = {
-  jobProfileId: PropTypes.number.isRequired,
-  applicationId: PropTypes.number,
-  status: PropTypes.string,
-};
 
 export default ApplicationForm;

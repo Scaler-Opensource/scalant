@@ -7,6 +7,7 @@ import {
 
 export const APPLICATION_STATUS = {
   APPLICATION_FORM: 'application_form',
+  RESUME_FITMENT_CHECK: 'resume_fitment_check',
   RESUME_CHOICE_SELECT: 'resume_choice_select',
   SAVED: 'Saved',
   WITHDRAWN: 'Application Withdrawn',
@@ -52,6 +53,11 @@ export const COUNT_TO_TAB_MAPPING = {
 };
 
 export const SORTING_OPTIONS = {
+  default: {
+    label: 'Default',
+    value: 'default',
+    mapping: { property: 'default', direction: 'DESC' },
+  },
   eligibility: {
     label: 'Eligibility',
     value: 'eligibility',

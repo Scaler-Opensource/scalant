@@ -8,6 +8,7 @@ import metaDataReducer from './metaDataSlice';
 import filterOptionsReducer from './filterOptionsSlice';
 import alertReducer from './alertSlice';
 import savedJobsReducer from './savedJobsSlice';
+import resumeFitmentReducer from './resumeFitmentSlice';
 
 const rootReducer = combineReducers({
   [careerHubApi.reducerPath]: careerHubApi.reducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   filterOptions: filterOptionsReducer,
   alerts: alertReducer,
   savedJobs: savedJobsReducer,
+  resumeFitment: resumeFitmentReducer,
 });
 
 export default rootReducer;

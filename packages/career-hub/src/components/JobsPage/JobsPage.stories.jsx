@@ -43,6 +43,9 @@ export function Default() {
         openMockInterviewModal={() => {}}
         openResume={() => {}}
         analytics={analytics}
+        onCloseResumeBuilder={() => {
+          console.log('onCloseResumeBuilder');
+        }}
       />
     </>
   
