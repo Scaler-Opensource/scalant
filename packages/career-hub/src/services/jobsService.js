@@ -47,7 +47,10 @@ const jobsService = careerHubApi.injectEndpoints({
       query: (params = {}) => ({
         url: '/job-tracker/relevancy/',
         method: 'POST',
-        body: params,
+        body: {
+          ...params,
+          include_exceptional_jobs: true,
+        },
       }),
       transformResponse: normalizeJobsResponse,
       providesTags: ['RelevantJobs'],
