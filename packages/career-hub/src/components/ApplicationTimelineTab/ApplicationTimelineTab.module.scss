@@ -1,0 +1,28 @@
+.descriptionContainer {
+  width: 100%;
+  gap: 1rem;
+}
+
+.container {
+  gap: 3rem;
+}
+
+.recruiterAvatar {
+  background-color: $colors-neutral-border-color-border-secondary;
+}
+
+.recruiterCardContent {
+  gap: 0;
+}
+
+.recruiterName {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.recruiterEmail {
+  font-size: 1.4rem;
+  display: flex;
+  gap: 0.8rem;
+}

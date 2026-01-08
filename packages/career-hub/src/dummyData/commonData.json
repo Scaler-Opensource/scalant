@@ -1,0 +1,1112 @@
+{
+  "company_categories": [
+      {
+          "value": 5,
+          "label": "large_enterprise"
+      },
+      {
+          "value": 6,
+          "label": "large_startups"
+      },
+      {
+          "value": 7,
+          "label": "early_startups"
+      }
+  ],
+  "job_categories": [
+      {
+          "value": 56529,
+          "label": "Backend Engineer"
+      },
+      {
+          "value": 56530,
+          "label": "FullStack Engineer"
+      },
+      {
+          "value": 56531,
+          "label": "Frontend Engineer"
+      },
+      {
+          "value": 56569,
+          "label": "Android Engineer"
+      },
+      {
+          "value": 56570,
+          "label": "iOS Engineer"
+      },
+      {
+          "value": 179985,
+          "label": "Testing Engineer"
+      },
+      {
+          "value": 189726,
+          "label": "Data Scientist"
+      },
+      {
+          "value": 189727,
+          "label": "Data Analyst"
+      },
+      {
+          "value": 189728,
+          "label": "Business Analyst"
+      },
+      {
+          "value": 202365,
+          "label": "Data Engineer"
+      },
+      {
+          "value": 221192,
+          "label": "DevOps Engineer"
+      }
+  ],
+  "job_locations": [
+      {
+          "value": "Bangalore",
+          "label": "Bangalore"
+      },
+      {
+          "value": "Pune",
+          "label": "Pune"
+      },
+      {
+          "value": "Hyderabad",
+          "label": "Hyderabad"
+      },
+      {
+          "value": "Gurgaon",
+          "label": "Gurgaon"
+      },
+      {
+          "value": "Noida",
+          "label": "Noida"
+      },
+      {
+          "value": "Chennai",
+          "label": "Chennai"
+      },
+      {
+          "value": "Delhi",
+          "label": "Delhi"
+      },
+      {
+          "value": "Chandigarh",
+          "label": "Chandigarh"
+      },
+      {
+          "value": "Kolkata",
+          "label": "Kolkata"
+      },
+      {
+          "value": "Mumbai",
+          "label": "Mumbai"
+      },
+      {
+          "value": "Jaipur",
+          "label": "Jaipur"
+      },
+      {
+          "value": "Vadodara",
+          "label": "Vadodara"
+      },
+      {
+          "value": "Nagpur",
+          "label": "Nagpur"
+      },
+      {
+          "value": "Ahmedabad",
+          "label": "Ahmedabad"
+      },
+      {
+          "value": "Kochi",
+          "label": "Kochi"
+      },
+      {
+          "value": "Mysore",
+          "label": "Mysore"
+      },
+      {
+          "value": "Coimbatore",
+          "label": "Coimbatore"
+      },
+      {
+          "value": "Bangkok",
+          "label": "Bangkok"
+      },
+      {
+          "value": "Mauritius",
+          "label": "Mauritius"
+      },
+      {
+          "value": "Udaipur",
+          "label": "Udaipur"
+      },
+      {
+          "value": "Cochin",
+          "label": "Cochin"
+      },
+      {
+          "value": "Remote",
+          "label": "Remote"
+      },
+      {
+          "value": "Hubballi",
+          "label": "Hubballi"
+      },
+      {
+          "value": "Goa",
+          "label": "Goa"
+      },
+      {
+          "value": "Trivandrum",
+          "label": "Trivandrum"
+      },
+      {
+          "value": "Indore",
+          "label": "Indore"
+      },
+      {
+          "value": "London",
+          "label": "London"
+      },
+      {
+          "value": "Bhubaneswar",
+          "label": "Bhubaneswar"
+      },
+      {
+          "value": "Menlo Park",
+          "label": "Menlo Park"
+      },
+      {
+          "value": "Dehradun",
+          "label": "Dehradun"
+      },
+      {
+          "value": "Hosur",
+          "label": "Hosur"
+      },
+      {
+          "value": "Delaware",
+          "label": "Delaware"
+      },
+      {
+          "value": "Amsterdam",
+          "label": "Amsterdam"
+      },
+      {
+          "value": "California",
+          "label": "California"
+      },
+      {
+          "value": "Mohali",
+          "label": "Mohali"
+      },
+      {
+          "value": "New Jersey",
+          "label": "New Jersey"
+      },
+      {
+          "value": "Arizona",
+          "label": "Arizona"
+      },
+      {
+          "value": "North Carolina",
+          "label": "North Carolina"
+      },
+      {
+          "value": "Agra",
+          "label": "Agra"
+      },
+      {
+          "value": "Saudi Arabia",
+          "label": "Saudi Arabia"
+      },
+      {
+          "value": "Pondicherry",
+          "label": "Pondicherry"
+      },
+      {
+          "value": "Vizag",
+          "label": "Vizag"
+      }
+  ],
+  "role_types": [
+      {
+          "value": 198018,
+          "label": "internship"
+      },
+      {
+          "value": 198019,
+          "label": "full_time"
+      }
+  ],
+  "seniority_levels": [
+      {
+          "value": 202948,
+          "label": "Fresher"
+      },
+      {
+          "value": 202949,
+          "label": "Entry - Mid"
+      },
+      {
+          "value": 202950,
+          "label": "Mid - Senior"
+      },
+      {
+          "value": 202951,
+          "label": "Senior"
+      }
+  ],
+  "proficiency_mapping": {
+      "Must to Have": 0,
+      "Good to Have": 1,
+      "Bar Raiser": 2,
+      "Must to Have (Eligibility)": 3
+  },
+  "onboarding_modal_clicked": true,
+  "pipeline_stages": [
+      {
+          "value": "draft",
+          "label": "Draft"
+      },
+      {
+          "value": "in_review",
+          "label": "In Review"
+      },
+      {
+          "value": "resume_sent",
+          "label": "Resume Sent"
+      },
+      {
+          "value": "resume_shortlisted",
+          "label": "Resume Shortlisted"
+      },
+      {
+          "value": "interviewing",
+          "label": "Interviewing"
+      },
+      {
+          "value": "to_be_offered",
+          "label": "To Be Offered"
+      },
+      {
+          "value": "rejected",
+          "label": "Rejected"
+      },
+      {
+          "value": "offer_received",
+          "label": "Offer Received"
+      },
+      {
+          "value": "offer_withdrawn",
+          "label": "Offer Withdrawn"
+      },
+      {
+          "value": "offer_accepted",
+          "label": "Offer Accepted"
+      },
+      {
+          "value": "offer_declined",
+          "label": "Offer Declined"
+      },
+      {
+          "value": "on_hold",
+          "label": "On Hold"
+      },
+      {
+          "value": "joined",
+          "label": "Joined"
+      },
+      {
+          "value": "saved",
+          "label": "Saved"
+      },
+      {
+          "value": "not_interested",
+          "label": "Not Interested"
+      },
+      {
+          "value": "application_withdrawn",
+          "label": "Application Withdrawn"
+      },
+      {
+          "value": "application_archived",
+          "label": "Application Archived"
+      }
+  ],
+  "merit_based_skills": [
+      {
+          "id": 37223,
+          "title": "Databases and SQL",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37183,
+          "title": "Data Structures & Algorithms",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37184,
+          "title": "Python",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37185,
+          "title": "Java",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37187,
+          "title": "Low Level Design",
+          "mentee_module_id": 3053255
+      },
+      {
+          "id": 37188,
+          "title": "High Level Design",
+          "mentee_module_id": 3053256
+      },
+      {
+          "id": 37189,
+          "title": "Frontend (React)",
+          "mentee_module_id": 3053258
+      },
+      {
+          "id": 37190,
+          "title": "Backend (Java Spring/Springboot)",
+          "mentee_module_id": 3053258
+      },
+      {
+          "id": 37216,
+          "title": "Django",
+          "mentee_module_id": 3053258
+      },
+      {
+          "id": 37244,
+          "title": "Angular",
+          "mentee_module_id": 3053258
+      },
+      {
+          "id": 37191,
+          "title": "Python Libraries",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37192,
+          "title": "SQL",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37193,
+          "title": "Data Analytics - Tools",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37194,
+          "title": "EDA Fundamentals",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37195,
+          "title": "Supervised Learning",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37196,
+          "title": "Unsupervised Learning",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37197,
+          "title": "Computer Vision",
+          "mentee_module_id": 7522793
+      },
+      {
+          "id": 37198,
+          "title": "Natural Language Processing",
+          "mentee_module_id": 7522794
+      },
+      {
+          "id": 37194,
+          "title": "EDA Fundamentals",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37195,
+          "title": "Supervised Learning",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37196,
+          "title": "Unsupervised Learning",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37201,
+          "title": "DA tools",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37202,
+          "title": "Intermediate DSA",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37245,
+          "title": "DevOps - Data Structures & Algorithms",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37245,
+          "title": "DevOps - Data Structures & Algorithms",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37183,
+          "title": "Data Structures & Algorithms",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37223,
+          "title": "Databases and SQL",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37185,
+          "title": "Java",
+          "mentee_module_id": 7532826
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": 7532826
+      },
+      {
+          "id": 37187,
+          "title": "Low Level Design",
+          "mentee_module_id": 7532828
+      },
+      {
+          "id": 37189,
+          "title": "Frontend (React)",
+          "mentee_module_id": 7532828
+      },
+      {
+          "id": 37244,
+          "title": "Angular",
+          "mentee_module_id": 7532828
+      },
+      {
+          "id": 37188,
+          "title": "High Level Design",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37192,
+          "title": "SQL",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37191,
+          "title": "Python Libraries",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37194,
+          "title": "EDA Fundamentals",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37195,
+          "title": "Supervised Learning",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37196,
+          "title": "Unsupervised Learning",
+          "mentee_module_id": 7522864
+      },
+      {
+          "id": 37184,
+          "title": "Python",
+          "mentee_module_id": 5696347
+      },
+      {
+          "id": 37185,
+          "title": "Java",
+          "mentee_module_id": 5696347
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": 5696347
+      },
+      {
+          "id": 37184,
+          "title": "Python",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37185,
+          "title": "Java",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37187,
+          "title": "Low Level Design",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": 5910715
+      },
+      {
+          "id": 37189,
+          "title": "Frontend (React)",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37244,
+          "title": "Angular",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37224,
+          "title": "MERN",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37190,
+          "title": "Backend (Java Spring/Springboot)",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37216,
+          "title": "Django",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37224,
+          "title": "MERN",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37190,
+          "title": "Backend (Java Spring/Springboot)",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37216,
+          "title": "Django",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37224,
+          "title": "MERN",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37190,
+          "title": "Backend (Java Spring/Springboot)",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37216,
+          "title": "Django",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37224,
+          "title": "MERN",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37226,
+          "title": "Data Structures & Algorithms Advanced",
+          "mentee_module_id": 7522524
+      },
+      {
+          "id": 37190,
+          "title": "Backend (Java Spring/Springboot)",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37216,
+          "title": "Django",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37224,
+          "title": "MERN",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37184,
+          "title": "Python",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37185,
+          "title": "Java",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37186,
+          "title": "Javascript",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37187,
+          "title": "Low Level Design",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37188,
+          "title": "High Level Design",
+          "mentee_module_id": null
+      },
+      {
+          "id": 37247,
+          "title": "Shell Scripting and CS Fundamentals",
+          "mentee_module_id": 7522518
+      },
+      {
+          "id": 37194,
+          "title": "EDA Fundamentals",
+          "mentee_module_id": null
+      }
+  ],
+  "v1_onboarding_enabled": true,
+  "v0_onboarding_completed": true,
+  "initial_user_application_stage": 4,
+  "is_discussion_hub_enabled": false,
+  "resume_issues": {
+      "total_issues": 2
+  },
+  "default_resume_details": {
+      "id": 17407,
+      "user_id": 674153,
+      "name": "AswanthDefaultResume",
+      "default": true,
+      "status": "active",
+      "meta": {
+          "social_profiles": {
+              "codechef": "",
+              "codeforces": "",
+              "geeksforgeeks": "",
+              "github": "",
+              "hackerearth": "",
+              "hackerrank": "",
+              "leetcode": "",
+              "portfolio": ""
+          },
+          "job_title": "Fullstack developer 1",
+          "interactions": {
+              "relevancy_alert_modal_displayed": true
+          }
+      },
+      "modified_at": "2025-05-11T15:27:35.000Z",
+      "created_at": "2024-02-13T19:39:17.000Z",
+      "updated_at": "2025-05-11T15:27:35.000Z"
+  },
+  "resume_builder_skills": {
+    "language": [
+        1167,
+        1150,
+        1148,
+        1136,
+        1128,
+        1276,
+        1270,
+        1218,
+        1217,
+        1215,
+        1213,
+        1211,
+        1210,
+        1209
+    ],
+    "framework": [
+        1206,
+        1203,
+        1200,
+        1198,
+        1197,
+        1196,
+        1195,
+        1158,
+        1157,
+        1156,
+        1145,
+        1133
+    ],
+    "tools": [
+        2431,
+        2430,
+        2435,
+        1234,
+        1231,
+        1229,
+        1228,
+        1176,
+        1175,
+        2432,
+        46262,
+        58475
+    ]
+},
+"skill_data": [
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1128,
+        "subtopic": "Javascript",
+        "eligible_topic_id": 7591,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1133,
+        "subtopic": "Angular",
+        "eligible_topic_id": 7580,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1136,
+        "subtopic": "CSS",
+        "eligible_topic_id": 7586,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1145,
+        "subtopic": "Flutter",
+        "eligible_topic_id": 8760,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1148,
+        "subtopic": "HTML",
+        "eligible_topic_id": 7589,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1150,
+        "subtopic": "JavaScript",
+        "eligible_topic_id": 7591,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1156,
+        "subtopic": "React",
+        "eligible_topic_id": 7597,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1157,
+        "subtopic": "React Native",
+        "eligible_topic_id": 8763,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1158,
+        "subtopic": "Redux",
+        "eligible_topic_id": 8764,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 1167,
+        "subtopic": "TypeScript",
+        "eligible_topic_id": 8768,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Mobile Development",
+        "topic_id": 401,
+        "subtopic_id": 1175,
+        "subtopic": "Android Development",
+        "eligible_topic_id": 8753,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Mobile Development",
+        "topic_id": 401,
+        "subtopic_id": 1176,
+        "subtopic": "iOS Development",
+        "eligible_topic_id": 8770,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1195,
+        "subtopic": ".NET",
+        "eligible_topic_id": 7579,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1196,
+        "subtopic": "Django",
+        "eligible_topic_id": 7587,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1197,
+        "subtopic": "Express.js",
+        "eligible_topic_id": 8758,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1198,
+        "subtopic": "Flask",
+        "eligible_topic_id": 8759,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1200,
+        "subtopic": "Node.js",
+        "eligible_topic_id": 7594,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1203,
+        "subtopic": "Ruby on Rails",
+        "eligible_topic_id": null,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Backend Development",
+        "topic_id": 403,
+        "subtopic_id": 1206,
+        "subtopic": "Spring Boot",
+        "eligible_topic_id": 7600,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1209,
+        "subtopic": "C",
+        "eligible_topic_id": 8755,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1210,
+        "subtopic": "Go",
+        "eligible_topic_id": 8761,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1211,
+        "subtopic": "Java",
+        "eligible_topic_id": 7590,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1213,
+        "subtopic": "Python",
+        "eligible_topic_id": 7596,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1215,
+        "subtopic": "Ruby",
+        "eligible_topic_id": null,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1217,
+        "subtopic": "Scala",
+        "eligible_topic_id": 8765,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1218,
+        "subtopic": "Swift",
+        "eligible_topic_id": 8766,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "DBMS",
+        "topic_id": 406,
+        "subtopic_id": 1228,
+        "subtopic": "MongoDB",
+        "eligible_topic_id": 8769,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "DBMS",
+        "topic_id": 406,
+        "subtopic_id": 1229,
+        "subtopic": "MySQL",
+        "eligible_topic_id": 7601,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "DBMS",
+        "topic_id": 406,
+        "subtopic_id": 1231,
+        "subtopic": "PostgreSQL",
+        "eligible_topic_id": 7601,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "DBMS",
+        "topic_id": 406,
+        "subtopic_id": 1234,
+        "subtopic": "SQL Server",
+        "eligible_topic_id": 7601,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1270,
+        "subtopic": "C#",
+        "eligible_topic_id": 7584,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Programming",
+        "topic_id": 404,
+        "subtopic_id": 1276,
+        "subtopic": "C++",
+        "eligible_topic_id": 7585,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Cloud Computing",
+        "topic_id": 564,
+        "subtopic_id": 2430,
+        "subtopic": "AWS",
+        "eligible_topic_id": 7581,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "CloudComputing",
+        "topic_id": 564,
+        "subtopic_id": 2431,
+        "subtopic": "Azure",
+        "eligible_topic_id": 8754,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "System Design",
+        "topic_id": 563,
+        "subtopic_id": 2432,
+        "subtopic": "Microservices",
+        "eligible_topic_id": 7593,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "DBMS",
+        "topic_id": 406,
+        "subtopic_id": 2435,
+        "subtopic": "SQL",
+        "eligible_topic_id": 7601,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Machine Learning",
+        "topic_id": 405,
+        "subtopic_id": 46262,
+        "subtopic": "Tableau",
+        "eligible_topic_id": 7604,
+        "eligible_class": "Topic"
+    },
+    {
+        "id": null,
+        "topic": "Frontend Development",
+        "topic_id": 400,
+        "subtopic_id": 58475,
+        "subtopic": "Power BI",
+        "eligible_topic_id": null,
+        "eligible_class": "Topic"
+    }
+]
+}

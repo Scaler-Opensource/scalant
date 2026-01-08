@@ -1,0 +1,60 @@
+.profileName {
+  margin-bottom: 0 !important;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.6rem;
+  // position: sticky;
+  // top: 9.6rem;
+  background-color: $colors-neutral-color-bg-base;
+  // min-height: calc(100vh - 9.6rem);
+  border-radius: 0.8rem;
+}
+
+.profileDetailsItems {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.preferencesTitle {
+  margin-bottom: 0 !important;
+}
+
+.preferencesDivider {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+.preferencesContent {
+  margin-top: 0.8rem;
+}
+
+.preferenceLabel {
+  font-size: $default-font-size;
+  color: $colors-neutral-text-color-text-secondary;
+  margin-right: 0.5rem;
+}
+
+.preferenceValue {
+  font-size: $h5-size;
+  color: $colors-neutral-text-color-text;
+}
+
+.preferenceTag {
+  margin-top: 0.6rem;
+  background-color: $colors-neutral-bg-color-bg-layout;
+  border-radius: 0.4rem;
+  border-color: #F0F0F0;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: $h6-size
+}
+
+.jobIntentContainer {
+  margin-top: 1.5rem;
+}
+
+.preferencesContainer {
+  margin-top: 2.4rem;
+}

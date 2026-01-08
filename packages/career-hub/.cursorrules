@@ -1,0 +1,73 @@
+# CSS and Styling Rules
+
+## General Styling Guidelines
+
+1. **NO inline styles**: Never use the `style` prop in JSX/TSX components. All styling must be done through CSS classes.
+
+2. **Use CSS Modules**: All component styles should be in a `.module.scss` file with the same name as the component (e.g., `ComponentName.module.scss`).
+
+3. **Unit System**: 
+   - All CSS values must use `rem` units, NOT `px`
+   - Conversion: 1rem = 10px in this codebase
+   - Examples:
+     - 8px → 0.8rem
+     - 14px → 1.4rem
+     - 16px → 1.6rem
+     - 20px → 2rem
+     - 24px → 2.4rem
+   - Exception: Ant Design component props (like Modal `width`) may still use pixels as they expect pixel values
+
+4. **Color Variables**: 
+   - Always use color variables from `@scalant/packages/components/src/styles/theme.scss`
+   - Common color variables:
+     - Primary: `$colors-brand-primary-color-primary`
+     - Text: `$colors-neutral-text-color-text`
+     - Text Secondary: `$colors-neutral-text-color-text-secondary`
+     - Text Tertiary: `$colors-neutral-text-color-text-tertiary`
+     - Error: `$colors-brand-error-color-error`
+     - Background: `$colors-neutral-color-bg-base`
+     - Border: `$colors-neutral-border-color-border`
+
+5. **Font Sizes**: 
+   - Use font size variables from theme.scss:
+     - Default: `$default-font-size` (1.4rem)
+     - H1: `$h1-size` (3.8rem)
+     - H2: `$h2-size` (3rem)
+     - H3: `$h3-size` (2.4rem)
+     - H4: `$h4-size` (2rem)
+     - H5: `$h5-size` (1.6rem)
+     - H6: `$h6-size` (1.2rem)
+
+6. **CSS Class Naming**:
+   - Use camelCase for class names in SCSS modules
+   - Use descriptive, semantic names
+   - Example: `.modalTitle`, `.formField`, `.requiredAsterisk`
+
+7. **Structure**:
+   - Import styles: `import styles from './ComponentName.module.scss'`
+   - Apply classes: `className={styles.className}`
+   - No hardcoded colors, sizes, or spacing values
+
+## Example
+
+**BAD:**
+```jsx
+<div style={{ marginTop: 8, fontSize: 14, color: '#666' }}>
+  Content
+</div>
+```
+
+**GOOD:**
+```jsx
+<div className={styles.description}>
+  Content
+</div>
+```
+
+```scss
+.description {
+  margin-top: 0.8rem;
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+}
+```

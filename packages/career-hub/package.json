@@ -1,0 +1,35 @@
+{
+  "name": "@scalant/career-hub",
+  "version": "4.0.9",
+  "description": "Career Hub package for MIT",
+  "license": "MIT",
+  "main": "dist/career-hub.umd.js",
+  "module": "dist/career-hub.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/career-hub.es.js",
+      "require": "./dist/career-hub.umd.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "eslint src",
+    "lint:styles": "stylelint \"**/*.scss\"",
+    "storybook": "start-storybook -p 6007"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  },
+  "gitHead": "859e969cf79a05a9e3a6cc20866af609f58473c5",
+  "dependencies": {
+    "react-pdf": "5.7.2"
+  }
+}

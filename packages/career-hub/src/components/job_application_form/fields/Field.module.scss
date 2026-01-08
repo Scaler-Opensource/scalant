@@ -1,0 +1,24 @@
+.field {
+  min-width: 50rem;
+  max-width: 100%;
+  margin-right: 2.4rem;
+}
+
+.checkboxAdjacentField {
+  margin-bottom: 0;
+}
+
+.fieldGroup {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkboxFieldGroup {
+  flex-direction: column;
+}
+
+.fieldGroupLabel {
+  width: 100%;
+  flex: 1;
+}

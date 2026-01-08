@@ -1,0 +1,29 @@
+.saveButton {
+  font-size: 1.2rem;
+  padding: 0.375rem 0.75rem;
+  height: auto;
+  color: #006AFF;
+
+  &:hover {
+    background: none !important;
+    color: #006AFF !important;
+  }
+}
+
+.savedButton {
+  font-size: 1.2rem;
+  padding: 0.375rem 0.75rem;
+  height: auto;
+  color: #8c8c8c;
+
+  &:hover {
+    background: none !important;
+    color: #8c8c8c !important;
+  }
+}
+
+.savedButton {
+  color: #8c8c8c;
+}
+
+

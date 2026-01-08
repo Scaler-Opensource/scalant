@@ -1,0 +1,63 @@
+.appliedButton {
+  color: $colors-brand-success-color-success;
+
+  &:hover {
+    color: $colors-brand-success-color-success !important;
+    background: transparent !important;
+  }
+}
+
+.saveButton, .savedButton {
+  color: $colors-brand-primary-color-primary;
+  background: $colors-neutral-color-white;
+  border: 1px solid $colors-brand-primary-color-primary;
+
+  &:hover {
+    background: $colors-neutral-color-white !important;
+    color: $colors-brand-primary-color-primary-hover !important;
+  }
+}
+
+.savedButton {
+  cursor: not-allowed;
+  color: $colors-neutral-text-color-text-secondary;
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    color: $colors-neutral-text-color-text-secondary !important;
+    background: $colors-neutral-color-white !important;
+  }
+}
+
+.jobActions {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.withdrawalReasonForm {
+  min-height: 30rem;
+  margin-top: 1.6rem;
+}
+
+.warningIcon {
+  color: $colors-brand-warning-color-warning;
+}
+
+.withdrawalReasonRadioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.withdrawnText {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: $colors-brand-success-color-success;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+}

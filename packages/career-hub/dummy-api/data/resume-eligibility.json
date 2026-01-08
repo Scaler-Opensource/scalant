@@ -1,0 +1,158 @@
+{
+  "8080": {
+      "tech_stack_check": {
+          "is_eligible": false,
+          "details": [
+              {
+                  "skill": "NodeJS",
+                  "proficiency_period": 12
+              }
+          ]
+      },
+      "blocker_and_garbage_details": {
+          "garbage_collection": {
+              "user_work_experiences": [
+                {
+                    "company": "Facebook",
+                    "job_title": "Software Engineer"
+                }
+              ],
+              "user_educations": [
+                {
+                    "university": "University of California, Berkeley",
+                    "degree": "Bachelor of Science in Computer Science",
+                    "branch": "Computer Science"
+                }
+              ]
+          },
+          "blockers": {
+              "bullets": true,
+              "skills": false,
+              "experience": false
+          }
+      },
+      "is_blocker": true,
+      "resume_details": {
+          "id": 8080,
+          "name": "ChanchalDefaultResume",
+          "default": true,
+          "modified_at": "2025-12-18T12:47:49.000Z",
+          "created_at": "2024-02-13T19:39:04.000Z"
+      }
+  },
+  "45507": {
+      "tech_stack_check": {
+          "is_eligible": true,
+          "details": []
+      },
+      "blocker_and_garbage_details": {
+          "garbage_collection": {
+              "user_work_experiences": [],
+              "user_educations": []
+          },
+          "blockers": {
+              "bullets": false,
+              "skills": true,
+              "projects": true
+          }
+      },
+      "is_blocker": true,
+      "resume_details": {
+          "id": 45507,
+          "name": "Hello",
+          "default": false,
+          "modified_at": "2025-11-28T04:34:44.000Z",
+          "created_at": "2025-11-25T11:10:05.000Z"
+      }
+  },
+  "45504": {
+      "tech_stack_check": {
+          "is_eligible": false,
+          "details": [
+              {
+                  "skill": "NodeJS",
+                  "proficiency_period": 12
+              }
+          ]
+      },
+      "blocker_and_garbage_details": {
+          "garbage_collection": {
+              "user_work_experiences": [],
+              "user_educations": []
+          },
+          "blockers": {
+              "bullets": false,
+              "skills": false,
+              "projects": true
+          }
+      },
+      "is_blocker": true,
+      "resume_details": {
+          "id": 45504,
+          "name": "yash",
+          "default": false,
+          "modified_at": "2025-11-25T14:28:01.000Z",
+          "created_at": "2025-11-20T08:23:44.000Z"
+      }
+  },
+  "45449": {
+      "tech_stack_check": {
+          "is_eligible": false,
+          "details": [
+              {
+                  "skill": "NodeJS",
+                  "proficiency_period": 12
+              }
+          ]
+      },
+      "blocker_and_garbage_details": {
+          "garbage_collection": {
+              "user_work_experiences": [],
+              "user_educations": []
+          },
+          "blockers": {
+              "bullets": false,
+              "skills": true,
+              "projects": true
+          }
+      },
+      "is_blocker": true,
+      "resume_details": {
+          "id": 45449,
+          "name": "Test 5",
+          "default": false,
+          "modified_at": "2025-10-23T13:41:43.000Z",
+          "created_at": "2025-09-29T10:18:08.000Z"
+      }
+  },
+  "45461": {
+      "tech_stack_check": {
+          "is_eligible": false,
+          "details": [
+              {
+                  "skill": "NodeJS",
+                  "proficiency_period": 12
+              }
+          ]
+      },
+      "blocker_and_garbage_details": {
+          "garbage_collection": {
+              "user_work_experiences": [],
+              "user_educations": []
+          },
+          "blockers": {
+              "bullets": false,
+              "skills": true,
+              "projects": true
+          }
+      },
+      "is_blocker": false,
+      "resume_details": {
+          "id": 45461,
+          "name": "Karandeep Singh Chadha",
+          "default": false,
+          "modified_at": "2025-10-23T09:14:43.000Z",
+          "created_at": "2025-10-21T09:37:48.000Z"
+      }
+  }
+}

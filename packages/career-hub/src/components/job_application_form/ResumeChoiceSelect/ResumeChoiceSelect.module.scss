@@ -1,0 +1,77 @@
+.container {
+  gap: 2.4rem;
+}
+
+.resumeChoiceOptionLabel {
+  display: flex;
+  padding: 1.6rem 0 1.6rem 1.6rem;
+  gap: 0.8rem;
+  width: 100%;
+  max-height: max-content;
+  flex: 1;
+  border-radius: 0.6rem;
+  border: 0.1rem solid $colors-neutral-border-color-border;
+  background: $colors-neutral-color-bg-base;
+
+  &.resumeChoiceOptionLabelChecked {
+    border-color: $colors-brand-primary-color-primary;
+  }
+
+  & > :global(span.ant-radio) {
+    align-self: flex-start;
+    padding-top: 0.4rem;
+  }
+
+  & > :global(span.ant-radio-label) {
+    flex: 1;
+  }
+}
+
+.resumeChoiceOptionLabelContent {
+  flex: 1;
+}
+
+.resumeChoiceOptionLabelName {
+  font-size: $h5-size;
+  font-weight: 600;
+  color: $colors-neutral-text-color-text;
+}
+
+.resumeChoiceOptionLabelModifiedAt {
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.resumeChoiceOptionLabelCard {
+  flex: 1;
+}
+
+.resumeChoiceOptionLabelCardHeader {
+  align-items: center;
+}
+
+.resumeChoiceOptionLabelEditButton {
+  margin-left: auto;
+}
+
+.resumeChoiceOptionLabelImprovementsList {
+  padding-inline-start: 1.6rem;
+  margin-bottom: 0;
+}
+
+.resumePreviewContainer {
+  height: 50rem;
+  padding: 2.4rem;
+  overflow: auto;
+  border-radius: 0.6rem;
+  border: 0.1rem dashed $colors-neutral-border-color-border-secondary;
+  background: $colors-neutral-bg-color-bg-layout;
+  justify-content: center;
+}
+
+.fitmentScoreTitle {
+  font-size: $h6-size;
+  color: $colors-neutral-text-color-text-secondary;
+  font-weight: 600;
+  line-height: 2rem;
+}

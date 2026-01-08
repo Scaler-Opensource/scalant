@@ -1,0 +1,30 @@
+.container {
+  padding: 1.6rem !important;
+
+  :global(.ant-notification-notice-description) {
+    margin-inline-start: 0 !important;
+    max-height: 35rem;
+    overflow-y: auto;
+  }
+}
+
+.footer {
+  width: 35rem;
+}
+
+.text {
+  font-size: $h6-size;
+}
+
+.heading {
+  font-size: $default-font-size;
+  font-weight: 600;
+  color: $colors-neutral-text-color-text-secondary;
+}
+
+.checkbox {
+  & > :global(span.ant-checkbox ) {
+    align-self: flex-start;
+    margin-top: 0.6rem;
+  }
+}

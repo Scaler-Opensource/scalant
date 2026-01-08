@@ -1,0 +1,425 @@
+{
+    "data": {
+        "id": "138835",
+        "type": "job_profile",
+        "attributes": {
+            "title": "SDE-1 (Backend)",
+            "slug": "sde-1-backend-02a86f88-122d-4e45-91b6-21a4e0520edf",
+            "job_desc": "https://scaler-staging.s3.ap-southeast-1.amazonaws.com/job_profiles/job_descs/000/138/835/original/moglix.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251223%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251223T043239Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=10eaf41444116513b7beb8667da4b43933b06ff7683b266bb8facae37b077012",
+            "job_desc_text": "\u003cp\u003eExperience:\tFresher\u003c/p\u003e\u003cp\u003eProfile opened for:\tSDE-1- (Service Bond for 2yrs.)\u003c/p\u003e\u003cp\u003eSkills:\tJava \u003c/p\u003e\u003cp\u003eInterview Process:\t3 rounds - written- aptitude + programing, F2F rounds-2 (all 3 rounds on same day)",
+            "min_experience": "0.0",
+            "max_experience": "12.0",
+            "max_ctc": "10.0",
+            "min_ctc": "20.0",
+            "valid_till": null,
+            "created_at": "2024-04-12T13:08:22.000Z",
+            "job_type": "lateral",
+            "preferred_cities": "Noida",
+            "preferred_notice_period": 0,
+            "merit_based_skills": [
+                {
+                    "id": 37183,
+                    "title": "Data Structures \u0026 Algorithms",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37185,
+                    "title": "Java",
+                    "proficiency": 0
+                },
+                {
+                    "id": 37223,
+                    "title": "Databases and SQL",
+                    "proficiency": 0
+                }
+            ],
+            "application_status": "In Review",
+            "contest_skills": [
+                {
+                    "id": 37183,
+                    "skill_id": 37183,
+                    "proficiency": 0,
+                    "skill_title": "Data Structures \u0026 Algorithms",
+                    "tag_name": "mbe_and_contest"
+                }
+            ],
+            "application_infos": [
+                {
+                    "name": "application_form",
+                    "completed": false,
+                    "required": true
+                },
+                {
+                    "name": "resume_choice_select",
+                    "completed": false,
+                    "required": true
+                },
+                {
+                    "name": "internal_test_issued",
+                    "completed": false,
+                    "required": false
+                }
+            ],
+            "expiry": null,
+            "application_id": 849486,
+            "user_company_status": "candidate-interested",
+            "application_last_upated_at": "2025-12-22T17:18:54.000Z",
+            "job_source": null,
+            "job_profile_id": 138835,
+            "job_profile_status": "active",
+            "date_posted_on": "2024-04-19T11:20:42.000Z",
+            "open_for_discussion_ctc": false,
+            "applied_on": "2025-12-22T13:27:33.000Z",
+            "seniority_level": "Fresher",
+            "role_type": "full_time",
+            "duration": null,
+            "stipend": null,
+            "eligibility_criteria": {
+                "is_eligible": true,
+                "reasons": [
+                    {
+                        "label": "placed_mentee",
+                        "text": "You can apply for this job as you are not placed yet",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "diversity",
+                        "text": "You can apply for this job as the diversity criteria is not applicable",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "experience",
+                        "text": "You have the required experience for this job profile",
+                        "show_text": true,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "notice_period",
+                        "text": "You can apply for this job as the notice period criteria is met",
+                        "show_text": true,
+                        "is_eligible": true,
+                        "data": null
+                    },
+                    {
+                        "label": "skills",
+                        "text": "You are eligible to apply for this job profile as you have cleared all the required skills",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": {
+                            "Data Structures \u0026 Algorithms": {
+                                "id": null,
+                                "contests": {
+                                    "cleared": true,
+                                    "details": "Skill obtained through DSA Full Syllabus Contest on 2025-12-18",
+                                    "join_link": "",
+                                    "show_text": true
+                                },
+                                "skills": {
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
+                                    "show_text": false
+                                },
+                                "skill_name": "Data Structures \u0026 Algorithms",
+                                "skill_id": 37183
+                            },
+                            "Databases and SQL": {
+                                "id": null,
+                                "contests": null,
+                                "skills": {
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
+                                    "show_text": false
+                                },
+                                "skill_name": "Databases and SQL",
+                                "skill_id": 37223
+                            },
+                            "Java": {
+                                "id": null,
+                                "contests": null,
+                                "skills": {
+                                    "cleared": true,
+                                    "details": "You have cleared this skill.",
+                                    "show_text": false
+                                },
+                                "skill_name": "Java",
+                                "skill_id": 37185
+                            }
+                        }
+                    },
+                    {
+                        "label": "tech_stacks",
+                        "text": "You are eligible to apply for this job profile as you have all the required experience skills",
+                        "show_text": false,
+                        "is_eligible": true,
+                        "data": {
+                            "Java": {
+                                "id": 138835,
+                                "skill_id": 1211,
+                                "skill_type": "SubTopic",
+                                "proficiency_period": 1,
+                                "owner_id": 138835,
+                                "proficiency": 3,
+                                "skill_name": "Java",
+                                "eligible_topic": null,
+                                "eligible_skill_id": 7590,
+                                "data": {
+                                    "cleared": true,
+                                    "details": "You have cleared this experience skill.",
+                                    "show_text": false
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "label": "career_guide",
+                        "text": null,
+                        "show_text": null,
+                        "is_eligible": true,
+                        "data": {
+                            "career_guide_completed": true
+                        }
+                    }
+                ]
+            },
+            "exceptional_job": false,
+            "is_relevant": false,
+            "recruiters": [
+                {
+                    "name": "Swati Bhargava",
+                    "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
+                    "slack_dm_link": null,
+                    "email": "swati@scaler.com",
+                    "position": "team lead"
+                },
+                {
+                    "name": "Kriti",
+                    "avatar": "https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg",
+                    "slack_dm_link": null,
+                    "email": "kaushik.kriti@scaler.com",
+                    "position": "recruiter"
+                }
+            ],
+            "hiring_steps": [
+                {
+                    "id": 963293,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Coding Test 1",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 14,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": 96420,
+                    "next_step_id": 963294
+                },
+                {
+                    "id": 963294,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Tech Interview 1",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 15,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": 96421,
+                    "next_step_id": 963295
+                },
+                {
+                    "id": 963295,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Tech Interview 2",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 15,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": 96422,
+                    "next_step_id": 963296
+                },
+                {
+                    "id": 963296,
+                    "company_id": 1594,
+                    "job_profile_id": 138835,
+                    "step_name": "Behavorial Round",
+                    "interview_type": "Online Interview",
+                    "interview_mode_id": 16,
+                    "is_first_step": false,
+                    "created_at": "2024-04-12T13:08:22.000Z",
+                    "updated_at": "2024-04-12T13:11:27.000Z",
+                    "step_meta_data": null,
+                    "parent_company_step_id": 96423,
+                    "next_step_id": 963297
+                }
+            ],
+            "experience_based_skills": [],
+            "flexible_experience_lower": false,
+            "flexible_experience_upper": false,
+            "application_count": 0,
+            "application_timeline": {
+                "timeline": [
+                    {
+                        "type": "status",
+                        "expected_update_date": "2025-12-23T13:27:33.000Z",
+                        "actual_update_date": "2025-12-22T13:27:33.000Z",
+                        "stage_name": "Application in Review",
+                        "terminate_timeline_here": true,
+                        "stage_status": "ongoing",
+                        "stage_comments": "Our internal team is reviewing your application",
+                        "status": "in_review"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2025-12-31T13:27:33.000Z",
+                        "stage_name": "Resume Sent to Company",
+                        "stage_status": "pending",
+                        "stage_comments": "Your resume will be shared with the company",
+                        "status": "resume_sent"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-03T13:27:33.000Z",
+                        "stage_name": "Resume Shortlist",
+                        "stage_status": "pending",
+                        "stage_comments": "Company will be shortlisting your resume for interviews",
+                        "status": "resume_shortlisted"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-09T13:27:33.000Z",
+                        "stage_name": "Coding Test 1",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Data Structures \u0026 Algorithms",
+                        "status": "Coding Test 1"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-15T13:27:33.000Z",
+                        "stage_name": "Tech Interview 1",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Java",
+                        "status": "Tech Interview 1"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-21T13:27:33.000Z",
+                        "stage_name": "Tech Interview 2",
+                        "stage_status": "pending",
+                        "stage_comments": "Skills Tested: Data Structures \u0026 Algorithms",
+                        "status": "Tech Interview 2"
+                    },
+                    {
+                        "type": "company_hiring_step_id",
+                        "expected_update_date": "2026-01-27T13:27:33.000Z",
+                        "stage_name": "Behavorial Round",
+                        "stage_status": "pending",
+                        "stage_comments": "",
+                        "status": "Behavorial Round"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-29T13:27:33.000Z",
+                        "stage_name": "To be offered",
+                        "stage_status": "pending",
+                        "stage_comments": "This is when you will negotiate your offer",
+                        "status": "to_be_offered"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Offer Received",
+                        "stage_status": "pending",
+                        "stage_comments": "When you receive an offer letter from the company",
+                        "status": "offer_received"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Offer Accepted",
+                        "stage_status": "pending",
+                        "stage_comments": "Once you accept the offer received",
+                        "status": "offer_accepted"
+                    },
+                    {
+                        "type": "status",
+                        "expected_update_date": "2026-01-31T13:27:33.000Z",
+                        "stage_name": "Joined",
+                        "stage_status": "pending",
+                        "stage_comments": "No text",
+                        "status": "joined"
+                    }
+                ],
+                "was_shortlisted": false,
+                "status": "In Review"
+            },
+            "previous_roles": null,
+            "visa_sponsorship": null,
+            "benefits": null,
+            "collect_rejection_reason_feedback": null,
+            "collect_recommendations_feedback": "true",
+            "form_builder_enabled": true,
+            "collect_recruiter_csat": false,
+            "existing_recruiter_csat": null,
+            "highlights": {
+                "confidence_note": "The Job Description provides excellent, specific details on technology, techniques, and responsibilities. However, the About the Company section is very high-level and lacks specifics on team culture, benefits, or project impact, leading to a MEDIUM score.",
+                "keywords": [
+                    "Generative AI",
+                    "LLMs \u0026 RAG",
+                    "Technical Leadership",
+                    "Python \u0026 Spark",
+                    "B2B Technology"
+                ],
+                "quality_score": "MEDIUM",
+                "highlights": [
+                    "Apply your expertise in cutting-edge technologies like Generative AI, Language Models (LLMs), and RAG at a global B2B leader pioneering the future of networks and cloud.",
+                    "Take on technical leadership responsibilities, driving data science projects and guiding R\u0026D efforts to shape the next generation of digital services.",
+                    "Work with a comprehensive and modern tech stack including Python, Spark, Docker, Kubernetes, and MLOps practices.",
+                    "Collaborate across diverse teams, including Product Management and Customer Interface, providing technical consulting to solve complex, real-world problems."
+                ]
+            }
+        },
+        "relationships": {
+            "company": {
+                "data": {
+                    "id": "1594",
+                    "type": "company"
+                }
+            },
+            "hiring_regions": {
+                "data": []
+            }
+        }
+    },
+    "included": [
+        {
+            "id": "1594",
+            "type": "company",
+            "attributes": {
+                "name": "Moglix",
+                "id": 1594,
+                "slug": "moglix",
+                "employee_count": "100-1000",
+                "company_website": "https://www.moglix.com",
+                "vision": "",
+                "benefits": null,
+                "perks": "",
+                "tagline": "Aapke Office Ki Sabhi Zaroori Samaan Ke Liye #MoglixHaiNa",
+                "logo": "https://scaler-staging.s3.ap-southeast-1.amazonaws.com/companies/images/000/001/594/original/1662045823381_%281%29.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIDNNIRGHAQUQRWYA%2F20251223%2Fap-southeast-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20251223T043239Z\u0026X-Amz-Expires=86400\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=4988d8d844765e9b20c3592bc7e89dddb681ff4dc15f452b38cd5539de8d95ca",
+                "location": "Noida",
+                "tier": null,
+                "category": "start_up",
+                "company_vision": "\u003cp\u003eWe are an Asia-based B2B commerce company intensively inclined towards B2B procurement of industrial supplies, in particular, MRO, Safety, Electrical \u0026amp; Lighting, Cleaning \u0026amp; Laundry Supplies, Office Supplies, Tools and many more industry essentials. Owing to the fragmentation of products and categories, industrial procurement is deemed to be a complex subject, across the globe. However, we at Moglix, through our extensive range of products and dedicated team of professionals are tapping into the responsibility of providing a seamless solution to this deep-rooted problem of the industry. We take pride in delivering world-class services and, our clients are well aware of the fact that we do not just deliver products; we deliver a satisfying experience, which has enabled us to forge strong relationship with our customers. It’s a cultural belief that is demonstrated every day, through exceptional customer service, product selection and, paramount industry knowledge.\u003c/p\u003e"
+            }
+        }
+    ]
+}

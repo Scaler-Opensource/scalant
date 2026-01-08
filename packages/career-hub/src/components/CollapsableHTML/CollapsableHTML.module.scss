@@ -1,0 +1,29 @@
+.collapsableContainer {
+  position: relative;
+}
+
+.collapsed {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.viewMore {
+  color: $colors-base-blue-6;
+  font-size: 1.4rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: -1.6rem;
+  background-color: $colors-neutral-color-white !important;
+  padding-left: 1rem !important;
+}

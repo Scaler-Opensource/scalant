@@ -1,0 +1,67 @@
+
+.basicInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  align-self: stretch;
+
+  &:focus {
+    background: $colors-brand-primary-color-primary;
+  }
+}
+
+.companyInfo {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.companyName {
+  color: $colors-neutral-text-color-text;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  align-self: stretch;
+}
+
+.extraDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: $colors-neutral-text-color-text;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+  flex-wrap: wrap;
+}
+
+.extraDetailsDivider {
+  border-color: $colors-neutral-border-color-border;
+
+  &:last-child {
+    display: none;
+  }
+}
+
+.jobTitle {
+  color: $colors-neutral-color-text-base;
+
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 3.8rem;
+}
+
+.jobLocation {
+  color: $colors-neutral-text-color-text-secondary;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+}

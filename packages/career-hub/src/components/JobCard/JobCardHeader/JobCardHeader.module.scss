@@ -1,0 +1,36 @@
+.header {
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.jobTitle {
+  color: #006AFF !important;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 0 !important;
+}
+
+.titleContainer {
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+.titleContainerExpanded {
+  max-width: 50rem;
+}
+
+.titleContainerCollapsed {
+  max-width: 25rem;
+}
+
+.companyName {
+  font-size: $default-font-size;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.actions {
+  width: 100%;
+  margin-right: 0;
+}
+

@@ -1,0 +1,375 @@
+{
+  "id": 549613,
+  "isPlaced": false,
+  "mandatoryMockInterviewCleared": false,
+  "clearedSkills": [
+    {
+      "id": 5,
+      "skillId": 32,
+      "ownerType": "Mentee",
+      "ownerId": 4966,
+      "expectedProficiency": 7,
+      "attainedProficiency": 8,
+      "createdAt": "2025-10-16T21:42:53.000Z",
+      "updatedAt": "2025-10-16T21:46:54.000Z",
+      "sourceType": "Mentee",
+      "sourceId": 4966
+    },
+    {
+      "id": 6,
+      "skillId": 43,
+      "ownerType": "Mentee",
+      "ownerId": 4966,
+      "expectedProficiency": 7,
+      "attainedProficiency": 8,
+      "createdAt": "2025-10-16T21:44:41.000Z",
+      "updatedAt": "2025-10-16T21:46:54.000Z",
+      "sourceType": "Mentee",
+      "sourceId": 4966
+    }
+  ],
+  "modulesCompleted": [],
+  "experienceBasedSkills": [
+    {
+        "id": 6683180,
+        "skillType": "SubTopic",
+        "skillId": 1157,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "React Native"
+    },
+    {
+        "id": 6683181,
+        "skillType": "SubTopic",
+        "skillId": 1133,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "Angular"
+    },
+    {
+        "id": 6683182,
+        "skillType": "SubTopic",
+        "skillId": 1176,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 1,
+            "months": 1
+        },
+        "categoryType": "tools",
+        "name": "iOS Development"
+    },
+    {
+        "id": 6683183,
+        "skillType": "SubTopic",
+        "skillId": 58475,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 0,
+            "months": 0
+        },
+        "categoryType": "tools",
+        "name": "Power BI"
+    },
+    {
+        "id": 6683184,
+        "skillType": "SubTopic",
+        "skillId": 1148,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 5,
+            "months": 0
+        },
+        "categoryType": "programming_languages",
+        "name": "HTML"
+    },
+    {
+        "id": 6683185,
+        "skillType": "SubTopic",
+        "skillId": 1156,
+        "proficiency": null,
+        "proficiencyPeriod": {
+            "years": 4,
+            "months": 0
+        },
+        "categoryType": "libraries_and_frameworks",
+        "name": "React"
+    }
+  ],
+  "placementIntent": "Interested",
+  "expertSessions": {
+    "isEnabled": true,
+    "totalInterviews": 1,
+    "clearedInterviews": 0
+  },
+  "applicationStage": 4,
+  "preferredCompanyCategories": "",
+  "formConfig": {
+    "csatJobListingPage": null,
+    "npsProfileCreationPage": null,
+    "csatAppliedJobsPage": null,
+    "csatCmiDropOffPage": null,
+    "npsCareerServices": null,
+    "csatJobApplicationRejection": null,
+    "csatJobRecommendations": null,
+    "csatJobRecruiters": null
+  },
+  "formResponses": {},
+  "rpoConsent": true,
+  "preferredRoleTypes": [
+    {
+      "value": 53277,
+      "label": "Internship"
+    },
+    {
+      "value": 53278,
+      "label": "Full Time"
+    }
+  ],
+  "rpoConsentVisited": true,
+  "preferredRoleTypeVisited": true,
+  "preferredRoleTypeUpdated": true,
+  "relevantYoeSkillsUpdated": false,
+  "relevantYoeSkillsVisited": true,
+  "archivedTabRibbonVisited": false,
+  "hasAppliedForJobs": false,
+  "showNpsErrorMessage": false,
+  "policyAwarenessVisited": true,
+  "scalerPerformance": {
+    "useScalerResume": true,
+    "useScalerEducation": true,
+    "doesNotHaveGoodProjects": false,
+    "moonshotResumeLink": null,
+    "resumeTemplateChoice": null,
+    "problemSolving": {
+      "forceHide": true,
+      "show": true,
+      "problemsSolved": 5
+    },
+    "leaderboard": {
+      "forceHide": false,
+      "show": true,
+      "percentile": 100
+    },
+    "mockInterview": {
+      "forceHide": false,
+      "show": true,
+      "rating": "Strong Hire",
+      "skillName": "Data Structures & Algorithms"
+    }
+  },
+  "resumeBuilderAwarenessVisited": false,
+  "scalerResumeTemplateStructure": {
+    "fresher": {
+      "sections": [
+        {
+          "name": "PersonalDetails",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "Skills",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "Experience",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "Projects",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "Achievements",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "Education",
+          "config": {
+            "view": "view1"
+          }
+        },
+        {
+          "name": "CustomSection",
+          "config": {
+            "view": "view1"
+          }
+        }
+      ]
+    }
+  },
+  "userResumeBlocked": false,
+  "blockerDetails": {
+    "totalIssues": 1,
+    "blockers": {
+      "bullets": false,
+      "skills": false,
+      "projects": false,
+      "experience": false,
+      "garbageCollection": 0
+    },
+    "garbageCollection": {
+      "userWorkExperiences": [],
+      "userEducations": []
+    }
+  },
+  "moduleCompletion": {
+    "notCompletedDsaModule": true,
+    "notCompletedLanguageModule": true,
+    "notCompletedLldModule": true
+  },
+  "chatGptEnabled": false,
+  "isRelevantJobsEnabled": true,
+  "aiInteraction": false,
+  "featureFlags": {
+    "practiceArenaEnable": true
+  },
+  "hasCompletedScreeningCall": false,
+  "maxOfferedSalary": null,
+  "name": "User 549613",
+  "username": "u549613",
+  "gender": "male",
+  "email": "aswanth@interviewbit.com",
+  "orgyear": 2018,
+  "timezone": "Mumbai",
+  "phoneVerified": false,
+  "phoneNumber": "9876543210",
+  "university": "IIT BHU",
+  "whatsappConsent": "whatsapp_consent_no",
+  "orgname": "Scaler Academy",
+  "linkedinProfile": "linkedin.com/p/temp",
+  "avatar": "https://all-scaler-assets.s3.ap-southeast-1.amazonaws.com/production/mobile-app/icons/profile/ic_default_avatar.svg",
+  "slug": "fe777f7fd3e4",
+  "experienceYears": 0,
+  "experienceMonths": 0,
+  "jobTitle": "Backend Engineer",
+  "roles": [
+    "admin",
+    "developer",
+    "[\"instructor\"]",
+    "instructor"
+  ],
+  "coins": 333,
+  "timezoneAbbreviation": "IST",
+  "emailVerified": true,
+  "signUpMethod": "email",
+  "pincode": null,
+  "state": null,
+  "city": null,
+  "landmark": null,
+  "streetAddress": null,
+  "company": "Scaler Academy",
+  "degree": "Specialized in Software Development & Problem Solving",
+  "branch": null,
+  "isEligibleLead": false,
+  "isPaidLearner": null,
+  "batchCourseProduct": null,
+  "batchStartDate": null,
+  "batchLevel": null,
+  "batchCoursePreference": null,
+  "showScalerProfile": false,
+  "userWorkExperiences": [
+    {
+      "id": 51,
+      "position": "Backend Engineer",
+      "company": "Scaler Academy",
+      "jobTitle": "Backend Engineer",
+      "from": null,
+      "to": null,
+      "isCurrent": null,
+      "teamSize": null,
+      "baseCtc": null,
+      "variableCtc": null,
+      "ctcCurrency": null,
+      "location": null,
+      "industry": [],
+      "shortDescription": null,
+      "showUserWorkExperienceLocation": false
+    }
+  ],
+  "userAddress": null,
+  "userCompanyProfile": {
+    "id": 621332,
+    "preferredRole": "Engineering Leadership",
+    "preferredLocation": "Hyderabad/Gurgaon/Noida",
+    "resume": "/resumes/original/missing.png",
+    "resumeFileName": null,
+    "city": "Bangalore",
+    "linkedin": "https://www.google.com/search?q=movies+that+starts+with+don+in+english&sourceid=chrome&ie=UTF-8",
+    "noticePeriod": 0,
+    "ctcCurrency": "INR",
+    "expectedCtc": "34",
+    "github": "",
+    "codeforces": "",
+    "hackerrank": "",
+    "codechef": "",
+    "hackerearth": "",
+    "leetcode": "",
+    "jobTitle": null,
+    "geeksforgeeks": "",
+    "visaType": 0,
+    "workAuthorization": null,
+    "servingNotice": null,
+    "availableJoiningDate": null,
+    "buyoutNotice": true,
+    "showUserCity": false
+  },
+  "userAcademicProfile": null,
+  "mentee": {
+    "id": 4966,
+    "coursePaused": false,
+    "careersHubProduct": "data_science",
+    "careersHubCountry": "in"
+  },
+  "userEducations": [
+    {
+      "id": 7,
+      "university": "Lovely Professional University",
+      "degree": "B.Tech",
+      "field": "Machine Learning",
+      "graduationDate": null,
+      "from": null,
+      "to": null,
+      "shortDescription": null,
+      "marks": "8.88",
+      "marksType": "GPA",
+      "showMarksInResume": false,
+      "showBranchInResume": false
+    },
+    {
+      "id": 8,
+      "university": "Scaler",
+      "degree": "Specialized in Software Development & Problem Solving",
+      "field": null,
+      "graduationDate": "2024-11-11",
+      "from": null,
+      "to": null,
+      "shortDescription": null,
+      "marks": null,
+      "marksType": null,
+      "showMarksInResume": false,
+      "showBranchInResume": false
+    }
+  ],
+  "userProjects": [],
+  "userBio": null,
+  "userAchievements": [],
+  "userResumeCustomSection": null
+}
+
