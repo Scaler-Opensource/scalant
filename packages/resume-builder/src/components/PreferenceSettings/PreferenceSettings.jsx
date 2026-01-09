@@ -195,6 +195,7 @@ const PreferenceSettings = ({ isLastStep = false }) => {
     } catch (error) {
       message.error(`Failed to update preference details: ${error.message}`);
     }
+
     dispatch(nextStep());
   };
 

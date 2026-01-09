@@ -1,4 +1,4 @@
-import { ADDITIONAL_PROFILES, PROGRAM_TYPES } from './constants';
+import { PROGRAM_TYPES } from './constants';
 
 export const COURSE_PRODUCT = {
   DATA_SCIENCE: 'data_science',

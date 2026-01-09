@@ -28,21 +28,6 @@ const { Text } = Typography;
 
 const FORM_ID = 'skillsForm';
 
-const SKILL_SECTIONS = {
-  PROGRAMMING_LANGUAGES: {
-    title: 'Programming Languages',
-    type: 'language',
-  },
-  FRAMEWORKS: {
-    title: 'Libraries and Frameworks',
-    type: 'framework',
-  },
-  TOOLS: {
-    title: 'Tools, databases, version control and everything else:',
-    type: 'tools',
-  },
-};
-
 const CATEGORY_TYPE_MAP = {
   language: 0, // Programming Languages
   framework: 1, // Libraries and Frameworks
@@ -112,6 +97,63 @@ const SkillsAndToolkit = ({ onComplete }) => {
     return skillsSection?.config?.view || 'view1';
   };
 
+  const selectedSkills = formData?.selectedSkills || [];
+  const courseBasedSkills =
+    resumeData?.course_based_skills || metaCourseBasedSkills || [];
+  const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
+
+  const handleExperienceUpdate = (skill, years, months) => {
+    if (!skill) return;
+    const selectedSkill = selectedSkills.find(
+      (s) => s.skill_id === skill.subtopic_id
+    );
+
+    if (selectedSkill) {
+      // Update existing skill experience
+      const updatedSelectedSkills = selectedSkills.map((s) => {
+        if (s.skill_id === skill.subtopic_id) {
+          return {
+            ...s,
+            proficiency_period: {
+              years,
+              months,
+            },
+          };
+        }
+        return s;
+      });
+
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: {
+            selectedSkills: updatedSelectedSkills,
+          },
+        })
+      );
+    } else {
+      // Create new skill with experience
+      const newSkill = {
+        skill_id: skill.subtopic_id,
+        skill_type: 'SubTopic',
+        name: skill.subtopic,
+        proficiency_period: {
+          years,
+          months,
+        },
+      };
+
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: {
+            selectedSkills: [...selectedSkills, newSkill],
+          },
+        })
+      );
+    }
+  };
+
   const handleSkillSelect = (skill) => {
     if (!skill) return;
     const isAlreadySelected = selectedSkills.some(
@@ -178,11 +220,6 @@ const SkillsAndToolkit = ({ onComplete }) => {
       [templateKey]: updatedTemplate,
     };
   };
-
-  const selectedSkills = formData?.selectedSkills || [];
-  const courseBasedSkills =
-    resumeData?.course_based_skills || metaCourseBasedSkills || [];
-  const selectedSkillIds = selectedSkills.map((skill) => skill.skill_id);
 
   const handleRemoveSkill = (skillId) => {
     const updatedSelectedSkills = selectedSkills.filter(
@@ -267,57 +304,8 @@ const SkillsAndToolkit = ({ onComplete }) => {
     }
   }, [dispatch, isFormInitialized, initialValues]);
 
-  const handleExperienceUpdate = (skill, years, months) => {
-    if (!skill) return;
-    const selectedSkill = selectedSkills.find(
-      (s) => s.skill_id === skill.subtopic_id
-    );
-
-    if (selectedSkill) {
-      // Update existing skill experience
-      const updatedSelectedSkills = selectedSkills.map((s) => {
-        if (s.skill_id === skill.subtopic_id) {
-          return {
-            ...s,
-            proficiency_period: {
-              years,
-              months,
-            },
-          };
-        }
-        return s;
-      });
-
-      dispatch(
-        updateFormData({
-          formId: FORM_ID,
-          data: {
-            selectedSkills: updatedSelectedSkills,
-          },
-        })
-      );
-    } else {
-      // Create new skill with experience
-      const newSkill = {
-        skill_id: skill.subtopic_id,
-        skill_type: 'SubTopic',
-        name: skill.subtopic,
-        proficiency_period: {
-          years,
-          months,
-        },
-      };
-
-      dispatch(
-        updateFormData({
-          formId: FORM_ID,
-          data: {
-            selectedSkills: [...selectedSkills, newSkill],
-          },
-        })
-      );
-    }
-  };
+  // eslint-disable-next-line no-unused-vars
+  const handleTagClick = () => { };
 
   const handleSaveAndCompile = () => {
     onComplete?.(FORM_KEYS.skills, true);
@@ -340,9 +328,7 @@ const SkillsAndToolkit = ({ onComplete }) => {
           </Text>
         </Checkbox>
         <Tooltip title={SKILL_VIEW_TOOLTIPS.CATEGORIZE}>
-          <InfoCircleOutlined
-            style={{ color: '#8c8c8c', cursor: 'pointer' }}
-          />
+          <InfoCircleOutlined style={{ color: '#8c8c8c', cursor: 'pointer' }} />
         </Tooltip>
       </Flex>
       {selectedSkills.length > 0 && (

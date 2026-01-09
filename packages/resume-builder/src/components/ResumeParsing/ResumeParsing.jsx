@@ -6,14 +6,12 @@ import UploadPrompt from './UploadPrompt';
 import Loading from './Loading';
 import ErrorState from './ErrorState';
 import SuccessState from './SuccessState';
-import { nextStep } from '../../store/resumeBuilderSlice';
+import { nextStep, setResumeData } from '../../store/resumeBuilderSlice';
 import {
   setParsingLoading,
   setParsingError,
   resetParsing,
   setParsingPercent,
-  // setParsingSuccess,
-  // setParsedData,
 } from '../../store/resumeParsingSlice';
 import { useParseResumeMutation } from '../../services/resumeBuilderApi';
 // import resumeParseData from '../../dummyData/resumeParseData.json';
@@ -47,6 +45,9 @@ const ResumeParsing = ({
   );
   const parsingPercent = useSelector(
     (s) => s.scalantResumeBuilder?.resumeParsing?.percent
+  );
+  const parsedData = useSelector(
+    (s) => s.scalantResumeBuilder?.resumeParsing?.parsedData
   );
 
   const [parseResume] = useParseResumeMutation();
@@ -98,6 +99,7 @@ const ResumeParsing = ({
 
   const handleRetry = useCallback(() => {
     dispatch(resetParsing());
+
     onRetry?.();
   }, [dispatch, onRetry]);
 
@@ -127,6 +129,7 @@ const ResumeParsing = ({
         dispatch(setParsingPercent(0));
         startTimeout();
         startProgress();
+
         await parseResume({ resumeId, resourceLink: url }).unwrap();
       } else {
         throw new Error('Upload file function not provided');
@@ -143,11 +146,13 @@ const ResumeParsing = ({
 
   const handleSave = useCallback(() => {
     batch(() => {
-      // dispatch(setResumeData(parsedData));
+      if (parsedData) {
+        dispatch(setResumeData(parsedData));
+      }
       dispatch(nextStep());
     });
     onContinue?.();
-  }, [dispatch, onContinue]);
+  }, [dispatch, onContinue, parsedData]);
 
   // React to parsing status updates that may come from websocket
   useEffect(() => {

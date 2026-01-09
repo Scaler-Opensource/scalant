@@ -45,7 +45,6 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
 
   const handleExpand = () => {
     const currentItems = formData?.projectItems || [];
-    console.log('currentItems', currentItems, index);
     const updatedItems = currentItems.map((projectItem) =>
       projectItem.index === index
         ? { ...projectItem, expanded: !projectItem.expanded }
@@ -99,7 +98,7 @@ const ProjectFormItem = ({ item, formId, required = false, index }) => {
       <Flex gap={16} justify="space-between">
         <Flex gap={4}>
           <Text>Project {index + 1}</Text>
-            <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
+          <DeleteOutlined onClick={handleDelete} style={{ color: 'red' }} />
         </Flex>
         <UpOutlined onClick={handleExpand} />
       </Flex>

@@ -1,7 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Flex, FloatButton, Tooltip } from 'antd';
-import { FileOutlined, AuditOutlined, LikeOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  FileOutlined,
+  AuditOutlined,
+  LikeOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 
 import FontSizeDropdown from './FontSizeDropdown';
 import ResumeDropdown from './ResumeDropdown';

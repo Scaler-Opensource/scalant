@@ -18,7 +18,6 @@ import {
   PREFERENCE_SETTINGS_IMAGE,
   PARSING_STATUS,
   STEPS_ORDER,
-  FORM_KEYS,
 } from '../../utils/constants';
 import {
   shouldShowOnboarding,
@@ -36,23 +35,9 @@ import SampleResumePreview from '../SampleResumePreview';
 import ResumeHighlightPreview from '../ResumeHighlightPreview';
 import styles from './ResumeBuilder.module.scss';
 
-const isEmptyArray = (value) => !Array.isArray(value) || value.length === 0;
-
-const areCoreSectionsEmpty = (resumeData) => {
-  const education = resumeData?.[FORM_KEYS.education];
-  const experience = resumeData?.[FORM_KEYS.experience];
-  const projects = resumeData?.[FORM_KEYS.projects];
-  return (
-    isEmptyArray(education) &&
-    isEmptyArray(experience) &&
-    isEmptyArray(projects)
-  );
-};
-
-const computeStepsWithSkip = (enableResumeParsing, resumeData) => {
+const computeStepsWithSkip = (enableResumeParsing) => {
   const baseSteps = STEPS_ORDER;
-  const shouldShowParsing =
-    Boolean(enableResumeParsing) && areCoreSectionsEmpty(resumeData);
+  const shouldShowParsing = Boolean(enableResumeParsing);
 
   if (shouldShowParsing) return baseSteps;
   return baseSteps.filter(
@@ -87,10 +72,17 @@ const ResumeBuilderContent = ({
   onContinue,
   onSkip,
   onUploadClick,
+  startFromResumeParsing = false,
 }) => {
   const dispatch = useDispatch();
   const { currentStep, steps } = useSelector(
     (state) => state.scalantResumeBuilder.resumeBuilder
+  );
+  const incompleteForms = useSelector(
+    (state) => state.scalantResumeBuilder.resumeForms.incompleteForms
+  );
+  const resumeFormsCompleted = useSelector(
+    (state) => state.scalantResumeBuilder.resumeForms.completed
   );
   const visitedStepsRef = useRef(new Set());
   const initialStepSetRef = useRef(false);
@@ -99,7 +91,7 @@ const ResumeBuilderContent = ({
     (s) => s.scalantResumeBuilder?.resumeParsing?.status
   );
 
-  // Handle upload button click - delegate to host app
+  // Handle upload button click - deligate to host app
   const handleUploadClick = useCallback(() => {
     onUploadClick?.();
   }, [onUploadClick]);
@@ -135,11 +127,13 @@ const ResumeBuilderContent = ({
         dispatch(setIsLoading(false));
       }
 
-      const shouldShow = isOnboarding ? shouldShowOnboarding(resumeId) : false;
-      const filteredSteps = computeStepsWithSkip(
-        enableResumeParsing,
-        resumeData
-      );
+      // Only show onboarding if not completed in localStorage AND resume is not complete
+      const shouldShow = isOnboarding
+        ? shouldShowOnboarding(resumeId) &&
+        incompleteForms.length > 0 &&
+        !resumeFormsCompleted
+        : false;
+      const filteredSteps = computeStepsWithSkip(enableResumeParsing);
       dispatch(setSteps(filteredSteps));
 
       if (!shouldShow) {
@@ -148,8 +142,30 @@ const ResumeBuilderContent = ({
         );
         dispatch(setCurrentStep(resumeStepsIndex >= 0 ? resumeStepsIndex : 0));
       }
+      // Note: startFromResumeParsing navigation is handled in a separate effect
     }
-  }, [resumeData, dispatch, isOnboarding, courseProduct, enableResumeParsing]);
+  }, [
+    resumeData,
+    dispatch,
+    isOnboarding,
+    courseProduct,
+    enableResumeParsing,
+    incompleteForms.length,
+    resumeFormsCompleted,
+  ]);
+
+  // Separate effect to handle navigation to parsing step when startFromResumeParsing is set
+  // This handles the case where startFromResumeParsing is set after the main effect runs
+  useEffect(() => {
+    if (startFromResumeParsing && enableResumeParsing && steps.length > 0) {
+      const parsingStepIndex = steps.findIndex(
+        (step) => step.key === RESUME_BUILDER_STEPS.RESUME_PARSING.key
+      );
+      if (parsingStepIndex >= 0 && currentStep !== parsingStepIndex) {
+        dispatch(setCurrentStep(parsingStepIndex));
+      }
+    }
+  }, [startFromResumeParsing, enableResumeParsing, steps, currentStep, dispatch]);
 
   useEffect(() => {
     const currentStepData = steps[currentStep];
@@ -174,7 +190,9 @@ const ResumeBuilderContent = ({
         // Only trigger callback for initial step if onboarding should be shown
         const resumeId = resumeData?.resume_details?.id;
         const shouldShow = isOnboarding
-          ? shouldShowOnboarding(resumeId)
+          ? shouldShowOnboarding(resumeId) &&
+          incompleteForms.length > 0 &&
+          !resumeFormsCompleted
           : false;
 
         if (shouldShow && stepKey) {
@@ -196,6 +214,8 @@ const ResumeBuilderContent = ({
     onResumeBuilderPageView,
     resumeData?.resume_details?.id,
     isOnboarding,
+    incompleteForms.length,
+    resumeFormsCompleted,
   ]);
 
   useEffect(() => {
@@ -349,6 +369,7 @@ const ResumeBuilder = ({
   onContinue,
   onSkip,
   onUploadClick,
+  startFromResumeParsing = false,
 }) => {
   return (
     <ResumeBuilderContent
@@ -379,6 +400,7 @@ const ResumeBuilder = ({
       onContinue={onContinue}
       onSkip={onSkip}
       onUploadClick={onUploadClick}
+      startFromResumeParsing={startFromResumeParsing}
     />
   );
 };

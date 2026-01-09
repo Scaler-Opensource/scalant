@@ -13,13 +13,7 @@ const dummyResumeList = [
 ];
 
 export const Default = () => (
-  <ResumeLayout
-    preview={
-      <ResumePreview
-        resumeList={dummyResumeList}
-      />
-    }
-  >
+  <ResumeLayout preview={<ResumePreview resumeList={dummyResumeList} />}>
     Dummy Content
   </ResumeLayout>
 );

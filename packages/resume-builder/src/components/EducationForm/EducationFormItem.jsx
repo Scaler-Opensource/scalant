@@ -79,12 +79,12 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
 
   const handleDeleteModalOk = () => {
     const currentItems = formData?.educationItems || [];
-    const updatedItems = currentItems.filter(
-      (educationItem) => educationItem.index !== index
-    ).map((educationItem, newIndex) => ({
-      ...educationItem,
-      index: newIndex,
-    }));
+    const updatedItems = currentItems
+      .filter((educationItem) => educationItem.index !== index)
+      .map((educationItem, newIndex) => ({
+        ...educationItem,
+        index: newIndex,
+      }));
 
     dispatch(
       updateFormData({
@@ -179,8 +179,14 @@ const EducationFormItem = ({ item, formId, required = false, index }) => {
                 { label: 'MBA', value: 'MBA' },
                 { label: 'MCA/BCA', value: 'MCA/BCA' },
                 { label: 'BE + MBA', value: 'BE + MBA' },
-                { label: 'Specialisation in Software Development', value: 'Specialisation in Software Development' },
-                { label: 'Specialisation in Data Science and Analytics', value: 'Specialisation in Data Science and Analytics' },
+                {
+                  label: 'Specialisation in Software Development',
+                  value: 'Specialisation in Software Development',
+                },
+                {
+                  label: 'Specialisation in Data Science and Analytics',
+                  value: 'Specialisation in Data Science and Analytics',
+                },
                 { label: 'Other', value: 'Other' },
               ]}
             />

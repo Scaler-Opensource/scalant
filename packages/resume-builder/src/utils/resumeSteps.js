@@ -13,7 +13,6 @@ import EducationForm from '../components/EducationForm';
 import WorkExperienceForm from '../components/WorkExperienceForm';
 import CustomForm from '../components/CustomForm';
 import React from 'react';
-import { isHtmlEmpty } from './formattingUtils';
 import {
   PROJECT_FORM_REQUIRED_FIELDS,
   PERSONAL_DETAILS_FORM_REQUIRED_FIELDS,
@@ -103,12 +102,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: [
-      'personalDetails',
-      'skills',
-      'projects',
-      'experience',
-    ],
+    requiredForms: ['personalDetails', 'skills', 'projects', 'experience'],
   },
   ACADEMY_EXCEPT_ENGINEERING: {
     order: [
@@ -152,12 +146,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: [
-      'personalDetails',
-      'skills',
-      'projects',
-      'experience',
-    ],
+    requiredForms: ['personalDetails', 'skills', 'projects', 'experience'],
   },
   DSML_DEVELOPER: {
     order: [
@@ -168,12 +157,7 @@ const STEP_ORDERS = {
       'education',
       'achievements',
     ],
-    requiredForms: [
-      'personalDetails',
-      'skills',
-      'projects',
-      'experience',
-    ],
+    requiredForms: ['personalDetails', 'skills', 'projects', 'experience'],
   },
   DSML_DATA_ML_ENGINEER: {
     order: [
