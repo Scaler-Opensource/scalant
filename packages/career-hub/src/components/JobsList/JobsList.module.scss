@@ -1,0 +1,37 @@
+.heading {
+  margin-bottom: 0.8rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  display: block;
+  text-align: center;
+  padding: 2rem;
+}
+
+.alert {
+  margin: 1rem 0;
+}
+
+.header {
+  padding: 2rem;
+  gap: 0rem;
+}
+
+.sentinel {
+  min-height: 20px;
+  height: 20px;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.loadingMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: $colors-neutral-text-color-text-tertiary;
+}

@@ -1,0 +1,33 @@
+.drawerContent {
+  height: 100%;
+}
+
+.filterForm {
+  padding: 2.4rem;
+}
+
+.drawerHeaderSubtitle {
+  font-weight: 400;
+  font-size: $h6-size;
+}
+
+.filterIcon {
+  color: $colors-brand-primary-color-primary;
+}
+
+.buttonContainer {
+  position: sticky;
+  bottom: 0;
+  background-color: $colors-neutral-color-bg-base;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.drawer {
+  :global(.ant-drawer-body) {
+    padding: 0 !important;
+  }
+}

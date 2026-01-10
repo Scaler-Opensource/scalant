@@ -1,0 +1,25 @@
+// JobsLayout styles
+.content {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $colors-neutral-color-white;
+  margin-right: 2rem;
+}
+
+.header {
+  background-color: $colors-neutral-color-bg-base;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 8rem;
+}
+
+.sider {
+  background: transparent;
+}
+
+.layout {
+  background: transparent;
+  margin: 0 8rem;
+  margin-top: 3.2rem; 
+}

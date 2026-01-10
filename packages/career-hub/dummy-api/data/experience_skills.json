@@ -1,0 +1,116 @@
+{
+  "all_skills": [
+      {
+          "key": "BabylonJS",
+          "name": "BabylonJS",
+          "skill_type": "SubTopic",
+          "skill_id": 1135
+      },
+      {
+          "key": "Babel",
+          "name": "Babel",
+          "skill_type": "SubTopic",
+          "skill_id": 1134
+      },
+      {
+          "key": "GitLab CI",
+          "name": "GitLab CI",
+          "skill_type": "SubTopic",
+          "skill_id": 324258
+      },
+      {
+          "key": "Google Colab",
+          "name": "Google Colab",
+          "skill_type": "SubTopic",
+          "skill_id": 308288
+      },
+      {
+          "key": "SeaBorn",
+          "name": "SeaBorn",
+          "skill_type": "SubTopic",
+          "skill_id": 308286
+      },
+      {
+          "key": "Stats and Probability",
+          "name": "Stats and Probability",
+          "skill_type": "SubTopic",
+          "skill_id": 46266
+      },
+      {
+          "key": "Tableau",
+          "name": "Tableau",
+          "skill_type": "SubTopic",
+          "skill_id": 46262
+      },
+      {
+          "key": "Frontend Development",
+          "name": "Frontend Development",
+          "skill_type": "Topic",
+          "skill_id": 400
+      },
+      {
+          "key": "Backend Development",
+          "name": "Backend Development",
+          "skill_type": "Topic",
+          "skill_id": 403
+      },
+      {
+          "key": "Machine Learning",
+          "name": "Machine Learning",
+          "skill_type": "Topic",
+          "skill_id": 405
+      }
+  ],
+  "items": [
+      {
+          "id": 1135,
+          "text": "BabylonJS",
+          "type": "SubTopic"
+      },
+      {
+          "id": 1134,
+          "text": "Babel",
+          "type": "SubTopic"
+      },
+      {
+          "id": 324258,
+          "text": "GitLab CI",
+          "type": "SubTopic"
+      },
+      {
+          "id": 308288,
+          "text": "Google Colab",
+          "type": "SubTopic"
+      },
+      {
+          "id": 308286,
+          "text": "SeaBorn",
+          "type": "SubTopic"
+      },
+      {
+          "id": 46266,
+          "text": "Stats and Probability",
+          "type": "SubTopic"
+      },
+      {
+          "id": 46262,
+          "text": "Tableau",
+          "type": "SubTopic"
+      },
+      {
+          "id": 400,
+          "text": "Frontend Development",
+          "type": "Topic"
+      },
+      {
+          "id": 403,
+          "text": "Backend Development",
+          "type": "Topic"
+      },
+      {
+          "id": 405,
+          "text": "Machine Learning",
+          "type": "Topic"
+      }
+  ]
+}

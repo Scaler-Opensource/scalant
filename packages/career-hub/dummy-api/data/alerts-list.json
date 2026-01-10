@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": "98911406",
+      "type": "job_alert",
+      "attributes": {
+        "id": 98911406,
+        "name": "Aswanth",
+        "status": "active",
+        "frequency": 7,
+        "notification_type": "email",
+        "locations": [
+          "Gurgaon"
+        ],
+        "job_functions": [
+          56529,
+          56530
+        ],
+        "companies": [],
+        "min_ctc": 10,
+        "min_experience": 12,
+        "max_experience": 24
+      }
+    },
+    {
+      "id": "31497",
+      "type": "job_alert",
+      "attributes": {
+        "id": 31497,
+        "name": "ResumeAlert",
+        "status": "paused",
+        "frequency": 0,
+        "notification_type": "both",
+        "locations": null,
+        "job_functions": [],
+        "companies": [],
+        "min_ctc": 41,
+        "min_experience": 0,
+        "max_experience": 12
+      }
+    }
+  ]
+}
+

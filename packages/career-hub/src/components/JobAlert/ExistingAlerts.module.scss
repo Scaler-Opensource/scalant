@@ -1,0 +1,39 @@
+.alertCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 8px;
+  border: 1px solid $colors-neutral-border-color-border;
+  background: $colors-neutral-color-white;
+  padding: 1.6rem;
+  margin-bottom: 1.6rem;
+  /* boxShadowTertiary */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+
+.alertHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alertIcon {
+  font-size: 1.6rem;
+  color: $colors-brand-primary-color-primary;
+}
+
+.inactiveIcon {
+  color: $colors-neutral-border-color-border;
+}
+
+.alertActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editFormCard {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid $colors-neutral-border-color-border;
+}
