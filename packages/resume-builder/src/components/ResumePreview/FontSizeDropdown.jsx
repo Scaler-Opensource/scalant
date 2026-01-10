@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
 import { FontSizeOutlined } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 
@@ -41,16 +41,21 @@ const FontSizeDropdown = ({ onFontSizeChange }) => {
     onFontSizeChange?.(key);
   };
 
-  const menu = (
-    <Menu onClick={handleFontSizeChange} selectedKeys={[fontSize]}>
-      <Menu.Item key="small">Small</Menu.Item>
-      <Menu.Item key="medium">Medium</Menu.Item>
-      <Menu.Item key="large">Large</Menu.Item>
-    </Menu>
-  );
+  const items = [
+    { key: 'small', label: 'Small' },
+    { key: 'medium', label: 'Medium' },
+    { key: 'large', label: 'Large' },
+  ];
 
   return (
-    <Dropdown overlay={menu} trigger={['click']}>
+    <Dropdown
+      menu={{
+        items,
+        onClick: handleFontSizeChange,
+        selectedKeys: [fontSize],
+      }}
+      trigger={['click']}
+    >
       <FloatButton
         icon={<FontSizeOutlined />}
         tooltip={`Font Size: ${fontSize.charAt(0).toUpperCase() + fontSize.slice(1)}`}

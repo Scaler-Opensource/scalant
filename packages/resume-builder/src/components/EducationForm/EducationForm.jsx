@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { Space, Button, Flex, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import EducationFormItem from './EducationFormItem';
 import CustomEducationFormItem from './CustomEducationFormItem';
-import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
+import { useResumeSave } from '../../hooks/useResumeSave';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
+import { setIncompleteForms } from '../../store/resumeFormsSlice';
 import dayjs from 'dayjs';
 import { FORM_KEYS } from '../../utils/constants';
 
@@ -51,48 +53,48 @@ const EducationForm = ({ onComplete, required = false }) => {
     incompleteForms.length === 0 ||
     (incompleteForms.length <= 1 &&
       currentIncompleteForm === FORM_KEYS.education);
-  const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
+  const { saveResume, isLoading } = useResumeSave();
 
   const initialValues = useMemo(() => {
     let value =
       resumeData?.education && resumeData?.education.length > 0
         ? {
-            educationItems: resumeData.education.map((item, index) => ({
-              id: item.id,
-              index: index,
-              completed: true,
-              expanded: false,
-              formData: {
-                university: item.university,
-                degree: item.degree,
-                field: item.field,
-                marks: item.marks,
-                marks_type: item.marks_type,
-                graduation_date: item.graduation_date
-                  ? dayjs(item.graduation_date)
-                  : null,
-                short_description: item.short_description,
-              },
-            })),
-          }
+          educationItems: resumeData.education.map((item, index) => ({
+            id: item.id,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              university: item.university,
+              degree: item.degree,
+              field: item.field,
+              marks: item.marks,
+              marks_type: item.marks_type,
+              graduation_date: item.graduation_date
+                ? dayjs(item.graduation_date)
+                : null,
+              short_description: item.short_description,
+            },
+          })),
+        }
         : { ...initialFormData };
 
     value.customEducation =
       resumeData?.resume_custom_section &&
-      Object.keys(resumeData?.resume_custom_section).length
+        Object.keys(resumeData?.resume_custom_section).length
         ? {
+          id: resumeData?.resume_custom_section?.id,
+          completed: true,
+          expanded: true,
+          formData: {
+            name: resumeData?.resume_custom_section?.name,
+            description: resumeData?.resume_custom_section?.description,
+            created_at: resumeData?.resume_custom_section?.created_at,
+            updated_at: resumeData?.resume_custom_section?.updated_at,
             id: resumeData?.resume_custom_section?.id,
-            completed: true,
-            expanded: true,
-            formData: {
-              name: resumeData?.resume_custom_section?.name,
-              description: resumeData?.resume_custom_section?.description,
-              created_at: resumeData?.resume_custom_section?.created_at,
-              updated_at: resumeData?.resume_custom_section?.updated_at,
-              id: resumeData?.resume_custom_section?.id,
-              user_id: resumeData?.resume_custom_section?.user_id,
-            },
-          }
+            user_id: resumeData?.resume_custom_section?.user_id,
+          },
+        }
         : null;
 
     return { ...value };
@@ -107,7 +109,9 @@ const EducationForm = ({ onComplete, required = false }) => {
         })
       );
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+    // Don't re-initialize when initialValues changes after form is initialized
+    // This prevents overwriting user input when resumeData updates
+  }, [dispatch, isFormInitialized]);
 
   const handleAddEducation = () => {
     const currentItems = formData?.educationItems || [];
@@ -179,22 +183,104 @@ const EducationForm = ({ onComplete, required = false }) => {
         },
       };
 
-      await updateResumeDetails({
-        resumeId: resumeData?.resume_details?.id,
+      const updatedResumeData = await saveResume({
         payload,
-      }).unwrap();
+        optimisticData: {
+          education: educationPayload,
+          resume_custom_section: {
+            ...customEducation?.formData,
+          },
+        },
+      });
+
+      if (!updatedResumeData) return false;
+
+      // Fix: If we sent an empty list and backend didn't return the key, force it to []
+      if (educationPayload.length === 0 && !updatedResumeData.education) {
+        updatedResumeData.education = [];
+      }
+
+      // Force update the form data with the new data from backend (which includes IDs)
+      let value = {};
+      if (updatedResumeData?.education) {
+        const newFormItems = updatedResumeData.education.map(
+          (item, index) => ({
+            id: item.id || `temp-${index}`,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              university: item.university,
+              degree: item.degree,
+              field: item.field, // Added field back
+              marks: item.marks, // Added marks back
+              marks_type: item.marks_type, // Added marks_type back
+              graduation_date: item.graduation_date
+                ? dayjs(item.graduation_date)
+                : null,
+              short_description: item.short_description, // Added short_description back
+            },
+          })
+        );
+        value.educationItems = newFormItems;
+      } else {
+        value.educationItems = { ...initialFormData }.educationItems;
+      }
+
+      value.customEducation =
+        updatedResumeData?.resume_custom_section &&
+          Object.keys(updatedResumeData?.resume_custom_section).length
+          ? {
+            id: updatedResumeData?.resume_custom_section?.id,
+            completed: true,
+            expanded: true,
+            formData: {
+              name: updatedResumeData?.resume_custom_section?.name,
+              description:
+                updatedResumeData?.resume_custom_section?.description,
+              created_at:
+                updatedResumeData?.resume_custom_section?.created_at,
+              updated_at:
+                updatedResumeData?.resume_custom_section?.updated_at,
+              id: updatedResumeData?.resume_custom_section?.id,
+              user_id: updatedResumeData?.resume_custom_section?.user_id,
+            },
+          }
+          : null;
+
+      dispatch(
+        updateFormData({
+          formId: FORM_ID,
+          data: value,
+        })
+      );
+
       message.success('Education details updated successfully');
+      return true;
     } catch (error) {
       message.error(`Failed to update education details: ${error.message}`);
+      return false;
     }
   };
-  const handleSaveAndCompile = () => {
-    onComplete?.(FORM_KEYS.education, true);
-    handleFinish();
+  const handleSaveAndCompile = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.education, true);
+      }
+    } catch (e) {
+      // handled
+    }
   };
-  const handleSaveAndNext = () => {
-    onComplete?.(FORM_KEYS.education);
-    handleFinish();
+  const handleSaveAndNext = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.education);
+      }
+    } catch (e) {
+      // handled
+    }
   };
 
   return (

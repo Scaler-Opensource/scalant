@@ -2,8 +2,10 @@ import { Button, Flex, message, Space } from 'antd';
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
-import { initializeForm } from '../../store/formStoreSlice';
+
+import { useResumeSave } from '../../hooks/useResumeSave';
+import { initializeForm, updateFormData } from '../../store/formStoreSlice';
+
 import CustomFormItem from './CustomFormItem';
 import { FORM_KEYS } from '../../utils/constants';
 import { isHtmlEmpty } from '../../utils/formattingUtils';
@@ -40,21 +42,21 @@ const CustomForm = ({ onComplete }) => {
     incompleteForms.length === 0 ||
     (incompleteForms.length <= 1 &&
       currentIncompleteForm === FORM_KEYS.achievements);
-  const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
+  const { saveResume, isLoading } = useResumeSave();
 
   const initialValues = useMemo(
     () =>
       resumeData?.achievements
         ? {
-            achievementsItems: resumeData.achievements.map((achievement) => ({
-              id: achievement.id,
-              completed: true,
-              saved: true,
-              formData: {
-                description: achievement.description,
-              },
-            })),
-          }
+          achievementsItems: resumeData.achievements.map((achievement) => ({
+            id: achievement.id,
+            completed: true,
+            saved: true,
+            formData: {
+              description: achievement.description,
+            },
+          })),
+        }
         : initialFormData,
     [resumeData?.achievements]
   );
@@ -63,7 +65,8 @@ const CustomForm = ({ onComplete }) => {
     if (!isFormInitialized) {
       dispatch(initializeForm({ formId: FORM_ID, initialData: initialValues }));
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+
+  }, [dispatch, isFormInitialized]);
 
   const handleFinish = async () => {
     const achievementsItems = formData?.achievementsItems || [];
@@ -76,12 +79,12 @@ const CustomForm = ({ onComplete }) => {
       return;
     }
 
-    const achievements = achievementsItems.map((item) => ({
-      ...(item.id && { id: item.id }),
-      description: isHtmlEmpty(item.formData.description)
-        ? ''
-        : item.formData.description,
-    }));
+    const achievements = achievementsItems
+      .filter((item) => !isHtmlEmpty(item.formData.description))
+      .map((item) => ({
+        ...(item.id && { id: item.id }),
+        description: item.formData.description,
+      }));
 
     try {
       const payload = {
@@ -91,10 +94,43 @@ const CustomForm = ({ onComplete }) => {
         mark_complete: markComplete,
       };
 
-      await updateResumeDetails({
-        resumeId: resumeData?.resume_details?.id,
+      const updatedResumeData = await saveResume({
         payload,
-      }).unwrap();
+        optimisticData: {
+          achievements: achievements,
+        },
+      });
+
+      if (!updatedResumeData) return;
+
+      // Fix: If we sent an empty list and backend didn't return the key, force it to []
+      if (
+        payload.achievements.length === 0 &&
+        !updatedResumeData.achievements
+      ) {
+        updatedResumeData.achievements = [];
+      }
+
+      // Force update the form data with the new data from backend (which includes IDs)
+      if (updatedResumeData?.achievements) {
+        const newFormItems = updatedResumeData.achievements.map((item) => ({
+          id: item.id,
+          completed: true,
+          saved: true,
+          formData: {
+            description: item.description,
+          },
+        }));
+
+        dispatch(
+          updateFormData({
+            formId: FORM_ID,
+            data: {
+              achievementsItems: newFormItems,
+            },
+          })
+        );
+      }
 
       message.success('Achievements updated successfully');
     } catch (error) {
@@ -119,15 +155,15 @@ const CustomForm = ({ onComplete }) => {
           {(formData?.achievementsItems?.length
             ? formData.achievementsItems
             : [
-                {
-                  id: null,
-                  completed: false,
-                  saved: false,
-                  formData: {
-                    description: '',
-                  },
+              {
+                id: null,
+                completed: false,
+                saved: false,
+                formData: {
+                  description: '',
                 },
-              ]
+              },
+            ]
           ).map((item) => (
             <CustomFormItem key={item.id} item={item} formId={FORM_ID} />
           ))}

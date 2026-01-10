@@ -102,7 +102,9 @@ const PreferenceSettings = ({ isLastStep = false }) => {
         })
       );
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+    // Don't re-initialize when initialValues changes after form is initialized
+    // This prevents overwriting user input when resumeData updates
+  }, [dispatch, isFormInitialized]);
 
   useEffect(() => {
     // Initialize form with Redux state

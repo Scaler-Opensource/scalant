@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
+import { setResumeData } from '../../store/resumeBuilderSlice';
 import SectionFeedback from '../SectionFeedback/SectionFeedback';
 
 import styles from './SkillsAndToolkit.module.scss';
@@ -282,14 +283,61 @@ const SkillsAndToolkit = ({ onComplete }) => {
         }),
       };
 
-      await updateResumeDetails({
+      const response = await updateResumeDetails({
         resumeId: resumeData?.resume_details?.id,
         payload,
       }).unwrap();
+
+      // Update global resume data with the response OR optimistically
+      if (response || !response) { // Always proceed if no error thrown
+        let updatedResumeData;
+
+        if (response) {
+          updatedResumeData = { ...(response.data || response) };
+        } else {
+          // Optimistic update if response is empty
+          console.warn('SkillsAndToolkit: Response null, performing optimistic update');
+          updatedResumeData = {
+            ...resumeData,
+            skills: payload.skills
+          };
+        }
+
+        // Fix: If we sent an empty list and backend didn't return the key, force it to []
+        // Note: Payload uses 'skills' key constructed from selectedSkills
+        if (selectedSkills.length === 0 && !updatedResumeData.skills) {
+          updatedResumeData.skills = [];
+        }
+
+        dispatch(setResumeData(updatedResumeData));
+
+        // Force update the form data with the new data from backend
+        if (updatedResumeData?.skills) {
+          const newSelectedSkills = updatedResumeData.skills.filter((skill) =>
+            skillsData.some((data) => data.subtopic_id === skill.skill_id)
+          );
+
+          dispatch(
+            updateFormData({
+              formId: FORM_ID,
+              data: {
+                selectedSkills: newSelectedSkills,
+              },
+            })
+          );
+        }
+      }
+
       message.success('Skills and toolkit updated successfully');
+      return true;
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      message.error('Failed to update skills and toolkit');
+      if (error?.data?.message) {
+        message.error(`Failed to update skills: ${error.data.message}`);
+      } else {
+        message.error('Failed to update skills and toolkit');
+      }
+      return false;
     }
   };
 
@@ -302,19 +350,33 @@ const SkillsAndToolkit = ({ onComplete }) => {
         })
       );
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+    // Don't re-initialize when initialValues changes after form is initialized
+    // This prevents overwriting user input when resumeData updates
+  }, [dispatch, isFormInitialized]);
 
   // eslint-disable-next-line no-unused-vars
   const handleTagClick = () => { };
 
-  const handleSaveAndCompile = () => {
-    onComplete?.(FORM_KEYS.skills, true);
-    handleFinish();
+  const handleSaveAndCompile = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.skills, true);
+      }
+    } catch (e) {
+      // handled
+    }
   };
 
-  const handleSaveAndNext = () => {
-    onComplete?.(FORM_KEYS.skills);
-    handleFinish();
+  const handleSaveAndNext = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.skills);
+      }
+    } catch (e) {
+      // handled
+    }
   };
 
   return (

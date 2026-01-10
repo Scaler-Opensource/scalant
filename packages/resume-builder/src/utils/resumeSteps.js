@@ -258,7 +258,7 @@ const getReviewStatus = (formKey, reviewData, isReviewLoading) => {
     reviewData?.resume_evaluation_result?.overall_resume_score;
   const sectionScore =
     reviewData?.resume_evaluation_result?.section_scores?.[
-      FORM_AI_FEEDBACK_SECTIONS[formKey]
+    FORM_AI_FEEDBACK_SECTIONS[formKey]
     ];
   if (isReviewLoading) {
     return 'under_review';
@@ -308,9 +308,8 @@ export const getOverallSummary = (reviewData, isReviewLoading) => {
   if (projects < 3) improvementAreas.push('Projects');
   if (work_experience < 3) improvementAreas.push('Work Experience');
 
-  const message = `You're close! Try improving the ${improvementAreas.join(', ')} section${
-    improvementAreas.length > 1 ? 's' : ''
-  }, based on the provided feedback`;
+  const message = `You're close! Try improving the ${improvementAreas.join(', ')} section${improvementAreas.length > 1 ? 's' : ''
+    }, based on the provided feedback`;
 
   return ['warning', message];
 };
@@ -324,6 +323,7 @@ export const getAllIncompleteForms = (resumeData) => {
 
     // Skip if form data doesn't exist or is empty
     if (!formData) {
+      // console.log(`[getAllIncompleteForms] ${key}: Missing data`);
       incompleteForms.push(formKey);
       return;
     }
