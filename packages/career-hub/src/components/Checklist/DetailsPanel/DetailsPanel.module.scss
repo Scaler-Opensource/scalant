@@ -1,0 +1,88 @@
+.detailsPanel {
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+  min-height: 400px;
+}
+
+.emptyTitle {
+  margin-bottom: 12px !important;
+  text-align: center;
+}
+
+.emptyText {
+  display: block;
+  text-align: center;
+  color: #8c8c8c;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.title {
+  margin: 0 !important;
+  flex: 1;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 4px 12px;
+}
+
+.pointsList {
+  margin-bottom: 24px;
+}
+
+.pointItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pointIcon {
+  font-size: 18px;
+  color: #1890ff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pointText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #595959;
+}
+
+.actionButton {
+  margin-bottom: 24px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.statsIcon {
+  font-size: 16px;
+  color: #8c8c8c;
+}
+
+.statsText {
+  font-size: 13px;
+  color: #8c8c8c;
+}
+

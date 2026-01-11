@@ -1,0 +1,28 @@
+{
+  "name": "@scalant/career-hub",
+  "version": "1.0.0",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/career-hub.umd.js",
+  "module": "dist/career-hub.es.js",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "react-router-dom": "^6.8.0"
+  },
+  "exports": {
+    "import": "./dist/career-hub.es.js",
+    "require": "./dist/career-hub.umd.js"
+  },
+  "style": "./dist/career-hub.css",
+  "scripts": {
+    "lint": "eslint packages/**/src",
+    "lint:styles": "stylelint \"**/*.scss\"",
+    "build": "vite build",
+    "storybook": "start-storybook -p 6007"
+  },
+  "gitHead": ""
+}

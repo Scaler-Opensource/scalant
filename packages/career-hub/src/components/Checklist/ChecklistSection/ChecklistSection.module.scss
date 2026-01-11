@@ -1,0 +1,65 @@
+.checklistSection {
+  width: 100%;
+  margin-bottom: 16px;
+  background: white;
+  border-radius: 4px;
+
+  :global(.ant-collapse-header) {
+    padding: 16px !important;
+  }
+
+  :global(.ant-collapse-content-box) {
+    padding: 0 16px 16px 16px !important;
+  }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sectionTitle {
+  margin: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sectionDescription {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.stepsList {
+  margin-bottom: 16px;
+}
+
+.progressSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+  width: 100%;
+}
+
+.fullWidthProgress {
+  width: 100%;
+
+  :global(.ant-progress-steps-outer) {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  :global(.ant-progress-steps-item) {
+    flex: 1 !important;
+  }
+}
+
+.progressText {
+  display: block;
+  margin-top: 8px;
+  font-weight: 500;
+  color: #1890ff;
+}
+
