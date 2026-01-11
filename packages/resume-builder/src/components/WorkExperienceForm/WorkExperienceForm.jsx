@@ -4,8 +4,10 @@ import dayjs from 'dayjs';
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
+
+import { useResumeSave } from '../../hooks/useResumeSave';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
+import { setIncompleteForms } from '../../store/resumeFormsSlice';
 import AiSuggestionBanner from '../AiSuggestionBanner/AiSuggestionBanner';
 import SectionFeedback from '../SectionFeedback/SectionFeedback';
 import WorkExperienceFormItem from './WorkExperienceFormItem';
@@ -64,28 +66,28 @@ const WorkExperienceForm = ({
     incompleteForms.length === 0 ||
     (incompleteForms.length <= 1 &&
       currentIncompleteForm === FORM_KEYS.experience);
-  const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
+  const { saveResume, isLoading } = useResumeSave();
 
   const initialValues = useMemo(
     () =>
       resumeData?.experience && resumeData?.experience.length > 0
         ? {
-            workExperienceItems: resumeData.experience.map((item, index) => ({
-              id: item.id,
-              index: index,
-              completed: true,
-              expanded: false,
-              formData: {
-                company: item.company,
-                position: item.position,
-                from: item.from ? dayjs(item.from) : null,
-                to: item.to ? dayjs(item.to) : null,
-                location: item.location,
-                short_description: item.short_description,
-                is_current: item.is_current,
-              },
-            })),
-          }
+          workExperienceItems: resumeData.experience.map((item, index) => ({
+            id: item.id,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              company: item.company,
+              position: item.position,
+              from: item.from ? dayjs(item.from) : null,
+              to: item.to ? dayjs(item.to) : null,
+              location: item.location,
+              short_description: item.short_description,
+              is_current: item.is_current,
+            },
+          })),
+        }
         : initialFormData,
     [resumeData?.experience]
   );
@@ -99,7 +101,9 @@ const WorkExperienceForm = ({
         })
       );
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+    // Don't re-initialize when initialValues changes after form is initialized
+    // This prevents overwriting user input when resumeData updates
+  }, [dispatch, isFormInitialized]);
 
   const handleAddWorkExperience = () => {
     const currentItems = formData?.workExperienceItems || [];
@@ -184,24 +188,81 @@ const WorkExperienceForm = ({
         previous_experiences: workExperiencePayload,
       };
 
-      await updateResumeDetails({
-        resumeId: resumeData?.resume_details?.id,
+      const updatedResumeData = await saveResume({
         payload,
-      }).unwrap();
+        optimisticData: {
+          experience: workExperiencePayload,
+        },
+      });
+
+      if (!updatedResumeData) return false;
+
+      // Fix: If we sent an empty list and backend didn't return the key, force it to []
+      if (
+        workExperiencePayload.length === 0 &&
+        !updatedResumeData.experience
+      ) {
+        updatedResumeData.experience = [];
+      }
+
+      // Force update the form data with the new data from backend (which includes IDs)
+      if (updatedResumeData?.experience) {
+        const newFormItems = updatedResumeData.experience.map(
+          (item, index) => ({
+            id: item.id || `temp-${index}`,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              company: item.company,
+              location: item.location,
+              position: item.position,
+              from: item.from,
+              to: item.to,
+              current: item.current,
+              description: item.description,
+            },
+          })
+        );
+
+        dispatch(
+          updateFormData({
+            formId: FORM_ID,
+            data: {
+              workExperienceItems: newFormItems,
+            },
+          })
+        );
+      }
+
       message.success('Work experience details updated successfully');
+      return true;
     } catch (error) {
       message.error(`Failed to update work experience details: ${error}`);
+      return false;
     }
   };
 
-  const handleSaveAndCompile = () => {
-    onComplete?.(FORM_KEYS.experience, true);
-    handleFinish();
+  const handleSaveAndCompile = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.experience, true);
+      }
+    } catch (e) {
+      // handled
+    }
   };
 
-  const handleSaveAndNext = () => {
-    onComplete?.(FORM_KEYS.experience);
-    handleFinish();
+  const handleSaveAndNext = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.experience);
+      }
+    } catch (e) {
+      // handled
+    }
   };
 
   return (

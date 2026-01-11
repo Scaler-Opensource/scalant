@@ -57,6 +57,11 @@ const resumeBuilderSlice = createSlice({
       state.currentStep = 0;
       state.steps = STEPS_ORDER;
     },
+    patchResumeData: (state, action) => {
+      state.resumeData = merge(state.resumeData, action.payload, {
+        arrayMerge: replaceArrays,
+      });
+    },
   },
 });
 
@@ -70,5 +75,6 @@ export const {
   setResumeData,
   resetSteps,
   setProgram,
+  patchResumeData,
 } = resumeBuilderSlice.actions;
 export default resumeBuilderSlice.reducer;

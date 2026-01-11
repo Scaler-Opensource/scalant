@@ -44,6 +44,7 @@ const ResumeTimeline = ({
   const [mounted, setMounted] = useState(false);
   const [tourDismissed, setTourDismissed] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
+  const previousResumeIdRef = useRef();
   const resumePersonaData = useSelector(
     (state) => state.scalantResumeBuilder.formStore.forms.basicQuestions
   );
@@ -60,26 +61,44 @@ const ResumeTimeline = ({
   // Initialize form values when resumeData is loaded
   useBasicQuestionsForm(resumeData?.personal_details);
 
-  // Force re-render when resumeData changes
+  // Recalculate incomplete forms only when resume ID changes or on initial load
+  // This prevents clearing form data when resumeData updates after a save
   useEffect(() => {
+    const resumeId = resumeData?.resume_details?.id;
+
     if (parseStatus === PARSING_STATUS.SUCCESS) {
       // parsing succeeded; mark all steps as incomplete and prepare the flow
       dispatch(setIncompleteForms(Object.values(FORM_KEYS)));
       dispatch(setCurrentIncompleteForm(FORM_KEYS.personal_details));
       setExpandedStep(null);
       setTourDismissed(false);
+      previousResumeIdRef.current = resumeId;
     } else if (resumeData) {
-      setSteps([]);
+      // Only recalculate steps when resume ID changes (different resume)
+      // or on initial load (previousResumeIdRef.current is undefined)
+      const resumeChanged =
+        previousResumeIdRef.current === undefined ||
+        previousResumeIdRef.current !== resumeId;
+
       const newIncompleteForms = getAllIncompleteForms(resumeData);
-      batch(() => {
+
+      if (resumeChanged) {
+        setSteps([]);
+        batch(() => {
+          dispatch(setIncompleteForms(newIncompleteForms));
+          if (newIncompleteForms.length > 0) {
+            dispatch(setCurrentIncompleteForm(newIncompleteForms[0]));
+            setExpandedStep(newIncompleteForms[0]);
+          } else {
+            setExpandedStep(null);
+          }
+        });
+        previousResumeIdRef.current = resumeId;
+      } else {
+        // For existing resume, just sync the incomplete list based on actual data
+        // This ensures the progress reflects the actual data state without resetting the UI flow
         dispatch(setIncompleteForms(newIncompleteForms));
-        if (newIncompleteForms.length > 0) {
-          dispatch(setCurrentIncompleteForm(newIncompleteForms[0]));
-          setExpandedStep(newIncompleteForms[0]);
-        } else {
-          setExpandedStep(null);
-        }
-      });
+      }
     }
   }, [resumeData, dispatch, parseStatus]);
 
@@ -125,48 +144,62 @@ const ResumeTimeline = ({
 
   const handleFormCompletion = useCallback(
     (formType, skipNextStep = false) => {
-      let updatedIncompleteForms = [...incompleteForms];
-      if (expandedStep === currentIncompleteForm) {
-        updatedIncompleteForms = updatedIncompleteForms.filter(
-          (form) => form !== currentIncompleteForm
-        );
+      // Use thunk to access the absolute latest state (updated by the child form)
+      // This prevents stale closures from overwriting the store or acting on old data
+      dispatch((dispatch, getState) => {
+        const state = getState();
+        const currentIncompleteForms =
+          state.scalantResumeBuilder.resumeForms.incompleteForms;
+        const latestCurrentIncompleteForm =
+          state.scalantResumeBuilder.resumeForms.currentIncompleteForm;
 
-        dispatch(setIncompleteForms(updatedIncompleteForms));
-      }
+        // Navigation Logic
+        if (!skipNextStep && currentIncompleteForms.length > 0) {
+          // If we are currently completing the form that is marked as "current",
+          // move to the next one in the updated list
+          if (expandedStep === latestCurrentIncompleteForm) {
+            const nextForm = currentIncompleteForms[0];
+            dispatch(setCurrentIncompleteForm(nextForm));
+            setExpandedStep(nextForm);
+          } else {
+            // If we finished a form that wasn't the "current" one (e.g. jumped ahead),
+            // just stick to the current plan or stay where we are?
+            // Actually, the new list `currentIncompleteForms` already has the finished one removed.
+            // So `currentIncompleteForms[0]` is indeed the next thing to do.
+            const nextForm = currentIncompleteForms[0];
+            dispatch(setCurrentIncompleteForm(nextForm));
+            setExpandedStep(nextForm);
+          }
+        } else if (!skipNextStep) {
+          setExpandedStep(null);
+        }
 
-      if (!skipNextStep && updatedIncompleteForms.length > 0) {
-        const nextForm = updatedIncompleteForms[0];
-        dispatch(setCurrentIncompleteForm(nextForm));
-        setExpandedStep(nextForm);
-      } else if (!skipNextStep) {
-        setExpandedStep(null);
-      }
-      onFormCompletion?.(formType);
-      if (updatedIncompleteForms.length === 0) {
-        onAllFormsComplete?.();
-      }
+        onFormCompletion?.(formType);
 
-      if (
-        updatedIncompleteForms.length === 0 &&
-        resumeData.application_stage !== 4
-      ) {
-        // if the form is complete and the application stage is not 4,
-        // then reload the page as the status will be updated to active after reload
-        dispatch(setCompleted(true));
-        message.success(
-          'Resume completed successfully. Redirecting to career hub...'
-        );
-        // eslint-disable-next-line no-undef
-        setTimeout(() => {
+        if (currentIncompleteForms.length === 0) {
+          onAllFormsComplete?.();
+        }
+
+        if (
+          currentIncompleteForms.length === 0 &&
+          resumeData.application_stage !== 4
+        ) {
+          // if the form is complete and the application stage is not 4,
+          // then reload the page as the status will be updated to active after reload
+          dispatch(setCompleted(true));
+          message.success(
+            'Resume completed successfully. Redirecting to career hub...'
+          );
           // eslint-disable-next-line no-undef
-          window.location.reload();
-        }, 5000); // 5 seconds delay to ensure the status is updated
-      }
+          setTimeout(() => {
+            // eslint-disable-next-line no-undef
+            window.location.reload();
+          }, 5000); // 5 seconds delay to ensure the status is updated
+        }
+      });
     },
     [
-      incompleteForms,
       expandedStep,
-      currentIncompleteForm,
       onFormCompletion,
       resumeData?.application_stage,
       dispatch,

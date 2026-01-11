@@ -109,23 +109,38 @@ const ResumeBuilderContent = ({
     previousResumeIdRef.current = resumeId;
   }, [resumeData?.resume_details?.id, dispatch]);
 
+  const previousResumeIdForDataRef = useRef();
+
   useEffect(() => {
     if (resumeData) {
       const resumeId = resumeData?.resume_details?.id;
-
       const resumeEvaluationDetails = resumeData?.resume_evaluation_details;
 
-      dispatch(setResumeData(resumeData));
-      dispatch(setProgram(getResumeProgram(courseProduct)));
-      dispatch(resetSteps());
-      dispatch(resetAllForms());
-      dispatch(setReviewData(resumeEvaluationDetails));
+      const isResumeChanged =
+        previousResumeIdForDataRef.current !== undefined &&
+        previousResumeIdForDataRef.current !== resumeId;
+
+      const isFirstLoad = previousResumeIdForDataRef.current === undefined;
+
+      if (isResumeChanged || isFirstLoad) {
+        dispatch(setResumeData(resumeData));
+        dispatch(setProgram(getResumeProgram(courseProduct)));
+        dispatch(setReviewData(resumeEvaluationDetails));
+
+        // Reset forms and steps only when resume ID actually changes (different resume)
+        // or on first load
+        dispatch(resetSteps());
+        dispatch(resetAllForms());
+
+        previousResumeIdForDataRef.current = resumeId;
+      }
 
       if (resumeEvaluationDetails?.evaluation_state === 'ongoing') {
         dispatch(setIsLoading(true));
       } else {
         dispatch(setIsLoading(false));
       }
+
 
       // Only show onboarding if not completed in localStorage AND resume is not complete
       const shouldShow = isOnboarding

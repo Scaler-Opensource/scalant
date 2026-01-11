@@ -2,11 +2,12 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { initializeForm, updateFormData } from '../../store/formStoreSlice';
 
+
 import { Space, Button, Flex, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import ProjectFormItem from './ProjectFormItem';
 
-import { useUpdateResumeDetailsMutation } from '../../services/resumeBuilderApi';
+import { useResumeSave } from '../../hooks/useResumeSave';
 import AiSuggestionBanner from '../AiSuggestionBanner/AiSuggestionBanner';
 import SectionFeedback from '../SectionFeedback/SectionFeedback';
 import { FORM_KEYS } from '../../utils/constants';
@@ -60,24 +61,24 @@ const ProjectForm = ({
     incompleteForms.length === 0 ||
     (incompleteForms.length <= 1 &&
       currentIncompleteForm === FORM_KEYS.projects);
-  const [updateResumeDetails, { isLoading }] = useUpdateResumeDetailsMutation();
+  const { saveResume, isLoading } = useResumeSave();
 
   const initialValues = useMemo(
     () =>
       resumeData?.projects && resumeData?.projects.length > 0
         ? {
-            projectItems: resumeData.projects.map((item, index) => ({
-              id: item.id,
-              index: index,
-              completed: true,
-              expanded: false,
-              formData: {
-                title: item.title,
-                project_link: item.project_link,
-                description: item.description,
-              },
-            })),
-          }
+          projectItems: resumeData.projects.map((item, index) => ({
+            id: item.id,
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              title: item.title,
+              project_link: item.project_link,
+              description: item.description,
+            },
+          })),
+        }
         : initialFormData,
     [resumeData?.projects]
   );
@@ -91,7 +92,9 @@ const ProjectForm = ({
         })
       );
     }
-  }, [dispatch, isFormInitialized, initialValues]);
+    // Don't re-initialize when initialValues changes after form is initialized
+    // This prevents overwriting user input when resumeData updates
+  }, [dispatch, isFormInitialized]);
 
   const handleAddProject = () => {
     const currentItems = formData?.projectItems || [];
@@ -147,24 +150,84 @@ const ProjectForm = ({
         mark_complete: markComplete,
       };
 
-      await updateResumeDetails({
-        resumeId: resumeData?.resume_details?.id,
+      console.log('ProjectForm: Sending payload', JSON.stringify(payload, null, 2));
+
+      console.log('ProjectForm: Sending payload', JSON.stringify(payload, null, 2));
+
+      const updatedResumeData = await saveResume({
         payload,
-      }).unwrap();
+        optimisticData: {
+          projects: projectsPayload,
+        },
+      });
+
+      console.log('ProjectForm: Updated from Response', updatedResumeData);
+
+      if (!updatedResumeData) return false;
+
+      // Fix: If we sent an empty list and backend didn't return the key, force it to []
+      // This ensures the global state merge clears the existing array
+      if (projectsPayload.length === 0 && !updatedResumeData.projects) {
+        updatedResumeData.projects = [];
+      }
+
+      // Force update the form data with the new data from backend (which includes IDs)
+      // Note: For optimistic updates without IDs, this might be tricky if we need IDs for editing.
+      // But for "completion count", it's fine.
+      if (updatedResumeData?.projects) {
+        const newFormItems = updatedResumeData.projects.map(
+          (item, index) => ({
+            id: item.id || `temp-${index}`, // Fallback ID for optimistic
+            index: index,
+            completed: true,
+            expanded: false,
+            formData: {
+              title: item.title,
+              project_link: item.project_link,
+              description: item.description,
+            },
+          })
+        );
+
+        dispatch(
+          updateFormData({
+            formId: FORM_ID,
+            data: {
+              projectItems: newFormItems,
+            },
+          })
+        );
+      }
+
       message.success('Projects updated successfully');
+      return true;
     } catch (error) {
+      console.error('ProjectForm: Error saving', error);
       message.error(`Failed to update projects: ${error.message}`);
+      return false;
     }
   };
 
-  const handleSaveAndCompile = () => {
-    onComplete?.(FORM_KEYS.projects, true);
-    handleFinish();
+  const handleSaveAndCompile = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.projects, true);
+      }
+    } catch (e) {
+      // already handled in handleFinish
+    }
   };
 
-  const handleSaveAndNext = () => {
-    onComplete?.(FORM_KEYS.projects);
-    handleFinish();
+  const handleSaveAndNext = async () => {
+    try {
+      const success = await handleFinish();
+      if (success) {
+        onComplete?.(FORM_KEYS.projects);
+      }
+    } catch (e) {
+      // already handled in handleFinish
+    }
   };
 
   return (
